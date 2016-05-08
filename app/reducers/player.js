@@ -9,8 +9,6 @@ import R from 'ramda';
 import { ApiEvents } from '../actions/game';
 import createReducer from './create-reducer';
 
-const _ = R.__;
-
 const initialState = {
   profile: {
     limits: {

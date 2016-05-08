@@ -1,5 +1,3 @@
-/// <reference path="../../lib/typedefs/kancolle.d.ts" />
-/// <reference path="../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *
@@ -20,11 +18,11 @@ const upsertOpponent = (opponentObj, o) => ({ ...opponentObj, o });
 
 export default createReducer(initialState, {
   [ApiEvents.GET_OPPONENT_INFO](state, action) {
-    const opponents = {
-      ...state.opponents,
-      ...{ [action.payload.id]: deepMerge(action.payload) }
+    return {
+      ...state, ...{
+        ...state.opponents,
+        ...{ [action.payload.id]: deepMerge(action.payload) }
+      }
     };
-
-    return { ...state, ...{ opponents } };
   }
 });

@@ -5,7 +5,6 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/reducers/quest
  */
-import R from 'ramda';
 import { ApiEvents } from '../actions/game';
 import createReducer from './create-reducer';
 import { Enum } from '../helpers';
