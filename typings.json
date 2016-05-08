@@ -1,0 +1,20 @@
+{
+  "name": "electron-test",
+  "version": false,
+  "dependencies": {},
+  "ambientDependencies": {
+    "chrome": "registry:dt/chrome#0.0.0+20160317120654",
+    "flux-standard-action": "registry:dt/flux-standard-action#0.5.0+20160316155526",
+    "github-electron": "registry:dt/github-electron#0.36.3+20160319055237",
+    "jest": "registry:dt/jest#0.9.0+20160319033628",
+    "normalizr": "registry:dt/normalizr#2.0.1+20160423064823",
+    "react": "registry:dt/react#0.14.0+20160319053454",
+    "react-dom": "registry:dt/react-dom#0.14.0+20160316155526",
+    "react-redux": "registry:dt/react-redux#4.4.0+20160316155526",
+    "react-router": "registry:dt/react-router#2.0.0+20160330124659",
+    "react-router-redux": "registry:dt/react-router-redux#4.0.0+20160316155526",
+    "redux-devtools": "registry:dt/redux-devtools#3.0.0+20151215130854",
+    "redux-thunk": "registry:dt/redux-thunk#2.0.1+20160317120654",
+    "webpack": "registry:dt/webpack#1.12.9+20160321060707"
+  }
+}
