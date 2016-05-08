@@ -83,3 +83,4 @@ typings/
 release/
 dist/
 main.js*
+lib/PepperFlashPlayer.plugin
