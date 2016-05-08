@@ -1,6 +1,4 @@
-/// <reference path="../../lib/typedefs/kancolle.d.ts" />
-/// <reference path="../../lib/typedefs/dockyard.d.ts" />
-/*eslint no-confusing-arrow:0*/
+/* eslint no-confusing-arrow: 0 */
 /**
  * @overview
  *  Convenience functions for mapping and filtering API data into

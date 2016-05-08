@@ -1,5 +1,3 @@
-/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
-/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *
@@ -9,6 +7,9 @@
  */
 import { asBool } from '../primitive';
 
+/**
+ * @param o
+ */
 export const playerSlotItem = o => ({
   id: o.api_id,
   level: o.api_level,

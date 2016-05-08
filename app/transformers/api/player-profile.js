@@ -1,22 +1,17 @@
-/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
-/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *
  * @since 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/api/player-profile
- * @flow
  */
-import type { ApiRequest } from '../../types/api';
-import type { PlayerProfile } from '../../types/player-profile';
 import { asBool } from '../primitive';
 
 /**
  * @param {KCS.Models.PlayerProfile} d
  * @returns {Dockyard.PlayerData.Profile}
  */
-const playerProfile = (d:ApiRequest):PlayerProfile => ({
+export const playerProfile = (d) => ({
   id: d.api_member_id,
   nickname: d.api_nickname,
   level: d.api_level,
@@ -69,5 +64,3 @@ const playerProfile = (d:ApiRequest):PlayerProfile => ({
   },
   $_finalized: false
 });
-
-export { playerProfile };

@@ -1,5 +1,3 @@
-/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
-/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
  * @since 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>

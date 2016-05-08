@@ -1,5 +1,3 @@
-/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
-/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /* eslint no-param-reassign: 0, camelcase: 0, no-underscore-dangle: 0 */
 /**
  * @overview
@@ -7,10 +5,9 @@
  * @since 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/api/materials
- * @see {@link __PROTO.AppState}
  * @flow
  */
-import type { Material } from '../../types/kcsapi';
+import { Material } from '../../types/kcsapi';
 import { getArrayOrDefault } from '../primitive';
 import R from 'ramda';
 

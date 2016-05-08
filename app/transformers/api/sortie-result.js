@@ -1,5 +1,3 @@
-/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
-/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *
@@ -10,7 +8,6 @@
  */
 import { asBool } from '../primitive';
 
-/** Reward ship */
 type RewardShip = {
   id: number,
   name: string,
@@ -18,6 +15,16 @@ type RewardShip = {
   flavorText: string
 };
 
+type RewardItem = {
+  id: number,
+  name: string
+};
+
+type RewardSlotItem = {
+  id: number
+};
+
+/** Reward ship */
 const getShip = (o):RewardShip => ({
   id: o.api_ship_id,
   name: o.api_ship_name,
@@ -26,21 +33,12 @@ const getShip = (o):RewardShip => ({
 });
 
 /** Reward item */
-type RewardItem = {
-  id: number,
-  name: string
-};
-
 const getItem = (o):RewardItem => ({
   id: o.api_useitem_id,
   name: o.api_useitem_name
 });
 
 /** Reward slot item */
-type RewardSlotItem = {
-  id: number
-};
-
 const getSlotItem = (o):RewardSlotItem => ({
   id: o.api_slotitem_id
 });
@@ -48,7 +46,7 @@ const getSlotItem = (o):RewardSlotItem => ({
 /**
  * @param o
  */
-const sortieResult = o => {
+export const sortieResult = o => {
   const ei = o.api_enemy_info;
   const gs = o.api_get_ship;
   const gi = o.api_get_useitem;
@@ -98,5 +96,3 @@ const sortieResult = o => {
     $_finalized: false
   };
 };
-
-export { sortieResult };

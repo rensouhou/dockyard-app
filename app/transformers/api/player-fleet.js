@@ -1,10 +1,3 @@
-/**
- * @overview
- *
- * @since 0.3.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/transformers/api/player-fleet
- */
 import { notEmpty, getArrayOrDefault } from '../primitive';
 import { mission } from './mission';
 
