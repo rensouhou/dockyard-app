@@ -58,7 +58,6 @@ const updateKey = (key, data, state) => R.assoc(key, { ...data }, state);
 
 export default createReducer(initialState, {
   [ApiEvents.GET_PLAYER_BASE_DATA](state, action) {
-    console.log('get player base data', state, action);
     return updateKey('slotItems', action.payload.slotItems.items, state);
   },
   [ApiEvents.GET_BASE_DATA](state, action) {
