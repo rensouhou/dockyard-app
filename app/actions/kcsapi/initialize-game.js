@@ -1,15 +1,16 @@
+/* eslint camelcase: 0 */
 import R from 'ramda';
 import { baseShip } from '../../transformers/api/base-ship';
 import { baseShipGraphic } from '../../transformers/api/base-ship-graphic';
 import { baseShipType } from '../../transformers/api/base-ship-types';
 import { baseSlotItem } from '../../transformers/api/base-slotitem';
-import { normalize, Schema, arrayOf } from 'normalizr';
+import { normalize, Schema } from 'normalizr';
 // import * as Schema from '../../schema';
 
 /**
  * @event INITIALIZE_GAME
  */
-export default function (r:ApiRequest):ApiRequestResult {
+export default function (r) {
   const {
           api_mst_ship,
           api_mst_shipgraph,
@@ -41,8 +42,6 @@ export default function (r:ApiRequest):ApiRequestResult {
   const result = normalize(response, {
     ships: baseShip_Schema
   });
-
-  console.log('normalized =>', result);
 
   return {
     normalized: result,

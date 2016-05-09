@@ -28,8 +28,8 @@ export default function action$getFleet(r) {
   const fleetId = asNumber(postBody.api_deck_rid);
 
   return {
-    fleet: fleet,
-    fleetId: fleetId,
+    fleet,
+    fleetId,
     ships: R.map(ship, getArrayOrDefault(r.body.api_ship_data))
   };
 }

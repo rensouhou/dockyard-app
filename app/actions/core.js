@@ -1,5 +1,3 @@
-/// <reference path="../../lib/typedefs/kancolle.d.ts" />
-/// <reference path="../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *  Core game -related actions
@@ -30,7 +28,6 @@ export const CREATE_TIMER = 'CREATE_TIMER';
 
 // @todo(@stuf): use configuration values for screenshot targets
 export const takeScreenshot = createAction(TAKE_SCREENSHOT, (view) => {
-  const electron = require('electron');
   const gameViewRect = view.getBoundingClientRect();
   const filename = `/Users/stuf/electron_${+(new Date())}.png`;
   let error = null;

@@ -18,7 +18,6 @@ const appName = argv.name || argv.n || pkg.productName;
 const shouldUseAsar = argv.asar || argv.a || false;
 const shouldBuildAll = argv.all || false;
 
-
 const DEFAULT_OPTS = {
   dir: './',
   name: appName,
@@ -29,10 +28,10 @@ const DEFAULT_OPTS = {
     '^/release($|/)',
     '^/main.development.js'
   ].concat(devDeps.map(name => `/node_modules/${name}($|/)`))
-  .concat(
-    deps.filter(name => !electronCfg.externals.includes(name))
-      .map(name => `/node_modules/${name}($|/)`)
-  )
+    .concat(
+      deps.filter(name => !electronCfg.externals.includes(name))
+        .map(name => `/node_modules/${name}($|/)`)
+    )
 };
 
 const icon = argv.icon || argv.i || 'app/app';
@@ -46,19 +45,20 @@ const version = argv.version || argv.v;
 if (version) {
   DEFAULT_OPTS.version = version;
   startPack();
-} else {
+}
+else {
   // use the same version as the currently-installed electron-prebuilt
   exec('npm list electron-prebuilt --dev', (err, stdout) => {
     if (err) {
       DEFAULT_OPTS.version = '0.37.6';
-    } else {
+    }
+    else {
       DEFAULT_OPTS.version = stdout.split('electron-prebuilt@')[1].replace(/\s/g, '');
     }
 
     startPack();
   });
 }
-
 
 function build(cfg) {
   return new Promise((resolve, reject) => {
@@ -85,7 +85,8 @@ function startPack() {
             pack(plat, arch, log(plat, arch));
           });
         });
-      } else {
+      }
+      else {
         // build for current platform only
         pack(os.platform(), os.arch(), log(os.platform(), os.arch()));
       }
@@ -104,7 +105,8 @@ function pack(plat, arch, cb) {
       let extension = '.png';
       if (plat === 'darwin') {
         extension = '.icns';
-      } else if (plat === 'win32') {
+      }
+      else if (plat === 'win32') {
         extension = '.ico';
       }
       return extension;
@@ -121,7 +123,6 @@ function pack(plat, arch, cb) {
 
   packager(opts, cb);
 }
-
 
 function log(plat, arch) {
   return (err, filepath) => {

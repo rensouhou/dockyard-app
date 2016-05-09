@@ -65,21 +65,19 @@ export default createReducer(initialState, {
     return updateBaseData(action.payload, state);
   },
   [ApiEvents.GET_FLEET](state, action) {
-    let fleets = state.fleets;
+    const fleets = state.fleets;
     fleets[action.payload.fleetId - 1] = action.payload.fleet;
 
     return {
-      ...state,
-      fleets: fleets
+      ...state, fleets
     };
   },
   [ApiEvents.LOAD_FLEET_PRESET](state, action) {
-    let fleets = state.fleets;
+    const fleets = state.fleets;
     fleets[action.payload.fleetId - 1] = action.payload.fleet;
 
     return {
-      ...state,
-      fleets: fleets
+      ...state, fleets
     };
   },
   [ApiEvents.GET_MATERIAL](state, action) {
