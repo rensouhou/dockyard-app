@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
-import styles from './game.css';
 import { createGameViewHandler } from '../core/game-data-handler';
 import config from '../config';
 
@@ -16,8 +15,6 @@ export default class Game extends Component {
   componentDidMount() {
     const { gameViewHolder } = this.refs;
     const { actions, game, transformerActions } = this.props;
-    console.log('this.props =>', this.props);
-    console.log('actions =>', actions);
     const view = Object.assign(document.createElement('webview'), {
       nodeintegration: true,
       plugins: true,

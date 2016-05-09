@@ -1,22 +1,14 @@
-/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
-/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *  Handler for `START_MISSION` event
  *
- * @since 0.3.0
+ * @since 0.1.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/transformers/kcsapi/start-mission
  */
-
-/**
- * @event START_MISSION
- * @param {KCSApi.API.START_MISSION} r
- */
-export default function action$startMission(r) {
+export default function ({ body, postBody }) {
   return {
-    completionTime: r.body.api_complatetime,
-    fleetId: r.postBody.api_deck_id,
-    missionId: r.postBody.api_mission_id
+    completionTime: body.api_complatetime,
+    fleetId: postBody.api_deck_id,
+    missionId: postBody.api_mission_id
   };
 }

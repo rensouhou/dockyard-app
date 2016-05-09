@@ -46,6 +46,7 @@
     "babel-plugin-add-module-exports": "^0.1.2",
     "babel-plugin-syntax-flow": "^6.8.0",
     "babel-plugin-syntax-trailing-function-commas": "^6.8.0",
+    "babel-plugin-transform-flow-comments": "^6.8.0",
     "babel-plugin-transform-runtime": "^6.8.0",
     "babel-plugin-webpack-loaders": "^0.4.0",
     "babel-polyfill": "^6.7.4",

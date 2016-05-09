@@ -6,10 +6,9 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  */
 import { parseMaterialArray } from '../../transformers/api/materials';
-import { createGameActionHandler } from './_action-handler';
 
-const DESTROY_ITEM = ({ body }) => ({
-  materials: parseMaterialArray(body.api_material)
-});
-
-export default createGameActionHandler(DESTROY_ITEM, { verbose: true });
+export default function ({ body }) {
+  return {
+    materials: parseMaterialArray(body.api_material)
+  };
+}

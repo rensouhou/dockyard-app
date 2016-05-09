@@ -1,4 +1,11 @@
-/* eslint camelcase: 0 */
+/* eslint camelcase: 0, prefer-arrow-callback: 0 */
+/**
+ * @overview
+ *  Handler for `INITIALIZE_GAME` event
+ *
+ * @since 0.1.0
+ * @author Stefan Rimaila <stefan@rimaila.fi>
+ */
 import R from 'ramda';
 import { baseShip } from '../../transformers/api/base-ship';
 import { baseShipGraphic } from '../../transformers/api/base-ship-graphic';
@@ -7,10 +14,7 @@ import { baseSlotItem } from '../../transformers/api/base-slotitem';
 import { normalize, Schema } from 'normalizr';
 // import * as Schema from '../../schema';
 
-/**
- * @event INITIALIZE_GAME
- */
-export default function (r) {
+export default function ({ body }) {
   const {
           api_mst_ship,
           api_mst_shipgraph,
@@ -31,10 +35,10 @@ export default function (r) {
           api_mst_mission,
           api_mst_const,
           api_mst_bgm,
-        } = r.body;
+        } = body;
 
   const response = {
-    ships: R.map(baseShip, r.body.api_mst_ship)
+    ships: R.map(baseShip, body.api_mst_ship)
   };
 
   const baseShip_Schema = new Schema('ships', { idAttribute: 'shipId' });

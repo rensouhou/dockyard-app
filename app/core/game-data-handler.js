@@ -1,4 +1,4 @@
-/* eslint no-return-assign: 0 */
+/* eslint no-return-assign: 0, no-console: 0 */
 /**
  * @overview
  *  Game data handler for {@see KCSApi} traffic
@@ -10,7 +10,6 @@
 import qs from 'querystring';
 import T from 'immutable';
 import invariant from 'invariant';
-
 import { ApiEventsByPath } from '../actions/game';
 import config from '../config';
 
@@ -98,10 +97,6 @@ function parsePath(url, re) {
   return !!url ? url.replace(re, '') : null;
 }
 
-function logMethod(requestId, method, ...args) {
-  console.log(`${requestId}: ${method} =>`, args);
-}
-
 /**
  * Game data interceptor
  * @todo(@stuf): add support to choose which action to dispatch instead of generic actions
@@ -163,12 +158,11 @@ function Handler(wc, parseFunObj, cfg) {
                 const handler = (parseFunObj.transformerActions || {})[eventToHandle];
 
                 if (eventToHandle && handler) {
-                  // console.log(`found a handler for the event ${eventToHandle}`);
+                  console.log(`found a handler (\`${handler.name}\`) for the event ${eventToHandle} with data:`, { ...res });
                   handler(res);
                 }
 
-                console.log(`${requestId}: Network.getResponseBody done = ${path}\t%O`,
-                  JSON.parse(JSON.stringify({ res })));
+                // console.log(`${requestId}: Network.getResponseBody done = ${path}\t%O`, JSON.parse(JSON.stringify({ res })));
               });
           }
           break;

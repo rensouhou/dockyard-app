@@ -1,14 +1,32 @@
 {
-  "presets": ["es2015", "stage-0", "react"],
-  "plugins": ["add-module-exports", "transform-runtime", "syntax-flow", "syntax-trailing-function-commas"],
-  "env": {
-    "development": {
-      "presets": ["react-hmre"]
-    },
-    "test": {
-      "plugins": [
-        ["webpack-loaders", { "config": "webpack.config.node.js", "verbose": false }]
-      ]
-    }
-  }
+	"presets": [
+		"es2015",
+		"stage-0",
+		"react"
+	],
+	"plugins": [
+		"add-module-exports",
+		"transform-runtime",
+		"syntax-flow",
+		"syntax-trailing-function-commas",
+		"transform-flow-comments"
+	],
+	"env": {
+		"development": {
+			"presets": [
+				"react-hmre"
+			]
+		},
+		"test": {
+			"plugins": [
+				[
+					"webpack-loaders",
+					{
+						"config": "webpack.config.node.js",
+						"verbose": false
+					}
+				]
+			]
+		}
+	}
 }

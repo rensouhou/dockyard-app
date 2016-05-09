@@ -1,11 +1,8 @@
-/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
-/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *
- * @since 0.3.0
+ * @since 0.1.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/transformers/kcsapi/get-opponent-info
  *
  * @todo(@stuf): logging of seen opponents
  * @todo(@stuf): display if opponent seen at an earlier time (probably needs some time lookup magic)

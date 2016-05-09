@@ -1,12 +1,9 @@
-/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
-/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *  Handler for `GET_CONSTRUCTION_DOCKS` event
  *
- * @since 0.3.0
+ * @since 0.1.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/transformers/kcsapi/get-construction-docks
  */
 import R from 'ramda';
 import { parseMaterialsRecipe } from '../../transformers/api/materials';
@@ -36,12 +33,8 @@ const parseDock = dock => ({
   state: State(dock.api_state)
 });
 
-/**
- * @param {KCSApi.API.GET_CONSTRUCTION_DOCKS} r
- * @event GET_CONSTRUCTION_DOCKS
- */
-export default function action$getConstructionDocks(r) {
+export default function ({ body }) {
   return {
-    docks: r.body.map(parseDock)
+    docks: body.map(parseDock)
   };
 }
