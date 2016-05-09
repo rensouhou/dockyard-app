@@ -2,29 +2,24 @@
  * @overview
  *  Handler for `CRAFT_SHIP` event
  *
- * @since 0.3.0
+ * @since 0.1.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/transformers/kcsapi/craft-ship
  */
+import { gameActionHandler } from './_action-handler';
 import { asBool, asNumber } from '../../transformers/primitive';
 import { parseMaterialsRecipe } from '../../transformers/api/materials';
 
-/**
- * @event CRAFT_SHIP
- * @param {KCSApi.API.CRAFT_SHIP} r
- * @returns {Dockyard.API.CraftShip}
- */
-export default function action$craftShip(r) {
-  const d = r.postBody;
+const CRAFT_SHIP = ({ postBody }) => ({
+  dockId: asNumber(postBody.api_kdock_id),
+  flags: {
+    instant: asBool(postBody.api_highspeed),
+    lsc: asBool(postBody.api_large_flag)
+  },
+  consumed: {
+    recipe: parseMaterialsRecipe([
+      postBody.api_item1, postBody.api_item1, postBody.api_item3, postBody.api_item4, null, null, postBody.api_item5
+    ])
+  }
+});
 
-  return {
-    dockId: asNumber(d.api_kdock_id),
-    flags: {
-      instant: asBool(d.api_highspeed),
-      lsc: asBool(d.api_large_flag)
-    },
-    consumed: {
-      recipe: parseMaterialsRecipe([d.api_item1, d.api_item1, d.api_item3, d.api_item4, null, null, d.api_item5])
-    }
-  };
-}
+export default gameActionHandler(CRAFT_SHIP);

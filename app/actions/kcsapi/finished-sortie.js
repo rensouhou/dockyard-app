@@ -2,19 +2,18 @@
  * @overview
  *  Handler for the `FINISHED_SORTIE` event
  *
- * @since 0.3.0
- * @version 0.4.0
+ * @since 0.1.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/transformers/kcsapi/finished-sortie
  */
 import { sortieResult } from '../../transformers/api/sortie-result';
+import { gameActionHandler } from './_action-handler';
 
 /**
  * @event FINISHED_SORTIE
- * @param {__PROTO.ApiRequest} r
  */
-export default function action$finishedSortie(r) {
-  return {
-    result: sortieResult(r.body)
-  };
-}
+const finishedSortieHandler = (r) => ({
+  result: sortieResult(r.body)
+});
+
+export default gameActionHandler('FINISHED_SORTIE', finishedSortieHandler, { warn: true });
+

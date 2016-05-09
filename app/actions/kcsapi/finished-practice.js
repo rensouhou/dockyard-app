@@ -2,17 +2,11 @@
  * @overview
  *  Handler for `FINISHED_PRACTICE` event
  *
- * @since 0.3.0
+ * @since 0.1.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/transformers/kcsapi/finished-practice
  */
+import { gameActionHandler } from './_action-handler';
 
-/**
- * @event FINISHED_PRACTICE
- * @param r
- */
-export default function action$finishedPractice(r) {
-  console.warn('action$finishedPractice NYI; event `FINISHED_PRACTICE`');
+const FINISHED_PRACTICE = (r) => ({ r });
 
-  return { r };
-}
+export default gameActionHandler(FINISHED_PRACTICE, { warn: true });

@@ -8,6 +8,7 @@
  * @module app/transformers/kcsapi/complete-mission
  */
 import R from 'ramda';
+import { gameActionHandler } from './_action-handler';
 import { parseMaterialArray } from '../../transformers/api/materials';
 import { asNumber, getObjectOrDefault } from '../../transformers/primitive';
 import { Enum } from '../../helpers';
@@ -32,22 +33,18 @@ const parseReward = it => ({ id: it.api_useitem_id, amount: it.api_useitem_count
  */
 const collectShipExperience = (ids, exp) => R.mergeAll(R.zipObj(ids, exp));
 
-/**
- * @param {KCSApi.API.COMPLETE_MISSION} r
- * @event COMPLETE_MISSION
- */
-export default function action$completeMission(r) {
-  return {
-    fleetId: asNumber(r.postBody.api_deck_id),
-    result: missionResult(r.body.api_clear_result),
-    map: {
-      area: r.body.api_maparea_name,
-      name: r.body.api_quest_name,
-      level: r.body.api_quest_level
-    },
-    rewards: [r.body.api_get_item1, r.body.api_get_item2].map(getObjectOrDefault).map(parseReward),
-    materials: parseMaterialArray(r.body.api_get_material),
-    ships: r.body.api_ship_id.slice[1]
-    // experience: collectShipExperience(r.body.api_ship_id.slice[1], r.body.api_get_exp_lvup)
-  };
-}
+const COMPLETE_MISSION = ({ body, postBody }) => ({
+  fleetId: asNumber(postBody.api_deck_id),
+  result: missionResult(body.api_clear_result),
+  map: {
+    area: body.api_maparea_name,
+    name: body.api_quest_name,
+    level: body.api_quest_level
+  },
+  rewards: [body.api_get_item1, body.api_get_item2].map(getObjectOrDefault).map(parseReward),
+  materials: parseMaterialArray(body.api_get_material),
+  ships: body.api_ship_id.slice[1],
+  // experience: collectShipExperience(body.api_ship_id.slice[1], body.api_get_exp_lvup)
+});
+
+export default gameActionHandler(COMPLETE_MISSION);

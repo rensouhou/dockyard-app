@@ -14,7 +14,7 @@
     "consistent-return": 0,
     "max-len": [2, 120],
     "no-unused-vars": 1,
-    "new-cap": 1,
+    "new-cap": 0,
     "spaced-comment": 1,
     "eqeqeq": [2, "allow-null"],
     "brace-style": [2, "stroustrup"]
