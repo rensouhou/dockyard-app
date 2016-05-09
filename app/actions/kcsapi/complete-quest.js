@@ -5,7 +5,7 @@
  * @since 0.1.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  */
-import { gameActionHandler } from './_action-handler';
+import { createGameActionHandler } from './_action-handler';
 import { asNumber } from '../../transformers/primitive';
 import { parseMaterialArray } from '../../transformers/api/materials';
 
@@ -18,4 +18,4 @@ const COMPLETE_QUEST = ({ body, postBody }) => ({
   }
 });
 
-export default gameActionHandler(COMPLETE_QUEST);
+export default createGameActionHandler(COMPLETE_QUEST);

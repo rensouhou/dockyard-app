@@ -5,7 +5,7 @@
  * @since 0.1.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  */
-import { gameActionHandler } from './_action-handler';
+import { createGameActionHandler } from './_action-handler';
 import { asBool, asNumber } from '../../transformers/primitive';
 import { parseMaterialsRecipe } from '../../transformers/api/materials';
 
@@ -22,4 +22,4 @@ const CRAFT_SHIP = ({ postBody }) => ({
   }
 });
 
-export default gameActionHandler(CRAFT_SHIP);
+export default createGameActionHandler(CRAFT_SHIP);

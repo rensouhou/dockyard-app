@@ -6,7 +6,7 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  */
 import R from 'ramda';
-import { gameActionHandler } from './_action-handler';
+import { createGameActionHandler } from './_action-handler';
 import { asNumber, asBool } from '../../transformers/primitive';
 import { parseMaterialsRecipe, parseMaterialArray } from '../../transformers/api/materials';
 
@@ -30,4 +30,4 @@ const CRAFT_ITEM = ({ body, postBody }) => ({
   }
 });
 
-export default gameActionHandler(CRAFT_ITEM);
+export default createGameActionHandler(CRAFT_ITEM);

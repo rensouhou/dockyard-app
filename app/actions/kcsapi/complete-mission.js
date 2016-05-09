@@ -1,14 +1,10 @@
-/// <reference path="../../../lib/typedefs/kancolle.d.ts" />
-/// <reference path="../../../lib/typedefs/dockyard.d.ts" />
 /**
  * @overview
  *
- * @since 0.3.0
+ * @since 0.1.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/transformers/kcsapi/complete-mission
  */
-import R from 'ramda';
-import { gameActionHandler } from './_action-handler';
+import { createGameActionHandler } from './_action-handler';
 import { parseMaterialArray } from '../../transformers/api/materials';
 import { asNumber, getObjectOrDefault } from '../../transformers/primitive';
 import { Enum } from '../../helpers';
@@ -27,12 +23,6 @@ const missionResult = Enum({
  */
 const parseReward = it => ({ id: it.api_useitem_id, amount: it.api_useitem_count });
 
-/**
- * @param {Array<number>} ids
- * @param {Array<[number, number]>} exp
- */
-const collectShipExperience = (ids, exp) => R.mergeAll(R.zipObj(ids, exp));
-
 const COMPLETE_MISSION = ({ body, postBody }) => ({
   fleetId: asNumber(postBody.api_deck_id),
   result: missionResult(body.api_clear_result),
@@ -47,4 +37,4 @@ const COMPLETE_MISSION = ({ body, postBody }) => ({
   // experience: collectShipExperience(body.api_ship_id.slice[1], body.api_get_exp_lvup)
 });
 
-export default gameActionHandler(COMPLETE_MISSION);
+export default createGameActionHandler(COMPLETE_MISSION);

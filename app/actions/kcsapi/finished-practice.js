@@ -5,8 +5,8 @@
  * @since 0.1.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  */
-import { gameActionHandler } from './_action-handler';
+import { createGameActionHandler } from './_action-handler';
 
-const FINISHED_PRACTICE = (r) => ({ r });
+const FINISHED_PRACTICE = ({ body, postBody }) => ({ body, postBody });
 
-export default gameActionHandler(FINISHED_PRACTICE, { warn: true });
+export default createGameActionHandler(FINISHED_PRACTICE, { warn: true });

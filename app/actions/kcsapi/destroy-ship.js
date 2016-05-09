@@ -5,7 +5,7 @@
  * @since 0.1.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  */
-import { gameActionHandler } from './_action-handler';
+import { createGameActionHandler } from './_action-handler';
 import { parseMaterialArray } from '../../transformers/api/materials';
 import { asNumber } from '../../transformers/primitive';
 
@@ -14,4 +14,4 @@ const DESTROY_SHIP = r => ({
   id: asNumber(r.postBody.api_ship_id)
 });
 
-export default gameActionHandler(DESTROY_SHIP);
+export default createGameActionHandler(DESTROY_SHIP);
