@@ -12,5 +12,5 @@ export default function ({ body, postBody }) {
   return {
     materials: parseMaterialArray(body.api_material),
     id: asNumber(postBody.api_ship_id)
-  }
-};
+  };
+}

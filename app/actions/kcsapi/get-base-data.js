@@ -20,4 +20,4 @@ export default function GET_BASE_DATA({ body }) {
     ships: body.api_ship.map(ship),
     materials: parseMaterialObjects(body.api_material)
   };
-};
+}

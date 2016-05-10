@@ -16,5 +16,5 @@ export default function ({ body, postBody }) {
       count: body.api_bounus_count,
       items: body.api_bounus
     }
-  }
+  };
 }

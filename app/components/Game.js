@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
+import './Game.css';
 import { createGameViewHandler } from '../core/game-data-handler';
 import config from '../config';
 

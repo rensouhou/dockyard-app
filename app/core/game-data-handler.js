@@ -1,4 +1,4 @@
-/* eslint no-return-assign: 0, no-console: 0 */
+/* eslint no-return-assign: 0, no-console: 0, max-len: 0 */
 /**
  * @overview
  *  Game data handler for {@see KCSApi} traffic

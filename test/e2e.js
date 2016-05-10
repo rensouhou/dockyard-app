@@ -1,3 +1,4 @@
+/* eslint prefer-arrow-callback: 0 */
 import chromedriver from 'chromedriver';
 import { expect } from 'chai';
 
