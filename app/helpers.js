@@ -1,5 +1,13 @@
 /* eslint no-param-reassign:0 */
 /**
+ * @overview
+ *
+ * @since 0.1.0
+ * @author Stefan Rimaila <stefan@rimaila.fi>
+ * @flow
+ */
+
+/**
  * @param a
  * @returns {Object}
  * @constructor
@@ -17,4 +25,13 @@ export function Enum(a) {
       (o, k) => (o[k] = a[k], o), v => i[v]
     )
   );
+}
+
+/**
+ * @param obj
+ */
+export function* entries(obj) {
+  for (const key of Object.keys(obj)) {
+    yield [key, obj[key]];
+  }
 }
