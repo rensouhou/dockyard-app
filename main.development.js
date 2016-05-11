@@ -1,5 +1,69 @@
+/* eslint no-console: 0, prefer-template: 0, prefer-const: 0 */
 import { app, BrowserWindow, Menu, crashReporter, shell } from 'electron';
 import path from 'path';
+import winston from 'winston';
+import chalk from 'chalk';
+
+process.removeAllListeners('uncaughtException');
+process.on('uncaughtException', err => {
+  console.log(chalk.red.inverse.bold('Uncaught exception '));
+  console.log(chalk.red(err.stack || err));
+});
+
+//
+// Initialize logging
+//
+winston.setLevels({
+  normal: 0,
+  success: 1,
+  failed: 2,
+  info: 3,
+  warn: 4,
+  error: 5,
+  fatal: 6,
+  uncaught: 7
+});
+
+const chalkPID = chalk.bgBlue;
+const chalkSuccess = chalk.green;
+const chalkWarn = chalk.yellow;
+const chalkError = chalk.red;
+const chalkInfo = chalk.cyan;
+
+const levelToFormat = {
+  normal(text) {
+    let pid = chalkPID(`[${process.pid}]`) + ' ';
+    return pid + text;
+  },
+  success(text) {
+    let pid = chalkPID(`[${process.pid}]`) + ' ';
+    return pid + chalkSuccess(text);
+  },
+  failed(text) {
+    let pid = chalkPID(`[${process.pid}]`) + ' ';
+    return pid + chalkError(text);
+  },
+  info(text) {
+    let pid = chalkPID(`[${process.pid}]`) + ' ';
+    return pid + chalkInfo(text);
+  },
+  warn(text) {
+    let pid = chalkPID(`[${process.pid}]`) + ' ';
+    return pid + chalkWarn.inverse.bold('Warning:') + ' ' + chalkWarn(text);
+  },
+  error(text) {
+    let pid = chalkPID(`[${process.pid}]`) + ' ';
+    return pid + chalkError.inverse.bold('Error:') + ' ' + chalkError(text);
+  },
+  fatal(text) {
+    let pid = chalkPID(`[${process.pid}]`) + ' ';
+    return pid + chalkError.inverse.bold('Fatal Error:') + ' ' + chalkError(text);
+  },
+  uncaught(text) {
+    let pid = chalkPID(`[${process.pid}]`) + ' ';
+    return pid + chalkError.inverse.bold('Uncaught Exception:') + ' ' + chalkError(text);
+  },
+};
 
 crashReporter.start();
 
@@ -24,7 +88,42 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
 
+app.on('gpu-process-crashed', () => {
+  console.log(chalk.red.inverse.bold('GPU process crashed!'));
+});
+
 app.on('ready', () => {
+  winston.cli();
+
+  // Remove the default transports
+  winston.remove(winston.transports.Console);
+
+  // ...and add the new and shiny one
+  winston.add(winston.transports.Console, {
+    level: 'uncaught',
+    formatter(options) {
+      let text = '';
+      if (!!options.message) {
+        text += options.message;
+      }
+      if (options.meta && Object.keys(options.meta).length) {
+        text += ' ' + JSON.stringify(options.meta);
+      }
+      let formatter = levelToFormat[options.level];
+      if (formatter) {
+        return formatter(text);
+      }
+
+      return text;
+    }
+  });
+
+  winston.info('Initializing Dockyard');
+
+  winston.log('error', 'Erroring test');
+
+  winston.log('success', 'Testing');
+
   mainWindow = new BrowserWindow({
     show: false,
     width: 1200,
