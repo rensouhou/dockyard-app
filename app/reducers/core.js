@@ -10,17 +10,28 @@ import createReducer from './create-reducer';
 import {
   REGISTER_GAME_VIEW,
   TAKE_SCREENSHOT,
-  REGISTER_NOTIFICATION_HANDLERS
+  REGISTER_NOTIFICATION_HANDLERS,
+  READ_CONFIGURATION
 } from '../actions/core';
 
 const initialState = {
   webview: null,
   successful: null,
   filename: null,
-  notifiers: []
+  notifiers: [],
+  configuration: {}
 };
 
 export default createReducer(initialState, {
+  [READ_CONFIGURATION](state, action) {
+    return {
+      ...state,
+      configuration: {
+        ...state.configuration,
+        [action.payload.file]: action.payload.content
+      }
+    };
+  },
   [REGISTER_GAME_VIEW](state, action) {
     return { ...state, webview: action.payload };
   },

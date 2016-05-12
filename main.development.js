@@ -3,12 +3,28 @@ import { app, BrowserWindow, Menu, crashReporter, shell } from 'electron';
 import path from 'path';
 import winston from 'winston';
 import chalk from 'chalk';
+import bluebird from 'bluebird';
+import electronStorage from 'electron-json-storage';
+
+bluebird.promisifyAll(electronStorage);
 
 process.removeAllListeners('uncaughtException');
 process.on('uncaughtException', err => {
   console.log(chalk.red.inverse.bold('Uncaught exception '));
   console.log(chalk.red(err.stack || err));
 });
+
+//
+// Initialize settings
+//
+const initSettings = async() => {
+  const hasCore = await electronStorage.hasAsync('core');
+  if (!hasCore) {
+    await electronStorage.setAsync('core', { initial: true });
+  }
+};
+
+initSettings();
 
 //
 // Initialize logging
@@ -117,12 +133,6 @@ app.on('ready', () => {
       return text;
     }
   });
-
-  winston.info('Initializing Dockyard');
-
-  winston.log('error', 'Erroring test');
-
-  winston.log('success', 'Testing');
 
   mainWindow = new BrowserWindow({
     show: false,

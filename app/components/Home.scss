@@ -1,0 +1,54 @@
+@import '~material-colors/dist/colors.scss';
+
+.container {
+  width: 800px;
+  height: 100vh;
+  color: #fff;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  > * {
+    width: 100%;
+    // border: dashed 0.1rem #f00;
+    text-align: center;
+    margin: 0 0 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: normal;
+    margin: 0 0 1rem;
+  }
+
+  a {
+    color: #f00;
+  }
+
+  footer {
+    color: $md-amber-a400;
+  }
+
+  .modeSelect {
+    $button-color: $md-amber-a400;
+    > a {
+      width: 20%;
+      color: $button-color;
+      border: solid 2px $button-color;
+      display: block;
+      margin: 0 auto 0.5rem;
+      text-decoration: none;
+      padding: 0.4rem 1rem;
+
+      &:hover {
+        background-color: $button-color;
+        color: $md-blue-grey-900;
+      }
+    }
+  }
+}

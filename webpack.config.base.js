@@ -3,15 +3,6 @@ import path from 'path';
 export default {
   module: {
     loaders: [
-      {
-        test: /\.s[a|c]ss$/,
-        loaders: [
-          'style?sourceMap',
-          'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
-          'resolve-url',
-          'sass?sourceMap'
-        ]
-      },
       { test: /\.(png|jpg)$/, loader: 'file?name=images/[name].[hash].[ext]' },
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,

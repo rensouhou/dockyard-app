@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { persistState } from 'redux-devtools';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
+import promiseMiddleware from 'redux-promise';
 import { hashHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
 import rootReducer from '../reducers';
@@ -15,7 +16,7 @@ const logger = createLogger({
 const router = routerMiddleware(hashHistory);
 
 const enhancer = compose(
-  applyMiddleware(thunk, router, logger),
+  applyMiddleware(thunk, promiseMiddleware, router, logger),
   DevTools.instrument(),
   persistState(
     window.location.href.match(
