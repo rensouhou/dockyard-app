@@ -12,15 +12,14 @@ import invariant from 'invariant';
 import bluebird from 'bluebird';
 import { createAction } from 'redux-actions';
 import AppEvent from '../../src/shared/constants';
-import electron from 'electron';
+import { ipcRenderer, remote as electronRemote } from 'electron';
 import electronStorage from 'electron-json-storage';
 import chalk from 'chalk';
-const ipcRenderer = electron.ipcRenderer;
 
 // I'm going the easy way
 bluebird.promisifyAll(electronStorage);
+bluebird.promisify(fs.writeFile);
 
-/** @type {string} Register a reference to the <webview /> holding the game SWF */
 export const REGISTER_GAME_VIEW = 'REGISTER_GAME_VIEW';
 export const UPDATE_CONFIGURATION = 'UPDATE_CONFIGURATION';
 export const TAKE_SCREENSHOT = 'TAKE_SCREENSHOT';
@@ -70,21 +69,23 @@ export const readConfiguration = createAction(READ_CONFIGURATION,
   });
 
 // @todo(@stuf): use configuration values for screenshot targets
-export const takeScreenshot = createAction(TAKE_SCREENSHOT, (view) => {
+export const takeScreenshot = createAction(TAKE_SCREENSHOT, view => {
   const gameViewRect = view.getBoundingClientRect();
   const filename = `/Users/stuf/electron_${+(new Date())}.png`;
   let error = null;
 
-  electron.remote.getCurrentWindow().capturePage({
+  electronRemote.getCurrentWindow().capturePage({
     x: gameViewRect.left,
     y: gameViewRect.top,
     width: gameViewRect.width,
     height: gameViewRect.height
-  }, (image) => {
-    fs.writeFile(filename, image.toPng(), (err) => {
-      if (err) error = err;
-      console.log(`Screenshot saved as: ${filename}`);
-    });
+  }, async image => {
+    try {
+      await fs.writeFileAsync(filename, image.toPng());
+    }
+    catch (e) {
+      error = e;
+    }
   });
 
   return { error, filename };
@@ -99,9 +100,7 @@ export const notify = createAction(NOTIFY, (title, options) => new Notification(
 export const createTimer = createAction(CREATE_TIMER, async args => {
   ipcRenderer.send(AppEvent.TIMER_START, { ...args });
 
-  const result = await new Promise((resolve, reject) => {
+  return await new Promise((resolve) => {
     ipcRenderer.once(AppEvent.TIMER_STARTED, (event, payload) => resolve(payload));
   });
-
-  return result;
 });

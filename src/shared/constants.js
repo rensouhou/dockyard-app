@@ -6,7 +6,7 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module src/shared/constants
  */
-module.exports = {
+export default {
   TIMER_START: 'TIMER_START',
   TIMER_STARTED: 'TIMER_START_ACK',
   TIMER_SYNC: 'TIMER_SYNC',

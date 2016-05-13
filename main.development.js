@@ -5,6 +5,8 @@ import winston from 'winston';
 import chalk from 'chalk';
 import bluebird from 'bluebird';
 import electronStorage from 'electron-json-storage';
+import defaultConfig from './src/main/default-config';
+import { entries } from './app/helpers';
 
 bluebird.promisifyAll(electronStorage);
 
@@ -13,18 +15,6 @@ process.on('uncaughtException', err => {
   console.log(chalk.red.inverse.bold('Uncaught exception '));
   console.log(chalk.red(err.stack || err));
 });
-
-//
-// Initialize settings
-//
-const initSettings = async() => {
-  const hasCore = await electronStorage.hasAsync('core');
-  if (!hasCore) {
-    await electronStorage.setAsync('core', { initial: true });
-  }
-};
-
-initSettings();
 
 //
 // Initialize logging
@@ -81,6 +71,24 @@ const levelToFormat = {
   },
 };
 
+//
+// Initialize settings
+// -------------------
+(async function getSettings() {
+  console.log(chalkInfo('Seeding default configuration.'));
+  for (const [key, val] of entries(defaultConfig)) {
+    console.log(chalkInfo(`--> ${key}.json`));
+    const found = await electronStorage.hasAsync(key);
+    if (!found) {
+      await electronStorage.set(key, val);
+      console.log(chalkInfo('    Done.'));
+    }
+  }
+}());
+
+//
+// Start application
+// -----------------
 crashReporter.start();
 
 let menu;
