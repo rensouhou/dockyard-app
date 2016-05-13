@@ -31,19 +31,21 @@
   }
 
   footer {
-    color: $md-amber-a400;
+    color: transparentize($md-white, 0.4);
+    font-size: 0.9rem;
   }
 
   .modeSelect {
     $button-color: $md-amber-a400;
     > a {
-      width: 20%;
+      width: 22%;
       color: $button-color;
       border: solid 2px $button-color;
       display: block;
       margin: 0 auto 0.5rem;
       text-decoration: none;
-      padding: 0.4rem 1rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 1.2rem;
 
       &:hover {
         background-color: $button-color;

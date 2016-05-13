@@ -1,18 +1,15 @@
-/* eslint no-console: 0, prefer-template: 0, prefer-const: 0 */
+/* eslint no-console: 0, prefer-template: 0, prefer-const: 0, no-param-reassign: 0 */
 import { app, BrowserWindow, Menu, crashReporter, shell } from 'electron';
-import path from 'path';
 import winston from 'winston';
 import chalk from 'chalk';
 import bluebird from 'bluebird';
 import electronStorage from 'electron-json-storage';
-import defaultConfig from './src/main/default-config';
-import { entries } from './app/helpers';
 
 bluebird.promisifyAll(electronStorage);
 
 process.removeAllListeners('uncaughtException');
 process.on('uncaughtException', err => {
-  console.log(chalk.red.inverse.bold('Uncaught exception '));
+  console.log(chalk.red.inverse.bold('Uncaught exception:'));
   console.log(chalk.red(err.stack || err));
 });
 
@@ -72,21 +69,6 @@ const levelToFormat = {
 };
 
 //
-// Initialize settings
-// -------------------
-(async function getSettings() {
-  console.log(chalkInfo('Seeding default configuration.'));
-  for (const [key, val] of entries(defaultConfig)) {
-    console.log(chalkInfo(`--> ${key}.json`));
-    const found = await electronStorage.hasAsync(key);
-    if (!found) {
-      await electronStorage.set(key, val);
-      console.log(chalkInfo('    Done.'));
-    }
-  }
-}());
-
-//
 // Start application
 // -----------------
 crashReporter.start();
@@ -94,21 +76,19 @@ crashReporter.start();
 let menu;
 let template;
 let mainWindow = null;
-let ppapiFlashPath = null;
 
-if (process.platform === 'darwin') {
-  ppapiFlashPath = path.join(__dirname, 'lib', 'PepperFlashPlayer.plugin');
-}
-
-app.commandLine.appendSwitch('remote-debugging-port', '8642');
-app.commandLine.appendSwitch('ppapi-flash-path', ppapiFlashPath);
+// @todo(@stuf): Currently OSX only. Pls fix.
+app.commandLine.appendSwitch('remote-debugging-port', 8642);
+app.commandLine.appendSwitch('ppapi-flash-path', './lib/PepperFlashPlayer.plugin');
 app.commandLine.appendSwitch('ppapi-flash-version', '21.0.0.197');
+console.log('configuration set');
 
 if (process.env.NODE_ENV === 'development') {
   require('electron-debug')();
 }
 
 app.on('window-all-closed', () => {
+  console.log(chalkInfo('All windows have been closed.'));
   if (process.platform !== 'darwin') app.quit();
 });
 
@@ -117,6 +97,7 @@ app.on('gpu-process-crashed', () => {
 });
 
 app.on('ready', () => {
+  console.log(chalkSuccess('Application ready.'));
   winston.cli();
 
   // Remove the default transports
@@ -124,7 +105,7 @@ app.on('ready', () => {
 
   // ...and add the new and shiny one
   winston.add(winston.transports.Console, {
-    level: 'uncaught',
+    level: 'normal',
     formatter(options) {
       let text = '';
       if (!!options.message) {
@@ -141,6 +122,8 @@ app.on('ready', () => {
       return text;
     }
   });
+
+  winston.log('normal', 'herpy derp');
 
   mainWindow = new BrowserWindow({
     show: false,
@@ -160,7 +143,7 @@ app.on('ready', () => {
   });
 
   if (process.env.NODE_ENV === 'development') {
-    //mainWindow.openDevTools();
+    // mainWindow.openDevTools();
   }
 
   if (process.platform === 'darwin') {

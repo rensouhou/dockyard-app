@@ -11,6 +11,7 @@ export default class Home extends Component {
           <Link to="/game">Launch</Link>
           <Link to="/configure">Configuration</Link>
         </div>
+        <footer>github.com/rensouhou</footer>
       </div>
     );
   }

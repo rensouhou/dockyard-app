@@ -62,7 +62,7 @@ export function save(file:string, content:JSONObject):JSONObject {
   invariant(file, 'A file name is required');
   const data = JSON.stringify(content);
   const filename = getFileName(file);
-  let result;
+  let result = {};
   let error;
   try {
     fs.writeFileSync(filename, data);
@@ -107,3 +107,5 @@ export function clear():boolean {
     return false;
   }
 }
+
+export default { load, save, has, keys, clear };
