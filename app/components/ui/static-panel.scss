@@ -1,0 +1,24 @@
+@import '~material-colors/dist/colors.scss';
+
+$primary-text-alpha: 0.87;
+$secondary-text-alpha: 0.54;
+$hint-text-alpha: 0.38;
+$divider-alpha: 0.12;
+
+.staticPanel {
+  // border: dashed 0.1rem #f00;
+  color: rgba($md-white, $primary-text-alpha);
+}
+
+.title {
+  // border: dashed 0.1rem #f70;
+  font-size: 0.8rem;
+  color: rgba($md-white, $hint-text-alpha);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.staticPanelBody {
+  // border: dashed 0.1rem #0f0;
+}

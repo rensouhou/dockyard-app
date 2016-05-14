@@ -88,6 +88,15 @@ export default createReducer(initialState, {
       }
     };
   },
+  [ApiEvents.RESUPPLY_SHIP](state, action) {
+    return {
+      ...state,
+      materials: {
+        ...state.materials,
+        ...action.payload.materials
+      }
+    };
+  },
   [ApiEvents.GET_CONSTRUCTION_DOCKS](state, action) {
     return { ...state };
   }

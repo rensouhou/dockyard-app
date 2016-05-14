@@ -1,4 +1,11 @@
 /* eslint no-console: 0, prefer-template: 0, prefer-const: 0, no-param-reassign: 0 */
+/**
+ * @overview
+ *
+ * @since 0.1.0
+ * @author Stefan Rimaila <stefan@rimaila.fi>
+ * @flow
+ */
 import { app, BrowserWindow, Menu, crashReporter, shell } from 'electron';
 import winston from 'winston';
 import chalk from 'chalk';
@@ -15,7 +22,7 @@ process.on('uncaughtException', err => {
 
 //
 // Initialize logging
-//
+// ------------------
 winston.setLevels({
   normal: 0,
   success: 1,
@@ -71,17 +78,21 @@ const levelToFormat = {
 //
 // Start application
 // -----------------
-crashReporter.start();
+crashReporter.start({
+  productName: 'Dockyard',
+  companyName: 'Rensouhou',
+  submitURL: 'http://heatenin.gs:8123'
+});
 
 let menu;
 let template;
 let mainWindow = null;
 
 // @todo(@stuf): Currently OSX only. Pls fix.
-app.commandLine.appendSwitch('remote-debugging-port', 8642);
+app.commandLine.appendSwitch('remote-debugging-port', '8642');
 app.commandLine.appendSwitch('ppapi-flash-path', './lib/PepperFlashPlayer.plugin');
 app.commandLine.appendSwitch('ppapi-flash-version', '21.0.0.197');
-console.log('configuration set');
+console.log(chalkSuccess('Configuration set.'));
 
 if (process.env.NODE_ENV === 'development') {
   require('electron-debug')();
@@ -105,7 +116,7 @@ app.on('ready', () => {
 
   // ...and add the new and shiny one
   winston.add(winston.transports.Console, {
-    level: 'normal',
+    level: 'uncaught',
     formatter(options) {
       let text = '';
       if (!!options.message) {
@@ -122,8 +133,6 @@ app.on('ready', () => {
       return text;
     }
   });
-
-  winston.log('normal', 'herpy derp');
 
   mainWindow = new BrowserWindow({
     show: false,

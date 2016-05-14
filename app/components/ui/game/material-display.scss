@@ -1,0 +1,19 @@
+.materialDisplay {
+  display: flex;
+
+  > article {
+    padding: 0.2rem;
+    width: (100% / 8);
+    flex-grow: 1;
+  }
+}
+
+.materialElem {
+  // border: solid 1px #f00;
+}
+
+.materialCount {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+

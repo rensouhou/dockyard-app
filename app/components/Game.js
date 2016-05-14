@@ -1,33 +1,32 @@
 import React, { Component, PropTypes } from 'react';
-import { findDOMNode } from 'react-dom';
-import './Game.css';
-import { createGameViewHandler } from '../core/game-data-handler';
-import config from '../config';
+import { StaticPanel } from './ui';
+import GameView from './game/game-view';
+import { Fleet, MaterialDisplay } from './ui/game';
+import style from './Game.scss';
 
 export default class Game extends Component {
   static propTypes = {
     actions: PropTypes.object,
     game: PropTypes.any,
-    transformerActions: PropTypes.any
+    transformerActions: PropTypes.any,
+    appState: PropTypes.object
   };
 
-  // The webview needs to be appended as a vanilla DOM element,
-  // since the `plugins` attribute does not work if mounted through React.
-  componentDidMount() {
-    const { gameViewHolder } = this.refs;
-    const { actions, game, transformerActions } = this.props;
-    const view = Object.assign(document.createElement('webview'), {
-      nodeintegration: true,
-      plugins: true,
-      partition: 'persist:kc',
-      src: 'http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/'
-    });
-    view.addEventListener('dom-ready', createGameViewHandler({ game, transformerActions }, config));
-    findDOMNode(gameViewHolder).appendChild(view);
-    actions.registerGameView(view);
-  }
-
   render() {
-    return <div ref="gameViewHolder" id="game-view-holder"></div>;
+    return (
+      <div className={style.container}>
+        <GameView
+          actions={this.props.actions}
+          game={this.props.game}
+          transformerActions={this.props.transformerActions}
+        />
+        <StaticPanel title="Resources">
+          <MaterialDisplay data={this.props.appState.player.materials} />
+        </StaticPanel>
+        <StaticPanel title="MainFleet">
+          <Fleet />
+        </StaticPanel>
+      </div>
+    );
   }
 }
