@@ -8,6 +8,10 @@ $divider-alpha: 0.12;
 .staticPanel {
   // border: dashed 0.1rem #f00;
   color: rgba($md-white, $primary-text-alpha);
+
+  &.topSpace {
+    margin-top: 0.75rem;
+  }
 }
 
 .title {

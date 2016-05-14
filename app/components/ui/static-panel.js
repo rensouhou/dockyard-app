@@ -16,7 +16,7 @@ const panelTitle = title =>
     : null;
 
 const StaticPanel = props => (
-  <article className={cx(style.staticPanel, props.className)}>
+  <article className={cx(style.staticPanel, props.className)} style={props.style}>
     {panelTitle(props.title)}
     <div className={style.staticPanelBody}>
       {props.children}
@@ -27,7 +27,8 @@ const StaticPanel = props => (
 StaticPanel.propTypes = {
   className: PropTypes.string,
   children: PropTypes.element,
-  title: PropTypes.string
+  title: PropTypes.string,
+  style: PropTypes.object
 };
 
 export default StaticPanel;

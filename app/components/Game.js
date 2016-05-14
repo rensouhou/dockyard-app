@@ -18,23 +18,62 @@ export default class Game extends Component {
     actions: PropTypes.object,
     game: PropTypes.any,
     transformerActions: PropTypes.any,
-    appState: PropTypes.object
+    appState: PropTypes.object,
+    gameEntities: PropTypes.object
   };
 
   isInitialized = ():boolean => R.complement(R.isEmpty(R.pathOr([], ['appState'], this.props)));
+
+  getFleetShips = (fleet, shipEntities) => {
+    console.log(fleet.ships);
+    console.log(' =>', R.pick(fleet.ships, shipEntities));
+  };
 
   renderMainFleet = (fleet):?Fleet =>
     R.isEmpty(fleet)
       ? null
       : <Fleet {...fleet} />;
 
-  render() {
-    if (!this.isInitialized()) {
-      return <div>Not initialized yet.</div>;
-    }
-
-    const { transformerActions, game, actions } = this.props;
+  renderBody() {
+    const { transformerActions, game, actions, gameEntities } = this.props;
     const { player } = this.props.appState;
+
+    const getFirstFleet = R.head(
+      R.pathOr(
+        [], ['props', 'appState', 'player', 'fleets'], this)
+    );
+    const getFleetShips = (ships, shipEntities) => R.pick(ships, shipEntities);
+
+    const f = R.head(R.pathOr([], ['props', 'appState', 'player', 'fleets'], this));
+    const s = R.values(
+      getFleetShips(
+        getFirstFleet.ships,
+        gameEntities.entities.ships
+      )
+    );
+
+    return (
+      <div className={style.uiBody}>
+        <StaticPanel title="Resources">
+          <MaterialDisplay data={player.materials} />
+        </StaticPanel>
+        <StaticPanel title="MainFleet" style={{ marginTop: '0.75rem' }}>
+          {this.renderMainFleet({ ...f, ships: s })}
+        </StaticPanel>
+      </div>
+    );
+  }
+
+  render() {
+    let body = null;
+    const { transformerActions, game, actions, gameEntities } = this.props;
+    if (!this.isInitialized() || this.props.appState.gameState === 'UNINITIALIZED' ||
+      this.props.appState.gameState === 'STARTING_GAME') {
+      body = <div>Not initialized yet.</div>;
+    }
+    else {
+      body = this.renderBody();
+    }
 
     return (
       <div className={style.container}>
@@ -43,12 +82,7 @@ export default class Game extends Component {
           game={game}
           transformerActions={transformerActions}
         />
-        <StaticPanel title="Resources">
-          <MaterialDisplay data={player.materials} />
-        </StaticPanel>
-        <StaticPanel title="MainFleet">
-          {this.renderMainFleet(R.head(R.pathOr([], ['props', 'appState', 'player', 'fleets'], this)))}
-        </StaticPanel>
+        {body}
       </div>
     );
   }

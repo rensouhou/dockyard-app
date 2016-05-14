@@ -1,3 +1,39 @@
+@import '~material-colors/dist/colors.scss';
+
 .ship {
-  border: solid 1px #f00;
+  // border: solid 1px #f00;
+  width: (100% / 3);
+  padding: 0 0.75rem;
+
+  header {
+    // border: solid 1px #f00;
+    display: flex;
+    align-items: center;
+
+    > div {
+      flex-grow: 2;
+
+      &:last-child {
+        flex-grow: 1;
+      }
+    }
+  }
+}
+
+.level,
+.morale {
+  color: rgba($md-white, 0.87);
+}
+
+.name {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.level {  }
+.morale {
+  i {
+    color: $md-amber-a400;
+  }
+
+  color: rgba($md-white, 0.54);
 }

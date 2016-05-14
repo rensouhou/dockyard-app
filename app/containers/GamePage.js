@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import Game from '../components/Game';
 import { createTransformerActions, createGameActions } from '../actions/game';
 import * as coreActions from '../actions/core';
+import { gameEntities } from '../selectors/game-entities';
 
-const mapStateToProps = state => ({ appState: { ...state } });
+const mapStateToProps = state => ({
+  appState: { ...state },
+  gameEntities: gameEntities(state)
+});
 
 const mapDispatchToProps = dispatch => ({
   transformerActions: bindActionCreators(createTransformerActions(), dispatch),

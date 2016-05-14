@@ -1,3 +1,10 @@
 .fleet {
-  border: dotted 0.1rem #0ff;
+  // border: dotted 0.1rem #0ff;
+}
+
+.ships {
+  // border: solid 1px #f00;
+  margin: 0 -0.75rem;
+  display: flex;
+  flex-wrap: wrap;
 }
