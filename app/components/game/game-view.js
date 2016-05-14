@@ -8,6 +8,7 @@ import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import { createGameViewHandler } from '../../core/game-data-handler';
 import config from '../../config';
+import './game-view.scss';
 
 export default class GameView extends Component {
   static propTypes = {
