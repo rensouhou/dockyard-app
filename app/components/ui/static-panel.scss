@@ -12,11 +12,12 @@ $divider-alpha: 0.12;
 
 .title {
   // border: dashed 0.1rem #f70;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: rgba($md-white, $hint-text-alpha);
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  text-transform: uppercase;
 }
 
 .staticPanelBody {

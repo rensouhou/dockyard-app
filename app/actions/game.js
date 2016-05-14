@@ -136,5 +136,3 @@ export const createGameActions = () => ({
     }
   })
 });
-
-export { ApiEvents, ApiEventsByPath };
