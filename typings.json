@@ -10,6 +10,7 @@
     "flux-standard-action": "registry:dt/flux-standard-action#0.5.0+20160316155526",
     "github-electron": "registry:dt/github-electron#0.36.3+20160319055237",
     "jest": "registry:dt/jest#0.9.0+20160319033628",
+    "node-schedule": "registry:dt/node-schedule#0.0.0+20160316155526",
     "normalizr": "registry:dt/normalizr#2.0.1+20160423064823",
     "react": "registry:dt/react#0.14.0+20160319053454",
     "react-dom": "registry:dt/react-dom#0.14.0+20160316155526",
