@@ -7,19 +7,8 @@
  * @module app/reducers/game-state
  */
 import R from 'ramda';
-import { ApiEvents } from '../actions/game';
+import { ApiEvents, GameState } from '../actions/game';
 import createReducer from './create-reducer';
-
-const GameState = {
-  UNINITIALIZED: 'UNINITIALIZED',
-  STARTING_GAME: 'STARTING_GAME',
-  IN_SORTIE: 'IN_SORTIE',
-  IN_PRACTICE: 'IN_PRACTICE',
-  IDLE: 'IDLE',
-  FINISHED_PRACTICE: 'FINISHED_PRACTICE',
-  BROWSING_MISSIONS: 'BROWSING_MISSIONS',
-  MISSION_STARTED: 'MISSION_STARTED'
-};
 
 const GameStateMapping = [
   [ApiEvents.INITIALIZE_GAME, GameState.STARTING_GAME],
