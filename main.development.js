@@ -11,6 +11,7 @@ import winston from 'winston';
 import chalk from 'chalk';
 import bluebird from 'bluebird';
 import electronStorage from 'electron-json-storage';
+import './src/main/timers';
 
 bluebird.promisifyAll(electronStorage);
 

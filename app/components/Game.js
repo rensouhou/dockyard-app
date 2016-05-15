@@ -7,7 +7,7 @@
  */
 import React, { Component, PropTypes } from 'react';
 import R from 'ramda';
-import { StaticPanel } from './ui';
+import { StaticPanel, FunctionalityTestPanel } from './ui';
 import { GameState } from '../actions/game';
 import GameView from './game/game-view';
 import { Fleet, MaterialDisplay } from './ui/game';
@@ -49,6 +49,7 @@ export default class Game extends Component {
 
     return (
       <div className={style.uiBody}>
+        <FunctionalityTestPanel actions={actions} />
         <StaticPanel title="Resources">
           <MaterialDisplay data={player.materials} />
         </StaticPanel>

@@ -7,7 +7,7 @@
  */
 export default function ({ body, postBody }) {
   return {
-    completionTime: body.api_complatetime,
+    targetTime: body.api_complatetime,
     fleetId: postBody.api_deck_id,
     missionId: postBody.api_mission_id
   };

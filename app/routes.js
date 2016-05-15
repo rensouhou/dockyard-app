@@ -8,5 +8,6 @@ export default (
     <IndexRoute component={pages.HomePage} />
     <Route path="/configure" component={pages.ConfigurePage} />
     <Route path="/game" component={pages.GamePage} />
+    <Route path="/test" component={pages.TestPage} />
   </Route>
 );

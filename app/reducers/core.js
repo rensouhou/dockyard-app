@@ -33,10 +33,17 @@ export default createReducer(initialState, {
     };
   },
   [REGISTER_GAME_VIEW](state, action) {
-    return { ...state, webview: action.payload };
+    return {
+      ...state,
+      webview: action.payload
+    };
   },
   [TAKE_SCREENSHOT](state, action) {
-    return { ...state, successful: true, filename: action.payload.filename };
+    return {
+      ...state,
+      successful: true,
+      filename: action.payload.filename
+    };
   },
   [REGISTER_NOTIFICATION_HANDLERS](state, action) {
     return { ...state, notifiers: action.payload };

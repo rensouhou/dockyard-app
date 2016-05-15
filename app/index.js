@@ -1,3 +1,5 @@
+import { ipcRenderer } from 'electron';
+import AppEvent from '../src/shared/constants';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -6,6 +8,11 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import routes from './routes';
 import configureStore from './store/configureStore';
 import './app.global.css';
+
+ipcRenderer.on(AppEvent.TIMER_DONE, (event, arg) => {
+  console.log('x-D', arg);
+  new Notification(arg.title, arg);
+});
 
 const store = configureStore();
 const history = syncHistoryWithStore(hashHistory, store);

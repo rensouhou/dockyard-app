@@ -1,4 +1,4 @@
-/*eslint no-case-declarations:0,no-new:0*/
+/* eslint no-case-declarations:0,no-new:0,no-console:0 */
 /**
  * @overview
  *  Back-end implementation for RDB logging.
@@ -11,33 +11,32 @@
 const thinky = require('thinky')({ db: 'dockyard_rdb' });
 const type = thinky.type;
 const schema = require('./schema/rdb')(thinky, type);
-const R = require('ramda');
 
-const electron = require('electron');
-const AppEvent = require('../shared/constants');
+import { ipcMain } from 'electron';
+import AppEvent from '../shared/constants';
+
 const ApiEvent = require('../../app/constants/api-events').ApiEvents;
-const ipcMain = electron.ipcMain;
 
-console.log('app/core/db-logger#import');
-
-ipcMain.on(AppEvent.REHYDRATE_STORE_REQUEST, (event, arg) => {
+ipcMain.on(AppEvent.REHYDRATE_STORE_REQUEST, event => {
   event.sender.send(AppEvent.REHYDRATE_STORE);
 });
 
 ipcMain.on(AppEvent.RDB_LOG_EVENT, (event, arg) => {
-  const type = arg.action.type;
-    const payload = arg.action.payload;
+  const eventType = arg.action.type;
+  const payload = arg.action.payload;
 
   new schema.GameEvent({ type: payload.type }).saveAll();
 
   // Log material state
-  if ([
-      ApiEvent.GET_BASE_DATA,
-      ApiEvent.RESUPPLY_SHIP,
-      ApiEvent.GET_MATERIAL,
-      ApiEvent.CRAFT_ITEM,
-      ApiEvent.DESTROY_SHIP
-    ].includes(type)) {
+  const materialLogEvents = [
+    ApiEvent.GET_BASE_DATA,
+    ApiEvent.RESUPPLY_SHIP,
+    ApiEvent.GET_MATERIAL,
+    ApiEvent.CRAFT_ITEM,
+    ApiEvent.DESTROY_SHIP
+  ];
+
+  if (materialLogEvents.includes(eventType)) {
     console.log('Logging material state');
     new schema.MaterialState(payload.materials).saveAll();
   }

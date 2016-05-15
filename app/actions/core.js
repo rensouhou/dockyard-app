@@ -97,10 +97,6 @@ export const registerNotificationHandlers = createAction(REGISTER_NOTIFICATION_H
 
 export const notify = createAction(NOTIFY, (title, options) => new Notification(title, options));
 
-export const createTimer = createAction(CREATE_TIMER, async args => {
-  ipcRenderer.send(AppEvent.TIMER_START, { ...args });
-
-  return await new Promise((resolve) => {
-    ipcRenderer.once(AppEvent.TIMER_STARTED, (event, payload) => resolve(payload));
-  });
+export const scheduleEvent = createAction(CREATE_TIMER, args => {
+  ipcRenderer.send(AppEvent.TIMER_START, { targetTime: args.targetTime });
 });

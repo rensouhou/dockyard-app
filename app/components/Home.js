@@ -10,6 +10,7 @@ export default class Home extends Component {
         <div className={styles.modeSelect}>
           <Link to="/game">Launch</Link>
           <Link to="/configure">Configuration</Link>
+          <Link to="/test">Core Test</Link>
         </div>
         <footer>github.com/rensouhou/dockyard-app</footer>
       </div>
