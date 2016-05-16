@@ -26,7 +26,7 @@ const StaticPanel = props => (
 
 StaticPanel.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.element,
+  children: PropTypes.any,
   title: PropTypes.string,
   style: PropTypes.object
 };

@@ -9,8 +9,8 @@ import routes from './routes';
 import configureStore from './store/configureStore';
 import './app.global.css';
 
+// @todo Change into something more better nice
 ipcRenderer.on(AppEvent.TIMER_DONE, (event, arg) => {
-  console.log('x-D', arg);
   new Notification(arg.title, arg);
 });
 

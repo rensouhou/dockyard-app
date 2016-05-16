@@ -1,0 +1,17 @@
+@import '../../assets/base-styles';
+
+@mixin make-button($color: $md-pink-a400, $invert-color: $md-white) {
+  border: solid 2px $color;
+  color: $color;
+
+  &:hover {
+    background: $color;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    cursor: pointer;
+  }
+}
+
+.button {
+  @include make-button();
+}

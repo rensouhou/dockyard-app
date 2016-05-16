@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 /**
  * @overview
  *
@@ -6,16 +7,25 @@
  */
 import chalk from 'chalk';
 import { ipcRenderer } from 'electron';
-import { ApiEvents, GameState } from '../actions/game';
-import { CREATE_TIMER, notify, scheduleEvent } from '../actions/core';
+import storage from 'electron-json-storage';
 import AppEvent from '../../src/shared/constants';
-import R from 'ramda';
+import { ApiEvents } from '../actions/game';
 
 const g = chalk.green;
 const gi = chalk.green.inverse;
 const logEvent = (event, msg) => console.log(`${g('event')} '${gi(event)}': ${msg}`);
 
-const schedule = targetTime => ipcRenderer.send(AppEvent.TIMER_START, { targetTime });
+let scheduled = {};
+
+const file = 'scheduled';
+// @todo(@stuf): replace me with one without side effects!
+const persist = () => storage.set(file, scheduled, err => console.log(err));
+
+const schedule = (type, targetTime) => {
+  ipcRenderer.send(AppEvent.TIMER_START, { targetTime });
+  scheduled = { ...scheduled, [targetTime]: { type, targetTime } };
+  persist();
+};
 
 function createScheduleMiddleware() {
   return ({ getState, dispatch }) => next => action => {
