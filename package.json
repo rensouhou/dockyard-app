@@ -127,6 +127,7 @@
     "reselect": "^2.5.1",
     "rimraf": "^2.5.2",
     "source-map-support": "^0.4.0",
+    "thinky": "^2.3.2",
     "warning": "^2.1.0",
     "winston": "^2.2.0"
   },

@@ -3,6 +3,7 @@ import { persistState } from 'redux-devtools';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import timerMiddleware from '../core/schedule-middleware';
+import gameDataLoggingMiddleware from '../core/game-logging-middleware';
 import promiseMiddleware from 'redux-promise';
 import { hashHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
@@ -18,8 +19,10 @@ const router = routerMiddleware(hashHistory);
 
 const timer = timerMiddleware();
 
+const gameDataLogger = gameDataLoggingMiddleware();
+
 const enhancer = compose(
-  applyMiddleware(thunk, promiseMiddleware, router, logger, timer),
+  applyMiddleware(thunk, promiseMiddleware, router, logger, timer, gameDataLogger),
   DevTools.instrument(),
   persistState(
     window.location.href.match(

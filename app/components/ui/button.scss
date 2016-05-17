@@ -1,6 +1,6 @@
 @import '../../assets/base-styles';
 
-@mixin make-button($color: $md-pink-a400, $invert-color: $md-white) {
+@mixin make-button($color: $md-amber-a400, $invert-color: $md-white) {
   border: solid 2px $color;
   background-color: transparent;
   padding: 0.4rem 1rem;

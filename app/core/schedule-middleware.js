@@ -23,7 +23,7 @@ const persist = () => storage.set(file, scheduled, err => console.log(err));
 
 const schedule = (type, targetTime) => {
   ipcRenderer.send(AppEvent.TIMER_START, { targetTime });
-  scheduled = { ...scheduled, [targetTime]: { type, targetTime } };
+  scheduled[targetTime] = { type, targetTime };
   persist();
 };
 
@@ -31,7 +31,7 @@ function createScheduleMiddleware() {
   return ({ getState, dispatch }) => next => action => {
     switch (action.type) {
       case ApiEvents.START_MISSION:
-        schedule(action.payload.targetTime);
+        schedule(action.payload);
         break;
       default:
         break;

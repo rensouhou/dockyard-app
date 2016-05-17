@@ -12,6 +12,7 @@ import chalk from 'chalk';
 import bluebird from 'bluebird';
 import electronStorage from 'electron-json-storage';
 import './src/main/timers';
+import { createGameDataLogger } from './src/main/game-data-logger';
 
 bluebird.promisifyAll(electronStorage);
 
@@ -98,6 +99,9 @@ console.log(chalkSuccess('Configuration set.'));
 if (process.env.NODE_ENV === 'development') {
   require('electron-debug')();
 }
+
+// Other "secondary" functions
+createGameDataLogger();
 
 app.on('window-all-closed', () => {
   console.log(chalkInfo('All windows have been closed.'));

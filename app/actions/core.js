@@ -98,5 +98,8 @@ export const registerNotificationHandlers = createAction(REGISTER_NOTIFICATION_H
 export const notify = createAction(NOTIFY, (title, options) => new Notification(title, options));
 
 export const scheduleEvent = createAction(CREATE_TIMER, args => {
-  ipcRenderer.send(AppEvent.TIMER_START, { targetTime: args.targetTime });
+  console.error('action:scheduleEvent', args);
+  const payload = { targetTime: args.targetTime };
+  ipcRenderer.send(AppEvent.TIMER_START, payload);
+  return payload;
 });
