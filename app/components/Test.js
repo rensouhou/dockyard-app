@@ -8,7 +8,7 @@ import React, { Component, PropTypes } from 'react';
 import { FunctionalityTestPanel } from './ui';
 
 export default class Test extends Component {
-  static PropTypes = {
+  static propTypes = {
     actions: PropTypes.object
   };
 
