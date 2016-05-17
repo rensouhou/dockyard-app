@@ -16,7 +16,6 @@ export default class FunctionalityTestPanel extends Component {
   };
 
   timerTestClickHandler = event => {
-    console.log('timerTestClickHandler clicked', event);
     this.props.actions.scheduleEvent({ targetTime: +(new Date()) + 5000 });
   };
 
