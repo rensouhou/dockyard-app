@@ -4,8 +4,10 @@
  *  Back-end implementation for RDB logging.
  *  Electron + Webpack has issues and I want to log my event data. 🙃
  *
+ *  Rewrite/overhaul this at some later point to be a little bit more
+ *  configurable. Maybe.
+ *
  * @since 0.1.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
  */
 import { ipcMain } from 'electron';
 import chalk from 'chalk';
@@ -23,13 +25,17 @@ export function createGameDataLogger() {
   const dbName = 'dockyard_rdb';
   console.log(c(`Creating game data logger; using database ${ci(dbName)}`));
   const thinky = Thinky({ db: 'dockyard_rdb' });
+  const r = thinky.r;
   const type = thinky.type;
   const schema = createSchemas(thinky, type);
   console.log(`${c('Schemas:')} [${c(Object.keys(schema).join(', '))}]`);
 
-  ipcMain.on(AppEvent.REHYDRATE_STORE_REQUEST, event => {
-    // @todo(@stuf): fetch data for rehydrating the store
-    event.sender.send(AppEvent.REHYDRATE_STORE, {});
+  ipcMain.on(AppEvent.REHYDRATE_STORE_REQUEST, async event => {
+    event.sender.send(AppEvent.REHYDRATE_STORE,
+      await r.table('MaterialState')
+             .orderBy(r.desc('timestamp'))
+             .nth(0)
+             .run());
   });
 
   // @todo(@stuf): this needs some rethinking (ahue)
@@ -56,6 +62,12 @@ export function createGameDataLogger() {
     if (materialLogEvents.indexOf(eventType) !== -1) {
       console.log(c(`--> ${JSON.stringify(payload.materials)}`));
       new schema.MaterialState(payload.materials).saveAll();
+    }
+    switch (eventType) {
+      case ApiEvent.GET_OPPONENT_INFO:
+        break;
+      default:
+        break;
     }
   });
 }

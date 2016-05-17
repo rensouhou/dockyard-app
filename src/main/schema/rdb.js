@@ -41,6 +41,7 @@ export default function (thinky, type) {
   });
   CraftingLog.ensureIndex('timestamp');
 
+  // @todo(@stuf): this will need migrating
   const Opponent = thinky.createModel('Opponent', {
     timestamp: type.date().default(r.now()),
     id: type.number().required(),
