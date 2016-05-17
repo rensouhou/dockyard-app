@@ -6,7 +6,7 @@
  */
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as coreActions from '../actions/core';
+import * as coreActions from '../actions/application';
 import Test from '../components/Test';
 
 const mapDispatchToProps = dispatch => ({

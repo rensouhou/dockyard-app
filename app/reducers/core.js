@@ -1,11 +1,12 @@
 /**
  * @overview
  *
- * @since 0.2.0
+ * @since 0.1.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/reducers/core-app
+ * @deprecated
  * @flow
  */
+import deprecate from 'deprecate';
 import createReducer from './create-reducer';
 import {
   REGISTER_GAME_VIEW,
@@ -22,6 +23,8 @@ const initialState = {
   configuration: {}
 };
 
+deprecate('app/actions/core.js is deprecated.');
+
 export default createReducer(initialState, {
   [READ_CONFIGURATION](state, action) {
     return {
@@ -32,6 +35,7 @@ export default createReducer(initialState, {
       }
     };
   },
+  // @done
   [REGISTER_GAME_VIEW](state, action) {
     return {
       ...state,

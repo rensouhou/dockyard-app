@@ -137,7 +137,7 @@ export const createGameActions = () => ({
   })
 });
 
-export const GameState = {
+export const GameStates = {
   UNINITIALIZED: 'UNINITIALIZED',
   STARTING_GAME: 'STARTING_GAME',
   IN_SORTIE: 'IN_SORTIE',

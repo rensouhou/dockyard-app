@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Game from '../components/Game';
 import { createTransformerActions, createGameActions } from '../actions/game';
-import * as coreActions from '../actions/core';
+import * as coreActions from '../actions/application';
 import { gameEntities } from '../selectors/game-entities';
 
 const mapStateToProps = state => ({

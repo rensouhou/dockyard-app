@@ -8,7 +8,7 @@
 import React, { Component, PropTypes } from 'react';
 import R from 'ramda';
 import { StaticPanel, FunctionalityTestPanel } from './ui';
-import { GameState } from '../actions/game';
+import { GameStates } from '../actions/game';
 import GameView from './game/game-view';
 import { Fleet, MaterialDisplay } from './ui/game';
 import style from './Game.scss';
@@ -30,7 +30,7 @@ export default class Game extends Component {
       : <Fleet {...fleet} />;
 
   renderBody() {
-    const { transformerActions, game, actions, gameEntities } = this.props;
+    const { transformerActions, game, actions, gameEntities, appState } = this.props;
     const { player } = this.props.appState;
 
     const getFirstFleet = R.head(
@@ -49,7 +49,7 @@ export default class Game extends Component {
 
     return (
       <div className={style.uiBody}>
-        <FunctionalityTestPanel actions={actions} />
+        <FunctionalityTestPanel actions={actions} appState={appState} />
         <StaticPanel title="Resources">
           <MaterialDisplay data={player.materials} />
         </StaticPanel>
@@ -64,13 +64,15 @@ export default class Game extends Component {
   render() {
     let body = null;
     const { transformerActions, game, actions, gameEntities } = this.props;
-    if (!this.isInitialized() || this.props.appState.gameState === GameState.UNINITIALIZED ||
-      this.props.appState.gameState === GameState.STARTING_GAME) {
+    if (!this.isInitialized() || this.props.appState.gameState === GameStates.UNINITIALIZED ||
+      this.props.appState.gameState === GameStates.STARTING_GAME) {
       body = <div>Not initialized yet.</div>;
     }
     else {
       body = this.renderBody();
     }
+
+    console.log('Game.js:this.props =>', this.props);
 
     return (
       <div className={style.container}>

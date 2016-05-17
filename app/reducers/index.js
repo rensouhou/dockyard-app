@@ -7,7 +7,7 @@
  */
 import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
-import core from './core';
+import application from './application';
 import crafting from './crafting';
 import game from './game';
 import gameState from './game-state';
@@ -17,7 +17,7 @@ import practice from './practice';
 import result from './result';
 
 const rootReducer = combineReducers({
-  core,
+  application,
   game,
   gameState,
   player,
