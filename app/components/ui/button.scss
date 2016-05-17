@@ -2,12 +2,17 @@
 
 @mixin make-button($color: $md-pink-a400, $invert-color: $md-white) {
   border: solid 2px $color;
+  background-color: transparent;
+  padding: 0.4rem 1rem;
+  font-family: Avenir, sans-serif;
+  font-size: 1rem;
   color: $color;
 
   &:hover {
-    background: $color;
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
+    //-webkit-text-fill-color: transparent;
+    //-webkit-background-clip: text;
+    background-color: $color;
+    color: $global-background;
     cursor: pointer;
   }
 }
