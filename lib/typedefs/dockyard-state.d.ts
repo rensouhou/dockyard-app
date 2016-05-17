@@ -14,12 +14,14 @@
 export module DockyardState {
   // Base game data
   interface game {
-    ships: Array<any>;
-    shipTypes: Array<any>;
-    slotItems: Array<any>;
-    mapAreas: Array<any>;
-    mapCells: Array<any>;
-    missions: Array<any>;
+    ships: Object[];
+    shipTypes: Object[];
+    slotItems: Object[];
+    maps: Object[];
+    mapAreas: Object[];
+    mapCells: Object[];
+    missions: Object[];
+    bgm: Object[];
   }
 
   // Application internals
@@ -58,7 +60,8 @@ export module DockyardState {
   }
 
   // Expeditions
-  interface mission {}
+  interface mission {
+  }
 
   interface practice {
     opponents: Array<any>;
@@ -75,4 +78,51 @@ export module DockyardState {
   }
 
   interface ships {}
+}
+
+namespace BaseData {
+  export interface Map {
+    id: number;
+    name: string;
+    type: number;
+    cells: MapCell;
+  }
+
+  export interface MapCell {
+    id: number;
+    mapId: number;
+    mapAreaId: number;
+    mapInfoId: number;
+    cellId: number;
+    cellType: CellType;
+  }
+
+  export interface Mission {
+    id: number;
+    mapAreaId: number;
+    name: string;
+    description: string;
+    duration: number;
+    difficulty: any;
+    consumption: {
+      fuel: number;
+      ammo: number;
+    };
+    rewards: {}[];
+    interruptable: boolean;
+  }
+
+  export enum CellType {
+    StartingPoint = 0,
+    Exists = 1,
+    Resources = 2,
+    Whirlpool = 3,
+    BattleNode = 4,
+    BossNode = 5,
+    ImaginationNode = 6,
+    AirBattleNode = 7,
+    EscortNode = 8,
+    AirScoutNode = 9,
+    BigAirBattle = 10
+  }
 }
