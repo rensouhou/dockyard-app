@@ -11,7 +11,9 @@ import './app.global.css';
 
 // @todo Change into something more better nice
 ipcRenderer.on(AppEvent.TIMER_DONE, (event, arg) => {
+  /* eslint-disable */
   new Notification(arg.title, arg);
+  /* eslint-enable */
 });
 
 const store = configureStore();
