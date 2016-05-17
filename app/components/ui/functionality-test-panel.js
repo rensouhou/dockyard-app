@@ -23,6 +23,8 @@ export default class FunctionalityTestPanel extends Component {
     return (
       <StaticPanel title="FunctionalityTestPanel" className={css.functionalityTestPanel}>
         <Button onClickHandler={this.timerTestClickHandler}>Timer</Button>
+        <Button>Screenshot</Button>
+        <Button>Notify</Button>
       </StaticPanel>
     );
   }
