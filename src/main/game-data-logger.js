@@ -40,7 +40,7 @@ export function createGameDataLogger() {
       console.log(`${g('Could not find handler for event')} ${gi(eventType)}`);
       return;
     }
-    console.log(`${ci(AppEvent.DB_LOG_EVENT)}: ${c(JSON.stringify(arg))}`);
+    console.log(`${ci(AppEvent.DB_LOG_EVENT)}: ${c('event')} ${ci(arg.action.type)}`);
 
     new schema.GameEvent({ type: payload.type }).saveAll();
 
@@ -54,7 +54,7 @@ export function createGameDataLogger() {
     ];
 
     if (materialLogEvents.indexOf(eventType) !== -1) {
-      console.log('Logging material state');
+      console.log(c(`--> ${JSON.stringify(payload.materials)}`));
       new schema.MaterialState(payload.materials).saveAll();
     }
   });

@@ -1,9 +1,7 @@
 /**
  * @overview
  *
- * @since 0.3.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/transformers/api/base-ship-type
+ * @since 0.1.0
  * @flow
  */
 

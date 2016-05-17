@@ -14,6 +14,9 @@ import { baseSlotItem } from '../../transformers/api/base-slotitem';
 import { normalize, Schema } from 'normalizr';
 // import * as Schema from '../../schema';
 
+/**
+ * @type {Dockyard.GameEvent.transformer}
+ */
 export default function ({ body }) {
   const {
           api_mst_ship,

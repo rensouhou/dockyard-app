@@ -1,4 +1,4 @@
-/* eslint quote-props: 0 */
+/* eslint quote-props: 0, no-console: 0 */
 import { createAction } from 'redux-actions';
 import T from 'immutable';
 import ApiTransformers from './kcsapi';
