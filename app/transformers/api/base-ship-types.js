@@ -4,6 +4,7 @@
  * @since 0.1.0
  * @flow
  */
+import { asNumber } from '../primitive';
 
 type LocalizedString = {
   ja: string,
@@ -42,11 +43,10 @@ const typeName:ShipTypeName = {
 const shipTypeName = (id, name = typeName) => name[id] || null;
 
 export const baseShipType = (o) => ({
-  id: o.api_id,
-  sortId: o.api_sortno,
+  id: asNumber(o.api_id),
+  sortId: asNumber(o.api_sortno),
   name: shipTypeName(o.api_name),
   slotCount: o.api_scnt,
   silhouette: o.api_kcnt,
-  equipType: o.api_equip_type,
-  $_finalized: false
+  equipType: o.api_equip_type
 });

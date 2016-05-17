@@ -11,18 +11,19 @@ import { baseShip } from '../../transformers/api/base-ship';
 import { baseShipGraphic } from '../../transformers/api/base-ship-graphic';
 import { baseShipType } from '../../transformers/api/base-ship-types';
 import { baseSlotItem } from '../../transformers/api/base-slotitem';
+import { baseFurniture } from '../../transformers/api/base-furniture';
+import { baseMapArea } from '../../transformers/api/base-maparea';
+import { baseMission } from '../../transformers/api/base-mission';
 import { normalize, Schema } from 'normalizr';
 // import * as Schema from '../../schema';
 
 /**
  * @type {Dockyard.GameEvent.transformer}
  */
-export default function ({ body }) {
+export default function({ body }) {
   const {
-          api_mst_ship,
           api_mst_shipgraph,
           api_mst_shipupgrade,
-          api_mst_slotitem,
           api_msg_slotitem_equiptype,
           api_mst_equip_exslot,
           api_mst_stype,
@@ -35,7 +36,6 @@ export default function ({ body }) {
           api_mst_mapinfo,
           api_mst_mapbgm,
           api_mst_mapcell,
-          api_mst_mission,
           api_mst_const,
           api_mst_bgm,
         } = body;
@@ -44,17 +44,27 @@ export default function ({ body }) {
     ships: R.map(baseShip, body.api_mst_ship)
   };
 
-  const baseShip_Schema = new Schema('ships', { idAttribute: 'shipId' });
+  const transformedResult = {
+    ships: body.api_mst_ship.map(baseShip),
+    shipGraphics: body.api_mst_shipgraph.map(baseShipGraphic),
+    shipTypes: body.api_mst_stype.map(baseShipType),
+    slotItems: body.api_mst_slotitem.map(baseSlotItem),
+    missions: body.api_mst_mission.map(baseMission),
+    furniture: body.api_mst_furniture.map(baseFurniture),
+    mapAreas: body.api_mst_maparea.map(baseMapArea)
+  };
 
-  const result = normalize(response, {
-    ships: baseShip_Schema
-  });
+  const schemas = {
+    ships: new Schema('ships'),
+    shipTypes: new Schema('shiptypes'),
+    slotItems: new Schema('slotItems'),
+    missions: new Schema('missions'),
+    furniture: new Schema('furniture'),
+    mapArea: new Schema('mapAreas')
+  };
 
   return {
-    normalized: result,
-    ships: api_mst_ship.map(baseShip),
-    shipGraphics: api_mst_shipgraph.map(baseShipGraphic),
-    shipTypes: api_mst_stype.map(baseShipType),
-    slotItems: api_mst_slotitem.map(baseSlotItem)
+    normalized: normalize(response, schemas),
+    ...transformedResult
   };
 }
