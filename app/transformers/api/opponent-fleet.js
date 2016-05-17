@@ -5,7 +5,14 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/api/opponent-fleet
  */
-import { asBool, getObjectOrDefault } from '../primitive';
+import { asBool, getObjectOrDefault, notEmpty } from '../primitive';
+
+const opponentShip = o => ({
+  id: o.api_id,
+  shipId: o.api_ship_id,
+  level: o.api_level,
+  stars: o.api_star
+});
 
 /**
  * @param o
@@ -23,7 +30,7 @@ export const opponentFleet = (o) => ({
   },
   fleet: {
     name: o.api_deckname,
-    ships: getObjectOrDefault(o.api_deck).api_ships
+    ships: getObjectOrDefault(o.api_deck).api_ships.filter(notEmpty).map(opponentShip)
   },
   $_unknown: {
     friend: asBool(o.api_friend),

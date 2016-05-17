@@ -5,17 +5,12 @@
  * @since 0.1.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
  */
-import chalk from 'chalk';
 import { ipcRenderer } from 'electron';
 import storage from 'electron-json-storage';
 import AppEvent from '../../src/shared/constants';
 import { ApiEvents } from '../actions/game';
 
-const g = chalk.green;
-const gi = chalk.green.inverse;
-const logEvent = (event, msg) => console.log(`${g('event')} '${gi(event)}': ${msg}`);
-
-let scheduled = {};
+const scheduled = {};
 
 const file = 'scheduled';
 // @todo(@stuf): replace me with one without side effects!
@@ -29,6 +24,7 @@ const schedule = (type, targetTime) => {
 
 function createScheduleMiddleware() {
   return ({ getState, dispatch }) => next => action => {
+    console.log(typeof getState, typeof dispatch);
     switch (action.type) {
       case ApiEvents.START_MISSION:
         schedule(action.payload);

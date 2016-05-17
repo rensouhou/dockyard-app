@@ -13,9 +13,6 @@ const initialState = {
   opponents: {}
 };
 
-/** @deprecated */
-const upsertOpponent = (opponentObj, o) => ({ ...opponentObj, o });
-
 export default createReducer(initialState, {
   [ApiEvents.GET_OPPONENT_INFO](state, action) {
     return {

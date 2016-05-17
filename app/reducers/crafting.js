@@ -30,7 +30,7 @@ export default createReducer(initialState, {
     return { ...state, ...action.payload, flags: { shipCrafted: true } };
   },
   [ApiEvents.GET_CONSTRUCTION_DOCKS](state, action) {
-    console.log(`${ApiEvents.GET_CONSTRUCTION_DOCKS} =>`, state, action);
+    // console.log(`${ApiEvents.GET_CONSTRUCTION_DOCKS} =>`, state, action);
     return { ...state, docks: action.payload.docks };
   }
 });

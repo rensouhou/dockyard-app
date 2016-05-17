@@ -5,7 +5,6 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  */
 import React, { Component, PropTypes } from 'react';
-import { ipcRenderer } from 'electron';
 import StaticPanel from './static-panel';
 import Button from './button';
 import css from './functionality-test-panel.scss';
@@ -29,7 +28,6 @@ export default class FunctionalityTestPanel extends Component {
   };
 
   render() {
-    console.log('this.props =>', this.props);
     return (
       <StaticPanel title="FunctionalityTestPanel" className={css.functionalityTestPanel}>
         <Button onClickHandler={this.timerTestClickHandler}>Timer</Button>

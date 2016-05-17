@@ -1,9 +1,7 @@
 /**
  * @overview
  *
- * @since 0.2.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/reducers
+ * @since 0.1.0
  */
 import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
