@@ -111,6 +111,7 @@
     "invariant": "^2.2.1",
     "material-colors": "^1.0.0",
     "node-schedule": "^1.1.0",
+    "normalize.css": "^4.1.1",
     "normalizr": "^2.1.0",
     "postcss": "^5.0.19",
     "ramda": "^0.21.0",
