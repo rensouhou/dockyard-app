@@ -50,12 +50,12 @@ export default function (thinky, type) {
     comment: type.string(),
     rank: type.number(),
     counts: {
-      ships: type.number(),
-      slotItems: type.number()
+      ships: [type.number()],
+      slotItems: [type.number()]
     },
     fleet: {
       name: type.string(),
-      ships: [type.number()]
+      ships: [type.object()]
     }
   });
   Opponent.ensureIndex('timestamp');
@@ -66,5 +66,17 @@ export default function (thinky, type) {
   });
   GameEvent.ensureIndex('timestamp');
 
-  return { MaterialState, CraftingLog, Opponent, GameEvent };
+  const SortieResult = thinky.createModel('SortieResult', {
+    timestamp: type.date().default(r.now()),
+    rank: type.string()
+  });
+  SortieResult.ensureIndex('timestamp');
+
+  const Drops = thinky.createModel('Drops', {
+    timestamp: type.date().default(r.now()),
+    id: type.number().required()
+  });
+  Drops.ensureIndex('timestamp');
+
+  return { MaterialState, CraftingLog, Opponent, GameEvent, Drops, SortieResult };
 }

@@ -7,3 +7,4 @@
  */
 export const Fleet = require('./fleet');
 export const MaterialDisplay = require('./material-display');
+export const PlayerInfo = require('./player-info');

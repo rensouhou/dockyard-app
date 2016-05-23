@@ -6,7 +6,7 @@ $hint-text-alpha: 0.38;
 $divider-alpha: 0.12;
 
 .staticPanel {
-  // border: dashed 0.1rem #f00;
+  margin-top: (0.75rem / 2);
   color: rgba($md-white, $primary-text-alpha);
 
   &.topSpace {
@@ -15,7 +15,6 @@ $divider-alpha: 0.12;
 }
 
 .title {
-  // border: dashed 0.1rem #f70;
   font-size: 0.7rem;
   color: rgba($md-white, $hint-text-alpha);
   text-overflow: ellipsis;

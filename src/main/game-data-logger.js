@@ -63,8 +63,15 @@ export function createGameDataLogger() {
       console.log(c(`--> ${JSON.stringify(payload.materials)}`));
       new schema.MaterialState(payload.materials).saveAll();
     }
+
     switch (eventType) {
       case ApiEvent.GET_OPPONENT_INFO:
+        console.log(c(JSON.stringify(payload)));
+        new schema.Opponent(payload.fleet).saveAll();
+        break;
+      case ApiEvent.FINISHED_SORTIE:
+        console.log(c(JSON.stringify(payload)));
+        new schema.SortieResult().saveAll();
         break;
       default:
         break;

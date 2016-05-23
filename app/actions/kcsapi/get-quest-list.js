@@ -3,7 +3,6 @@
  *  Handler for `GET_QUEST_LIST` event
  *
  * @since 0.1.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
  */
 import R from 'ramda';
 import { getArrayOrDefault } from '../../transformers/primitive';

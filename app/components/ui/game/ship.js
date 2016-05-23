@@ -19,6 +19,10 @@ export default class Ship extends Component {
     morale: PropTypes.number
   };
 
+  static defaultProps = {
+    name: {}
+  };
+
   render() {
     const { id, shipId, hp, level, name, morale } = this.props;
 
@@ -26,9 +30,9 @@ export default class Ship extends Component {
       return <div>Not a valid ship</div>;
     }
     return (
-      <StaticPanel title={`${name.reading}`} className={style.ship}>
+      <StaticPanel title={`${(name || {}).reading}`} className={style.ship}>
         <header>
-          <div className={style.name}>{name.kanji}</div>
+          <div className={style.name}>{(name || {}).kanji}</div>
           <div className={style.level}>{level}</div>
           <div className={style.morale}><i className="fa fa-heart" /> {morale}</div>
         </header>

@@ -1,11 +1,9 @@
-/* eslint no-return-assign: 0, no-console: 0, max-len: 0 */
+/* eslint no-return-assign: 0, max-len: 0 */
 /**
  * @overview
  *  Game data handler for {@see KCSApi} traffic
  *
  * @since 0.1.0
- * @author Stefan Rimaila
- * @module app/core/game-data-handler
  */
 import qs from 'querystring';
 import T from 'immutable';
@@ -28,8 +26,6 @@ const NETWORK = {
 export function createGameViewHandler(parseFunObj, cfg) {
   invariant(parseFunObj, 'A parsing function is required.');
   invariant(cfg, 'A configuration object is required.');
-
-  // console.log('createGameViewHandler; parseFn =', parseFunObj);
   return handleGameView(parseFunObj, cfg);
 }
 
@@ -73,7 +69,7 @@ export function handleGameView(parseFunObj, cfg) {
         callback({ cancel });
 
         if (cancel) {
-          console.log(`Found game SWF: ${details.url.replace(/\?.*$/, '?[API_KEY_REDACTED]')}`);
+          console.log(`Found game SWF: ${details.url.replace(/\?.*$/, '')}`);
           gameUrl = details.url;
           firstGameLoad = false;
           wc.loadURL(gameUrl);
@@ -113,7 +109,8 @@ function Handler(wc, parseFunObj, cfg) {
           url = params.request.url;
           if (pathPrefix.test(url)) {
             req = req.update(requestId,
-              (it) => Object.assign({}, it, {
+              it => ({
+                ...it,
                 request: params.request,
                 path: parsePath(url, pathPrefix)
               }));
@@ -123,7 +120,7 @@ function Handler(wc, parseFunObj, cfg) {
           url = params.response.url;
           if (pathPrefix.test(url)) {
             req = req.update(requestId,
-              (it) => Object.assign({}, it, { response: params.response }));
+              it => ({ ...it, response: params.response }));
           }
           break;
         case NETWORK.LoadingFinished:
@@ -154,15 +151,14 @@ function Handler(wc, parseFunObj, cfg) {
                 const res = { path, error, body, postBody };
 
                 // Look up the appropriate event name
-                const eventToHandle = ApiEventsByPath.find((v, k) => res.path.includes(k));
+                const eventToHandle = ApiEventsByPath.find((v, k) => (new RegExp(`${k}$`)).test(res.path));
                 const handler = (parseFunObj.transformerActions || {})[eventToHandle];
 
                 if (eventToHandle && handler) {
-                  console.log(`found a handler (\`${handler.name}\`) for the event ${eventToHandle} with data:`, { ...res });
+                  console.log(`${requestId}: Network.getResponseBody done = ${path}\t%o`,
+                    JSON.parse(JSON.stringify({ ...res })));
                   handler(res);
                 }
-
-                // console.log(`${requestId}: Network.getResponseBody done = ${path}\t%O`, JSON.parse(JSON.stringify({ res })));
               });
           }
           break;

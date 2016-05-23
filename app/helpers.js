@@ -1,4 +1,4 @@
-/* eslint no-param-reassign:0 */
+/* eslint no-param-reassign: 0, no-return-assign: 0 */
 /**
  * @overview
  *

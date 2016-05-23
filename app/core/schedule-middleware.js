@@ -24,7 +24,7 @@ const schedule = (type, targetTime) => {
 
 function createScheduleMiddleware() {
   return ({ getState, dispatch }) => next => action => {
-    console.log(typeof getState, typeof dispatch);
+    // console.log(typeof getState, typeof dispatch);
     switch (action.type) {
       case ApiEvents.START_MISSION:
         schedule(action.payload);

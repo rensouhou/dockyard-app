@@ -18,7 +18,7 @@ const panelTitle = title =>
 const StaticPanel = props => (
   <article className={cx(style.staticPanel, props.className)} style={props.style}>
     {panelTitle(props.title)}
-    <div className={style.staticPanelBody}>
+    <div className={cx(style.staticPanelBody)}>
       {props.children}
     </div>
   </article>

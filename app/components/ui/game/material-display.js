@@ -12,7 +12,7 @@ import style from './material-display.scss';
 
 export default class MaterialDisplay extends Component {
   static propTypes = {
-    data: PropTypes.object,
+    data: PropTypes.any,
     state: PropTypes.arrayOf(PropTypes.object)
   };
 
@@ -26,7 +26,7 @@ export default class MaterialDisplay extends Component {
   };
 
   render() {
-    if (R.isEmpty(this.props && this.props.data)) {
+    if (this.props.data.isNone()) {
       return (<div>nope</div>);
     }
 
@@ -34,7 +34,7 @@ export default class MaterialDisplay extends Component {
       <StaticPanel title={it[0]} key={it[0]} className={style.materialElem}>
         <div className={style.materialCount}>{it[1]}</div>
       </StaticPanel>
-    ), R.toPairs(this.props.data));
+    ), R.toPairs(this.props.data.orSome({})));
 
     return (
       <div className={style.materialDisplay}>

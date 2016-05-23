@@ -1,31 +1,12 @@
 /**
  * @overview
  *
- * @since 0.3.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/transformers/api/sortie-result
- * @flow
+ * @since 0.1.0
  */
 import { asBool } from '../primitive';
 
-type RewardShip = {
-  id: number,
-  name: string,
-  type: string,
-  flavorText: string
-};
-
-type RewardItem = {
-  id: number,
-  name: string
-};
-
-type RewardSlotItem = {
-  id: number
-};
-
 /** Reward ship */
-const getShip = (o):RewardShip => ({
+const getShip = o => ({
   id: o.api_ship_id,
   name: o.api_ship_name,
   type: o.api_ship_type,
@@ -33,13 +14,13 @@ const getShip = (o):RewardShip => ({
 });
 
 /** Reward item */
-const getItem = (o):RewardItem => ({
+const getItem = o => ({
   id: o.api_useitem_id,
   name: o.api_useitem_name
 });
 
 /** Reward slot item */
-const getSlotItem = (o):RewardSlotItem => ({
+const getSlotItem = o => ({
   id: o.api_slotitem_id
 });
 
@@ -67,12 +48,12 @@ export const sortieResult = o => {
       name: o.api_quest_name,
       difficulty: o.api_quest_level
     },
+    flags: {
+      itemReward: flags.getItem,
+      shipReward: flags.getShip,
+      remaining: flags.remaining
+    },
     rewards: {
-      flags: {
-        item: flags.getItem,
-        ship: flags.getShip,
-        remaining: flags.remaining
-      },
       ship: !!gs ? getShip(gs) : null,
       item: !!gi ? getItem(gi) : null,
       slotItem: !!gsi ? getSlotItem(gsi) : null
@@ -92,7 +73,6 @@ export const sortieResult = o => {
       level: ei.api_level,
       rank: ei.api_rank,
       fleetName: ei.api_deck_name
-    },
-    $_finalized: false
+    }
   };
 };

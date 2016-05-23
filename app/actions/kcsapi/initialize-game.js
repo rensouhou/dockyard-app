@@ -20,7 +20,7 @@ import { normalize, Schema } from 'normalizr';
 /**
  * @type {Dockyard.GameEvent.transformer}
  */
-export default function({ body }) {
+export default function INITIALIZE_GAME({ body }) {
   const {
           api_mst_shipgraph,
           api_mst_shipupgrade,

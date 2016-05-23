@@ -8,6 +8,7 @@
 import { ApiEvents } from '../actions/game';
 import createReducer from './create-reducer';
 
+/** @type {DockyardState.game} */
 const initialState = {
   ships: [],
   shipTypes: [],
