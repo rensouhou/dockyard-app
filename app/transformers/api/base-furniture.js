@@ -15,13 +15,13 @@ const FurnitureType = Enum({
   DESK: 5
 });
 
-export const baseFurniture = ({ body }) => ({
-  id: asNumber(body.api_id),
-  title: body.api_title,
-  description: body.api_description,
-  price: asNumber(body.api_price),
-  rarity: asNumber(body.api_rarity),
-  type: FurnitureType(asNumber(body.api_type)),
-  sale: asBool(body.api_saleflg),
-  season: asNumber(body.api_season)
+export const baseFurniture = o => ({
+  id: asNumber(o.api_id),
+  title: o.api_title,
+  description: o.api_description,
+  price: asNumber(o.api_price),
+  rarity: asNumber(o.api_rarity),
+  type: FurnitureType(asNumber(o.api_type)),
+  sale: asBool(o.api_saleflg),
+  season: asNumber(o.api_season)
 });
