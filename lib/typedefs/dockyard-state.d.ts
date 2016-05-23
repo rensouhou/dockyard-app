@@ -68,7 +68,8 @@ export module DockyardState {
   }
 
   interface quest {
-    quests: Array<any>;
+    quests: Array<{}>;
+    active: Array<number>;
   }
 
   interface result {

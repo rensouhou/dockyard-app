@@ -6,84 +6,15 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @flow
  */
-import { app, BrowserWindow, Menu, crashReporter, shell } from 'electron';
-import winston from 'winston';
+import { app, BrowserWindow, Menu, shell } from 'electron';
 import chalk from 'chalk';
-import bluebird from 'bluebird';
-import electronStorage from 'electron-json-storage';
 import './src/main/timers';
 import { createGameDataLogger } from './src/main/game-data-logger';
-
-bluebird.promisifyAll(electronStorage);
 
 process.removeAllListeners('uncaughtException');
 process.on('uncaughtException', err => {
   console.log(chalk.red.inverse.bold('Uncaught exception:'));
   console.log(chalk.red(err.stack || err));
-});
-
-//
-// Initialize logging
-// ------------------
-winston.setLevels({
-  normal: 0,
-  success: 1,
-  failed: 2,
-  info: 3,
-  warn: 4,
-  error: 5,
-  fatal: 6,
-  uncaught: 7
-});
-
-const chalkPID = chalk.bgBlue;
-const chalkSuccess = chalk.green;
-const chalkWarn = chalk.yellow;
-const chalkError = chalk.red;
-const chalkInfo = chalk.cyan;
-
-const levelToFormat = {
-  normal(text) {
-    let pid = chalkPID(`[${process.pid}]`) + ' ';
-    return pid + text;
-  },
-  success(text) {
-    let pid = chalkPID(`[${process.pid}]`) + ' ';
-    return pid + chalkSuccess(text);
-  },
-  failed(text) {
-    let pid = chalkPID(`[${process.pid}]`) + ' ';
-    return pid + chalkError(text);
-  },
-  info(text) {
-    let pid = chalkPID(`[${process.pid}]`) + ' ';
-    return pid + chalkInfo(text);
-  },
-  warn(text) {
-    let pid = chalkPID(`[${process.pid}]`) + ' ';
-    return pid + chalkWarn.inverse.bold('Warning:') + ' ' + chalkWarn(text);
-  },
-  error(text) {
-    let pid = chalkPID(`[${process.pid}]`) + ' ';
-    return pid + chalkError.inverse.bold('Error:') + ' ' + chalkError(text);
-  },
-  fatal(text) {
-    let pid = chalkPID(`[${process.pid}]`) + ' ';
-    return pid + chalkError.inverse.bold('Fatal Error:') + ' ' + chalkError(text);
-  },
-  uncaught(text) {
-    let pid = chalkPID(`[${process.pid}]`) + ' ';
-    return pid + chalkError.inverse.bold('Uncaught Exception:') + ' ' + chalkError(text);
-  },
-};
-
-//
-// Start application
-// -----------------
-crashReporter.start({
-  productName: 'Dockyard',
-  companyName: 'Rensouhou',
-  submitURL: 'http://heatenin.gs:8123'
 });
 
 let menu;
@@ -94,7 +25,7 @@ let mainWindow = null;
 app.commandLine.appendSwitch('remote-debugging-port', '8642');
 app.commandLine.appendSwitch('ppapi-flash-path', './lib/PepperFlashPlayer.plugin');
 app.commandLine.appendSwitch('ppapi-flash-version', '21.0.0.197');
-console.log(chalkSuccess('Configuration set.'));
+console.log(chalk.green.bold('Configuration set.'));
 
 if (process.env.NODE_ENV === 'development') {
   require('electron-debug')();
@@ -104,7 +35,7 @@ if (process.env.NODE_ENV === 'development') {
 createGameDataLogger();
 
 app.on('window-all-closed', () => {
-  console.log(chalkInfo('All windows have been closed.'));
+  console.log('All windows have been closed.');
   if (process.platform !== 'darwin') app.quit();
 });
 
@@ -113,31 +44,7 @@ app.on('gpu-process-crashed', () => {
 });
 
 app.on('ready', () => {
-  console.log(chalkSuccess('Application ready.'));
-  winston.cli();
-
-  // Remove the default transports
-  winston.remove(winston.transports.Console);
-
-  // ...and add the new and shiny one
-  winston.add(winston.transports.Console, {
-    level: 'uncaught',
-    formatter(options) {
-      let text = '';
-      if (!!options.message) {
-        text += options.message;
-      }
-      if (options.meta && Object.keys(options.meta).length) {
-        text += ' ' + JSON.stringify(options.meta);
-      }
-      let formatter = levelToFormat[options.level];
-      if (formatter) {
-        return formatter(text);
-      }
-
-      return text;
-    }
-  });
+  console.log(chalk.green.bold('Application ready.'));
 
   mainWindow = new BrowserWindow({
     show: false,

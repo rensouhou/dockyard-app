@@ -20,8 +20,8 @@ const shouldBuildAll = argv.all || false;
 
 const DEFAULT_OPTS = {
   dir: './',
-  name: appName,
   asar: shouldUseAsar,
+  name: appName,
   ignore: [
     '^/test($|/)',
     '^/tools($|/)',

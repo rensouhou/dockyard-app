@@ -111,11 +111,14 @@
     "immutable": "^3.8.1",
     "invariant": "^2.2.1",
     "material-colors": "^1.0.0",
+    "monet": "^0.8.10",
     "node-schedule": "^1.1.0",
     "normalize.css": "^4.1.1",
     "normalizr": "^2.1.0",
+    "pkginfo": "^0.4.0",
     "postcss": "^5.0.19",
     "ramda": "^0.21.0",
+    "ramda-fantasy": "^0.5.0",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-redux": "^4.4.5",
@@ -127,10 +130,10 @@
     "redux-thunk": "^2.1.0",
     "reselect": "^2.5.1",
     "rimraf": "^2.5.2",
+    "sanctuary": "^0.10.0",
     "source-map-support": "^0.4.0",
     "thinky": "^2.3.2",
-    "warning": "^2.1.0",
-    "winston": "^2.2.0"
+    "warning": "^2.1.0"
   },
   "devEngines": {
     "node": "4.x || 5.x || 6.x",
