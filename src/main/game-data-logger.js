@@ -40,41 +40,46 @@ export function createGameDataLogger() {
 
   // @todo(@stuf): this needs some rethinking (ahue)
   ipcMain.on(AppEvent.DB_LOG_EVENT, (event, arg) => {
-    const { payload } = arg.action;
-    const eventType = arg.action.type;
-    if (!ApiEvent[eventType]) {
-      console.log(`${g('Could not find handler for event')} ${gi(eventType)}`);
-      return;
+    try {
+      const { payload } = arg.action;
+      const eventType = arg.action.type;
+      if (!ApiEvent[eventType]) {
+        console.log(`${g('Could not find handler for event')} ${gi(eventType)}`);
+        return;
+      }
+      console.log(`${ci(AppEvent.DB_LOG_EVENT)}: ${c('event')} ${ci(arg.action.type)}`);
+
+      new schema.GameEvent({ type: payload.type }).saveAll();
+
+      // Log material state
+      const materialLogEvents = [
+        ApiEvent.GET_BASE_DATA,
+        ApiEvent.RESUPPLY_SHIP,
+        ApiEvent.GET_MATERIAL,
+        ApiEvent.CRAFT_ITEM,
+        ApiEvent.DESTROY_SHIP
+      ];
+
+      if (materialLogEvents.indexOf(eventType) !== -1) {
+        console.log(c(`--> ${JSON.stringify(payload.materials)}`));
+        new schema.MaterialState(payload.materials).saveAll();
+      }
+
+      switch (eventType) {
+        case ApiEvent.GET_OPPONENT_INFO:
+          console.log(c(JSON.stringify(payload)));
+          new schema.Opponent(payload.fleet).saveAll();
+          break;
+        case ApiEvent.FINISHED_SORTIE:
+          console.log(c(JSON.stringify(payload)));
+          // new schema.SortieResult().saveAll();
+          break;
+        default:
+          break;
+      }
     }
-    console.log(`${ci(AppEvent.DB_LOG_EVENT)}: ${c('event')} ${ci(arg.action.type)}`);
-
-    new schema.GameEvent({ type: payload.type }).saveAll();
-
-    // Log material state
-    const materialLogEvents = [
-      ApiEvent.GET_BASE_DATA,
-      ApiEvent.RESUPPLY_SHIP,
-      ApiEvent.GET_MATERIAL,
-      ApiEvent.CRAFT_ITEM,
-      ApiEvent.DESTROY_SHIP
-    ];
-
-    if (materialLogEvents.indexOf(eventType) !== -1) {
-      console.log(c(`--> ${JSON.stringify(payload.materials)}`));
-      new schema.MaterialState(payload.materials).saveAll();
-    }
-
-    switch (eventType) {
-      case ApiEvent.GET_OPPONENT_INFO:
-        console.log(c(JSON.stringify(payload)));
-        new schema.Opponent(payload.fleet).saveAll();
-        break;
-      case ApiEvent.FINISHED_SORTIE:
-        console.log(c(JSON.stringify(payload)));
-        new schema.SortieResult().saveAll();
-        break;
-      default:
-        break;
+    catch (e) {
+      console.error('errored =>', e.message, e.stack);
     }
   });
 }
