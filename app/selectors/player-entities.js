@@ -7,18 +7,26 @@ import R from 'ramda';
 import { createSelector } from 'reselect';
 
 // Not necessary, but doing this just out of sheer cleanliness.
-const { indexBy, prop, propOr, merge, map } = R;
+const { indexBy, prop, isEmpty, mergeAll, map } = R;
 
 // Create basic predicates
-const getId = prop('id');
+const getId = prop('shipId');
 const indexByEntityId = indexBy(getId);
 
 const getPlayerState = (state) => indexByEntityId(state.player.ships);  // not null-safe at startup time!
 const getGameDataState = (state) => indexByEntityId(state.game.ships);  // not null-safe at startup time!
-const combineWith = (base) => (it, key) => merge({}, base[key], it);
 
 // Finally, something we can actually use
-const combineTwoSets = (baseData, userData) => map(combineWith(baseData), userData);
+const combineTwoSets = (baseData, userData) => {
+  let result = [];
+  try {
+    result = map((it) => mergeAll([{}, baseData[it.shipId], it]), userData);
+  }
+  catch (e) {
+    console.error('couldn\'t do anything', e.message, e.stack);
+  }
+  return result;
+};
 
 /**
  * Create a memoized selector for combining the player's ships
@@ -26,7 +34,7 @@ const combineTwoSets = (baseData, userData) => map(combineWith(baseData), userDa
  */
 export const normalizeShips = createSelector(
   [getGameDataState, getPlayerState],
-  (gameData, userData) => combineTwoSets(propOr('ships', gameData), userData.ships)
+  (gameData, userData) => isEmpty(gameData) ? [] : combineTwoSets(gameData, userData)
 );
 
 /**
