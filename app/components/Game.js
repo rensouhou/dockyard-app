@@ -7,7 +7,6 @@
  */
 import React, { Component, PropTypes } from 'react';
 import R from 'ramda';
-import S from 'sanctuary';
 import { StaticPanel, FunctionalityTestPanel } from './ui';
 import { GameStates } from '../actions/game';
 import GameView from './game/game-view';
@@ -27,15 +26,6 @@ export default class Game extends Component {
     gameEntities: PropTypes.object
   };
 
-  getMaybe = (path, props) => {
-    const value = R.path([...path], props);
-    return R.isEmpty(value) ? S.Nothing() : S.Just(value);
-  };
-
-  isProperlyInitialized = (props = this.props) => R.isEmpty(props)
-    ? S.Maybe.empty()
-    : S.Maybe.of(props);
-
   isInitialized = () => R.complement(R.isEmpty(R.pathOr([], ['appState'], this.props)));
 
   renderMainFleet = (fleet) =>
@@ -44,6 +34,8 @@ export default class Game extends Component {
       : <Fleet {...fleet} />;
 
   renderBody() {
+    console.group('Game#renderBody');
+    console.time('Game#renderBody');
     const { transformerActions, game, actions, gameEntities, appState } = this.props;
     const { player } = this.props.appState;
 
@@ -61,12 +53,6 @@ export default class Game extends Component {
           ...entity
         });
 
-    const mergeBase = S.Just(mergeBaseFn(gameEntities.entities.ships));
-
-    const getMainFleetM = S.head(R.path(['props', 'appState', 'player', 'fleets'], this))
-                           .map(x => x.ships);
-                           // .map(xs => mergeBase.ap(xs));
-
     const f = R.head(R.pathOr([], ['props', 'appState', 'player', 'fleets'], this));
     const ships = R.values(
       getFleetShips(
@@ -80,6 +66,11 @@ export default class Game extends Component {
       ships: player.ships.length,
       slotItems: player.slotItems.length
     };
+
+    console.log('this.props =>', this.props);
+
+    console.timeEnd('Game#renderBody');
+    console.groupEnd();
 
     return (
       <div className={css.uiBody}>
@@ -108,7 +99,6 @@ export default class Game extends Component {
     else {
       body = this.renderBody();
     }
-    console.log(this.props);
 
     return (
       <div className={css.container}>

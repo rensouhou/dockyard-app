@@ -16,7 +16,6 @@ export default class PlayerInfo extends Component {
 
   render() {
     const { ships, slotItems, nickname, level, limits } = this.props.profile;
-    console.log(this.props);
 
     return (
       <div className={css.playerInfo}>
