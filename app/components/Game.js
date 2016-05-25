@@ -100,6 +100,8 @@ export default class Game extends Component {
       body = this.renderBody();
     }
 
+    console.log('GameComponent#render.props =>', this.props);
+
     return (
       <div className={css.container}>
         <GameView

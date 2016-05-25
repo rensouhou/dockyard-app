@@ -128,6 +128,7 @@
     "redux-actions": "^0.9.1",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.1.0",
+    "redux-ui": "0.0.15",
     "reselect": "^2.5.1",
     "rimraf": "^2.5.2",
     "sanctuary": "^0.10.0",
