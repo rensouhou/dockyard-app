@@ -10,17 +10,21 @@ import { createSelector } from 'reselect';
 const { indexBy, prop, isEmpty, mergeAll, map } = R;
 
 // Create basic predicates
-const getId = prop('shipId');
-const indexByEntityId = indexBy(getId);
+const entityIdProp = prop('shipId');
+const indexByEntityId = indexBy(entityIdProp);
 
-const getPlayerState = (state) => indexByEntityId(state.player.ships);  // not null-safe at startup time!
-const getGameDataState = (state) => indexByEntityId(state.game.ships);  // not null-safe at startup time!
+const getPlayerState = (state) => state.player;  // not null-safe at startup time!
+const getGameDataState = (state) => state.game;  // not null-safe at startup time!
 
 // Finally, something we can actually use
 const combineTwoSets = (baseData, userData) => {
+  console.log('combineTwoSets:', baseData, userData);
+  // Normalize the data first
+  const baseDataNormalized = indexByEntityId(baseData);
+  const userDataNormalized = indexByEntityId(userData);
   let result = [];
   try {
-    result = map((it) => mergeAll([{}, baseData[it.shipId], it]), userData);
+    result = map((it) => mergeAll([{}, baseDataNormalized[it.shipId], it]), userDataNormalized);
   }
   catch (e) {
     console.error('couldn\'t do anything', e.message, e.stack);
@@ -34,7 +38,7 @@ const combineTwoSets = (baseData, userData) => {
  */
 export const normalizeShips = createSelector(
   [getGameDataState, getPlayerState],
-  (gameData, userData) => isEmpty(gameData) ? [] : combineTwoSets(gameData, userData)
+  (gameData, userData) => combineTwoSets(gameData.ships, userData.ships)
 );
 
 /**
