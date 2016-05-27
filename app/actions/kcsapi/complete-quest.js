@@ -3,7 +3,6 @@
  *  Handler for `COMPLETE_QUEST` event
  *
  * @since 0.1.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
  */
 import { asNumber } from '../../transformers/primitive';
 import { parseMaterialArray } from '../../transformers/api/materials';

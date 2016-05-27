@@ -3,7 +3,6 @@
  *  Handler for `GET_PLAYER_BASE_DATA` event
  *
  * @since 0.1.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
  */
 import { playerSlotItem } from '../../transformers/api/player-slotitem';
 import { constructionDock } from '../../transformers/api/construction-dock';

@@ -3,7 +3,6 @@
  *  Handler for `CRAFT_ITEM` event
  *
  * @since 0.1.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
  */
 import R from 'ramda';
 import { asNumber, asBool } from '../../transformers/primitive';

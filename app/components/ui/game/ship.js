@@ -29,6 +29,7 @@ export default class Ship extends Component {
     if (R.isEmpty(this.props.id)) {
       return <div>Not a valid ship</div>;
     }
+
     return (
       <StaticPanel title={`${(name || {}).reading}`} className={style.ship}>
         <header>

@@ -4,8 +4,6 @@
  *  Handler for `GET_BASE_DATA` event
  *
  * @since 0.1.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
- * @flow
  */
 import { parseMaterialObjects } from '../../transformers/api/materials';
 import { playerShip as ship } from '../../transformers/api/player-ship';

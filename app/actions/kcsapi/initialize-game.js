@@ -4,7 +4,6 @@
  *  Handler for `INITIALIZE_GAME` event
  *
  * @since 0.1.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
  */
 import R from 'ramda';
 import { baseShip } from '../../transformers/api/base-ship';
@@ -15,7 +14,6 @@ import { baseFurniture } from '../../transformers/api/base-furniture';
 import { baseMapArea } from '../../transformers/api/base-maparea';
 import { baseMission } from '../../transformers/api/base-mission';
 import { normalize, Schema } from 'normalizr';
-// import * as Schema from '../../schema';
 
 /**
  * @type {Dockyard.GameEvent.transformer}

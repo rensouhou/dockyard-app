@@ -3,7 +3,6 @@
  *  Handler for `GET_CONSTRUCTION_DOCKS` event
  *
  * @since 0.1.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
  */
 import R from 'ramda';
 import { parseMaterialsRecipe } from '../../transformers/api/materials';

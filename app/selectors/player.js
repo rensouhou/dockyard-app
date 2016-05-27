@@ -1,26 +1,53 @@
-/* eslint no-param-reassign: 0 */
+/* eslint no-param-reassign: 0, no-return-assign: 0 */
 /**
  * @overview
  *
  * @since 0.1.0
  */
 import R from 'ramda';
-import S from 'sanctuary';
 import { createSelector } from 'reselect';
-import { normalizeShips } from './player-entities';
+import { getNormalizedShips, getNormalizedSlotItems } from './player-entities';
+import { Player } from '../records';
 
-const { path, pathOr, map, reduce } = R;
-const { Maybe, Just, Nothing } = S;
+const { pathOr, map, reduce } = R;
 
-const playerFleetList = state => path(['player', 'fleets'], state) || [];
+// [1, 2, 3].forEach(function (item) {
+//   // derp
+// })
 
-export const playerFleets = createSelector(
-  [playerFleetList, normalizeShips],
-  (fleetList, shipEntities) => map(it => {
-    console.log('fleetReduceFn =>', it);
-    return {
+const playerFleetList = state => pathOr([], ['player', 'fleets'], state);
+const playerProfile = state => pathOr([], ['player', 'profile'], state);
+const playerMaterials = state => pathOr([], ['player', 'materials'], state);
+
+const getShipWithSlotItems = (ship, normalizedSlotItems) => ({
+  ...ship,
+  slot: {
+    ...ship.slot,
+    items: ship.slot.items.reduce((acc, id) => [...acc, normalizedSlotItems[id]], [])
+  }
+});
+
+export const getPlayerFleets = createSelector(
+  [playerFleetList, getNormalizedShips, getNormalizedSlotItems],
+  (fleetList, normalizedShips, normalizedSlotItems) =>
+    fleetList.map((it) => Player.Fleet({
       ...it,
-      shipsM: reduce((acc, shipId) => [...acc, shipEntities[shipId]], [], pathOr([], ['ships'], it))
-    };
-  }, fleetList)
+      ships: it.ships.map((shipId) =>
+        getShipWithSlotItems(normalizedShips[shipId], normalizedSlotItems))
+    })));
+
+export const getPlayerProfile = createSelector(
+  [playerProfile],
+  (profile) => new Player.Profile(profile)
+);
+
+export const getPlayerMaterials = createSelector(
+  [playerMaterials],
+  (materials) => new Player.Materials(materials)
+);
+
+// The entire player-related dataset for the UI
+export const getPlayer = createSelector(
+  [getPlayerFleets, getPlayerProfile, getPlayerMaterials],
+  (fleets, profile, materials) => ({ fleets, profile, materials })
 );

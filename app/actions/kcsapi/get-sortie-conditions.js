@@ -3,7 +3,6 @@
  *  Handler for `GET_SORTIE_CONDITIONS` event
  *
  * @since 0.1.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
  */
 import { asNumber } from '../../transformers/primitive';
 

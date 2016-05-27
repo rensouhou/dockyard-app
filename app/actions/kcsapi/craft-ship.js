@@ -3,7 +3,6 @@
  *  Handler for `CRAFT_SHIP` event
  *
  * @since 0.1.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
  */
 import { asBool, asNumber } from '../../transformers/primitive';
 import { parseMaterialsRecipe } from '../../transformers/api/materials';
