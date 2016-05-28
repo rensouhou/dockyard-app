@@ -27,7 +27,7 @@ export const Player = {
   Profile: Record({
     nickname: '',
     level: undefined,
-    limits: new Map({
+    limits: Map({
       maxShips: 0,
       maxSlotItems: 0,
       maxFurniture: 0
@@ -35,3 +35,19 @@ export const Player = {
   })
 };
 
+export const Ship = Record({
+  id: undefined,
+  sortId: undefined,
+  shipId: undefined,
+  level: undefined,
+  experience: undefined,
+  morale: undefined,
+  stars: 0,
+  fuel: 0,
+  ammo: 0,
+  hp: undefined,
+  stats: undefined,
+  repair: undefined,
+  flags: undefined,
+  slots: undefined
+});

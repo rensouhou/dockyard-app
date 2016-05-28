@@ -2,50 +2,59 @@
  * @overview
  *
  * @since 0.1.0
- *
- * @todo PropTypes for monads
  */
 import R from 'ramda';
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import Ship from './ship';
-import style from './fleet.scss';
 
-const { isEmpty } = R;
+const { isEmpty, pathOr } = R;
+const _ = R.__;
 
-export default class Fleet extends Component {
-  static propTypes = {
-    fleet: PropTypes.object,
-    fleetM: PropTypes.any,
-    id: PropTypes.number,
-    memberId: PropTypes.number,
-    name: PropTypes.string,
-    ships: PropTypes.array,
-    shipsM: PropTypes.any
-  };
+const getListOrDefault = (o, ...path) => pathOr([], path, o);
 
-  static defaultProps = {};
+/**
+ * <ShipList /> component for <Fleet />
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const ShipList = (props) => {
+  if (isEmpty(props.ships)) {
+    return <div>No ships.</div>;
+  }
+  return (
+    <div>
+      {props.ships.map(s => <Ship key={s.id} ship={s} />)}
+    </div>
+  );
+};
 
-  render() {
-    const { fleet, ships } = this.props;
-    if (isEmpty(fleet) || isEmpty(ships)) {
-      return (
-        <div>No fleet data.</div>
-      );
-    }
+ShipList.propTypes = {
+  ships: PropTypes.arrayOf(PropTypes.object)
+};
 
-    const { name, id } = fleet;
+/**
+ *
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const FleetComponent = (props) => {
+  const ships = getListOrDefault(props, 'fleet', 'ships');
+  if (isEmpty(ships)) {
     return (
-      <div className={style.fleet}>
-        <div>{name}</div>
-        <div className={style.ships}>
-          {ships.map(s => <Ship
-            name={s.name}
-            level={s.level}
-            morale={s.morale}
-            hp={s.hp}
-          />)}
-        </div>
-      </div>
+      <div>No data.</div>
     );
   }
-}
+  return (
+    <div>
+      <ShipList ships={ships} />
+    </div>
+  );
+};
+
+FleetComponent.propTypes = {
+  fleet: PropTypes.object
+};
+
+export default FleetComponent;

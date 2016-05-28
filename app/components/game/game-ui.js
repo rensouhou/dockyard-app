@@ -37,10 +37,10 @@ export default class GameUI extends Component {
         <StaticPanel title="Player">
         </StaticPanel>
         <StaticPanel title="Fleet">
-          <Fleet fleet={mainFleet} ships={mainFleetShips} />
+          <Fleet fleet={mainFleet} />
         </StaticPanel>
         <StaticPanel title="Kakkos fleet">
-          <Fleet fleet={kakkosFleet} ships={kakkosFleetShips} />
+          <Fleet fleet={kakkosFleet} />
         </StaticPanel>
       </div>
     );

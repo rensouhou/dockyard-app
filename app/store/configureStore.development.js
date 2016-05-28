@@ -9,6 +9,7 @@ import { hashHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
 import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
+import perflogger from 'redux-perf-middleware';
 
 const logger = createLogger({
   level: 'info',
@@ -22,7 +23,7 @@ const timer = timerMiddleware();
 const gameDataLogger = gameDataLoggingMiddleware();
 
 const enhancer = compose(
-  applyMiddleware(thunk, promiseMiddleware, router, logger, timer, gameDataLogger),
+  applyMiddleware(thunk, perflogger, promiseMiddleware, router, logger, timer, gameDataLogger),
   DevTools.instrument(),
   persistState(
     window.location.href.match(

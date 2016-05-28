@@ -7,13 +7,9 @@
 import { asBool, notEmpty } from '../primitive';
 import R from 'ramda';
 
-const playerShipHelp = [
-  ['id', 'player unique ship id'],
-  ['sortId', 'ship sorting id (= found in gallery)'],
-  ['shipId', 'ship\'s unique id (= used for linking base- and player data together)']
-];
+const { filter } = R;
 
-const rejectEmpty = R.filter(id => notEmpty(id));
+const rejectEmpty = filter(id => notEmpty(id));
 
 /**
  * @param {KCS.Models.PlayerShip} s

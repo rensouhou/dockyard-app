@@ -6,16 +6,16 @@
  * @since 0.1.0
  */
 import { parseMaterialObjects } from '../../transformers/api/materials';
-import { playerShip as ship } from '../../transformers/api/player-ship';
-import { playerProfile as profile } from '../../transformers/api/player-profile';
-import { playerFleet as fleet } from '../../transformers/api/player-fleet';
+import { playerShip } from '../../transformers/api/player-ship';
+import { playerProfile } from '../../transformers/api/player-profile';
+import { playerFleet } from '../../transformers/api/player-fleet';
 
 export default function GET_BASE_DATA({ body }) {
-  return {
-    id: body.api_basic.api_member_id,
-    profile: profile(body.api_basic),
-    fleets: body.api_deck_port.map(fleet),
-    ships: body.api_ship.map(ship),
-    materials: parseMaterialObjects(body.api_material)
-  };
+  const id = body.api_basic.api_member_id;
+  const profile = playerProfile(body.api_basic);
+  const fleets = body.api_deck_port.map(playerFleet);
+  const ships = body.api_ship.map(playerShip);
+  const materials = parseMaterialObjects(body.api_material);
+
+  return { id, profile, fleets, ships, materials };
 }

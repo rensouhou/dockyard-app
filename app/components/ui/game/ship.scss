@@ -2,22 +2,15 @@
 
 .ship {
   // border: solid 1px #f00;
+  border: dashed 1px #f00;
   width: (100% / 3);
   padding: 0 0.75rem;
+}
 
-  header {
-    // border: solid 1px #f00;
-    display: flex;
-    align-items: center;
-
-    > div {
-      flex-grow: 2;
-
-      &:last-child {
-        flex-grow: 1;
-      }
-    }
-  }
+.shipBody {
+  display: flex;
+  border: dashed 1px #0ff;
+  justify-content: space-between;
 }
 
 .level,
@@ -29,7 +22,10 @@
   font-size: 1.2rem;
   font-weight: 500;
 }
-.level {  }
+
+.level {
+}
+
 .morale {
   i {
     color: $md-amber-a400;
