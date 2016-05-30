@@ -10,7 +10,11 @@ import R from 'ramda';
 import m from 'monet';
 
 const { Maybe } = m;
-const { path, isEmpty } = R;
+const { path, pathOr, isEmpty } = R;
+
+export const listOrDefault = (obj, ...path) => pathOr([], path, obj);
+
+export const objOrDefault = (obj, ...path) => pathOr({}, path, obj);
 
 /**
  * @param obj
@@ -63,8 +67,8 @@ export const getWithDefault = (M, k, def) => getFromM(M, k).orSome(def);
 export function Enum(a) {
   // noinspection CommaExpressionJS
   const i = Object
-  .keys(a)
-  .reduce((o, k) => (o[a[k]] = k, o), {});
+    .keys(a)
+    .reduce((o, k) => (o[a[k]] = k, o), {});
 
   // noinspection CommaExpressionJS
   return Object.freeze(

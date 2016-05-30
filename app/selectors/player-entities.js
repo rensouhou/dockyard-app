@@ -1,3 +1,4 @@
+/* eslint no-confusing-arrow: 0 */
 /**
  * @overview
  *
@@ -5,18 +6,21 @@
  */
 import R from 'ramda';
 import { createSelector } from 'reselect';
+import { Collection } from 'immutable';
 
-// Not necessary, but doing this just out of sheer cleanliness.
-const { is, indexBy, not, prop, mergeAll, map, values } = R;
-
-// Create basic predicates
+// Doing this just out of making things pretty
+const { is, isEmpty, indexBy, not, prop, mergeAll, map, values } = R;
 const isObject = is(Object);
+const isRecord = (record) =>
+  not(isEmpty(record)) && Collection.isIterable(record) && not(isEmpty(record._defaultValues));
 
+// Base data selectors
+// -------------------
 const getPlayerState = (state) => state.player;  // not null-safe at startup time!
 const getGameDataState = (state) => state.game;  // not null-safe at startup time!
 
 // Finally, something we can actually use
-const combineTwoSets = (baseData, userData) => {
+const combineTwoSets = (baseData, userData, record) => {
   const userDataVerified = not(isObject(userData))
     ? userData
     : values(userData);
@@ -27,7 +31,9 @@ const combineTwoSets = (baseData, userData) => {
   let result = [];
   try {
     result = map(
-      (it) => mergeAll([{}, baseDataNormalized[it.shipId], it]),
+      (it) => isRecord(record)
+        ? new record(mergeAll([{}, baseDataNormalized[it.shipId], it]))
+        : mergeAll([{}, baseDataNormalized[it.shipId], it]),
       userDataNormalized
     );
   }

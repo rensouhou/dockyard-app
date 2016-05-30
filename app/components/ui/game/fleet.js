@@ -8,7 +8,6 @@ import React, { PropTypes } from 'react';
 import Ship from './ship';
 
 const { isEmpty, pathOr } = R;
-const _ = R.__;
 
 const getListOrDefault = (o, ...path) => pathOr([], path, o);
 

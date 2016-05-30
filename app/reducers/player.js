@@ -1,23 +1,30 @@
 /**
  * @overview
  *
- * @since 0.3.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/reducers/player
+ * @since 0.1.0
  */
+import { List, Set, Map } from 'immutable';
 import R from 'ramda';
 import { ApiEvents } from '../actions/game';
 import createReducer from './create-reducer';
+import { PlayerProfile, Materials as MaterialState } from '../records';
+
+const immutableInitialState = Map({
+  profile: new PlayerProfile(),
+  quests: List(),
+  fleets: List(),
+  ships: Set(),
+  slotItems: Set(),
+  missions: List(),
+  docks: {
+    repair: List(),
+    construction: List()
+  },
+  materials: new MaterialState()
+});
 
 const initialState = {
-  profile: {
-    limits: {
-      maxShips: 0,
-      maxSlotItems: 0,
-      maxFurniture: 0
-    },
-    level: 0
-  },
+  profile: new PlayerProfile(),
   quests: {},
   fleets: [],
   ships: [],
@@ -27,7 +34,7 @@ const initialState = {
     repairDocks: [],
     constructionDocks: []
   },
-  materials: {}
+  materials: new MaterialState()
 };
 
 const mergeProfile = (k, l, r) => {

@@ -1,15 +1,12 @@
 @import '~material-colors/dist/colors.scss';
 
 .ship {
-  // border: solid 1px #f00;
-  border: dashed 1px #f00;
-  width: (100% / 3);
-  padding: 0 0.75rem;
+  // border: dashed 1px #f00;
 }
 
-.shipBody {
+.shipBody > div {
   display: flex;
-  border: dashed 1px #0ff;
+  // border: dashed 1px #0ff;
   justify-content: space-between;
 }
 

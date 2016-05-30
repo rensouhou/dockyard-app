@@ -4,45 +4,41 @@
  *
  * @since 0.1.0
  */
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import R from 'ramda';
+import { listOrDefault } from '../../helpers';
 import { StaticPanel } from '../ui';
 import css from './game-ui.scss';
 import { Fleet } from '../ui/game';
 
-const { indexOf, isEmpty, prop, path, not } = R;
+const { indexOf, isEmpty, prop, pathOr, not } = R;
 
-export default class GameUI extends Component {
-  static propTypes = {
-    children: PropTypes.any,
-    appState: PropTypes.any,
-    uiState: PropTypes.any
-  };
+const GameUIComponent = (props) => {
+  const fleets = listOrDefault(props, 'uiState', 'player', 'fleets');
+  console.log('GameUIComponent.props =>', props);
 
-  /**
-   * @returns {JSX.Element}
-   */
-  render() {
-    const fleets = R.pathOr([], ['uiState', 'player', 'fleets'], this.props);
-    const mainFleet = R.head(fleets);
-    const mainFleetShips = R.propOr([], 'ships', mainFleet);
-    const kakkosFleet = R.not(R.isEmpty(fleets)) ? fleets[1] : {};
-    const kakkosFleetShips = R.propOr([], 'ships', kakkosFleet);
+  // @todo Move this outside
+  return (
+    <div className={css.gameUi}>
+      <StaticPanel title="Materials" />
+      <StaticPanel title="Player" />
+      <StaticPanel title="Fleet">
+        <div className={css.fleetCols}>
+          {fleets.map(f => (
+            <StaticPanel title={f.name} className={css.fleetCol}>
+              <Fleet fleet={f} />
+            </StaticPanel>
+          ))}
+        </div>
+      </StaticPanel>
+    </div>
+  );
+};
 
-    // @todo Move this outside
-    return (
-      <div className={css.gameUi}>
-        <StaticPanel title="Materials">
-        </StaticPanel>
-        <StaticPanel title="Player">
-        </StaticPanel>
-        <StaticPanel title="Fleet">
-          <Fleet fleet={mainFleet} />
-        </StaticPanel>
-        <StaticPanel title="Kakkos fleet">
-          <Fleet fleet={kakkosFleet} />
-        </StaticPanel>
-      </div>
-    );
-  }
-}
+GameUIComponent.propTypes = {
+  children: PropTypes.any,
+  appState: PropTypes.object,
+  uiState: PropTypes.object
+};
+
+export default GameUIComponent;

@@ -38,7 +38,7 @@ export const baseShip = (s) => ({
     scrap: parseMaterialArray(s.api_broken),
     modernize: s.api_powup
   },
-  slots: {
+  slot: {
     count: s.api_slot_num,
     capacity: s.api_maxeq
   },
