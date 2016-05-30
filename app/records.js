@@ -83,3 +83,36 @@ export const Ship = Record({
     items: []
   }
 });
+
+export const SlotItem = Record({
+  id: undefined,
+  slotItemId: undefined,
+  sortId: undefined,
+  type: {
+    broadCategory: undefined,
+    category: undefined,
+    iconId: undefined,
+    itemInfoType: undefined
+  },
+  name: '',
+  flavorText: '',
+  level: undefined,
+  airplaneLevel: undefined,
+  gains: {
+    scrap: undefined
+  },
+  rarity: undefined,
+  locked: undefined,
+  stats: undefined,
+});
+
+// Internal
+// --------
+export const Internal = Map({
+  ApiHandler: Record({
+    path: undefined,
+    event: undefined,
+    handler: undefined,
+    flags: {}
+  })
+});
