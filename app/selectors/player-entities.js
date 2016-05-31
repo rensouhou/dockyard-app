@@ -1,26 +1,27 @@
-/* eslint no-confusing-arrow: 0 */
+/* eslint no-confusing-arrow: 0, max-len: 0 */
 /**
  * @overview
  *
  * @since 0.1.0
  */
 import R from 'ramda';
+import * as T from 'immutable';
 import { createSelector } from 'reselect';
-import { Collection } from 'immutable';
+import {
+  Ship as ShipRecord,
+  SlotItem as SlotItemRecord
+} from '../records';
 
 // Doing this just out of making things pretty
 const { is, isEmpty, indexBy, not, prop, mergeAll, map, values } = R;
 const isObject = is(Object);
-const isRecord = (record) =>
-  not(isEmpty(record)) && Collection.isIterable(record) && not(isEmpty(record._defaultValues));
 
 // Base data selectors
-// -------------------
 const getPlayerState = (state) => state.player;  // not null-safe at startup time!
 const getGameDataState = (state) => state.game;  // not null-safe at startup time!
 
 // Finally, something we can actually use
-const combineTwoSets = (baseData, userData, record) => {
+const combineTwoSets = (baseData, userData) => {
   const userDataVerified = not(isObject(userData))
     ? userData
     : values(userData);
@@ -31,9 +32,7 @@ const combineTwoSets = (baseData, userData, record) => {
   let result = [];
   try {
     result = map(
-      (it) => isRecord(record)
-        ? new record(mergeAll([{}, baseDataNormalized[it.shipId], it]))
-        : mergeAll([{}, baseDataNormalized[it.shipId], it]),
+      (it) => mergeAll([{}, baseDataNormalized[it.shipId], it]),
       userDataNormalized
     );
   }

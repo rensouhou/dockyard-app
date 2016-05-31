@@ -69,3 +69,14 @@ export const ApiEventPaths = OrderedMap({
   [ApiEvents.GET_BASE_DATA]: '/api_port/port',
   [ApiEvents.GET_FLEET]: '/api_get_member/ship_deck'
 });
+
+export const GameStates = Map({
+  UNINITIALIZED: 'UNINITIALIZED',
+  STARTING_GAME: 'STARTING_GAME',
+  IN_SORTIE: 'IN_SORTIE',
+  IN_PRACTICE: 'IN_PRACTICE',
+  IDLE: 'IDLE',
+  FINISHED_PRACTICE: 'FINISHED_PRACTICE',
+  BROWSING_MISSIONS: 'BROWSING_MISSIONS',
+  MISSION_STARTED: 'MISSION_STARTED'
+});

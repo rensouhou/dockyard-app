@@ -6,13 +6,11 @@
  *
  * @todo Aircraft proficiency calculation
  */
-import R from 'ramda';
+import { Seq } from 'immutable';
 import { listOrDefault, objOrDefault } from '../helpers';
 import { createSelector } from 'reselect';
 import { getNormalizedShips, getNormalizedSlotItems } from './player-entities';
-import { Player, Ship } from '../records';
-
-const { pathOr, map, reduce } = R;
+import { PlayerProfile, Materials, Fleet, Ship } from '../records';
 
 /**
  * Get a null-safe state of the player's fleet
@@ -45,6 +43,7 @@ const getShipWithSlotItems = (ship, normalizedSlotItems) => ({
   ...ship,
   slot: {
     ...ship.slot,
+    // @todo rewrite as a Seq
     items: ship.slot.items.reduce((acc, id) => [...acc, normalizedSlotItems[id]], [])
   }
 });
@@ -64,10 +63,10 @@ export const getPlayerFleets = createSelector(
    * @returns {object[]}
    */
   (fleetList, normalizedShips, normalizedSlotItems) =>
-    fleetList.map((it) => Player.Fleet({
+    fleetList.map((it) => new Fleet({
       ...it,
-      ships: it.ships.map((shipId) =>
-        new Ship(getShipWithSlotItems(normalizedShips[shipId], normalizedSlotItems)))
+      /** @todo Write as a {@link Seq} */
+      ships: it.ships.map((shipId) => getShipWithSlotItems(normalizedShips[shipId], normalizedSlotItems))
     })));
 
 export const getPlayerProfile = createSelector(
@@ -76,7 +75,7 @@ export const getPlayerProfile = createSelector(
    * @param profile
    * @return {Player.Profile}
    */
-  (profile) => new Player.Profile(profile)
+  (profile) => new PlayerProfile(profile)
 );
 
 export const getPlayerMaterials = createSelector(
@@ -85,7 +84,7 @@ export const getPlayerMaterials = createSelector(
    * @param materials
    * @return {Player.Materials}
    */
-  (materials) => new Player.Materials(materials)
+  (materials) => new Materials(materials)
 );
 
 // The entire player-related dataset for the UI

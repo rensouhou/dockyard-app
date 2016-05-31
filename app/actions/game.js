@@ -6,8 +6,8 @@ import ApiTransformers from './kcsapi';
 const transformers = T.Map(ApiTransformers);
 
 export const ApiEventsByPath = T.Map({
-  'api_start2': 'INITIALIZE_GAME',
-  'api_port/port': 'GET_BASE_DATA',
+  'api_start2': 'INITIALIZE_GAME',  // ok
+  'api_port/port': 'GET_BASE_DATA', // ok
   'api_req_mission/start': 'START_MISSION',
   'mission/result': 'COMPLETE_MISSION',
   'req_mission/return_instruction': 'QUIT_MISSION',
@@ -39,7 +39,7 @@ export const ApiEventsByPath = T.Map({
   'req_combined_battle/battle_water': 'COMBINED_BATTLE_WATER_PHASE',
   'get_member/require_info': 'GET_PLAYER_BASE_DATA',
   'get_member/sortie_conditions': 'GET_SORTIE_CONDITIONS',
-  'get_member/ship_deck': 'GET_FLEET',
+  'get_member/ship_deck': 'GET_FLEET', // ok
   'get_member/deck': 'GET_FLEET_DATA',
   'get_member/basic': 'GET_PROFILE_DATA',
   'get_member/furniture': 'GET_FURNITURE',

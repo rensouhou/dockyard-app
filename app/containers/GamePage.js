@@ -6,7 +6,6 @@ import * as coreActions from '../actions/application';
 import { getPlayer } from '../selectors/player';
 
 const mapStateToProps = state => ({
-  appState: { ...state },
   ui: {
     player: getPlayer(state)
   }

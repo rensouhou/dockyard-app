@@ -5,6 +5,7 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  */
 import React, { PropTypes } from 'react';
+import { Map } from 'immutable';
 import StaticPanel from '../static-panel';
 import Progress from '../progress';
 import css from './ship.scss';
@@ -15,7 +16,7 @@ const ShipComponent = (props) => {
     <StaticPanel title={ship.name.reading} className={css.ship}>
       <div className={css.shipBody}>
         <div>
-          <div style={{ width: '50%' }}>{ship.name.kanji}</div>
+          <div style={{ width: '50%' }}>{(ship.name || {}).kanji}</div>
           <div style={{ width: '25%' }}><i className="fa fa-heart" /> {ship.morale}</div>
           <div style={{ width: '25%', textAlign: 'right', fontWeight: 'bold' }}>{ship.level}</div>
         </div>
@@ -28,7 +29,6 @@ const ShipComponent = (props) => {
 };
 
 ShipComponent.propTypes = {
-  // ship: PropTypes.instanceOf(Record)
   ship: PropTypes.object.isRequired
 };
 
