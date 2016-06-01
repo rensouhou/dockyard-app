@@ -26,14 +26,15 @@ export default class Game extends Component {
 
   // @todo(@stuf): make use of monads or something to ease up on the required null-checking festa
   render() {
-    const { transformerActions, game, actions, gameEntities } = this.props;
-    console.log('GameComponent#render.props =>', this.props);
+    const { transformerActions, game, actions } = this.props;
+    console.group('GameComponent UI State');
+    console.log(this.props.ui);
+    console.groupEnd();
     if (!this.isInitialized()) {
       return (
         <div>Not ready yet.</div>
       );
     }
-
     return (
       <div className={css.container}>
         <GameView

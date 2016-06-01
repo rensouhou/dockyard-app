@@ -12,8 +12,8 @@ const initialState = {
    * @description
    *  `gameState` is the "state" of the SWF game itself, deduced from
    *  the kind of API events are received;
-   *  @example ApiEvents.INITIALIZE_GAME -> GameState.STARTING_GAME
-   *  @example ApiEvents.START_SORTIE    -> GameState.IN_SORTIE
+   * @example ApiEvents.INITIALIZE_GAME -> GameState.STARTING_GAME
+   * @example ApiEvents.START_SORTIE    -> GameState.IN_SORTIE
    */
   gameState: null,
 

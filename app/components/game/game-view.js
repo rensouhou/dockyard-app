@@ -28,9 +28,6 @@ export default class GameView extends Component {
       partition: 'persist:kc',
       src: 'http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/'
     });
-    view.addEventListener('did-start-loading', (e) => {
-      console.log('GameView.view#did-start-loading =>', e);
-    });
     view.addEventListener('dom-ready', createGameViewHandler({ game, transformerActions }, config));
     findDOMNode(gameViewHolder).appendChild(view);
     actions.registerGameView(view);

@@ -89,11 +89,15 @@ export const getPlayerMaterials = createSelector(
 
 // The entire player-related dataset for the UI
 export const getPlayer = createSelector(
-  [getPlayerFleets, getPlayerProfile, getPlayerMaterials],
+  [getPlayerFleets, getPlayerProfile, getPlayerMaterials, getNormalizedShips, getNormalizedSlotItems],
   /**
    * @param fleets
    * @param profile
    * @param materials
+   * @param ships
+   * @param slotItems
    */
-  (fleets, profile, materials) => ({ fleets, profile, materials })
+  (fleets, profile, materials, ships, slotItems) => ({
+    fleets, profile, materials, ships, slotItems
+  })
 );

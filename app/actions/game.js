@@ -1,4 +1,5 @@
 /* eslint quote-props: 0, no-console: 0 */
+import R from 'ramda';
 import { createAction } from 'redux-actions';
 import T from 'immutable';
 import ApiTransformers from './kcsapi';
@@ -118,10 +119,18 @@ export const ApiEvents = {
 export const RECEIVED_API_DATA:string = 'RECEIVED_API_DATA';
 export const PARSED_API_DATA:string = 'PARSED_API_DATA';
 
+const wrapTransformer = (k, v) => R.wrap(v, (fn, action) => {
+  console.group('k =>', k);
+  console.log('fn => %O', fn);
+  console.log('action => %O', action);
+  console.groupEnd();
+  return fn(action);
+});
+
 // @todo(@stuf): fix me properly pls
 export const createTransformerActions = () => transformers
   .toKeyedSeq()
-  .mapEntries(([k, v]) => [k, createAction(k, v)])
+  .mapEntries(([k, v]) => [k, createAction(k, wrapTransformer(k, v))])
   .toJS();
 
 export const createGameActions = () => ({

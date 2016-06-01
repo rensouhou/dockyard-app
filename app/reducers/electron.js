@@ -2,17 +2,14 @@
 /**
  * @overview
  *
- * @since 0.2.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/reducers/electron
+ * @since 0.1.0
  */
-const remote = require('electron').remote;
+import { remote } from 'electron';
+import * as InterfaceActions from '../actions/interface';
 const webContents = remote.getCurrentWebContents();
 const browserWindow = remote.getCurrentWindow();
 
 const initialState = { webContents, browserWindow };
-
-import * as InterfaceActions from '../actions/interface';
 
 export default function electronReducer(state = initialState, action) {
   console.log(`electronReducer():call; action = ${action.type}`);

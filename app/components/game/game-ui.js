@@ -15,8 +15,6 @@ const { indexOf, isEmpty, prop, pathOr, not } = R;
 
 const GameUIComponent = (props) => {
   const fleets = listOrDefault(props, 'uiState', 'player', 'fleets');
-  console.log('GameUIComponent.props =>', props);
-
   // @todo Move this outside
   return (
     <div className={css.gameUi}>
