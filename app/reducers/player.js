@@ -3,18 +3,17 @@
  *
  * @since 0.1.0
  */
-import { List, Set, Map } from 'immutable';
-import R from 'ramda';
+import { List, Map } from 'immutable';
 import { ApiEvents } from '../actions/game';
 import createReducer from './create-reducer';
 import { PlayerProfile, Materials as MaterialState } from '../records';
 
-const immutableInitialState = Map({
+const initialState = Map({
   profile: new PlayerProfile(),
   quests: List(),
   fleets: List(),
-  ships: Set(),
-  slotItems: Set(),
+  ships: List(),
+  slotItems: List(),
   missions: List(),
   docks: {
     repair: List(),
@@ -23,88 +22,56 @@ const immutableInitialState = Map({
   materials: new MaterialState()
 });
 
-const initialState = {
-  profile: new PlayerProfile(),
-  quests: {},
-  fleets: [],
-  ships: [],
-  slotItems: [],
-  missions: [],
-  docks: {
-    repairDocks: [],
-    constructionDocks: []
-  },
-  materials: new MaterialState()
+const logReducer = (state, action) => {
+  console.group('Action of type %s', action.type);
+  console.log('state  =>', state);
+  console.log('action =>', action);
+  console.groupEnd();
 };
-
-const mergeProfile = (k, l, r) => {
-  switch (k) {
-    case 'profile':
-    case 'materials':
-      return R.merge(l, r);
-    case 'ships':
-    case 'fleets':
-    case 'slotItems':
-      return r;
-    default:
-      return r;
-  }
-};
-
-const updateFleet = (state, payload) => ({
-  ...state,
-  fleets: R.update(
-    R.propEq('id', payload.fleetId), state.fleets,
-    payload.fleet,
-    state.fleets
-  )
-});
-
-const updateBaseData = (data, state) => R.mergeWithKey(mergeProfile, state, data);
-const updateKey = (key, data, state) => R.assoc(key, { ...data }, state);
 
 export default createReducer(initialState, {
   [ApiEvents.GET_PLAYER_BASE_DATA](state, action) {
-    return updateKey('slotItems', action.payload.slotItems.items, state);
+    logReducer(state, action);
+    return state.set('slotItems', action.payload.slotItems.items);
   },
   [ApiEvents.GET_BASE_DATA](state, action) {
-    return updateBaseData(action.payload, state);
+    logReducer(state, action);
+    return state.merge(action.payload);
   },
   [ApiEvents.GET_FLEET](state, action) {
-    const fleets = state.fleets;
-    fleets[action.payload.fleetId - 1] = action.payload.fleet;
-
-    return {
-      ...state, fleets
-    };
+    logReducer(state, action);
+    return state.set(
+      'fleets',
+      state.get('fleets').set(action.payload.fleetId - 1, action.payload.fleet)
+    );
   },
   [ApiEvents.LOAD_FLEET_PRESET](state, action) {
-    const fleets = state.fleets;
-    fleets[action.payload.fleetId - 1] = action.payload.fleet;
-
-    return {
-      ...state, fleets
-    };
+    logReducer(state, action);
+    return state.set(
+      'fleets',
+      state.get('fleets').set(action.payload.fleetId - 1, action.payload.fleet)
+    );
   },
   [ApiEvents.GET_MATERIAL](state, action) {
-    return {
-      ...state,
-      materials: {
-        ...state.materials,
-        ...action.payload.materials
-      }
-    };
+    logReducer(state, action);
+    const materials = state.get('materials');
+    console.log('materials ->', materials);
+    return state.set(
+      'materials',
+      materials.merge(action.payload)
+    );
   },
   [ApiEvents.RESUPPLY_SHIP](state, action) {
-    return {
-      ...state,
-      materials: {
-        ...state.materials,
-        ...action.payload.materials
-      }
-    };
+    logReducer(state, action);
+    const materials = state.get('materials');
+    console.log('materials ->', materials);
+    return state.set(
+      'materials',
+      materials.merge(action.payload)
+    );
   },
   [ApiEvents.GET_CONSTRUCTION_DOCKS](state, action) {
+    logReducer(state, action);
     return { ...state };
   }
 });

@@ -1,11 +1,11 @@
 /**
- * @since 0.3.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/transformers/api/player-ship
- * @flow
+ * @overview
+ *
+ * @since 0.1.0
  */
-import { asBool, notEmpty } from '../primitive';
 import R from 'ramda';
+import { asBool, notEmpty } from '../primitive';
+import { Ship } from '../../records';
 
 const { filter } = R;
 
@@ -15,7 +15,7 @@ const rejectEmpty = filter(id => notEmpty(id));
  * @param {KCS.Models.PlayerShip} s
  * @returns {Dockyard.PlayerData.Ship}
  */
-export const playerShip = (s) => ({
+export const playerShip = (s) => new Ship({
   id: s.api_id,
   sortId: s.api_sortno,
   shipId: s.api_ship_id,

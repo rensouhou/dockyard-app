@@ -9,9 +9,29 @@ import StaticPanel from '../static-panel';
 import Progress from '../progress';
 import css from './ship.scss';
 
+const ShipSlotItems = (props) => (
+  <div>
+    <ul>
+      {props.items.map((it, idx) => (
+        <li>{idx} -> {it.name} (category: {it.type.category})</li>
+      ))}
+    </ul>
+  </div>
+);
+
+ShipSlotItems.propTypes = {
+  items: PropTypes.any,
+  count: PropTypes.number
+};
+
+ShipSlotItems.defaultProps = {
+  slotItems: []
+};
+
 const ShipComponent = (props) => {
   const { ship } = props;
   const { slot } = ship;
+  console.log('slot =>', slot);
   return (
     <StaticPanel title={ship.name.reading} className={css.ship}>
       <div className={css.shipBody}>
@@ -20,9 +40,7 @@ const ShipComponent = (props) => {
           <div style={{ width: '25%' }}><i className="fa fa-heart" /> {ship.morale}</div>
           <div style={{ width: '25%', textAlign: 'right', fontWeight: 'bold' }}>{ship.level}</div>
         </div>
-        <div>
-          {slot.items.map((it) => (<div>{it.type.category}<br />{it.name}</div>))}1
-        </div>
+        <ShipSlotItems items={slot.items} count={slot.count} />
         <div>
           <Progress min={0} max={100} value={ship.experience[2]} />
         </div>

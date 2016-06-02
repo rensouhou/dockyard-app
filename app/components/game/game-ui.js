@@ -9,25 +9,24 @@ import R from 'ramda';
 import { listOrDefault } from '../../helpers';
 import { StaticPanel } from '../ui';
 import css from './game-ui.scss';
-import { Fleet } from '../ui/game';
 
 const { indexOf, isEmpty, prop, pathOr, not } = R;
 
 const GameUIComponent = (props) => {
   const fleets = listOrDefault(props, 'uiState', 'player', 'fleets');
   // @todo Move this outside
+  // fleets.slice(0, 1).map(f => (
+  //   <StaticPanel title={f.name} className={css.fleetCol}>
+  //     <Fleet fleet={f} />
+  //   </StaticPanel>
+  // ))
+
   return (
     <div className={css.gameUi}>
       <StaticPanel title="Materials" />
       <StaticPanel title="Player" />
       <StaticPanel title="Fleet">
-        <div className={css.fleetCols}>
-          {fleets.map(f => (
-            <StaticPanel title={f.name} className={css.fleetCol}>
-              <Fleet fleet={f} />
-            </StaticPanel>
-          ))}
-        </div>
+        TBA
       </StaticPanel>
     </div>
   );

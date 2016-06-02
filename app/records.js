@@ -3,7 +3,7 @@
  *
  * @since 0.1.0
  */
-import { Map, Record } from 'immutable';
+import { Map, List, Record } from 'immutable';
 
 export const Fleet = Record({
   flagship: undefined,
@@ -28,11 +28,24 @@ export const Materials = Record({
 export const PlayerProfile = Record({
   nickname: '',
   level: undefined,
+  rank: undefined,
   limits: Map({
-    maxShips: 0,
-    maxSlotItems: 0,
-    maxFurniture: 0
-  })
+    maxShips: undefined,
+    maxSlotItems: undefined,
+    maxFurniture: undefined
+  }),
+  flags: Map({}),
+  coins: undefined,
+  medals: undefined,
+  comment: undefined,
+  furniture: undefined,
+  fleetCount: undefined,
+  missions: Map({}),
+  practice: Map({}),
+  sorties: Map({}),
+  docks: Map({}),
+  startTime: undefined,
+  tutorial: Map({})
 });
 
 export const Player = {
@@ -79,8 +92,8 @@ export const Ship = Record({
   type: undefined,
   slot: {
     count: undefined,
-    capacity: [],
-    items: []
+    capacity: List(),
+    items: List()
   }
 });
 
@@ -104,6 +117,14 @@ export const SlotItem = Record({
   rarity: undefined,
   locked: undefined,
   stats: undefined,
+});
+
+export const Dock = Record({
+  id: undefined,
+  completionTime: undefined,
+  shipId: undefined,
+  materials: undefined,
+  state: undefined
 });
 
 // Internal

@@ -5,17 +5,19 @@
  *
  * @since 0.1.0
  */
-import { parseMaterialObjects } from '../../transformers/api/materials';
+import { Map, List } from 'immutable';
+import { asNumber } from '../../transformers/primitive';
+import { parseMaterialObjects, asRecord } from '../../transformers/api/materials';
 import { playerShip } from '../../transformers/api/player-ship';
 import { playerProfile } from '../../transformers/api/player-profile';
 import { playerFleet } from '../../transformers/api/player-fleet';
 
 export default function GET_BASE_DATA({ body }) {
-  const id = body.api_basic.api_member_id;
-  const profile = playerProfile(body.api_basic);
-  const fleets = body.api_deck_port.map(playerFleet);
-  const ships = body.api_ship.map(playerShip);
-  const materials = parseMaterialObjects(body.api_material);
-
-  return { id, profile, fleets, ships, materials };
+  return Map({
+    id: asNumber(body.api_basic.api_member_id),
+    profile: playerProfile(body.api_basic),
+    fleets: List(body.api_deck_port).map(playerFleet),
+    ships: List(body.api_ship).map(playerShip),
+    materials: asRecord(parseMaterialObjects(body.api_material))
+  });
 }

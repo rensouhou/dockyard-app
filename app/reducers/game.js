@@ -1,22 +1,20 @@
 /**
  * @overview
  *
- * @since 0.3.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/reducers/game
+ * @since 0.1.0
  */
+import { Map, List } from 'immutable';
 import { ApiEvents } from '../actions/game';
 import createReducer from './create-reducer';
 
-/** @type {DockyardState.game} */
-const initialState = {
-  ships: [],
-  shipTypes: [],
-  slotItems: []
-};
+const initialState = Map({
+  ships: List(),
+  shipTypes: List(),
+  slotItems: List()
+});
 
 export default createReducer(initialState, {
   [ApiEvents.INITIALIZE_GAME](state, action) {
-    return { ...state, ...action.payload };
+    return state.merge(action.payload);
   }
 });

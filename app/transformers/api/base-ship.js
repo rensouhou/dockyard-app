@@ -1,3 +1,8 @@
+/**
+ * @overview
+ *
+ * @since 0.1.0
+ */
 import { asNumber, formatLineBreaks } from '../primitive';
 import { parseMaterialArray } from './materials';
 

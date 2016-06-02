@@ -5,7 +5,8 @@
  * @since 0.1.0
  */
 import R from 'ramda';
-import { parseMaterialsRecipe } from '../../transformers/api/materials';
+import { Dock } from '../../records';
+import { parseMaterialsRecipe, asRecord } from '../../transformers/api/materials';
 import { Enum } from '../../helpers';
 
 // @todo(@stuf): pls
@@ -22,17 +23,17 @@ const State = Enum({
 });
 
 /**
- * @param {KCS.Models.ConstructionDock} dock
+ * @param dock
  */
-const parseDock = dock => ({
+const parseDock = dock => new Dock({
   id: dock.api_id,
   completionTime: dock.api_complete_time,
   shipId: dock.api_created_ship_id,
-  materials: parseMaterialsRecipe(padList(getRecipe(dock))),
+  materials: asRecord(parseMaterialsRecipe(padList(getRecipe(dock)))),
   state: State(dock.api_state)
 });
 
-export default function ({ body }) {
+export default function GET_CONSTRUCTION_DOCKS({ body }) {
   return {
     docks: body.map(parseDock)
   };

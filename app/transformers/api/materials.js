@@ -2,13 +2,12 @@
 /**
  * @overview
  *
- * @since 0.3.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/transformers/api/materials
+ * @since 0.1.0
  * @flow
  */
 import { Material } from '../../types/kcsapi';
 import { getArrayOrDefault } from '../primitive';
+import { Materials } from '../../records';
 import R from 'ramda';
 
 const _ = R.__;
@@ -37,10 +36,16 @@ const matIntoPair = R.map(({ api_id, api_value }:Material):[number, number] => [
 const fixMatKey = R.map(([i, v]:[number, number]):[string, number] => [materials[i - 1], v]);
 
 /** @private */
-const tightFilter = R.allPass([
+const tightFilterPred = R.allPass([
   R.complement(R.isNil),
   R.is(Number)
 ]);
+
+/** @private */
+const tightFilter = R.filter(tightFilterPred);
+
+/** @private */
+const zipMats = R.zipObj(materials);
 
 /**
  * @type {Function}
@@ -51,7 +56,7 @@ const tightFilter = R.allPass([
  * console.log(matObj); // => { fuel: 100, ammo: 100, steel: 200, bauxite: 50 }
  */
 export const parseMaterialArray:MaterialsObject =
-  (arr) => R.compose(R.filter(tightFilter), R.zipObj(materials))(getArrayOrDefault(arr));
+  (arr) => R.compose(tightFilter, zipMats)(getArrayOrDefault(arr));
 
 /**
  * @type {Function}
@@ -91,3 +96,9 @@ export const parseMaterialsRecipe:MaterialsObject =
  * @returns {Dockyard.Materials}
  */
 export const parseRecipe:MaterialsObject = R.curry(parseMaterialsRecipe)(_, _, _, _, null, null, _);
+
+/**
+ * @param obj
+ * @returns {records/Materials}
+ */
+export const asRecord = (obj) => new Materials(obj);

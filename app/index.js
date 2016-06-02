@@ -1,3 +1,9 @@
+/**
+ * @overview
+ *
+ * @since 0.1.0
+ */
+import { Map } from 'immutable';
 import { ipcRenderer } from 'electron';
 import AppEvent from '../src/shared/constants';
 import React from 'react';
@@ -16,8 +22,13 @@ ipcRenderer.on(AppEvent.TIMER_DONE, (event, arg) => {
   /* eslint-enable */
 });
 
-const store = configureStore();
-const history = syncHistoryWithStore(hashHistory, store);
+const initialState = Map();
+const store = configureStore(initialState);
+const history = syncHistoryWithStore(hashHistory, store, {
+  selectLocationState(state) {
+    return state.get('routing').toJS();
+  }
+});
 
 render(
   <Provider store={store}>
