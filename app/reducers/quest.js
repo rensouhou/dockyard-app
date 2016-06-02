@@ -4,15 +4,16 @@
  * @since 0.1.0
  */
 import R from 'ramda';
+import { Map, List } from 'immutable';
 import { ApiEvents } from '../actions/game';
 import createReducer from './create-reducer';
 import { Enum } from '../helpers';
 
 /** @type {DockyardState.quest} */
-const initialState = {
-  quests: [],
-  active: []
-};
+const initialState = Map({
+  quests: List(),
+  active: List()
+});
 
 const QuestProgressState = Enum({
   Zero: 0,

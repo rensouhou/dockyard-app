@@ -23,7 +23,7 @@ const timer = timerMiddleware();
 const gameDataLogger = gameDataLoggingMiddleware();
 
 const enhancer = compose(
-  applyMiddleware(thunk, perflogger, promiseMiddleware, router, logger, timer, gameDataLogger),
+  applyMiddleware(thunk, perflogger, promiseMiddleware, router, logger),
   DevTools.instrument(),
   persistState(
     window.location.href.match(
