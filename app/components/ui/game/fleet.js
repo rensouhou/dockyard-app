@@ -4,8 +4,8 @@
  * @since 0.1.0
  */
 import R from 'ramda';
-import React, { PropTypes } from 'react';
-import Ship from './ship';
+import React from 'react';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 const { isEmpty, pathOr } = R;
 
@@ -18,18 +18,16 @@ const getListOrDefault = (o, ...path) => pathOr([], path, o);
  * @constructor
  */
 const ShipList = (props) => {
-  if (isEmpty(props.ships)) {
-    return <div>No ships.</div>;
-  }
+  // props.ships.map(s => <Ship key={s.id} ship={s} />)
+  console.log('ShipList =>', props);
   return (
     <div>
-      {props.ships.map(s => <Ship key={s.id} ship={s} />)}
     </div>
   );
 };
 
 ShipList.propTypes = {
-  ships: PropTypes.arrayOf(PropTypes.object)
+  ships: ImmutablePropTypes.listOf(ImmutablePropTypes.record)
 };
 
 /**
@@ -39,21 +37,16 @@ ShipList.propTypes = {
  * @constructor
  */
 const FleetComponent = (props) => {
-  const ships = getListOrDefault(props, 'fleet', 'ships');
-  if (isEmpty(ships)) {
-    return (
-      <div>No data.</div>
-    );
-  }
+  const ships = props.record.get('ships');
   return (
     <div>
-      <ShipList ships={ships} />
+      <pre>{JSON.stringify(ships, null, 2)}</pre>
     </div>
   );
 };
 
 FleetComponent.propTypes = {
-  fleet: PropTypes.object
+  record: ImmutablePropTypes.record
 };
 
 export default FleetComponent;

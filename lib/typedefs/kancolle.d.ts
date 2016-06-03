@@ -87,7 +87,7 @@ namespace KCS {
       api_taisen: [number, number];
     }
 
-    interface PlayerProfile {
+    interface KCSPlayerProfile {
       api_active_flag: number;
       api_comment?: string;
       api_comment_id?: string;

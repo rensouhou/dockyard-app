@@ -6,28 +6,20 @@
  */
 import React, { PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import R from 'ramda';
-import { listOrDefault } from '../../helpers';
+import { List } from 'immutable';
 import { StaticPanel } from '../ui';
+import Fleet from '../ui/game/fleet';
 import css from './game-ui.scss';
 
-const { indexOf, isEmpty, prop, pathOr, not } = R;
-
 const GameUIComponent = (props) => {
-  const fleets = listOrDefault(props, 'uiState', 'player', 'fleets');
-  // @todo Move this outside
-  // fleets.slice(0, 1).map(f => (
-  //   <StaticPanel title={f.name} className={css.fleetCol}>
-  //     <Fleet fleet={f} />
-  //   </StaticPanel>
-  // ))
+  const fleets = props.ui.getIn(['player', 'fleets'], List());
 
   return (
     <div className={css.gameUi}>
       <StaticPanel title="Materials" />
       <StaticPanel title="Player" />
       <StaticPanel title="Fleet">
-        TBA
+        <Fleet record={fleets.first()} />
       </StaticPanel>
     </div>
   );

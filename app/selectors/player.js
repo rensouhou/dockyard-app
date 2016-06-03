@@ -13,42 +13,49 @@ import { PlayerProfile, Materials } from '../records';
 /**
  * Null-safe data getters
  */
+
 /**
  * Get state of the player's fleet
  * @param state
- * @returns {object[]}
+ * @returns {Immutable.List<Fleet>}
  */
 const playerFleetList = (state) => state.getIn(['player', 'fleets'], List());
 
 /**
  * Get the player ship list
  * @param state
- * @returns {object[]}
+ * @returns {Immutable.List<Ship>}
  */
 const playerShipList = (state) => state.getIn(['player', 'ships'], List());
 
 /**
  * Get the master game ship list
  * @param state
- * @returns {object[]}
+ * @returns {Immutable.List<Ship>}
  */
 const baseShipList = (state) => state.getIn(['game', 'ships'], List());
 
 /**
+ * @param state
+ * @return {Immutable.List<SlotItem>}
+ */
+const playerSlotItemList = (state) => state.getIn(['player', 'slotItems'], List());
+
+/**
  * Get state of the player profile
  * @param state
- * @returns {object[]}
+ * @returns {PlayerProfile}
  */
 const playerProfile = (state) => state.getIn(['player', 'profile'], new PlayerProfile());
 
 /**
  * Get state of player materials
  * @param state
- * @returns {object}
+ * @returns {Materials}
  */
 const playerMaterials = (state) => state.getIn(['player', 'materials'], new Materials());
 
-/********************************************************************
+/** **
  * Public-facing selectors
  */
 
@@ -57,6 +64,10 @@ const playerMaterials = (state) => state.getIn(['player', 'materials'], new Mate
  */
 export const getPlayerFleets = createSelector(
   [playerFleetList],
+  /**
+   * @param {Immutable.List<Fleet>} fleetList
+   * @return {Immutable.List<Fleet>}
+   */
   (fleetList) => fleetList
 );
 
@@ -65,7 +76,20 @@ export const getPlayerFleets = createSelector(
  */
 export const getPlayerShips = createSelector(
   [playerShipList],
+  /**
+   * @param {Immutable.List<Ship>} playerShips
+   * @return {Immutable.List<Ship>}
+   */
   (playerShips) => playerShips
+);
+
+export const getPlayerSlotItems = createSelector(
+  [playerSlotItemList],
+  /**
+   * @param {Immutable.List<SlotItem>} playerSlotItems
+   * @return {Immutable.List<SlotItem>}
+   */
+  (playerSlotItems) => playerSlotItems
 );
 
 /**
@@ -73,6 +97,12 @@ export const getPlayerShips = createSelector(
  */
 export const getPlayerFleetsList = createSelector(
   [playerFleetList, playerShipList, baseShipList],
+  /**
+   * @param {Immutable.List<Fleet>} fleetList
+   * @param {Immutable.List<Ship>} playerShips
+   * @param {Immutable.List<Ship>} baseShips
+   * @return {Immutable.List<Fleet>}
+   */
   (fleetList, playerShips, baseShips) => List(fleetList)
     .flatMap((fleet, idx) => Map(fleet))
 );
@@ -83,8 +113,8 @@ export const getPlayerFleetsList = createSelector(
 export const getPlayerProfile = createSelector(
   [playerProfile],
   /**
-   * @param profile
-   * @return {Player.Profile}
+   * @param {PlayerProfile} profile
+   * @return {PlayerProfile}
    */
   (profile) => profile
 );
@@ -95,8 +125,8 @@ export const getPlayerProfile = createSelector(
 export const getPlayerMaterials = createSelector(
   [playerMaterials],
   /**
-   * @param materials
-   * @return {Player.Materials}
+   * @param {Materials} materials
+   * @return {Materials}
    */
   (materials) => materials
 );
@@ -105,14 +135,16 @@ export const getPlayerMaterials = createSelector(
  * Player main state selector (for UI)
  */
 export const getPlayer = createSelector(
-  [getPlayerFleets, getPlayerProfile, getPlayerMaterials, getPlayerShips],
+  [getPlayerFleets, getPlayerProfile, getPlayerMaterials, getPlayerShips, getPlayerSlotItems],
   /**
-   * @param fleets
-   * @param profile
-   * @param materials
-   * @param ships
+   * @param {Immutable.List<Fleet>} fleets
+   * @param {PlayerProfile} profile
+   * @param {Materials} materials
+   * @param {Immutable.List<Ship>} ships
+   * @param {Immutable.List<SlotItem>} slotItems
+   * @return {Immutable.Map}
    */
-  (fleets, profile, materials, ships) => Map({
-    fleets, profile, materials, ships
+  (fleets, profile, materials, ships, slotItems) => Map({
+    fleets, profile, materials, ships, slotItems
   })
 );
