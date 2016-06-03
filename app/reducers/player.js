@@ -23,7 +23,7 @@ const initialState = Map({
 });
 
 const logReducer = (state, action) => {
-  console.group('Action of type %s', action.type);
+  console.groupCollapsed('Action of type %s', action.type);
   console.log('state  =>', state);
   console.log('action =>', action);
   console.groupEnd();
@@ -58,7 +58,7 @@ export default createReducer(initialState, {
     console.log('materials ->', materials);
     return state.set(
       'materials',
-      materials.merge(action.payload)
+      materials.merge(action.payload.materials)
     );
   },
   [ApiEvents.RESUPPLY_SHIP](state, action) {
@@ -67,7 +67,7 @@ export default createReducer(initialState, {
     console.log('materials ->', materials);
     return state.set(
       'materials',
-      materials.merge(action.payload)
+      materials.merge(action.payload.materials)
     );
   },
   [ApiEvents.GET_CONSTRUCTION_DOCKS](state, action) {

@@ -2,8 +2,6 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { persistState } from 'redux-devtools';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
-import timerMiddleware from '../core/schedule-middleware';
-import gameDataLoggingMiddleware from '../core/game-logging-middleware';
 import promiseMiddleware from 'redux-promise';
 import { hashHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
@@ -17,10 +15,6 @@ const logger = createLogger({
 });
 
 const router = routerMiddleware(hashHistory);
-
-const timer = timerMiddleware();
-
-const gameDataLogger = gameDataLoggingMiddleware();
 
 const enhancer = compose(
   applyMiddleware(thunk, perflogger, promiseMiddleware, router, logger),
