@@ -42,7 +42,7 @@ export default class Game extends Component {
           game={game}
           transformerActions={transformerActions}
         />
-        <GameUI appState={this.props.appState} uiState={this.props.ui} />
+        <GameUI appState={this.props.appState} ui={this.props.ui} />
       </div>
     );
   }

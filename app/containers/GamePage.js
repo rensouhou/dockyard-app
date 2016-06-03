@@ -1,21 +1,24 @@
+/**
+ * @overview
+ *
+ * @since 0.1.0
+ */
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Game from '../components/Game';
 import { createTransformerActions, createGameActions } from '../actions/game';
 import * as coreActions from '../actions/application';
 import { getPlayer } from '../selectors/player';
+import { Map } from 'immutable';
 
-const mapStateToProps = state => {
-  const playerState = {};
+const mapStateToProps = (state) => ({
+  ui: Map({
+    player: getPlayer(state)
+  })
+});
 
-  return {
-    ui: {
-      player: getPlayer(state)
-    }
-  };
-};
-
-const mapDispatchToProps = dispatch => ({
+// @todo rethink this into something cleaner
+const mapDispatchToProps = (dispatch) => ({
   transformerActions: bindActionCreators(createTransformerActions(), dispatch),
   game: bindActionCreators(createGameActions(), dispatch),
   actions: bindActionCreators({ ...coreActions }, dispatch)

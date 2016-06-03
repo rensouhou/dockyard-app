@@ -5,6 +5,7 @@
  * @since 0.1.0
  */
 import React, { PropTypes } from 'react';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import R from 'ramda';
 import { listOrDefault } from '../../helpers';
 import { StaticPanel } from '../ui';
@@ -34,8 +35,7 @@ const GameUIComponent = (props) => {
 
 GameUIComponent.propTypes = {
   children: PropTypes.any,
-  appState: PropTypes.object,
-  uiState: PropTypes.object
+  ui: ImmutablePropTypes.map
 };
 
 export default GameUIComponent;

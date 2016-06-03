@@ -6,64 +6,80 @@
  *
  * @todo Aircraft proficiency calculation
  */
-import R from 'ramda';
-import { List } from 'immutable';
+import { Map, List } from 'immutable';
 import { createSelector } from 'reselect';
-import { PlayerProfile, Materials, Ship } from '../records';
+import { PlayerProfile, Materials } from '../records';
 
 /**
- * Get a null-safe state of the player's fleet
+ * Null-safe data getters
+ */
+/**
+ * Get state of the player's fleet
  * @param state
  * @returns {object[]}
  */
 const playerFleetList = (state) => state.getIn(['player', 'fleets'], List());
 
 /**
- * Get a null-safe state of the player profile
+ * Get the player ship list
+ * @param state
+ * @returns {object[]}
+ */
+const playerShipList = (state) => state.getIn(['player', 'ships'], List());
+
+/**
+ * Get the master game ship list
+ * @param state
+ * @returns {object[]}
+ */
+const baseShipList = (state) => state.getIn(['game', 'ships'], List());
+
+/**
+ * Get state of the player profile
  * @param state
  * @returns {object[]}
  */
 const playerProfile = (state) => state.getIn(['player', 'profile'], new PlayerProfile());
 
 /**
- * Get a null-safe state of player materials
+ * Get state of player materials
  * @param state
  * @returns {object}
  */
 const playerMaterials = (state) => state.getIn(['player', 'materials'], new Materials());
 
-/**
- * @todo Document me
- * @param ship
- * @param normalizedSlotItems
- * @return {Ship}
- */
-const getShipWithSlotItems = (ship, normalizedSlotItems) =>
-  ship.set('slot', R.mergeAll([
-    {}, ship.get('slot'), {
-      items: ship.get('slot').items.reduce((acc, id) => acc.concat(normalizedSlotItems.get(id)), [])
-    }
-  ]));
-
-/**
+/********************************************************************
  * Public-facing selectors
  */
 
+/**
+ * Player fleet selector
+ */
 export const getPlayerFleets = createSelector(
   [playerFleetList],
-  /**
-   * @param fleetList
-   * @returns {object[]}
-   */
   (fleetList) => fleetList
-  // fleetList.map((it) => new Fleet({
-  //  ...it,
-  //  /** @todo Write as a {@link Seq} */
-  //  ships: it.ships.map((shipId) =>
-  //    getShipWithSlotItems(normalizedShips.get(shipId), normalizedSlotItems))
-  // }))
 );
 
+/**
+ * Player ship selector
+ */
+export const getPlayerShips = createSelector(
+  [playerShipList],
+  (playerShips) => playerShips
+);
+
+/**
+ * WIP: Player fleet selector
+ */
+export const getPlayerFleetsList = createSelector(
+  [playerFleetList, playerShipList, baseShipList],
+  (fleetList, playerShips, baseShips) => List(fleetList)
+    .flatMap((fleet, idx) => Map(fleet))
+);
+
+/**
+ * Player profile selector
+ */
 export const getPlayerProfile = createSelector(
   [playerProfile],
   /**
@@ -73,6 +89,9 @@ export const getPlayerProfile = createSelector(
   (profile) => profile
 );
 
+/**
+ * Player material state selector
+ */
 export const getPlayerMaterials = createSelector(
   [playerMaterials],
   /**
@@ -82,15 +101,18 @@ export const getPlayerMaterials = createSelector(
   (materials) => materials
 );
 
-// The entire player-related dataset for the UI
+/**
+ * Player main state selector (for UI)
+ */
 export const getPlayer = createSelector(
-  [getPlayerFleets, getPlayerProfile, getPlayerMaterials],
+  [getPlayerFleets, getPlayerProfile, getPlayerMaterials, getPlayerShips],
   /**
    * @param fleets
    * @param profile
    * @param materials
+   * @param ships
    */
-  (fleets, profile, materials) => ({
-    fleets, profile, materials
+  (fleets, profile, materials, ships) => Map({
+    fleets, profile, materials, ships
   })
 );

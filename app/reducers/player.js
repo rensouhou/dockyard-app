@@ -30,44 +30,42 @@ const logReducer = (state, action) => {
 };
 
 export default createReducer(initialState, {
-  [ApiEvents.GET_PLAYER_BASE_DATA](state, action) {
-    logReducer(state, action);
-    return state.set('slotItems', action.payload.slotItems.items);
+  [ApiEvents.GET_PLAYER_BASE_DATA](state, { payload }) {
+    logReducer(state, { payload });
+    return state.set('slotItems', payload.slotItems.items);
   },
-  [ApiEvents.GET_BASE_DATA](state, action) {
-    logReducer(state, action);
-    return state.merge(action.payload);
+  [ApiEvents.GET_BASE_DATA](state, { payload }) {
+    logReducer(state, { payload });
+    return state.merge(payload);
   },
-  [ApiEvents.GET_FLEET](state, action) {
-    logReducer(state, action);
+  [ApiEvents.GET_FLEET](state, { payload }) {
+    logReducer(state, { payload });
+    const fleets = state.get('fleets');
     return state.set(
       'fleets',
-      state.get('fleets').set(action.payload.fleetId - 1, action.payload.fleet)
+      fleets.set(payload.fleetId - 1, payload.fleet)
     );
   },
-  [ApiEvents.LOAD_FLEET_PRESET](state, action) {
-    logReducer(state, action);
+  [ApiEvents.LOAD_FLEET_PRESET](state, { payload }) {
+    logReducer(state, { payload });
+    const fleets = state.get('fleets');
     return state.set(
       'fleets',
-      state.get('fleets').set(action.payload.fleetId - 1, action.payload.fleet)
+      fleets.set(payload.fleetId - 1, payload.fleet)
     );
   },
-  [ApiEvents.GET_MATERIAL](state, action) {
-    logReducer(state, action);
-    const materials = state.get('materials');
-    console.log('materials ->', materials);
+  [ApiEvents.GET_MATERIAL](state, { payload }) {
+    logReducer(state, { payload });
     return state.set(
       'materials',
-      materials.merge(action.payload.materials)
+      state.get('materials').merge(payload.materials)
     );
   },
-  [ApiEvents.RESUPPLY_SHIP](state, action) {
-    logReducer(state, action);
-    const materials = state.get('materials');
-    console.log('materials ->', materials);
+  [ApiEvents.RESUPPLY_SHIP](state, { payload }) {
+    logReducer(state, { payload });
     return state.set(
       'materials',
-      materials.merge(action.payload.materials)
+      state.get('materials').merge(payload.materials)
     );
   },
   [ApiEvents.GET_CONSTRUCTION_DOCKS](state, action) {
