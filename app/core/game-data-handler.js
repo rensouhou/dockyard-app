@@ -6,12 +6,12 @@
  * @since 0.1.0
  */
 import qs from 'querystring';
-import T from 'immutable';
+import T, { Map } from 'immutable';
 import invariant from 'invariant';
 import { ApiEventsByPath } from '../actions/game';
 import config from '../config';
 
-let req = T.Map();
+let req = Map();
 
 let firstGameLoad = true;
 let gameUrl;
