@@ -55,9 +55,9 @@ const playerProfile = (state) => state.getIn(['player', 'profile'], new PlayerPr
  */
 const playerMaterials = (state) => state.getIn(['player', 'materials'], new Materials());
 
-/** **
+/**
  * Public-facing selectors
- */
+ **************************************/
 
 /**
  * Player fleet selector
@@ -83,6 +83,9 @@ export const getPlayerShips = createSelector(
   (playerShips) => playerShips
 );
 
+/**
+ * Player slot item selector
+ */
 export const getPlayerSlotItems = createSelector(
   [playerSlotItemList],
   /**
@@ -137,6 +140,7 @@ export const getPlayerMaterials = createSelector(
 export const getPlayer = createSelector(
   [getPlayerFleets, getPlayerProfile, getPlayerMaterials, getPlayerShips, getPlayerSlotItems],
   /**
+   * @typedef {Immutable.Map<string, any>} UIStatePlayer
    * @param {Immutable.List<Fleet>} fleets
    * @param {PlayerProfile} profile
    * @param {Materials} materials

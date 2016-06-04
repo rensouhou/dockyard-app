@@ -8,8 +8,8 @@ import { mission } from './mission';
 import { Fleet } from '../../records';
 
 /**
- * @param {KCS.Models.Fleet} d
- * @returns {Dockyard.PlayerData.Fleet}
+ * @param {Object} d
+ * @returns {Fleet}
  */
 export const playerFleet = (d) => new Fleet({
   flagship: d.api_flagship,

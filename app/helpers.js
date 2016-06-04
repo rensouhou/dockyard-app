@@ -1,4 +1,4 @@
-/* eslint no-param-reassign: 0, no-return-assign: 0 */
+/* eslint no-param-reassign: 0, no-return-assign: 0, no-sequences: 0 */
 /**
  * @overview
  *
@@ -12,9 +12,9 @@ import m from 'monet';
 const { Maybe } = m;
 const { path, pathOr, isEmpty } = R;
 
-export const listOrDefault = (obj, ...path) => pathOr([], path, obj);
+export const listOrDefault = (obj, ...objPath) => pathOr([], objPath, obj);
 
-export const objOrDefault = (obj, ...path) => pathOr({}, path, obj);
+export const objOrDefault = (obj, ...objPath) => pathOr({}, objPath, obj);
 
 /**
  * @param obj

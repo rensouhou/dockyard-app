@@ -6,6 +6,7 @@
 import R from 'ramda';
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import { Fleet } from '../../../records';
 
 const { isEmpty, pathOr } = R;
 
@@ -47,6 +48,10 @@ const FleetComponent = (props) => {
 
 FleetComponent.propTypes = {
   record: ImmutablePropTypes.record
+};
+
+FleetComponent.defaultProps = {
+  record: new Fleet()
 };
 
 export default FleetComponent;

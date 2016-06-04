@@ -4,14 +4,11 @@
  *
  * @since 0.1.0
  */
+import { Map } from 'immutable';
 import { opponentFleet } from '../../transformers/api/opponent-fleet';
 
-/**
- * @event GET_OPPONENT_INFO
- * @param {__PROTO.ApiRequest} r
- */
 export default function GET_OPPONENT_INFO({ body }) {
-  return {
+  return Map({
     fleet: opponentFleet(body)
-  };
+  });
 }

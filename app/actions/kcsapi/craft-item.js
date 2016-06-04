@@ -5,27 +5,24 @@
  * @since 0.1.0
  */
 import R from 'ramda';
+import { Map } from 'immutable';
 import { asNumber, asBool } from '../../transformers/primitive';
-import { parseMaterialsRecipe, parseMaterialArray } from '../../transformers/api/materials';
+import { parseMaterialsRecipe, parseMaterialArray, asRecord } from '../../transformers/api/materials';
 
-export default function ({ body, postBody }) {
-  return {
+export default function CRAFT_ITEM({ body, postBody }) {
+  return Map({
     flags: {
       successful: asBool(body.api_create_flag),
       usedDevelopmentMaterials: asBool(body.api_shizai_flag)
     },
     consumed: {
-      recipe: parseMaterialsRecipe(R.map(asNumber, postBody))
+      recipe: asRecord(parseMaterialsRecipe(R.map(asNumber, postBody)))
     },
-    materials: parseMaterialArray(body.api_material),
+    materials: asRecord(parseMaterialArray(body.api_material)),
     // @todo(@stuf): replace with Maybe monad (`sanctuary`)
     slotItem: !R.is(Object, body.api_slot_item) ? null : {
       id: body.api_slot_item.api_id,
       slotItemId: body.api_slot_item.api_slotitem_id
-    },
-    $_finalized: false,
-    $_unknown: {
-      fdata: body.api_fdata
     }
-  };
+  });
 }

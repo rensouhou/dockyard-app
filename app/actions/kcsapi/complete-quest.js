@@ -4,16 +4,17 @@
  *
  * @since 0.1.0
  */
+import { Map } from 'immutable';
 import { asNumber } from '../../transformers/primitive';
-import { parseMaterialArray } from '../../transformers/api/materials';
+import { parseMaterialArray, asRecord } from '../../transformers/api/materials';
 
-export default function ({ body, postBody }) {
-  return {
+export default function COMPLETE_QUEST({ body, postBody }) {
+  return Map({
     id: asNumber(postBody.api_quest_id),
-    materials: parseMaterialArray(body.api_material),
+    materials: asRecord(parseMaterialArray(body.api_material)),
     rewards: {
       count: body.api_bounus_count,
       items: body.api_bounus
     }
-  };
+  });
 }

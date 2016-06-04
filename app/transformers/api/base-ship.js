@@ -3,17 +3,18 @@
  *
  * @since 0.1.0
  */
+import { Ship } from '../../records';
 import { asNumber, formatLineBreaks } from '../primitive';
-import { parseMaterialArray } from './materials';
+import { parseMaterialArray, asRecord } from './materials';
 
 /**
- * @param {KCS.Models.BaseShip} s
- * @returns {Dockyard.BaseData.Ship}
+ * @param s
+ * @returns {Ship}
  * @todo(@stuf): create methods to check if a ship is player/enemy
  */
-export const baseShip = (s) => ({
-  shipId: s.api_id,
-  sortId: s.api_sortno,
+export const baseShip = (s) => new Ship({
+  shipId: asNumber(s.api_id),
+  sortId: asNumber(s.api_sortno),
   flavorText: formatLineBreaks(s.api_getmes),
   name: {
     kanji: s.api_name,
@@ -40,7 +41,7 @@ export const baseShip = (s) => ({
   },
   rarity: s.api_backs,
   gains: {
-    scrap: parseMaterialArray(s.api_broken),
+    scrap: asRecord(parseMaterialArray(s.api_broken)),
     modernize: s.api_powup
   },
   slot: {
@@ -49,12 +50,11 @@ export const baseShip = (s) => ({
   },
   type: s.api_stype,
   shipExtraVoices: s.api_voicef,
-  ammo: s.api_bull_max,
-  fuel: s.api_fuel_max,
+  ammo: asNumber(s.api_bull_max),
+  fuel: asNumber(s.api_fuel_max),
   remodel: {
-    level: s.api_afterlv,
+    level: asNumber(s.api_afterlv),
     remodelsToId: asNumber(s.api_aftershipid)
   },
-  buildTime: s.api_buildtime,
-  $_finalized: false
+  buildTime: s.api_buildtime
 });

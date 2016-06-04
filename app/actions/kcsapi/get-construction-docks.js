@@ -5,6 +5,7 @@
  * @since 0.1.0
  */
 import R from 'ramda';
+import { Map, List } from 'immutable';
 import { Dock } from '../../records';
 import { parseMaterialsRecipe, asRecord } from '../../transformers/api/materials';
 import { Enum } from '../../helpers';
@@ -24,8 +25,9 @@ const State = Enum({
 
 /**
  * @param dock
+ * @return {Dock}
  */
-const parseDock = dock => new Dock({
+const parseDock = (dock) => new Dock({
   id: dock.api_id,
   completionTime: dock.api_complete_time,
   shipId: dock.api_created_ship_id,
@@ -34,7 +36,7 @@ const parseDock = dock => new Dock({
 });
 
 export default function GET_CONSTRUCTION_DOCKS({ body }) {
-  return {
-    docks: body.map(parseDock)
-  };
+  return Map({
+    docks: List(body).map(parseDock)
+  });
 }

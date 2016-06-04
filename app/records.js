@@ -127,6 +127,17 @@ export const Dock = Record({
   state: undefined
 });
 
+export const Quest = Record({
+  id: undefined,
+  type: undefined,
+  category: undefined,
+  state: undefined,
+  title: undefined,
+  detail: undefined,
+  reward: new Materials(),
+  progress: undefined
+});
+
 // Internal
 // --------
 export const Internal = Map({

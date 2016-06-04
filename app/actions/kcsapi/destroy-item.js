@@ -4,10 +4,11 @@
  *
  * @since 0.1.0
  */
-import { parseMaterialArray } from '../../transformers/api/materials';
+import { Map } from 'immutable';
+import { parseMaterialArray, asRecord } from '../../transformers/api/materials';
 
-export default function ({ body }) {
-  return {
-    materials: parseMaterialArray(body.api_material)
-  };
+export default function DESTROY_ITEM({ body }) {
+  return Map({
+    materials: asRecord(parseMaterialArray(body.api_material))
+  });
 }

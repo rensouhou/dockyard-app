@@ -11,6 +11,20 @@ import * as coreActions from '../actions/application';
 import { getPlayer } from '../selectors/player';
 import { Map } from 'immutable';
 
+/**
+ * @typedef {Object} UIStateProps
+ * @property {Immutable.Map} ui
+ */
+
+/**
+ * @typedef {Immutable.Map} UIState
+ * @property {Immutable.Map} UIStatePlayer
+ */
+
+/**
+ * @param state
+ * @returns {UIState}
+ */
 const mapStateToProps = (state) => ({
   ui: Map({
     player: getPlayer(state)

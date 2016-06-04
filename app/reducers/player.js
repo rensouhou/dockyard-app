@@ -43,7 +43,7 @@ export default createReducer(initialState, {
     const fleets = state.get('fleets');
     return state.set(
       'fleets',
-      fleets.set(payload.fleetId - 1, payload.fleet)
+      fleets.set(payload.get('fleetId') - 1, payload.get('fleet'))
     );
   },
   [ApiEvents.LOAD_FLEET_PRESET](state, { payload }) {
@@ -51,14 +51,14 @@ export default createReducer(initialState, {
     const fleets = state.get('fleets');
     return state.set(
       'fleets',
-      fleets.set(payload.fleetId - 1, payload.fleet)
+      fleets.set(payload.get('fleetId') - 1, payload.get('fleet'))
     );
   },
   [ApiEvents.GET_MATERIAL](state, { payload }) {
     logReducer(state, { payload });
     return state.set(
       'materials',
-      state.get('materials').merge(payload.materials)
+      state.get('materials').merge(payload.get('materials'))
     );
   },
   [ApiEvents.RESUPPLY_SHIP](state, { payload }) {
