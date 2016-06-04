@@ -1,5 +1,6 @@
 /**
  * @overview
+ *  Application front-end entry point
  *
  * @since 0.1.0
  */

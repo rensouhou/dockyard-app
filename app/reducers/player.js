@@ -70,6 +70,6 @@ export default createReducer(initialState, {
   },
   [ApiEvents.GET_CONSTRUCTION_DOCKS](state, action) {
     logReducer(state, action);
-    return { ...state };
+    return Map(state);
   }
 });
