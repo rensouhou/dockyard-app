@@ -3,7 +3,7 @@
  *
  * @since 0.1.0
  */
-import { Map, List, Record } from 'immutable';
+import { Map, List, Set, Record } from 'immutable';
 
 export const Fleet = Record({
   flagship: undefined,
@@ -140,11 +140,37 @@ export const Quest = Record({
 
 // Internal
 // --------
-export const Internal = Map({
-  ApiHandler: Record({
-    path: undefined,
-    event: undefined,
-    handler: undefined,
-    flags: {}
-  })
+const ApplicationState = Record({
+  /**
+   * @description
+   *  `gameState` is the "state" of the SWF game itself, deduced from
+   *  the kind of API events are received;
+   * @example ApiEvents.INITIALIZE_GAME -> GameState.STARTING_GAME
+   * @example ApiEvents.START_SORTIE    -> GameState.IN_SORTIE
+   */
+  gameState: '',
+  /**
+   * @description
+   *  `appState` is the internal Dockyard application's state
+   */
+  appState: '',
+  /**
+   * @description
+   *  A reference to the `<webview />` element that holds the game SWF
+   */
+  webview: undefined,
+  /**
+   * @description
+   *  The result of the last taken screenshot (during this session)
+   */
+  lastScreenshot: Map()
 });
+
+const ApiHandler = Record({
+  path: undefined,
+  event: undefined,
+  handler: undefined,
+  flags: Set()
+});
+
+export const Internal = { ApplicationState, ApiHandler };

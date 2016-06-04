@@ -1,12 +1,18 @@
 /* eslint quote-props: 0, no-console: 0 */
+/**
+ * @overview
+ *
+ * @since 0.1.0
+ */
 import R from 'ramda';
 import { createAction } from 'redux-actions';
-import T from 'immutable';
+import { Map, Seq, Record } from 'immutable';
 import ApiTransformers from './kcsapi';
 
-const transformers = T.Map(ApiTransformers);
+const transformers = Map(ApiTransformers);
+const transformersSeq = Seq.Keyed(ApiTransformers);
 
-export const ApiEventsByPath = T.Map({
+export const ApiEventsByPath = Map({
   'api_start2': 'INITIALIZE_GAME',  // ok
   'api_port/port': 'GET_BASE_DATA', // ok
   'api_req_mission/start': 'START_MISSION',
@@ -130,8 +136,24 @@ const wrapTransformer = (k, v) => R.wrap(v, (fn, action) => {
 // @todo(@stuf): fix me properly pls
 export const createTransformerActions = () => transformers
   .toKeyedSeq()
-  .mapEntries(([k, v]) => [k, createAction(k, wrapTransformer(k, v))])
+  .mapEntries(([k, v]) => [k, createAction(k, v)])
   .toJS();
+
+export const prepareTransformerActions = transformersSeq
+  .flatMap((fn, k) => Map({ [k]: createAction(k, fn) }));
+
+export const preparefdsTransformerActions = () => {
+  const a = Seq(transformers).flatMap((v, k) => {
+    console.log('prepareTransformerActions flatMap');
+    console.log('v\t=>', v);
+    console.log('k\t=>', k);
+    console.log('a\t=>', createAction(k, v));
+    return Map({ [k]: createAction(k, v) });
+  });
+
+  console.log({ a });
+  return a;
+};
 
 export const createGameActions = () => ({
   parseApiData: createAction(RECEIVED_API_DATA, (data) => {
@@ -146,7 +168,7 @@ export const createGameActions = () => ({
   })
 });
 
-export const GameStates = {
+const GameStatesRec = Record({
   UNINITIALIZED: 'UNINITIALIZED',
   STARTING_GAME: 'STARTING_GAME',
   IN_SORTIE: 'IN_SORTIE',
@@ -155,4 +177,6 @@ export const GameStates = {
   FINISHED_PRACTICE: 'FINISHED_PRACTICE',
   BROWSING_MISSIONS: 'BROWSING_MISSIONS',
   MISSION_STARTED: 'MISSION_STARTED'
-};
+});
+
+export const GameStates = new GameStatesRec();

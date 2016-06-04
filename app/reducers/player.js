@@ -32,7 +32,7 @@ const logReducer = (state, action) => {
 export default createReducer(initialState, {
   [ApiEvents.GET_PLAYER_BASE_DATA](state, { payload }) {
     logReducer(state, { payload });
-    return state.set('slotItems', payload.slotItems.items);
+    return state.set('slotItems', payload.getIn(['slotItems', 'items']));
   },
   [ApiEvents.GET_BASE_DATA](state, { payload }) {
     logReducer(state, { payload });

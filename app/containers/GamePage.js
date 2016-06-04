@@ -6,10 +6,12 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Game from '../components/Game';
-import { createTransformerActions, createGameActions } from '../actions/game';
+import { createTransformerActions, prepareTransformerActions, createGameActions } from '../actions/game';
 import * as coreActions from '../actions/application';
 import { getPlayer } from '../selectors/player';
 import { Map } from 'immutable';
+
+const transformerFns = prepareTransformerActions.cacheResult();
 
 /**
  * @typedef {Object} UIStateProps
@@ -34,6 +36,7 @@ const mapStateToProps = (state) => ({
 // @todo rethink this into something cleaner
 const mapDispatchToProps = (dispatch) => ({
   transformerActions: bindActionCreators(createTransformerActions(), dispatch),
+  transFns: bindActionCreators(transformerFns.toJS(), dispatch),
   game: bindActionCreators(createGameActions(), dispatch),
   actions: bindActionCreators({ ...coreActions }, dispatch)
 });

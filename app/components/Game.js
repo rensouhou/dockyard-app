@@ -6,6 +6,7 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  */
 import React, { Component, PropTypes } from 'react';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import R from 'ramda';
 import GameView from './game/game-view';
 import GameUI from './game/game-ui';
@@ -18,7 +19,8 @@ export default class Game extends Component {
     game: PropTypes.any,
     transformerActions: PropTypes.any,
     appState: PropTypes.object,
-    ui: PropTypes.object,
+    ui: ImmutablePropTypes.map,
+    transFns: PropTypes.object,
     gameEntities: PropTypes.object
   };
 
@@ -27,8 +29,9 @@ export default class Game extends Component {
   // @todo(@stuf): make use of monads or something to ease up on the required null-checking festa
   render() {
     const { transformerActions, game, actions } = this.props;
-    console.group('GameComponent UI State');
-    console.log(this.props.ui);
+    console.group('GameComponent');
+    console.log('ui\t\t=>', this.props.ui);
+    console.log('props\t=>', this.props);
     console.groupEnd();
     if (!this.isInitialized()) {
       return (
