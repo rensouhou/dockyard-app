@@ -90,11 +90,11 @@ export const Ship = Record({
     remodelsToId: undefined
   },
   type: undefined,
-  slot: {
+  slot: Map({
     count: undefined,
     capacity: List(),
     items: List()
-  }
+  })
 });
 
 export const SlotItem = Record({

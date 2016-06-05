@@ -6,7 +6,10 @@
 import { List, Map } from 'immutable';
 import { ApiEvents } from '../actions/game';
 import createReducer from './create-reducer';
-import { PlayerProfile, Materials as MaterialState } from '../records';
+import {
+  PlayerProfile,
+  Materials as MaterialState
+} from '../records';
 
 const initialState = Map({
   profile: new PlayerProfile(),
@@ -70,6 +73,6 @@ export default createReducer(initialState, {
   },
   [ApiEvents.GET_CONSTRUCTION_DOCKS](state, action) {
     logReducer(state, action);
-    return Map(state);
+    return Map.of(...state);
   }
 });

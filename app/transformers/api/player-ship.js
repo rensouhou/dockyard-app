@@ -4,8 +4,8 @@
  * @since 0.1.0
  */
 import R from 'ramda';
+import { fromJS } from 'immutable';
 import { asBool, notEmpty } from '../primitive';
-import { Ship } from '../../records';
 
 const { filter } = R;
 
@@ -15,7 +15,7 @@ const rejectEmpty = filter(id => notEmpty(id));
  * @param {KCS.Models.PlayerShip} s
  * @returns {Dockyard.PlayerData.Ship}
  */
-export const playerShip = (s) => new Ship({
+export const playerShip = (s) => fromJS({
   id: s.api_id,
   sortId: s.api_sortno,
   shipId: s.api_ship_id,
@@ -58,9 +58,5 @@ export const playerShip = (s) => new Ship({
   flags: {
     isLocked: asBool(s.api_locked),
     isSlotItemLocked: asBool(s.api_locked_equip)
-  },
-  $_finalized: false,
-  $_unknown: {
-    timeStr: s.api_ndock_time_str
   }
 });

@@ -2,19 +2,17 @@
  * @overview
  *  Base model for the base slot-item data
  *
- * @since 0.3.0
- * @version 0.4.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/transformers/api/base-slotitem
+ * @since 0.1.0
  */
+import { fromJS } from 'immutable';
 import { formatLineBreaks } from '../primitive';
 import { parseMaterialArray } from '../api/materials';
 
 /**
- * @param {KCS.Models.BaseSlotItem} o
- * @returns {Dockyard.BaseData.SlotItem}
+ * @param o
+ * @returns {SlotItem}
  */
-export const baseSlotItem = o => ({
+export const baseSlotItem = (o) => fromJS({
   slotItemId: o.api_id,
   sortId: o.api_sortno,
   name: o.api_name,

@@ -3,13 +3,10 @@
  *
  * @since 0.1.0
  */
-import { SlotItem } from '../../records';
+import { fromJS } from 'immutable';
 import { asBool } from '../primitive';
 
-/**
- * @param o
- */
-export const playerSlotItem = o => new SlotItem({
+export const playerSlotItem = (o) => fromJS({
   id: o.api_id,
   level: o.api_level,
   locked: asBool(o.api_locked),

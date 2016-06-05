@@ -3,7 +3,7 @@
  *
  * @since 0.1.0
  */
-import { Ship } from '../../records';
+import { fromJS } from 'immutable';
 import { asNumber, formatLineBreaks } from '../primitive';
 import { parseMaterialArray, asRecord } from './materials';
 
@@ -12,7 +12,7 @@ import { parseMaterialArray, asRecord } from './materials';
  * @returns {Ship}
  * @todo(@stuf): create methods to check if a ship is player/enemy
  */
-export const baseShip = (s) => new Ship({
+export const baseShip = (s) => fromJS({
   shipId: asNumber(s.api_id),
   sortId: asNumber(s.api_sortno),
   flavorText: formatLineBreaks(s.api_getmes),
