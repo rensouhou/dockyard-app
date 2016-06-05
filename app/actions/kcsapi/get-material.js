@@ -4,12 +4,12 @@
  *
  * @since 0.1.0
  */
-import { Map } from 'immutable';
-import { parseMaterialObjects, asRecord } from '../../transformers/api/materials';
+import { fromJS } from 'immutable';
+import { parseMaterialObjects } from '../../transformers/api/materials';
 import { getArrayOrDefault } from '../../transformers/primitive';
 
 export default function GET_MATERIAL({ body }) {
-  return Map({
-    materials: asRecord(parseMaterialObjects(getArrayOrDefault(body)))
+  return fromJS({
+    materials: parseMaterialObjects(getArrayOrDefault(body))
   });
 }
