@@ -12,7 +12,7 @@ import {
   PlayerProfile,
   Materials as MaterialState,
   Fleet as FleetRecord,
-  Ship,
+  Ship as ShipRecord,
   SlotItem as SlotItemRecord
 } from '../records';
 
@@ -52,7 +52,8 @@ const baseShipList = (state) =>
  */
 const getShipList = createSelector(
   [playerShipList, baseShipList],
-  (playerShips, baseShips) => playerShips.map((ship) => new Ship(baseShips.get(ship.get('shipId')).mergeDeep(ship)))
+  (playerShips, baseShips) =>
+    playerShips.map((ship) => new ShipRecord(baseShips.get(ship.get('shipId')).mergeDeep(ship)))
 );
 
 /**
