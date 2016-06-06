@@ -4,8 +4,8 @@
  *
  * @since 0.1.0
  */
-import { Map } from 'immutable';
+import { fromJS } from 'immutable';
 
 export default function FINISHED_PRACTICE({ body, postBody }) {
-  return Map({ body, postBody });
+  return fromJS({ body, postBody });
 }

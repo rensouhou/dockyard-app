@@ -173,4 +173,15 @@ const ApiHandler = Record({
   flags: Set()
 });
 
-export const Internal = { ApplicationState, ApiHandler };
+const ApiAction = Record({
+  body: {},
+  postBody: {},
+  path: '',
+  error: undefined
+});
+
+const KCSApiData = Record({
+  api_data: undefined
+});
+
+export const Internal = { ApplicationState, ApiHandler, ApiAction, KCSApiData };

@@ -4,7 +4,7 @@
  * @since 0.1.0
  */
 import { Map, List } from 'immutable';
-import { ApiEvents } from '../actions/game';
+import { ApiEvents } from '../constants';
 import createReducer from './create-reducer';
 
 const initialState = Map({

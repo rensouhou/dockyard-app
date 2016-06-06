@@ -14,7 +14,7 @@ import chalk from 'chalk';
 import Thinky from 'thinky';
 import createSchemas from './schema/rdb';
 import AppEvent from '../shared/constants';
-import { ApiEvents as ApiEvent } from '../../app/actions/game';
+import { ApiEvents as ApiEvent } from '../../app/constants';
 
 const g = chalk.green;
 const gi = g.inverse;

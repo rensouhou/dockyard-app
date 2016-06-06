@@ -5,7 +5,7 @@
  */
 import R from 'ramda';
 import { Map, List } from 'immutable';
-import { ApiEvents } from '../actions/game';
+import { ApiEvents } from '../constants';
 import createReducer from './create-reducer';
 import { Enum } from '../helpers';
 

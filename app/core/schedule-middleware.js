@@ -7,7 +7,7 @@
 import { ipcRenderer } from 'electron';
 import storage from 'electron-json-storage';
 import AppEvent from '../../src/shared/constants';
-import { ApiEvents } from '../actions/game';
+import { ApiEvents } from '../constants';
 
 const scheduled = {};
 

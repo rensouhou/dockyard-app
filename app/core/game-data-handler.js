@@ -8,7 +8,8 @@
 import qs from 'querystring';
 import { Map } from 'immutable';
 import invariant from 'invariant';
-import { ApiEventsByPath } from '../actions/game';
+import { getObjectOrDefault } from '../transformers/primitive';
+import { findEvent } from '../actions/api-actions';
 import config from '../config';
 
 let req = Map();
@@ -32,8 +33,7 @@ export function createGameViewHandler(parseFunObj, cfg) {
 /**
  * @param parseFunObj
  * @param cfg
- * @returns {function()}
- * @todo(@stuf): handle data as monads and rewrite individual handlers
+ * @returns {function}
  */
 export function handleGameView(parseFunObj, cfg) {
   return (e) => {
@@ -95,7 +95,9 @@ function parsePath(url, re) {
 
 /**
  * Game data interceptor
- * @todo(@stuf): add support to choose which action to dispatch instead of generic actions
+ * @param {Object} wc
+ * @param {Object} parseFunObj
+ * @param {Object} cfg
  */
 function Handler(wc, parseFunObj, cfg) {
   return (event, method, params) => {
@@ -151,8 +153,8 @@ function Handler(wc, parseFunObj, cfg) {
                 const res = { path, error, body, postBody };
 
                 // Look up the appropriate event name
-                const eventToHandle = ApiEventsByPath.find((v, k) => (new RegExp(`${k}$`)).test(res.path));
-                const handler = (parseFunObj.transformerActions || {})[eventToHandle];
+                const eventToHandle = findEvent(res.path);
+                const handler = getObjectOrDefault(parseFunObj.transformerActions)[eventToHandle];
 
                 if (eventToHandle && handler) {
                   console.log(`${requestId}: Network.getResponseBody done = ${path}\t%o`,

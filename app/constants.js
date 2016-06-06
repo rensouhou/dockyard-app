@@ -106,7 +106,7 @@ export const ApiEventPaths = Map({
   // endregion
 });
 
-export const GameStates = Map({
+export const GameStates = {
   UNINITIALIZED: 'UNINITIALIZED',
   STARTING_GAME: 'STARTING_GAME',
   IN_SORTIE: 'IN_SORTIE',
@@ -115,4 +115,4 @@ export const GameStates = Map({
   FINISHED_PRACTICE: 'FINISHED_PRACTICE',
   BROWSING_MISSIONS: 'BROWSING_MISSIONS',
   MISSION_STARTED: 'MISSION_STARTED'
-});
+};
