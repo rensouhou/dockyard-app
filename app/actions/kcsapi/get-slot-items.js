@@ -4,11 +4,11 @@
  *
  * @since 0.1.0
  */
-import { Map } from 'immutable';
+import { fromJS } from 'immutable';
 import { playerSlotItem } from '../../transformers/api/player-slotitem';
 
 export default function GET_SLOT_ITEMS({ body }) {
-  return Map({
+  return fromJS({
     slotItems: body.map(playerSlotItem)
   });
 }

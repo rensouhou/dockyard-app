@@ -1,3 +1,4 @@
+/* eslint no-confusing-arrow: 0 */
 /**
  * @overview
  *
@@ -6,10 +7,7 @@
 import { List, Map } from 'immutable';
 import { ApiEvents } from '../actions/game';
 import createReducer from './create-reducer';
-import {
-  PlayerProfile,
-  Materials as MaterialState
-} from '../records';
+import { PlayerProfile, Materials as MaterialState } from '../records';
 
 const initialState = Map({
   profile: new PlayerProfile(),
@@ -61,14 +59,14 @@ export default createReducer(initialState, {
     logReducer(state, { payload });
     return state.set(
       'materials',
-      state.get('materials').merge(payload.get('materials'))
+      state.get('materials').mergeWith((prev, next) => next == null ? prev : next, payload.get('materials'))
     );
   },
   [ApiEvents.RESUPPLY_SHIP](state, { payload }) {
     logReducer(state, { payload });
     return state.set(
       'materials',
-      state.get('materials').merge(payload.materials)
+      state.get('materials').mergeWith((prev, next) => next == null ? prev : next, payload.get('materials'))
     );
   },
   [ApiEvents.GET_CONSTRUCTION_DOCKS](state, action) {

@@ -29,7 +29,7 @@ export default class Game extends Component {
   // @todo(@stuf): make use of monads or something to ease up on the required null-checking festa
   render() {
     const { transformerActions, game, actions } = this.props;
-    console.group('GameComponent');
+    console.groupCollapsed('GameComponent');
     console.log('ui\t\t=>', this.props.ui);
     console.log('props\t=>', this.props);
     console.groupEnd();

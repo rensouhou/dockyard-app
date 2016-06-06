@@ -3,36 +3,31 @@
  *
  * @since 0.1.0
  */
-import R from 'ramda';
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Fleet } from '../../../records';
+import Ship from './ship';
 
-const { isEmpty, pathOr } = R;
-
-const getListOrDefault = (o, ...path) => pathOr([], path, o);
-
+// region <ShipList /> ship list component
 /**
  * <ShipList /> component for <Fleet />
  * @param props
  * @returns {JSX.Element}
  * @constructor
  */
-const ShipList = (props) => {
-  // props.ships.map(s => <Ship key={s.id} ship={s} />)
-  console.log('ShipList =>', props);
-  return (
-    <div>
-    </div>
-  );
-};
+const ShipList = (props) => (
+  <div>
+    {props.ships.map((ship) => <Ship record={ship} />)}
+  </div>
+);
 
 ShipList.propTypes = {
   ships: ImmutablePropTypes.listOf(ImmutablePropTypes.record)
 };
+// endregion
 
+// region <FleetComponent /> fleet component
 /**
- *
  * @param props
  * @returns {JSX.Element}
  * @constructor
@@ -41,7 +36,7 @@ const FleetComponent = (props) => {
   const ships = props.record.get('ships');
   return (
     <div>
-      <pre>{JSON.stringify(ships, null, 2)}</pre>
+      <ShipList ships={ships} />
     </div>
   );
 };
@@ -53,5 +48,6 @@ FleetComponent.propTypes = {
 FleetComponent.defaultProps = {
   record: new Fleet()
 };
+// endregion
 
 export default FleetComponent;

@@ -53,7 +53,8 @@ const baseShipList = (state) =>
 const getShipList = createSelector(
   [playerShipList, baseShipList],
   (playerShips, baseShips) =>
-    playerShips.map((ship) => new ShipRecord(baseShips.get(ship.get('shipId')).mergeDeep(ship)))
+    playerShips.map((ship) =>
+      new ShipRecord(baseShips.get(ship.get('shipId')).mergeDeep(ship)))
 );
 
 /**
