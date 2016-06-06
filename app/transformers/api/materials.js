@@ -99,6 +99,6 @@ export const parseRecipe:MaterialsObject = R.curry(parseMaterialsRecipe)(_, _, _
 
 /**
  * @param obj
- * @returns {records/Materials}
+ * @returns {records.js~Materials}
  */
 export const asRecord = (obj) => new Materials(obj);

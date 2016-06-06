@@ -4,12 +4,12 @@
  *
  * @since 0.1.0
  */
-import { List, Map } from 'immutable';
+import { List, Map, fromJS } from 'immutable';
 import { ApiEvents } from '../actions/game';
 import createReducer from './create-reducer';
 import { PlayerProfile, Materials as MaterialState } from '../records';
 
-const initialState = Map({
+const initialState = fromJS({
   profile: new PlayerProfile(),
   quests: List(),
   fleets: List(),
@@ -23,54 +23,26 @@ const initialState = Map({
   materials: new MaterialState()
 });
 
-const logReducer = (state, action) => {
-  console.groupCollapsed('Action of type %s', action.type);
-  console.log('state  =>', state);
-  console.log('action =>', action);
-  console.groupEnd();
-};
-
 export default createReducer(initialState, {
   [ApiEvents.GET_PLAYER_BASE_DATA](state, { payload }) {
-    logReducer(state, { payload });
     return state.set('slotItems', payload.getIn(['slotItems', 'items']));
   },
   [ApiEvents.GET_BASE_DATA](state, { payload }) {
-    logReducer(state, { payload });
     return state.merge(payload);
   },
   [ApiEvents.GET_FLEET](state, { payload }) {
-    logReducer(state, { payload });
-    const fleets = state.get('fleets');
-    return state.set(
-      'fleets',
-      fleets.set(payload.get('fleetId') - 1, payload.get('fleet'))
-    );
+    return state.setIn(['fleets', payload.get('fleetId') - 1], payload.get('fleet'));
   },
   [ApiEvents.LOAD_FLEET_PRESET](state, { payload }) {
-    logReducer(state, { payload });
-    const fleets = state.get('fleets');
-    return state.set(
-      'fleets',
-      fleets.set(payload.get('fleetId') - 1, payload.get('fleet'))
-    );
+    return state.setIn(['fleets', payload.get('fleetId') - 1], payload.get('fleet'));
   },
   [ApiEvents.GET_MATERIAL](state, { payload }) {
-    logReducer(state, { payload });
-    return state.set(
-      'materials',
-      state.get('materials').mergeWith((prev, next) => next == null ? prev : next, payload.get('materials'))
-    );
+    return state.mergeDeepWith((prev, next) => next == null ? prev : next, payload);
   },
   [ApiEvents.RESUPPLY_SHIP](state, { payload }) {
-    logReducer(state, { payload });
-    return state.set(
-      'materials',
-      state.get('materials').mergeWith((prev, next) => next == null ? prev : next, payload.get('materials'))
-    );
+    return state.mergeDeepWith((prev, next) => next == null ? prev : next, payload);
   },
-  [ApiEvents.GET_CONSTRUCTION_DOCKS](state, action) {
-    logReducer(state, action);
+  [ApiEvents.GET_CONSTRUCTION_DOCKS](state, { payload }) {
     return Map.of(...state);
   }
 });
