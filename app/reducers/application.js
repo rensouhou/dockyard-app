@@ -7,7 +7,7 @@ import { Map } from 'immutable';
 import createReducer from './create-reducer';
 import { Internal } from '../records';
 import { ApiEvents, GameStates } from '../constants';
-import { REGISTER_GAME_VIEW } from '../actions/application';
+import { REGISTER_GAME_VIEW, TOGGLE_AUDIO } from '../actions/application';
 
 const gameStateMapping = Map({
   [ApiEvents.INITIALIZE_GAME]: GameStates.STARTING_GAME,
@@ -32,6 +32,9 @@ const updatedState = (state, actionType) =>
  * Reducer for `ApplicationState.application`
  */
 export default createReducer(initialState, {
+  [TOGGLE_AUDIO](state, { payload }) {
+    return state;
+  },
   [REGISTER_GAME_VIEW](state, { payload }) {
     return state.set('webview', payload);
   },

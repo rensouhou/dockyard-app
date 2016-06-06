@@ -2,9 +2,7 @@
  * @overview
  *  Constants shared between main- and renderer process
  *
- * @since 0.4.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module src/shared/constants
+ * @since 0.1.0
  */
 export default {
   TIMER_START: 'TIMER_START',

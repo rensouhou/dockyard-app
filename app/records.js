@@ -163,7 +163,8 @@ const ApplicationState = Record({
    * @description
    *  The result of the last taken screenshot (during this session)
    */
-  lastScreenshot: Map()
+  lastScreenshot: Map(),
+  isAudioMuted: false
 });
 
 const ApiHandler = Record({
