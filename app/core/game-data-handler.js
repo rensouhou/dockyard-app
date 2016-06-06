@@ -6,7 +6,7 @@
  * @since 0.1.0
  */
 import qs from 'querystring';
-import T, { Map } from 'immutable';
+import { Map } from 'immutable';
 import invariant from 'invariant';
 import { ApiEventsByPath } from '../actions/game';
 import config from '../config';

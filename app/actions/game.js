@@ -1,8 +1,8 @@
 /* eslint quote-props: 0, no-console: 0 */
 /**
  * @overview
- *
  * @since 0.1.0
+ * @deprecated
  */
 import R from 'ramda';
 import { createAction } from 'redux-actions';
@@ -15,49 +15,49 @@ const transformersSeq = Seq.Keyed(ApiTransformers);
 export const ApiEventsByPath = Map({
   'api_start2': 'INITIALIZE_GAME',  // ok
   'api_port/port': 'GET_BASE_DATA', // ok
-  'api_req_mission/start': 'START_MISSION',
-  'mission/result': 'COMPLETE_MISSION',
-  'req_mission/return_instruction': 'QUIT_MISSION',
-  'kuosyou/destroyship': 'SCRAP_SHIP',
+  'api_req_mission/start': 'START_MISSION', // ok
+  'mission/result': 'COMPLETE_MISSION', // ok
+  'req_mission/return_instruction': 'QUIT_MISSION', // ok
+  'kuosyou/destroyship': 'SCRAP_SHIP', // ok
   'hokyu/charge': 'RESUPPLY_SHIP',
-  'req_kousyou/createitem': 'CRAFT_ITEM',
-  'req_kousyou/createship': 'CRAFT_SHIP',
-  'req_kousyou/destroyship': 'DESTROY_SHIP',
-  'req_kousyou/destroyitem2': 'DESTROY_ITEM',
-  'req_kousyou/getship': 'GET_SHIP',
+  'req_kousyou/createitem': 'CRAFT_ITEM', // ok
+  'req_kousyou/createship': 'CRAFT_SHIP', // ok
+  'req_kousyou/destroyship': 'DESTROY_SHIP', // ok
+  'req_kousyou/destroyitem2': 'DESTROY_ITEM', // ok
+  'req_kousyou/getship': 'GET_SHIP', // ok
   'req_kaisou/powerup': 'MODERNIZE_SHIP',
   'req_kaisou/lock': 'LOCK_EQUIPMENT',
   'req_hensei/change': 'CHANGE_SHIP',
-  'req_quest/start': 'START_QUEST',
-  'quest/clearitemget': 'COMPLETE_QUEST',
-  'req_quest/stop': 'STOP_QUEST',
-  'req_map/start': 'START_SORTIE',
-  'req_map/next': 'NEXT_SORTIE_NODE',
-  'req_sortie/battleresult': 'FINISHED_SORTIE',
-  'req_sortie/battle': 'SORTIE_STAGE',
-  'req_nyukyo/start': 'START_REPAIR',
-  'req_member/get_practice_enemyinfo': 'GET_OPPONENT_INFO',
+  'req_quest/start': 'START_QUEST', // ok
+  'quest/clearitemget': 'COMPLETE_QUEST', // ok
+  'req_quest/stop': 'STOP_QUEST', // ok
+  'req_map/start': 'START_SORTIE', // ok
+  'req_map/next': 'NEXT_SORTIE_NODE', // ok
+  'req_sortie/battleresult': 'FINISHED_SORTIE', // ok
+  'req_sortie/battle': 'SORTIE_STAGE', // ok
+  'req_nyukyo/start': 'START_REPAIR', // ok
+  'req_member/get_practice_enemyinfo': 'GET_OPPONENT_INFO', // ok
   'req_member/payitemuse': 'USE_PAID_ITEM',
-  'req_practice/battle': 'START_PVP_BATTLE',
-  'req_practice/midnight_battle': 'START_PVP_MIDNIGHT_BATTLE',
-  'req_practice/battle_result': 'FINISHED_PRACTICE',
-  'req_hensei/combined': 'FLEET_COMBINED',
-  '/api_req_hensei/preset_select': 'LOAD_FLEET_PRESET',
-  'req_combined_battle/battle_water': 'COMBINED_BATTLE_WATER_PHASE',
-  'get_member/require_info': 'GET_PLAYER_BASE_DATA',
+  'req_practice/battle': 'START_PVP_BATTLE', // ok
+  'req_practice/midnight_battle': 'START_PVP_MIDNIGHT_BATTLE', // ok
+  'req_practice/battle_result': 'FINISHED_PRACTICE', // ok
+  'req_hensei/combined': 'FLEET_COMBINED', // ok
+  '/api_req_hensei/preset_select': 'LOAD_FLEET_PRESET', // ok
+  'req_combined_battle/battle_water': 'COMBINED_BATTLE_WATER_PHASE', // ok
+  'get_member/require_info': 'GET_PLAYER_BASE_DATA', // ok
   'get_member/sortie_conditions': 'GET_SORTIE_CONDITIONS',
   'get_member/ship_deck': 'GET_FLEET', // ok
-  'get_member/deck': 'GET_FLEET_DATA',
+  'get_member/deck': 'GET_FLEET_DATA', // ok
   'get_member/basic': 'GET_PROFILE_DATA',
   'get_member/furniture': 'GET_FURNITURE',
-  'get_member/slotitem': 'GET_SLOT_ITEMS',
+  'get_member/slotitem': 'GET_SLOT_ITEMS', // ok
   'get_member/useitem': 'GET_USABLE_ITEMS',
   'get_member/ndock': 'GET_REPAIR_DOCKS',
   'get_member/kdock': 'GET_CONSTRUCTION_DOCKS',
-  'get_member/material': 'GET_MATERIAL',
-  'get_member/questlist': 'GET_QUEST_LIST',
-  'get_member/mission': 'GET_MISSION_LIST',
-  'get_member/practice': 'GET_PVP_OPPONENT_LIST',
+  'get_member/material': 'GET_MATERIAL', // ok
+  'get_member/questlist': 'GET_QUEST_LIST', // ok
+  'get_member/mission': 'GET_MISSION_LIST', // ok
+  'get_member/practice': 'GET_PVP_OPPONENT_LIST', // ok
   'get_member/payitem': 'GET_PAID_ITEMS',
   'get_member/slot_item': 'GET_SLOT_ITEMS',
   'get_member/record': 'GET_PLAYER_RECORD'
@@ -134,26 +134,11 @@ const wrapTransformer = (k, v) => R.wrap(v, (fn, action) => {
 });
 
 // @todo(@stuf): fix me properly pls
-export const createTransformerActions = () => transformers
-  .toKeyedSeq()
-  .mapEntries(([k, v]) => [k, createAction(k, v)])
-  .toJS();
+export const createTransformerActions = () => transformers.toKeyedSeq()
+                                                          .mapEntries(([k, v]) => [k, createAction(k, v)])
+                                                          .toJS();
 
-export const prepareTransformerActions = transformersSeq
-  .flatMap((fn, k) => Map({ [k]: createAction(k, fn) }));
-
-export const preparefdsTransformerActions = () => {
-  const a = Seq(transformers).flatMap((v, k) => {
-    console.log('prepareTransformerActions flatMap');
-    console.log('v\t=>', v);
-    console.log('k\t=>', k);
-    console.log('a\t=>', createAction(k, v));
-    return Map({ [k]: createAction(k, v) });
-  });
-
-  console.log({ a });
-  return a;
-};
+export const prepareTransformerActions = transformersSeq.flatMap((fn, k) => Map.of(k, createAction(k, fn)));
 
 export const createGameActions = () => ({
   parseApiData: createAction(RECEIVED_API_DATA, (data) => {

@@ -4,31 +4,46 @@
  *  Goal is to get an easier-to-use way of creating the API event handlers,
  *  and a better way to look up events by path.
  *
- * @since 0.1.0
+ * @since 0.2.0
  */
-import { Seq } from 'immutable';
+import { Seq, Map } from 'immutable';
 import { createAction } from 'redux-actions';
 import { Internal } from '../records';
-import { ApiEventPaths as ApiEventPath } from '../constants';
+import { ApiEventPaths } from '../constants';
 import kcsapiHandlers from '../actions/kcsapi';
 
-export const handlers = Seq
-  .Keyed(ApiEventPath)
-  .mapEntries((path, event) => [
-    event,
-    new Internal.ApiHandler({ path, event, handler: kcsapiHandlers[event] })
-  ]);
+/**
+ * Ensure that the action handlers are mapped into {@link ApiHandler} records.
+ * @type {Iterable<any, any>}
+ */
+export const handlers = Seq.Keyed(ApiEventPaths)
+                           .flatMap((path, event) =>
+                             Map.of(event, new Internal.ApiHandler({ path, event, handler: kcsapiHandlers[event] })));
 
+/**
+ * Define a function that will return a `Seq` containing the matched handler
+ * @param findPath
+ * @returns {Immutable.Seq.Keyed<string, Internal.ApiHandler>}
+ */
 export const findEventSeq = (findPath) => {
   const pathRegex = new RegExp(`^${findPath}`);
-  return Seq.Keyed(ApiEventPath).findKey((path) => pathRegex.test(path));
+  return Seq.Keyed(ApiEventPaths).findKey((path) => pathRegex.test(path));
 };
 
+/**
+ * A non-`Seq` version of the @see findEventSeq function.
+ * @param findPath
+ * @returns {K|*}
+ */
 export const findEvent = (findPath) => {
   const pathRegex = new RegExp(`^${findPath}`);
-  return ApiEventPath.findKey((path) => pathRegex.test(path));
+  return ApiEventPaths.findKey((path) => pathRegex.test(path));
 };
 
-export const actionHandlers = Seq
-  .Keyed(handlers)
-  .mapEntries((event, handler) => [event, createAction(event, handler)]);
+/**
+ * Create a `Seq` of action handlers that is in a usable form for the Redux application.
+ * @type {Iterable<any, any>}
+ */
+export const actionHandlers = Seq.Keyed(handlers)
+                                 .flatMap((handlerRecord, event) =>
+                                   Map.of(event, createAction(event, handlerRecord.handler)));

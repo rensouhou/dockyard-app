@@ -5,13 +5,11 @@
  */
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Game from '../components/Game';
-import { createTransformerActions, prepareTransformerActions, createGameActions } from '../actions/game';
-import * as coreActions from '../actions/application';
+import { actionHandlers } from '../actions/api-actions';
+import { actions as applicationActions } from '../actions/application';
 import { getPlayer } from '../selectors/player';
 import { Map } from 'immutable';
-
-const transformerFns = prepareTransformerActions.cacheResult();
+import Game from '../components/Game';
 
 /**
  * @typedef {Object} UIStateProps
@@ -33,12 +31,12 @@ const mapStateToProps = (state) => ({
   })
 });
 
-// @todo rethink this into something cleaner
+/**
+ * @param {Dispatch} dispatch
+ */
 const mapDispatchToProps = (dispatch) => ({
-  transformerActions: bindActionCreators(createTransformerActions(), dispatch),
-  transFns: bindActionCreators(transformerFns.toJS(), dispatch),
-  game: bindActionCreators(createGameActions(), dispatch),
-  actions: bindActionCreators({ ...coreActions }, dispatch)
+  transformerActions: bindActionCreators(actionHandlers.toJS(), dispatch),
+  actions: bindActionCreators(applicationActions, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

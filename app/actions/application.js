@@ -71,3 +71,4 @@ export const scheduleEvent = createAction(CREATE_TIMER, args => {
   return payload;
 });
 
+export const actions = { scheduleEvent, notify, registerGameView, takeScreenshot };
