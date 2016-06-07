@@ -21,16 +21,6 @@ export const handlers = Seq.Keyed(ApiEventPaths)
                              Map.of(event, new Internal.ApiHandler({ path, event, handler: kcsapiHandlers[event] })));
 
 /**
- * Define a function that will return a `Seq` containing the matched handler
- * @param findPath
- * @returns {Immutable.Seq.Keyed<string, Internal.ApiHandler>}
- */
-export const findEventSeq = (findPath) => {
-  const pathRegex = new RegExp(`^${findPath}`);
-  return Seq.Keyed(ApiEventPaths).findKey((path) => pathRegex.test(path));
-};
-
-/**
  * A non-`Seq` version of the @see findEventSeq function.
  * @param findPath
  * @returns {K|*}
