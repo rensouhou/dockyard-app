@@ -76,7 +76,7 @@ export function handleGameView(parseFunObj, cfg) {
         }
       });
 
-      // @todo(@stuf): use ws.cookies.set() instead
+      // @todo Use `electron-cookies` instead.
       wc.executeJavaScript([
         'document.cookie = "cklg=welcome;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=.dmm.com;path=/";',
         'document.cookie = "cklg=welcome;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=.dmm.com;path=/netgame/";',
