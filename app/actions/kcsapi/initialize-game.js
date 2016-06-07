@@ -11,8 +11,13 @@ import { baseShipGraphic } from '../../transformers/api/base-ship-graphic';
 import { baseShipType } from '../../transformers/api/base-ship-types';
 import { baseSlotItem } from '../../transformers/api/base-slotitem';
 import { baseFurniture } from '../../transformers/api/base-furniture';
-import { baseMapArea } from '../../transformers/api/base-maparea';
 import { baseMission } from '../../transformers/api/base-mission';
+import {
+  mapArea as baseMapArea,
+  mapBgm as baseMapBgm,
+  mapCell as baseMapCell,
+  mapInfo as baseMapInfo
+} from '../../transformers/api/base-map';
 
 /**
  * @type {Dockyard.GameEvent.transformer}
@@ -25,6 +30,9 @@ export default function INITIALIZE_GAME({ body }) {
     slotItems: List(body.api_mst_slotitem).map(baseSlotItem),
     missions: List(body.api_mst_mission).map(baseMission),
     furniture: List(body.api_mst_furniture).map(baseFurniture),
-    mapAreas: List(body.api_mst_maparea).map(baseMapArea)
+    mapAreas: List(body.api_mst_maparea).map(baseMapArea),
+    mapBgms: List(body.api_mst_mapbgm).map(baseMapBgm),
+    mapInfos: List(body.api_mst_mapinfo).map(baseMapInfo),
+    mapNodes: List(body.api_mst_mapcell).map(baseMapCell)
   });
 }
