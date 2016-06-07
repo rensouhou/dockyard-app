@@ -79,7 +79,10 @@ export const Ship = Record({
     speed: undefined
   },
   repair: undefined,
-  flags: undefined,
+  flags: {
+    inRepairDock: false,
+    onExpedition: false
+  },
   rarity: undefined,
   gains: {
     scrap: undefined,

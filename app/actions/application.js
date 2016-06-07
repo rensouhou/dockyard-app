@@ -3,29 +3,16 @@
  * @overview
  *
  * @since 0.1.0
+ *
+ * @todo Clear cookies (session.clearStorageData)
  */
 import fs from 'fs';
 import { createAction } from 'redux-actions';
 import { ipcRenderer, remote as electronRemote } from 'electron';
-import AppEvent from '../../src/shared/constants';
+import MainProcEvent from '../../src/shared/constants';
+import { ApplicationEvents } from '../constants';
 
-//
-// Application Events
-//
-export const REGISTER_GAME_VIEW = 'REGISTER_GAME_VIEW';
-export const UPDATE_CONFIGURATION = 'UPDATE_CONFIGURATION';
-export const TAKE_SCREENSHOT = 'TAKE_SCREENSHOT';
-export const POST_NOTIFICATION = 'POST_NOTIFICATION';
-export const REGISTER_NOTIFICATION_HANDLERS = 'REGISTER_NOTIFICATION_HANDLERS';
-export const NOTIFY = 'NOTIFY';
-export const CREATE_TIMER = 'CREATE_TIMER';
-export const SAVE_CONFIGURATION = 'SAVE_CONFIGURATION';
-export const READ_CONFIGURATION = 'READ_CONFIGURATION';
-export const MUTE_AUDIO = 'MUTE_AUDIO';
-export const UNMUTE_AUDIO = 'UNMUTE_AUDIO';
-export const TOGGLE_AUDIO = 'TOGGLE_AUDIO';
-
-export const takeScreenshot = createAction(TAKE_SCREENSHOT,
+export const takeScreenshot = createAction(ApplicationEvents.TAKE_SCREENSHOT,
   /**
    * @description
    *  Screenshot action handler
@@ -56,7 +43,7 @@ export const takeScreenshot = createAction(TAKE_SCREENSHOT,
   }
 );
 
-export const registerGameView = createAction(REGISTER_GAME_VIEW,
+export const registerGameView = createAction(ApplicationEvents.REGISTER_GAME_VIEW,
   /**
    * @description
    *  Game view registration action creator
@@ -66,7 +53,7 @@ export const registerGameView = createAction(REGISTER_GAME_VIEW,
   (webview) => webview
 );
 
-export const notify = createAction(NOTIFY,
+export const notify = createAction(ApplicationEvents.NOTIFY,
   /**
    * @description
    *  Desktop notification action creator
@@ -78,7 +65,7 @@ export const notify = createAction(NOTIFY,
   (title, options) => new Notification(title, options)
 );
 
-export const scheduleEvent = createAction(CREATE_TIMER,
+export const scheduleEvent = createAction(ApplicationEvents.CREATE_TIMER,
   /**
    * @description
    *  Scheduled events action creator
@@ -89,12 +76,12 @@ export const scheduleEvent = createAction(CREATE_TIMER,
   (args) => {
     console.error('action:scheduleEvent', args);
     const payload = { targetTime: args.targetTime };
-    ipcRenderer.send(AppEvent.TIMER_START, payload);
+    ipcRenderer.send(MainProcEvent.TIMER_START, payload);
     return payload;
   }
 );
 
-export const toggleAudio = createAction(TOGGLE_AUDIO,
+export const toggleAudio = createAction(ApplicationEvents.TOGGLE_AUDIO,
   /**
    * @param webview
    * @returns {boolean}

@@ -6,8 +6,8 @@
 import { Map } from 'immutable';
 import createReducer from './create-reducer';
 import { Internal } from '../records';
-import { ApiEvents, GameStates } from '../constants';
-import { REGISTER_GAME_VIEW, TOGGLE_AUDIO } from '../actions/application';
+import { ApiEvents, GameStates, ApplicationEvents } from '../constants';
+const { REGISTER_GAME_VIEW, TOGGLE_AUDIO } = ApplicationEvents;
 
 const gameStateMapping = Map({
   [ApiEvents.INITIALIZE_GAME]: GameStates.STARTING_GAME,

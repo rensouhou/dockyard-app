@@ -9,11 +9,6 @@ import application from './application';
 import game from './game';
 import player from './player';
 
-const rootReducer = combineReducers({
-  application,
-  game,
-  player,
-  routing
-});
+const rootReducer = combineReducers({ application, game, player, routing });
 
 export default rootReducer;
