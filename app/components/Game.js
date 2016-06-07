@@ -6,7 +6,6 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  */
 import React, { PropTypes } from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import R from 'ramda';
 import GameView from './game/game-view';
 import GameUI from './game/game-ui';
@@ -36,16 +35,15 @@ const GameComponent = (props) => {
 
   return (
     <div className={css.container}>
-      <GameView actions={props.actions} transformerActions={props.transformerActions} />
+      <GameView actions={props.actions.application} transformerActions={props.actions.transformers} />
       <GameUI ui={props.ui} />
     </div>
   );
 };
 
 GameComponent.propTypes = {
-  ui: ImmutablePropTypes.map,
-  actions: PropTypes.any,
-  transformerActions: PropTypes.any
+  ui: PropTypes.object,
+  actions: PropTypes.object
 };
 
 export default GameComponent;

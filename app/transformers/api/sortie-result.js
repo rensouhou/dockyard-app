@@ -20,7 +20,7 @@ const getItem = o => ({
 });
 
 /** Reward slot item */
-const getSlotItem = o => ({
+const getSlotItem = (o) => ({
   id: o.api_slotitem_id
 });
 
@@ -54,9 +54,7 @@ export const sortieResult = o => {
       remaining: flags.remaining
     },
     rewards: {
-      ship: !!gs ? getShip(gs) : null,
-      item: !!gi ? getItem(gi) : null,
-      slotItem: !!gsi ? getSlotItem(gsi) : null
+      NYI: true
     },
     sunken: {
       ships: o.api_dests,

@@ -26,17 +26,19 @@ import Game from '../components/Game';
  * @returns {UIState}
  */
 const mapStateToProps = (state) => ({
-  ui: Map({
+  ui: {
     player: getPlayer(state)
-  })
+  }
 });
 
 /**
  * @param {Dispatch} dispatch
  */
 const mapDispatchToProps = (dispatch) => ({
-  transformerActions: bindActionCreators(actionHandlers.toJS(), dispatch),
-  actions: bindActionCreators(applicationActions, dispatch)
+  actions: {
+    application: bindActionCreators(applicationActions, dispatch),
+    transformers: bindActionCreators(actionHandlers.toJS(), dispatch)
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

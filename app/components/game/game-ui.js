@@ -12,7 +12,7 @@ import Fleet from '../ui/game/fleet';
 import css from './game-ui.scss';
 
 const GameUIComponent = (props) => {
-  const fleets = props.ui.getIn(['player', 'fleets'], List());
+  const fleets = props.ui.player.getIn(['fleets'], List());
 
   return (
     <div className={css.gameUi}>
