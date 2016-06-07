@@ -8,7 +8,6 @@
  * @flow
  */
 import invariant from 'invariant';
-import warning from 'warning';
 
 type ActionHandlerOptions = {
   warn?: bool,
@@ -50,7 +49,7 @@ export const createGameActionHandler = async(...args) => {
     const fullName:string = `${createGameActionHandler.name}.${event}`;
 
     if (options && options.warn) {
-      warning(false, `[${fullName}] => warning ${!!options.message
+      console.warn(false, `[${fullName}] => warning ${!!options.message
         ? `: ${options.message}`
         : ''}`);
     }

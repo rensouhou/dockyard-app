@@ -103,7 +103,8 @@ app.on('ready', () => {
             }
           }
         ]
-      }, {
+      },
+      {
         label: 'Edit',
         submenu: [
           {
@@ -134,9 +135,10 @@ app.on('ready', () => {
             selector: 'selectAll:'
           }
         ]
-      }, {
+      },
+      {
         label: 'View',
-        submenu: (process.env.NODE_ENV === 'development') ? [
+        submenu: (process.env.NODE_ENV) ? [
           {
             label: 'Reload',
             accelerator: 'Command+R',
