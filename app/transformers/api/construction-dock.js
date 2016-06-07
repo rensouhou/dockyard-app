@@ -1,20 +1,17 @@
 /**
  * @overview
  *
- * @since 0.4.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/transformers/api/construction-dock
+ * @since 0.1.0
+ * @todo Implement `constructionDock.state`
  */
-import { parseMaterialsRecipe } from '../api/materials';
+import { asNumber } from '../primitive';
+import { parseMaterialsRecipe, asRecord } from '../api/materials';
 
 export const constructionDock = o => ({
-  id: o.api_id,
-  completionTime: o.api_complete_time,
-  shipId: o.api_created_ship_id,
-  recipe: parseMaterialsRecipe([o.api_item1, o.api_item2, o.api_item3, o.api_item4, null, null, o.api_item5]),
-  state: o.api_state,
-  $_unknown: {
-    completionTimeStr: o.api_complete_time_str
-  },
-  $_finalized: false
+  id: asNumber(o.api_id),
+  completionTime: asNumber(o.api_complete_time),
+  shipId: asNumber(o.api_created_ship_id),
+  recipe: asRecord(parseMaterialsRecipe(
+    [o.api_item1, o.api_item2, o.api_item3, o.api_item4, null, null, o.api_item5])),
+  state: o.api_state
 });

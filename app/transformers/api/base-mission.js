@@ -20,7 +20,5 @@ export const baseMission = o => ({
     ammo: o.api_use_bull
   },
   rewards: [o.api_win_item1, o.api_win_item2].filter(it => !!it).map(rewardItem),
-  interruptable: o.api_return_flag,
-  $_finalized: false,
-  $_unclear: ['interruption']
+  interruptable: o.api_return_flag
 });
