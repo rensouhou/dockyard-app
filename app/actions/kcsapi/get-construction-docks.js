@@ -5,12 +5,12 @@
  * @since 0.1.0
  */
 import R from 'ramda';
-import { Map, List } from 'immutable';
+import { fromJS } from 'immutable';
 import { Dock } from '../../records';
 import { parseMaterialsRecipe, asRecord } from '../../transformers/api/materials';
 import { Enum } from '../../helpers';
 
-// @todo(@stuf): pls
+// @todo This "works" but isn't really too understandable.
 const range = R.range(1, 6);
 const apiItems = R.map(it => `api_item${it}`, range);
 const getRecipe = R.props(apiItems);
@@ -36,7 +36,7 @@ const parseDock = (dock) => new Dock({
 });
 
 export default function GET_CONSTRUCTION_DOCKS({ body }) {
-  return Map({
-    docks: List(body).map(parseDock)
+  return fromJS({
+    docks: body.map(parseDock)
   });
 }
