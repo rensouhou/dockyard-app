@@ -26,7 +26,12 @@ Button.propTypes = {
   className: PropTypes.string,
   children: PropTypes.any,
   disabled: PropTypes.bool,
-  onClickHandler: PropTypes.func
+  onClickHandler: PropTypes.func,
+  toggleable: PropTypes.bool
 };
+
+Button.defaultProps = {
+  toggleable: false
+}
 
 export default Button;

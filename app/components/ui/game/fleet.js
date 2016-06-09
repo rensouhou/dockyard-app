@@ -8,7 +8,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Fleet } from '../../../records';
 import Ship from './ship';
 
-// region <ShipList /> ship list component
+// region # <ShipList /> ship list component
 /**
  * <ShipList /> component for <Fleet />
  * @param props
@@ -26,7 +26,7 @@ ShipList.propTypes = {
 };
 // endregion
 
-// region <FleetComponent /> fleet component
+// region # <FleetComponent /> fleet component
 /**
  * @param props
  * @returns {JSX.Element}

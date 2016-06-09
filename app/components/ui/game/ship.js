@@ -18,7 +18,7 @@ const ShipSlotItems = (props) => (
   <div>
     <ul>
       {props.items.map((it, idx) => (
-        <li>{idx} -> {it.name} (category: {it.type.category})</li>
+        <li key={`${it.id}-${idx}`}>{idx} -> {it.name} (category: {it.type.category})</li>
       ))}
     </ul>
   </div>
@@ -26,15 +26,12 @@ const ShipSlotItems = (props) => (
 
 ShipSlotItems.propTypes = {
   items: PropTypes.any,
-  count: PropTypes.number
-};
-
-ShipSlotItems.defaultProps = {
-  slotItems: []
+  count: PropTypes.number,
+  slotItems: ImmutablePropTypes.listOf(ImmutablePropTypes.record)
 };
 // endregion
 
-// region # Ship component
+// region # <Ship /> component
 /**
  * @param {{record: Record|Map<string, *>}} props
  * @returns {JSX.Element}
