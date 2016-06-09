@@ -7,14 +7,16 @@
 import { fromJS, List } from 'immutable';
 import { asNumber, asBool } from '../../transformers/primitive';
 import { parseMaterialsRecipe, parseMaterialArray, asRecord } from '../../transformers/api/materials';
+import { ConstructionType } from '../../constants';
 
 const getSlotItem = (slotItem = {}) => ({
-  id: slotItem.api_id,
-  slotItemId: slotItem.api_slotitem_id
+  playerId: slotItem.api_id,
+  baseId: slotItem.api_slotitem_id
 });
 
 export default function CRAFT_ITEM({ body, postBody }) {
   return fromJS({
+    type: ConstructionType.ITEM,
     flags: {
       successful: asBool(body.api_create_flag),
       usedDevelopmentMaterials: asBool(body.api_shizai_flag)
@@ -25,6 +27,6 @@ export default function CRAFT_ITEM({ body, postBody }) {
     player: {
       materials: asRecord(parseMaterialArray(body.api_material))
     },
-    slotItem: getSlotItem(body.api_slot_item)
+    entity: getSlotItem(body.api_slot_item)
   });
 }
