@@ -130,6 +130,7 @@
     "ramda-fantasy": "^0.5.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
+    "react-fa": "^4.1.2",
     "react-immutable-proptypes": "^1.7.1",
     "react-intl": "^2.1.2",
     "react-redux": "^4.4.5",
@@ -145,8 +146,7 @@
     "rimraf": "^2.5.2",
     "sanctuary": "^0.10.0",
     "source-map-support": "^0.4.0",
-    "thinky": "^2.3.2",
-    "warning": "^3.0.0"
+    "thinky": "^2.3.2"
   },
   "devEngines": {
     "node": "4.x || 5.x || 6.x",
