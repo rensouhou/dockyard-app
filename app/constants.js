@@ -131,3 +131,10 @@ export const ApplicationEvents = {
   UNMUTE_AUDIO: 'UNMUTE_AUDIO',
   TOGGLE_AUDIO: 'TOGGLE_AUDIO'
 };
+
+export const ConstructionType = {
+  NONE: 'NONE',
+  ITEM: 'ITEM',
+  SHIP: 'SHIP',
+  OTHER: 'OTHER'
+};
