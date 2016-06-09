@@ -1,8 +1,10 @@
 /**
  * @overview
- *  Proposal for unifying API actions and constants into one place. Maybe.
- *  Goal is to get an easier-to-use way of creating the API event handlers,
- *  and a better way to look up events by path.
+ *  API handler action creator
+ *  Takes a key-value -pair representing the event to handle as key and its respective
+ *  handler function as the value.
+ *
+ *  Event-to-URL mapping is done in `ApiEventPaths`.
  *
  * @since 0.2.0
  */
