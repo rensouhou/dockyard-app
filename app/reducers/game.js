@@ -3,14 +3,14 @@
  *
  * @since 0.1.0
  */
-import { Map, List } from 'immutable';
+import { fromJS } from 'immutable';
 import { ApiEvents } from '../constants';
 import createReducer from './create-reducer';
 
-const initialState = Map({
-  ships: List(),
-  shipTypes: List(),
-  slotItems: List()
+const initialState = fromJS({
+  ships: [],
+  shipTypes: [],
+  slotItems: []
 });
 
 export default createReducer(initialState, {
