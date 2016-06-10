@@ -32,6 +32,6 @@ Button.propTypes = {
 
 Button.defaultProps = {
   toggleable: false
-}
+};
 
 export default Button;
