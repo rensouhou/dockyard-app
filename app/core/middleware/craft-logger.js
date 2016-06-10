@@ -5,7 +5,12 @@
  * @since 0.2.0
  */
 import { List, Record } from 'immutable';
-import { ApiEvents, ConstructionType } from '../../constants';
+import {
+  ApiEvents,
+  ConstructionType,
+  ApplicationEvents
+} from '../../constants';
+import { createdEntity } from '../../actions/application';
 import { Materials } from '../../records';
 
 // region # CraftedEntity default values
@@ -36,6 +41,7 @@ class CraftedEntity extends Record(craftedEntityDefault) {
   isInProgress() {
     return !!this.inProgress;
   }
+
   isValid() {
     switch (this.type) {
       case ConstructionType.NONE:
@@ -43,7 +49,7 @@ class CraftedEntity extends Record(craftedEntityDefault) {
       case ConstructionType.ITEM:
         return true;
       case ConstructionType.SHIP:
-        return this.entity.baseId != null && this.entity.playerId != null;
+        return !this.isInProgress();
       default:
         break;
     }
@@ -51,20 +57,19 @@ class CraftedEntity extends Record(craftedEntityDefault) {
 }
 // endregion
 
-let loggedObjectsTemp = List();
-
 /**
+ * Hold the current entity here for a while until it's valid.
  * @type {CraftedEntity|Map}
+ * @todo Log this in the state instead to make logger pure
  */
-let currentEntity = new CraftedEntity();
+let currentEntity = null;
 
-export const craftLogger = state => next => (action) => {
+export const craftLogger = (dispatch) => (next) => (action) => {
   const { type, payload } = action;
-  const currentState = state.getState();
   switch (type) {
     // region # CRAFT_ITEM
     case ApiEvents.CRAFT_ITEM:
-      currentEntity = currentEntity.merge({
+      currentEntity = new CraftedEntity({
         type: ConstructionType.ITEM,
         consumed: {
           materials: payload.getIn(['consumed', 'materials'])
@@ -76,7 +81,7 @@ export const craftLogger = state => next => (action) => {
     // endregion
     // region # CRAFT_SHIP (part 1/2)
     case ApiEvents.CRAFT_SHIP:
-      currentEntity = currentEntity.merge({
+      currentEntity = new CraftedEntity({
         inProgress: true,
         type: ConstructionType.SHIP,
         dockId: payload.get('dockId'),
@@ -106,9 +111,17 @@ export const craftLogger = state => next => (action) => {
   // The record will be valid only when it will have all the data it needs
   // Will be different for type ITEM and SHIP.
   if (currentEntity.isValid()) {
-    console.log('Please log this object:', loggedObjectsTemp);
-    loggedObjectsTemp = loggedObjectsTemp.push(currentEntity);
-    currentEntity = new CraftedEntity();
+    try {
+      console.log('Created object is valid;', currentEntity.toString());
+      console.log(`Dispatching record with event ${ApplicationEvents.CREATED_ENTITY}`);
+      const createdRecord = new Record(createdEntity);
+      dispatch(createdEntity(createdRecord));
+      currentEntity = new CraftedEntity();
+    }
+    catch (e) {
+      console.error(`Error in dispatching; ${e.message}`);
+      console.error(e.stack);
+    }
   }
 
   next(action);

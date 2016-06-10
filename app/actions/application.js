@@ -93,4 +93,14 @@ export const toggleAudio = createAction(ApplicationEvents.TOGGLE_AUDIO,
   }
 );
 
-export const actions = { scheduleEvent, notify, registerGameView, takeScreenshot, toggleAudio };
+export const createdEntity = createAction(ApplicationEvents.CREATED_ENTITY,
+  (entity) => entity);
+
+export const actions = {
+  scheduleEvent,
+  notify,
+  registerGameView,
+  takeScreenshot,
+  toggleAudio,
+  createdEntity
+};
