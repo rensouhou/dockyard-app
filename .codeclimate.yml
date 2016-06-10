@@ -1,6 +1,4 @@
 engines:
-  duplication:
-    enabled: true
   eslint:
     enabled: true
     config:
