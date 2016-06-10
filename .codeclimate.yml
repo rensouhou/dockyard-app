@@ -1,0 +1,16 @@
+engines:
+  duplication:
+    enabled: false
+  eslint:
+    enabled: true
+    config:
+      extensions:
+      - .es6
+      - .js
+      - .jsx
+ratings:
+  paths:
+  - app/**
+  - src/**
+exclude_paths:
+- node_modules/**/*
