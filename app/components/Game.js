@@ -11,13 +11,7 @@ import GameView from './game/game-view';
 import GameUI from './game/game-ui';
 import css from './Game.scss';
 
-const logProps = (props) => {
-  console.groupCollapsed('GameComponent');
-  console.log('props\t=>', props);
-  console.groupEnd();
-};
-
-const isInitialized = (props) => R.complement(R.isEmpty(R.pathOr([], ['appState'], props)));
+const isInitialized = (props) => R.complement(R.isEmpty(R.pathOr([], ['application'], props)));
 
 /**
  * @param props
@@ -25,8 +19,6 @@ const isInitialized = (props) => R.complement(R.isEmpty(R.pathOr([], ['appState'
  * @constructor
  */
 const GameComponent = (props) => {
-  logProps(props);
-
   if (!isInitialized(props)) {
     return (
       <div>Not ready yet.</div>

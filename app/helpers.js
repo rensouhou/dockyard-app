@@ -86,3 +86,13 @@ export function* entries(obj) {
     yield [key, obj[key]];
   }
 }
+
+/**
+ * @param {Object} props
+ * @param {string} name
+ */
+export const logProps = (props, name = 'Component') => {
+  console.groupCollapsed(name);
+  console.log('props\t=>', props);
+  console.groupEnd();
+};
