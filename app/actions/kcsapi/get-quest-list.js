@@ -8,6 +8,11 @@ import { Map, fromJS } from 'immutable';
 import { asNumber } from '../../transformers/primitive';
 import { quest as transformQuest } from '../../transformers/api/quest';
 
+const questListTabs = {
+  DEFAULT: 0,
+  DAILY: 1
+};
+
 export default function GET_QUEST_LIST({ body }) {
   return fromJS({
     questCount: asNumber(body.api_count),

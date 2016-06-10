@@ -23,14 +23,14 @@ import {
 /**
  * Get state of the player's fleet
  * @param state
- * @returns {Immutable.List<Fleet>}
+ * @returns {List<Fleet>}
  */
 const playerFleetList = (state) => state.getIn(['player', 'fleets'], List());
 
 /**
  * Get the player ship list
  * @param state
- * @returns {Immutable.Map<number, Ship>}
+ * @returns {Map<number, Ship>}
  */
 const playerShipList = (state) =>
   state.getIn(['player', 'ships'], List())
@@ -40,7 +40,7 @@ const playerShipList = (state) =>
 /**
  * Get the master game ship list
  * @param state
- * @returns {Immutable.Map<number, Ship>}
+ * @returns {Map<number, Ship>}
  */
 const baseShipList = (state) =>
   state.getIn(['game', 'ships'], List())
@@ -52,6 +52,11 @@ const baseShipList = (state) =>
  */
 const getShipList = createSelector(
   [playerShipList, baseShipList],
+  /**
+   * @param {Map<number, Ship>} playerShips
+   * @param {Map<number, Ship>} baseShips
+   * @returns {Ship}
+   */
   (playerShips, baseShips) =>
     playerShips.map((ship) =>
       new ShipRecord(baseShips.get(ship.get('shipId')).mergeDeep(ship)))
@@ -59,7 +64,7 @@ const getShipList = createSelector(
 
 /**
  * @param state
- * @return {Immutable.Map<number, SlotItem>}
+ * @return {Map<number, SlotItem>}
  */
 const playerSlotItemList = (state) =>
   state.getIn(['player', 'slotItems'], List())
@@ -68,7 +73,7 @@ const playerSlotItemList = (state) =>
 
 /**
  * @param state
- * @return {Immutable.Map<number, SlotItem>}
+ * @return {Map<number, SlotItem>}
  */
 const baseSlotItemList = (state) =>
   state.getIn(['game', 'slotItems'], List())
@@ -99,9 +104,9 @@ const playerMaterials = (state) => state.getIn(['player', 'materials'], Map());
 export const getPlayerSlotItems = createSelector(
   [playerSlotItemList, baseSlotItemList],
   /**
-   * @param {Immutable.Map<number, SlotItem|Immutable.Map>} playerSlotItems
-   * @param {Immutable.Map<number, SlotItem|Immutable.Map>} baseSlotItems
-   * @return {Immutable.Map<number, SlotItem>}
+   * @param {Map<number, SlotItem|Map>} playerSlotItems
+   * @param {Map<number, SlotItem|Map>} baseSlotItems
+   * @return {Map<number, SlotItem>}
    */
   (playerSlotItems, baseSlotItems) =>
     playerSlotItems.map((item) =>
@@ -114,9 +119,9 @@ export const getPlayerSlotItems = createSelector(
 export const getPlayerShips = createSelector(
   [getShipList, getPlayerSlotItems],
   /**
-   * @param {Immutable.Map<number, Ship|Immutable.Map>} shipList
-   * @param {Immutable.Map<number, SlotItem|Immutable.Map>} slotItems
-   * @return {Immutable.Map<number, Ship>}
+   * @param {Map<number, Ship|Map>} shipList
+   * @param {Map<number, SlotItem|Map>} slotItems
+   * @return {Map<number, Ship>}
    */
   (shipList, slotItems) => shipList.map((ship) =>
     ship.mergeDeepIn(['slot', 'items'],
@@ -133,9 +138,9 @@ export const getPlayerShips = createSelector(
 export const getPlayerFleets = createSelector(
   [playerFleetList, getPlayerShips],
   /**
-   * @param {Immutable.List<Fleet|Immutable.Map>} fleetList
-   * @param {Immutable.Map<number, Ship|Immutable.Map>} playerShipMap
-   * @return {Immutable.List<Fleet|Immutable.Map>}
+   * @param {List<Fleet|Map>} fleetList
+   * @param {Map<number, Ship|Map>} playerShipMap
+   * @return {List<Fleet|Map>}
    */
   (fleetList, playerShipMap) => fleetList
     .map((fleet) => fleet.mergeIn(['ships'], fleet.get('ships').map((id) => playerShipMap.get(id))))
@@ -148,7 +153,7 @@ export const getPlayerFleets = createSelector(
 export const getPlayerProfile = createSelector(
   [playerProfile],
   /**
-   * @param {Immutable.Map<string, *>} profile
+   * @param {Map<string, *>} profile
    * @return {PlayerProfile}
    */
   (profile) => new PlayerProfile(profile)
@@ -172,13 +177,13 @@ export const getPlayerMaterials = createSelector(
 export const getPlayer = createSelector(
   [getPlayerFleets, getPlayerProfile, getPlayerMaterials, getPlayerShips, getPlayerSlotItems],
   /**
-   * @typedef {Immutable.Map<string, *>} UIStatePlayer
-   * @param {Immutable.List<Fleet>} fleets
+   * @typedef {Map<string, *>} UIStatePlayer
+   * @param {List<Fleet>} fleets
    * @param {PlayerProfile} profile
    * @param {Materials} materials
-   * @param {Immutable.List<Ship>} ships
-   * @param {Immutable.List<SlotItem>} slotItems
-   * @return {Immutable.Map}
+   * @param {List<Ship>} ships
+   * @param {List<SlotItem>} slotItems
+   * @return {Map<string, Map<string, *>>}
    */
   (fleets, profile, materials, ships, slotItems) => Map({
     fleets, profile, materials, ships, slotItems
