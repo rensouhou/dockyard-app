@@ -23,7 +23,7 @@ export default function GET_QUEST_LIST({ body, postBody }) {
   return fromJS({
     questCount: asNumber(body.api_count),
     currentPage: asNumber(body.api_disp_page),
-    currentlyActiveTab: questListTabs(postBody.api_tab_page),
+    currentlyActiveTab: questListTabs(postBody.api_tab_id),
     totalPageCount: asNumber(body.api_page_count),
     quests: fromJS(body.api_list).toMap()
                                  .map((q) => fromJS(transformQuest(q)))
