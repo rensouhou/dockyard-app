@@ -79,7 +79,7 @@ export function Enum(a) {
 }
 
 /**
- * @param obj
+ * @param {!Object} obj
  */
 export function* entries(obj) {
   for (const key of Object.keys(obj)) {

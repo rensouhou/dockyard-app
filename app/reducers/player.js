@@ -9,6 +9,8 @@ import { ApiEvents } from '../constants';
 import createReducer from './create-reducer';
 import { PlayerProfile, Materials as MaterialState } from '../records';
 
+const mergeWithFn = (prev, next) => next == null ? prev : next;
+
 const initialState = fromJS({
   profile: new PlayerProfile(),
   quests: List(),
@@ -37,12 +39,15 @@ export default createReducer(initialState, {
     return state.setIn(['fleets', payload.get('fleetId') - 1], payload.get('fleet'));
   },
   [ApiEvents.GET_MATERIAL](state, { payload }) {
-    return state.mergeDeepWith((prev, next) => next == null ? prev : next, payload);
+    return state.mergeDeepWith(mergeWithFn, payload);
   },
   [ApiEvents.RESUPPLY_SHIP](state, { payload }) {
-    return state.mergeDeepWith((prev, next) => next == null ? prev : next, payload);
+    return state.mergeDeepWith(mergeWithFn, payload);
   },
   [ApiEvents.GET_CONSTRUCTION_DOCKS](state, { payload }) {
     return Map.of(...state);
+  },
+  [ApiEvents.CRAFT_ITEM](state, { payload }) {
+    return state.mergeDeepWith(mergeWithFn, payload.getIn(['player', 'materials']));
   }
 });

@@ -1,3 +1,9 @@
+/**
+ * @overview
+ *  Base configuration options
+ *
+ * @since 0.1.0
+ */
 import path from 'path';
 
 export default {

@@ -3,28 +3,15 @@
  * @overview
  *
  * @since 0.1.0
- * @flow
  */
-import { Material } from '../../types/kcsapi';
 import { getArrayOrDefault } from '../primitive';
 import { Materials } from '../../records';
 import R from 'ramda';
 
 const _ = R.__;
 
-type MaterialsObject = {
-  fuel: number,
-  ammo: number,
-  steel: number,
-  bauxite: number,
-  instantConstruction?: number,
-  instantRepair?: number,
-  developmentMaterials?: number,
-  improvementMaterials?: number
-};
-
 /** @private */
-const materials:Array<string> = [
+const materials = [
   'fuel', 'ammo', 'steel', 'bauxite', 'instantConstruction', 'instantRepair', 'developmentMaterials',
   'improvementMaterials'
 ];
@@ -55,7 +42,7 @@ const zipMats = R.zipObj(materials);
  * let matObj = parseMaterialArray(mats);
  * console.log(matObj); // => { fuel: 100, ammo: 100, steel: 200, bauxite: 50 }
  */
-export const parseMaterialArray:MaterialsObject =
+export const parseMaterialArray =
   (arr) => R.compose(tightFilter, zipMats)(getArrayOrDefault(arr));
 
 /**
@@ -72,7 +59,7 @@ export const parseMaterialArray:MaterialsObject =
  * let matObj = parseMaterialObjects(mats);
  * console.log(matObj); // => { fuel: 100, ammo: 100, steel: 200, bauxite: 50 }
  */
-export const parseMaterialObjects:MaterialsObject =
+export const parseMaterialObjects =
   R.compose(R.fromPairs, fixMatKey, matIntoPair);
 
 /**
@@ -86,7 +73,7 @@ export const parseMaterialObjects:MaterialsObject =
  * let matObj = parseMaterialsRecipe([100, 100, 200, 50, null, null, 20]);
  * console.log(matObj); // => { fuel: 100, ammo: 100, steel: 200, bauxite: 50, developmentMaterials: 20 }
  */
-export const parseMaterialsRecipe:MaterialsObject =
+export const parseMaterialsRecipe =
   R.compose(R.pickBy((k, v) => !R.isNil(v)), parseMaterialArray);
 
 /**
@@ -95,7 +82,7 @@ export const parseMaterialsRecipe:MaterialsObject =
  * @type {Function}
  * @returns {Dockyard.Materials}
  */
-export const parseRecipe:MaterialsObject = R.curry(parseMaterialsRecipe)(_, _, _, _, null, null, _);
+export const parseRecipe = R.curry(parseMaterialsRecipe)(_, _, _, _, null, null, _);
 
 /**
  * @param obj

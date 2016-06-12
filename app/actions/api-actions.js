@@ -12,7 +12,7 @@ import { Seq, Map } from 'immutable';
 import { createAction } from 'redux-actions';
 import { Internal } from '../records';
 import { ApiEventPaths } from '../constants';
-import kcsapiHandlers from '../actions/kcsapi';
+import * as apiHandlerFns from '../actions/kcsapi';
 
 /**
  * Ensure that the action handlers are mapped into {@link ApiHandler} records.
@@ -20,7 +20,7 @@ import kcsapiHandlers from '../actions/kcsapi';
  */
 export const handlers = Seq.Keyed(ApiEventPaths)
                            .flatMap((path, event) =>
-                             Map.of(event, new Internal.ApiHandler({ path, event, handler: kcsapiHandlers[event] })));
+                             Map.of(event, new Internal.ApiHandler({ path, event, handler: apiHandlerFns[event] })));
 
 /**
  * A non-`Seq` version of the @see findEventSeq function.

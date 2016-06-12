@@ -110,6 +110,8 @@
     "electron-packager": "^7.0.3",
     "electron-prebuilt": "^1.2.2",
     "electron-rebuild": "^1.1.5",
+    "esdoc": "^0.4.7",
+    "esdoc-es7-plugin": "0.0.3",
     "eslint": "^2.11.1",
     "eslint-plugin-import": "^1.9.0",
     "eslint-plugin-jsx-a11y": "^1.4.0",

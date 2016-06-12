@@ -1,7 +1,13 @@
+/**
+ * @overview
+ *
+ * @since 0.1.0
+ */
 import { createStore, applyMiddleware, compose } from 'redux';
 import { persistState } from 'redux-devtools';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
+import createCraftLogger from '../core/middleware/craft-logger';
 import promiseMiddleware from 'redux-promise';
 import { hashHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
@@ -15,6 +21,8 @@ const logger = createLogger({
 });
 
 const router = routerMiddleware(hashHistory);
+
+const craftingLogger = createCraftLogger();
 
 const enhancer = compose(
   applyMiddleware(thunk, perflogger, promiseMiddleware, router, logger),

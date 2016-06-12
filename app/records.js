@@ -1,10 +1,13 @@
 /**
  * @overview
+ *  Application record definitions
  *
  * @since 0.1.0
  */
 import { Map, List, Set, Record } from 'immutable';
+import { ConstructionType } from './constants';
 
+// region # Fleet
 export const Fleet = Record({
   flagship: undefined,
   id: undefined,
@@ -13,7 +16,9 @@ export const Fleet = Record({
   name: '',
   ships: []
 });
+// endregion
 
+// region # Material record
 export const Materials = Record({
   fuel: 0,
   ammo: 0,
@@ -24,7 +29,9 @@ export const Materials = Record({
   developmentMaterials: undefined,
   improvementMaterials: undefined
 });
+// endregion
 
+// region # PlayerProfile record
 export const PlayerProfile = Record({
   nickname: '',
   level: undefined,
@@ -47,13 +54,13 @@ export const PlayerProfile = Record({
   startTime: undefined,
   tutorial: Map({})
 });
+// endregion
 
-export const Player = {
-  Fleet,
-  Materials,
-  PlayerProfile
-};
-
+// region # Ship record
+/**
+ * Ship record
+ * @type {*|Record.Class}
+ */
 export const Ship = Record({
   id: undefined,
   sortId: undefined,
@@ -99,7 +106,13 @@ export const Ship = Record({
     items: List()
   })
 });
+// endregion
 
+// region # SlotItem record
+/**
+ * Slot item record
+ * @type {*|Record.Class}
+ */
 export const SlotItem = Record({
   id: undefined,
   slotItemId: undefined,
@@ -121,7 +134,9 @@ export const SlotItem = Record({
   locked: undefined,
   stats: undefined,
 });
+// endregion
 
+// region # Dock record
 export const Dock = Record({
   id: undefined,
   completionTime: undefined,
@@ -129,7 +144,9 @@ export const Dock = Record({
   materials: undefined,
   state: undefined
 });
+// endregion
 
+// region # Quest record
 export const Quest = Record({
   id: undefined,
   type: undefined,
@@ -140,6 +157,63 @@ export const Quest = Record({
   reward: new Materials(),
   progress: undefined
 });
+// endregion record
+
+// region # CraftedEntity default values
+const craftedEntityDefault = {
+  type: ConstructionType.NONE,
+  entity: {
+    baseId: undefined,
+    playerId: undefined
+  },
+  valid: undefined,
+  inProgress: undefined,
+  dockID: undefined,
+  completionTime: undefined,
+  consumed: {
+    materials: new Materials()
+  },
+  flags: {
+    wasSuccessful: undefined,
+    usedDevelopmentMaterials: undefined,
+    instant: undefined,
+    lsc: undefined
+  }
+};
+// endregion
+
+// region # CraftedEntity record definition
+/**
+ * @typedef {any} CreatedEntityRecord
+ * @extends {Record.Class}
+ */
+export class CraftedEntityRecord extends Record(craftedEntityDefault) {
+  /**
+   * @returns {boolean}
+   */
+  isInProgress() {
+    return !!this.inProgress;
+  }
+
+  isValid() {
+    switch (this.type) {
+      case ConstructionType.ITEM:
+        return true;
+      case ConstructionType.SHIP:
+        return !this.isInProgress();
+      default:
+        return false;
+    }
+  }
+}
+// endregion
+
+export const Player = {
+  Fleet,
+  Materials,
+  PlayerProfile,
+  CraftedEntityRecord
+};
 
 // Internal
 // --------

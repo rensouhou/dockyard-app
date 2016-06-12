@@ -94,7 +94,13 @@ export const toggleAudio = createAction(ApplicationEvents.TOGGLE_AUDIO,
 );
 
 export const createdEntity = createAction(ApplicationEvents.CREATED_ENTITY,
-  (entity) => entity);
+  /**
+   * Action dispatched with a completed entity record.
+   * @param {CreatedEntityRecord} entity
+   * @returns {CreatedEntityRecord}
+   */
+  (entity) => entity
+);
 
 export const actions = {
   scheduleEvent,

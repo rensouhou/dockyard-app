@@ -6,7 +6,6 @@
  */
 import R from 'ramda';
 import { fromJS } from 'immutable';
-import { Dock } from '../../records';
 import { parseMaterialsRecipe, asRecord } from '../../transformers/api/materials';
 import { Enum } from '../../helpers';
 
@@ -27,7 +26,7 @@ const State = Enum({
  * @param dock
  * @return {Dock}
  */
-const parseDock = (dock) => new Dock({
+const parseDock = (dock) => ({
   id: dock.api_id,
   completionTime: dock.api_complete_time,
   shipId: dock.api_created_ship_id,

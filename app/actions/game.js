@@ -7,7 +7,7 @@
 import R from 'ramda';
 import { createAction } from 'redux-actions';
 import { Map, Seq, Record } from 'immutable';
-import ApiTransformers from './kcsapi';
+import * as ApiTransformers from './kcsapi';
 
 const transformers = Map(ApiTransformers);
 const transformersSeq = Seq.Keyed(ApiTransformers);

@@ -20,7 +20,13 @@ const parseReward = ({ api_useitem_id, api_useitem_count }) => Map({
   amount: api_useitem_count
 });
 
-export default function COMPLETE_MISSION({ body, postBody }) {
+/**
+ * @param {ApiAction} p
+ * @returns {{fleetId: number, result: *, map: {area: string, name: string, level: number}, rewards: Iterable<number, *|Map<any, any>|Map<string, any>>, materials: records.js~Materials, ships: (*|List<T>|List<any>)}}
+ * @constructor
+ */
+export default function COMPLETE_MISSION(p) {
+  const { body, postBody } = p;
   return {
     fleetId: asNumber(postBody.api_deck_id),
     result: missionResult(body.api_clear_result),

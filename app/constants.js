@@ -92,6 +92,7 @@ export const ApiEventPaths = Map({
   [ApiEvents.QUIT_MISSION]: '/api_req_mission/return_instruction',
   // endregion
   // region # Construction-related
+  [ApiEvents.GET_CONSTRUCTION_DOCKS]: '/api_get_member/kdock',
   [ApiEvents.CRAFT_ITEM]: '/api_req_kousyou/createitem',
   [ApiEvents.DESTROY_ITEM]: '/api_req_kousyou/destroyitem2',
   [ApiEvents.CRAFT_SHIP]: '/api_req_kousyou/createship',
@@ -138,4 +139,10 @@ export const ConstructionType = {
   ITEM: 'ITEM',
   SHIP: 'SHIP',
   OTHER: 'OTHER'
+};
+
+export const ConstructionState = {
+  IDLE: 'IDLE',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED'
 };

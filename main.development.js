@@ -9,7 +9,6 @@
 import { app, BrowserWindow, Menu, shell } from 'electron';
 import chalk from 'chalk';
 import './src/main/timers';
-import { createGameDataLogger } from './src/main/game-data-logger';
 
 process.removeAllListeners('uncaughtException');
 process.on('uncaughtException', err => {
@@ -31,9 +30,6 @@ if (process.env.NODE_ENV === 'development') {
   require('electron-debug')();
 }
 
-// Other "secondary" functions
-createGameDataLogger();
-
 app.on('window-all-closed', () => {
   console.log('All windows have been closed.');
   if (process.platform !== 'darwin') app.quit();
@@ -49,7 +45,7 @@ app.on('ready', () => {
   mainWindow = new BrowserWindow({
     show: false,
     width: 1200,
-    height: 1100
+    height: 950
   });
 
   mainWindow.loadURL(`file://${__dirname}/app/app.html`);

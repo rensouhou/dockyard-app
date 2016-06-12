@@ -5,17 +5,28 @@
  */
 import { fromJS } from 'immutable';
 import createReducer from './create-reducer';
-import { ApiEvents, ConstructionType } from '../constants';
+import { ApiEvents, ConstructionState } from '../constants';
 
 const initialState = fromJS({
-  type: ConstructionType.NONE
+  craftingState: ConstructionState.IDLE,
+  createdEntity: null
 });
 
-export default createReducer(initialState, {
+/**
+ * @type {{
+ *  CRAFT_ITEM: *
+ * }}
+ */
+const handlers = {
   [ApiEvents.CRAFT_ITEM](state, { payload }) {
     return state;
   },
   [ApiEvents.CRAFT_SHIP](state, { payload }) {
     return state;
+  },
+  [ApiEvents.GET_CONSTRUCTION_DOCKS](state, { payload }) {
+    return state;
   }
-});
+};
+
+export default createReducer(initialState, handlers);
