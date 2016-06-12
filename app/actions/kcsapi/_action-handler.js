@@ -4,25 +4,17 @@
  *  Provides a thunk for adding notices and deprecation warnings to API action handlers.
  *
  * @since 0.1.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
- * @flow
  */
 import invariant from 'invariant';
 
-type ActionHandlerOptions = {
-  warn?: bool,
-  message?: string,
-  verbose?: bool
-};
-
-const defaultOpts:ActionHandlerOptions = {
+const defaultOpts = {
   verbose: true
 };
 
 export const createGameActionHandler = async(...args) => {
-  let event:string = null;
-  let handlerFn:Function = null;
-  let options:?ActionHandlerOptions = {};
+  let event = null;
+  let handlerFn = null;
+  let options = {};
 
   await setTimeout(() => {
     // console.log('delayed');
@@ -46,7 +38,7 @@ export const createGameActionHandler = async(...args) => {
       options = { ...defaultOpts, ...options };
     }
 
-    const fullName:string = `${createGameActionHandler.name}.${event}`;
+    const fullName = `${createGameActionHandler.name}.${event}`;
 
     if (options && options.warn) {
       console.warn(false, `[${fullName}] => warning ${!!options.message

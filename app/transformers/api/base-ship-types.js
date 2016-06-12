@@ -2,20 +2,22 @@
  * @overview
  *
  * @since 0.1.0
- * @flow
  */
 import { asNumber } from '../primitive';
 
-type LocalizedString = {
-  ja: string,
-  en?: string
-};
+// type LocalizedString = {
+//   ja: string,
+//   en?: string
+// };
+//
+// type ShipTypeName = {
+//   [id: number]: LocalizedString
+// }
 
-type ShipTypeName = {
-  [id: number]: LocalizedString
-}
-
-const typeName:ShipTypeName = {
+/**
+ * @type {Object}
+ */
+const typeName = {
   1: { ja: '海防艦	', en: 'Escort Ship' },
   2: { ja: '駆逐艦	', en: 'Destroyer' },
   3: { ja: '軽巡洋艦', en: 'Light Cruiser' },
@@ -40,8 +42,17 @@ const typeName:ShipTypeName = {
   22: { ja: '補給艦 (味方のほう)', en: 'Fleet Oiler' }
 };
 
+/**
+ * @param {number} id
+ * @param {string} name
+ * @returns {?string}
+ */
 const shipTypeName = (id, name = typeName) => name[id] || null;
 
+/**
+ * @param {Object} o
+ * @returns {Object}
+ */
 export const baseShipType = (o) => ({
   id: asNumber(o.api_id),
   sortId: asNumber(o.api_sortno),

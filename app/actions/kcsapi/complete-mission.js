@@ -15,6 +15,15 @@ const missionResult = Enum({
   HUGE_SUCCESS: 2
 });
 
+/**
+ * @typedef {Object} MissionReward
+ * @property {number} id
+ * @property {number} amount
+ */
+
+/**
+ * @returns {MissionReward}
+ */
 const parseReward = ({ api_useitem_id, api_useitem_count }) => Map({
   id: api_useitem_id,
   amount: api_useitem_count
@@ -22,7 +31,7 @@ const parseReward = ({ api_useitem_id, api_useitem_count }) => Map({
 
 /**
  * @param {ApiAction} p
- * @returns {{fleetId: number, result: *, map: {area: string, name: string, level: number}, rewards: Iterable<number, *|Map<any, any>|Map<string, any>>, materials: records.js~Materials, ships: (*|List<T>|List<any>)}}
+ * @returns {Object}
  * @constructor
  */
 export default function COMPLETE_MISSION(p) {
