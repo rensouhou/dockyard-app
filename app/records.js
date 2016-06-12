@@ -168,7 +168,7 @@ const craftedEntityDefault = {
   },
   valid: undefined,
   inProgress: undefined,
-  dockID: undefined,
+  dockId: undefined,
   completionTime: undefined,
   consumed: {
     materials: new Materials()

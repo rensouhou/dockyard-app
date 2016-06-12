@@ -12,17 +12,13 @@ const initialState = fromJS({
   createdEntity: null
 });
 
-/**
- * @type {{
- *  CRAFT_ITEM: *
- * }}
- */
 const handlers = {
   [ApiEvents.CRAFT_ITEM](state, { payload }) {
-    return state;
+    return state.mergeIn(['craftingState'], ConstructionState.COMPLETE)
+                .mergeIn(['createdEntity'], payload.get('createdEntity'));
   },
   [ApiEvents.CRAFT_SHIP](state, { payload }) {
-    return state;
+    return state.mergeIn(['craftingState'], ConstructionState.INCOMPLETE);
   },
   [ApiEvents.GET_CONSTRUCTION_DOCKS](state, { payload }) {
     return state;

@@ -14,6 +14,10 @@ import { routerMiddleware } from 'react-router-redux';
 import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
 import perflogger from 'redux-perf-middleware';
+import Immutable from 'immutable';
+import installImmutableDevTools from 'immutable-devtools';
+
+installImmutableDevTools(Immutable);
 
 const logger = createLogger({
   level: 'info',

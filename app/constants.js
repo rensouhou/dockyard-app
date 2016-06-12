@@ -143,6 +143,6 @@ export const ConstructionType = {
 
 export const ConstructionState = {
   IDLE: 'IDLE',
-  IN_PROGRESS: 'IN_PROGRESS',
-  COMPLETED: 'COMPLETED'
+  INCOMPLETE: 'INCOMPLETE',
+  COMPLETE: 'COMPLETE'
 };

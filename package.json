@@ -60,6 +60,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "fbjs-scripts": "^0.7.0",
     "file-loader": "^0.8.5",
+    "immutable-devtools": "0.0.7",
     "jsdom": "^9.0.0",
     "json-loader": "^0.5.4",
     "minimist": "^1.2.0",

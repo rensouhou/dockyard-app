@@ -9,8 +9,15 @@ import createReducer from './create-reducer';
 
 const initialState = fromJS({
   ships: [],
+  shipGraphics: [],
   shipTypes: [],
-  slotItems: []
+  slotItems: [],
+  missions: [],
+  furniture: [],
+  mapAreas: [],
+  mapBgms: [],
+  mapInfos: [],
+  mapNodes: [],
 });
 
 export default createReducer(initialState, {
