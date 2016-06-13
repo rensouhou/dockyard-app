@@ -17,10 +17,10 @@ const materials = [
 ];
 
 /** @private */
-const matIntoPair = R.map(({ api_id, api_value }:Material):[number, number] => [api_id, api_value]);
+const matIntoPair = R.map(({ api_id, api_value }) => [api_id, api_value]);
 
 /** @private */
-const fixMatKey = R.map(([i, v]:[number, number]):[string, number] => [materials[i - 1], v]);
+const fixMatKey = R.map(([i, v]) => [materials[i - 1], v]);
 
 /** @private */
 const tightFilterPred = R.allPass([

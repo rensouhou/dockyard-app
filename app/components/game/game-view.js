@@ -9,14 +9,22 @@ import { createGameViewHandler } from '../../core/game-data-handler';
 import config from '../../config';
 import './game-view.scss';
 
+/**
+ * Public-facing game view component that contains the
+ * game frame.
+ */
 export default class GameView extends Component {
   static propTypes = {
     actions: PropTypes.object,
     transformerActions: PropTypes.any
   };
 
-  // The webview needs to be appended as a vanilla DOM element,
-  // since the `plugins` attribute does not work if mounted through React.
+  /**
+   * Create the `webview` that will contain the game itself.
+   * The `webview` element needs to be appended as a vanilla DOM element,
+   * since otherwise the `plugins` attribute stops working, if mounted
+   * through React.
+   */
   componentDidMount() {
     const { gameViewHolder } = this.refs;
     const { actions, transformerActions } = this.props;
@@ -31,6 +39,9 @@ export default class GameView extends Component {
     actions.registerGameView(view);
   }
 
+  /**
+   * @returns {XML|JSX.Element}
+   */
   render() {
     return <div ref="gameViewHolder" id="game-view-holder"></div>;
   }

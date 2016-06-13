@@ -7,6 +7,10 @@ import { fromJS } from 'immutable';
 import createReducer from './create-reducer';
 import { ApiEvents, ConstructionState } from '../constants';
 
+/**
+ * @type {any}
+ * @private
+ */
 const initialState = fromJS({
   craftingState: ConstructionState.IDLE,
   createdEntity: null
@@ -18,11 +22,15 @@ const handlers = {
                 .mergeIn(['createdEntity'], payload.get('createdEntity'));
   },
   [ApiEvents.CRAFT_SHIP](state, { payload }) {
-    return state.mergeIn(['craftingState'], ConstructionState.INCOMPLETE);
+    return state.mergeIn(['craftingState'], ConstructionState.INCOMPLETE)
+                .mergeIn(['craftedEntity'], payload.get('craftedEntity'));
   },
   [ApiEvents.GET_CONSTRUCTION_DOCKS](state, { payload }) {
     return state;
   }
 };
 
+/**
+ * @type {reducer}
+ */
 export default createReducer(initialState, handlers);

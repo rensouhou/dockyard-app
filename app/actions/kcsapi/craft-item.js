@@ -10,11 +10,22 @@ import { parseMaterialsRecipe, parseMaterialArray, asRecord } from '../../transf
 import { ConstructionType } from '../../constants';
 import { CraftedEntityRecord } from '../../records';
 
+/**
+ * @private
+ * @param {Object} slotItem
+ * @returns {Object}
+ */
 const getSlotItem = (slotItem = {}) => ({
   playerId: slotItem.api_id,
   baseId: slotItem.api_slotitem_id
 });
 
+/**
+ * @param {Object} body
+ * @param {Object} postBody
+ * @returns {any}
+ * @constructor
+ */
 export default function CRAFT_ITEM({ body, postBody }) {
   return fromJS({
     craftedEntity: new CraftedEntityRecord({

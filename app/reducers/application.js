@@ -22,7 +22,7 @@ const gameStateMapping = Map({
 const initialState = new Internal.ApplicationState();
 
 /**
- * @param {Immutable.Map} state
+ * @param {!Map<string, *>} state
  * @param {!string} actionType
  */
 const updatedState = (state, actionType) =>
