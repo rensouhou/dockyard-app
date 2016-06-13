@@ -5,7 +5,7 @@
  * @since 0.1.0
  */
 import { getArrayOrDefault } from '../primitive';
-import { Materials } from '../../records';
+import { MaterialState } from '../../records';
 import R from 'ramda';
 
 const _ = R.__;
@@ -35,9 +35,10 @@ const tightFilter = R.filter(tightFilterPred);
 const zipMats = R.zipObj(materials);
 
 /**
+ * Parse a list of numbers into a player's {@link MaterialState}
  * @type {Function}
- * @returns {Dockyard.Materials}
- * @example
+ * @returns {MaterialState}
+ * @example <caption>Parsing arrays</caption>
  * let mats = [100, 100, 200, 50];
  * let matObj = parseMaterialArray(mats);
  * console.log(matObj); // => { fuel: 100, ammo: 100, steel: 200, bauxite: 50 }
@@ -47,7 +48,7 @@ export const parseMaterialArray =
 
 /**
  * @type {Function}
- * @returns {Dockyard.Materials}
+ * @returns {MaterialState}
  * @example
  * let createMaterial = (id, val, ?memberId) => { api_id: id, api_value: val, api_member_id: memberId };
  * let mats = [
@@ -68,7 +69,7 @@ export const parseMaterialObjects =
  * Uses {@link materials} index for values.
  *
  * @type {Function}
- * @returns {Dockyard.Materials}
+ * @returns {MaterialState}
  * @example
  * let matObj = parseMaterialsRecipe([100, 100, 200, 50, null, null, 20]);
  * console.log(matObj); // => { fuel: 100, ammo: 100, steel: 200, bauxite: 50, developmentMaterials: 20 }
@@ -80,7 +81,7 @@ export const parseMaterialsRecipe =
  * Convenience function for @see {@link parseMaterialsRecipe}
  *
  * @type {Function}
- * @returns {Dockyard.Materials}
+ * @returns {MaterialState}
  */
 export const parseRecipe = R.curry(parseMaterialsRecipe)(_, _, _, _, null, null, _);
 
@@ -88,4 +89,4 @@ export const parseRecipe = R.curry(parseMaterialsRecipe)(_, _, _, _, null, null,
  * @param obj
  * @returns {records.js~Materials}
  */
-export const asRecord = (obj) => new Materials(obj);
+export const asRecord = (obj) => new MaterialState(obj);

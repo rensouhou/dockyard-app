@@ -11,6 +11,11 @@ import { StaticPanel } from '../ui';
 import Fleet from '../ui/game/fleet';
 import css from './game-ui.scss';
 
+/**
+ * @param {Object} props
+ * @returns {XML|JSX.Element}
+ * @constructor
+ */
 const GameUIComponent = (props) => {
   const fleets = props.ui.player.getIn(['fleets'], List());
 

@@ -23,8 +23,12 @@ ipcRenderer.on(AppEvent.TIMER_DONE, (event, arg) => {
   /* eslint-enable */
 });
 
+/** @type {ApplicationReducerState} */
 const initialState = Map();
+
+/** @type {Store} */
 const store = configureStore(initialState);
+
 const history = syncHistoryWithStore(hashHistory, store, {
   selectLocationState(state) {
     return state.get('routing').toJS();

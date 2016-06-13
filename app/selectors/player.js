@@ -10,7 +10,7 @@ import { Map, List } from 'immutable';
 import { createSelector } from 'reselect';
 import {
   PlayerProfile,
-  Materials as MaterialState,
+  MaterialState as MaterialState,
   Fleet as FleetRecord,
   Ship as ShipRecord,
   SlotItem as SlotItemRecord
@@ -48,14 +48,15 @@ const baseShipList = (state) =>
        .flatMap((ship) => Map.of(ship.get('shipId'), ship));
 
 /**
- * Get the finally usable ship list
+ * Usable ship list containing complete {@link ShipRecord} entities.
+ * @type {List<Ship>}
  */
 const getShipList = createSelector(
   [playerShipList, baseShipList],
   /**
    * @param {Map<number, Ship>} playerShips
    * @param {Map<number, Ship>} baseShips
-   * @returns {Ship}
+   * @returns {List<Ship>}
    */
   (playerShips, baseShips) =>
     playerShips.map((ship) =>
@@ -63,7 +64,7 @@ const getShipList = createSelector(
 );
 
 /**
- * @param state
+ * @param {ApplicationReducerState} state
  * @return {Map<number, SlotItem>}
  */
 const playerSlotItemList = (state) =>
@@ -72,7 +73,7 @@ const playerSlotItemList = (state) =>
        .flatMap((item) => Map.of(item.get('id'), item));
 
 /**
- * @param state
+ * @param {ApplicationReducerState} state
  * @return {Map<number, SlotItem>}
  */
 const baseSlotItemList = (state) =>
@@ -82,15 +83,15 @@ const baseSlotItemList = (state) =>
 
 /**
  * Get state of the player profile
- * @param state
+ * @param {ApplicationReducerState} state
  * @returns {PlayerProfile}
  */
 const playerProfile = (state) => state.getIn(['player', 'profile'], Map());
 
 /**
  * Get state of player materials
- * @param state
- * @returns {Materials}
+ * @param {ApplicationReducerState} state
+ * @returns {MaterialStateRecord}
  */
 const playerMaterials = (state) => state.getIn(['player', 'materials'], Map());
 
@@ -134,6 +135,7 @@ export const getPlayerShips = createSelector(
 /**
  * Player fleet selector
  * Populates the fleet's ship list with {@link Ship} records
+ * @type {List<Fleet|Map>}
  */
 export const getPlayerFleets = createSelector(
   [playerFleetList, getPlayerShips],
@@ -149,6 +151,7 @@ export const getPlayerFleets = createSelector(
 
 /**
  * Player profile selector
+ * @type {List<Fleet|Map>}
  */
 export const getPlayerProfile = createSelector(
   [playerProfile],
@@ -161,18 +164,20 @@ export const getPlayerProfile = createSelector(
 
 /**
  * Player material state selector
+ * @type {List<Fleet|Map>}
  */
 export const getPlayerMaterials = createSelector(
   [playerMaterials],
   /**
-   * @param {Materials} materials
-   * @return {Materials}
+   * @param {MaterialState} materials
+   * @return {MaterialState}
    */
   (materials) => new MaterialState(materials)
 );
 
 /**
  * Player main state selector (for UI)
+ * @type {Map}
  */
 export const getPlayer = createSelector(
   [getPlayerFleets, getPlayerProfile, getPlayerMaterials, getPlayerShips, getPlayerSlotItems],
@@ -180,7 +185,7 @@ export const getPlayer = createSelector(
    * @typedef {Map<string, *>} UIStatePlayer
    * @param {List<Fleet>} fleets
    * @param {PlayerProfile} profile
-   * @param {Materials} materials
+   * @param {MaterialState} materials
    * @param {List<Ship>} ships
    * @param {List<SlotItem>} slotItems
    * @return {Map<string, Map<string, *>>}

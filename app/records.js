@@ -1,3 +1,4 @@
+/* eslint max-len: 0 */
 /**
  * @overview
  *  Application record definitions
@@ -8,22 +9,29 @@ import { Map, List, Set, Record } from 'immutable';
 import { ConstructionType } from './constants';
 
 // region # Fleet
+/**
+ * @type {FleetRecord}
+ */
 export const Fleet = Record({
   flagship: undefined,
   id: undefined,
   memberId: undefined,
-  mission: [],
+  mission: List(),
   name: '',
-  ships: []
+  ships: List()
 });
 // endregion
 
 // region # Material record
-export const Materials = Record({
-  fuel: 0,
-  ammo: 0,
-  steel: 0,
-  bauxite: 0,
+/**
+ * A record that hold's the player's current state of usable materials.
+ * @typedef {*|Record.Class} MaterialStateRecord
+ */
+export const MaterialState = Record({
+  fuel: undefined,
+  ammo: undefined,
+  steel: undefined,
+  bauxite: undefined,
   instantConstruction: undefined,
   instantRepair: undefined,
   developmentMaterials: undefined,
@@ -59,7 +67,7 @@ export const PlayerProfile = Record({
 // region # Ship record
 /**
  * Ship record
- * @type {*|Record.Class}
+ * @type {ShipRecord}
  */
 export const Ship = Record({
   id: undefined,
@@ -111,7 +119,7 @@ export const Ship = Record({
 // region # SlotItem record
 /**
  * Slot item record
- * @type {*|Record.Class}
+ * @type {SlotItemRecord}
  */
 export const SlotItem = Record({
   id: undefined,
@@ -137,6 +145,9 @@ export const SlotItem = Record({
 // endregion
 
 // region # Dock record
+/**
+ * @type {DockRecord}
+ */
 export const Dock = Record({
   id: undefined,
   completionTime: undefined,
@@ -147,6 +158,9 @@ export const Dock = Record({
 // endregion
 
 // region # Quest record
+/**
+ * @type {QuestRecord}
+ */
 export const Quest = Record({
   id: undefined,
   type: undefined,
@@ -154,7 +168,7 @@ export const Quest = Record({
   state: undefined,
   title: undefined,
   detail: undefined,
-  reward: new Materials(),
+  reward: new MaterialState(),
   progress: undefined
 });
 // endregion record
@@ -171,7 +185,7 @@ const craftedEntityDefault = {
   dockId: undefined,
   completionTime: undefined,
   consumed: {
-    materials: new Materials()
+    materials: new MaterialState()
   },
   flags: {
     wasSuccessful: undefined,
@@ -184,8 +198,7 @@ const craftedEntityDefault = {
 
 // region # CraftedEntity record definition
 /**
- * @typedef {any} CreatedEntityRecord
- * @extends {Record.Class}
+ * @type {CreatedEntityRecord}
  */
 export class CraftedEntityRecord extends Record(craftedEntityDefault) {
   /**
@@ -210,40 +223,23 @@ export class CraftedEntityRecord extends Record(craftedEntityDefault) {
 
 export const Player = {
   Fleet,
-  Materials,
+  MaterialState,
   PlayerProfile,
   CraftedEntityRecord
 };
 
 // Internal
 // --------
+/** @type {ApplicationStateRecord} */
 const ApplicationState = Record({
-  /**
-   * @description
-   *  `gameState` is the "state" of the SWF game itself, deduced from
-   *  the kind of API events are received;
-   * @example ApiEvents.INITIALIZE_GAME -> GameState.STARTING_GAME
-   * @example ApiEvents.START_SORTIE    -> GameState.IN_SORTIE
-   */
   gameState: '',
-  /**
-   * @description
-   *  `appState` is the internal Dockyard application's state
-   */
   appState: '',
-  /**
-   * @description
-   *  A reference to the `<webview />` element that holds the game SWF
-   */
   webview: undefined,
-  /**
-   * @description
-   *  The result of the last taken screenshot (during this session)
-   */
   lastScreenshot: Map(),
   isAudioMuted: false
 });
 
+/** @type {ApiHandlerRecord} */
 const ApiHandler = Record({
   path: undefined,
   event: undefined,
@@ -251,6 +247,7 @@ const ApiHandler = Record({
   flags: Set()
 });
 
+/** @type {ApiActionRecord} */
 const ApiAction = Record({
   body: {},
   postBody: {},
@@ -262,4 +259,8 @@ const KCSApiData = Record({
   api_data: undefined
 });
 
+/**
+ * Internal application state records.
+ * @type {{ApplicationState: ApplicationStateRecord, ApiHandler: ApiHandlerRecord, ApiAction: ApiActionRecord, KCSApiData: (*|Record.Class)}}
+ */
 export const Internal = { ApplicationState, ApiHandler, ApiAction, KCSApiData };

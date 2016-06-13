@@ -3,22 +3,20 @@
  * @overview
  *
  * @since 0.1.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
- * @flow
  */
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
-import style from './static-panel.scss';
+import css from './static-panel.scss';
 
-const panelTitle = title =>
+const panelTitle = (title) =>
   !!title
-    ? (<header className={style.title}>{title}</header>)
+    ? (<header className={css.title}>{title}</header>)
     : null;
 
-const StaticPanel = props => (
-  <article className={cx(style.staticPanel, props.className)} style={props.style}>
+const StaticPanel = (props) => (
+  <article className={cx(css.staticPanel, props.className)} style={props.style}>
     {panelTitle(props.title)}
-    <div className={cx(style.staticPanelBody)}>
+    <div className={cx(css.staticPanelBody)}>
       {props.children}
     </div>
   </article>

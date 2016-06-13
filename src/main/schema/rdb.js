@@ -11,7 +11,7 @@ export default function (thinky, type) {
   invariant(thinky && type, 'Thinky instance required');
   const r = thinky.r;
 
-  const MaterialState = thinky.createModel('MaterialState', {
+  const MaterialState = thinky.createModel('MaterialStateRecord', {
     timestamp: type.date().default(r.now()),
     fuel: type.number().integer(),
     ammo: type.number().integer(),

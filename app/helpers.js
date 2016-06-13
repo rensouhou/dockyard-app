@@ -12,14 +12,27 @@ import m from 'monet';
 const { Maybe } = m;
 const { path, pathOr, isEmpty } = R;
 
+/**
+ * @template T
+ * @param {?Array<T>} obj
+ * @param {!string[]} objPath
+ * @returns {Array<T>}
+ */
 export const listOrDefault = (obj, ...objPath) => pathOr([], objPath, obj);
 
+/**
+ * @template T, U
+ * @param {?Object<T, U>} obj
+ * @param {!string[]} objPath
+ * @returns {Object<T, U>}
+ */
 export const objOrDefault = (obj, ...objPath) => pathOr({}, objPath, obj);
 
 /**
+ * @template T
  * @param obj
  * @param propPath
- * @returns {Maybe<*>}
+ * @returns {Maybe<T>}
  */
 export const getMaybe = (obj, ...propPath) => {
   const d = path(propPath, obj);
@@ -34,7 +47,7 @@ export const getMaybe = (obj, ...propPath) => {
  * wrapped in a `Maybe` for use as an applicative (@see {@link Maybe#ap})
  *
  * @param key
- * @returns {Maybe}
+ * @returns {Maybe<T>}
  */
 export const getKeyAp = key => Maybe.Some(it => it[key]);
 
@@ -42,9 +55,9 @@ export const getKeyAp = key => Maybe.Some(it => it[key]);
  * Get the specified key `k` from the given `Maybe`.
  * The value of `M` must be something that can be picked by index and/or key.
  *
- * @param {Maybe} M
+ * @param {Maybe<T>} M
  * @param {string} k
- * @returns {Maybe}
+ * @returns {Maybe<T>}
  */
 export const getFromM = (M, k) => M.ap(getKeyAp(k));
 
@@ -52,34 +65,35 @@ export const getFromM = (M, k) => M.ap(getKeyAp(k));
  * Get the specified key `k` from the given `Maybe`, or return `def` in case
  * the result of getting `M[k]` is `None`.
  *
- * @param {Maybe} M
+ * @param {Maybe<T>} M
  * @param {string} k
- * @param {Iterable} def
+ * @param {Iterable<T>} def
  */
 export const getWithDefault = (M, k, def) => getFromM(M, k).orSome(def);
 
 /**
- * @param a
- * @returns {Object}
+ * @external {Enum} http://stackoverflow.com/a/30717598
+ * @param {Object} enumObj
+ * @returns {Enum}
  * @constructor
- * {@link http://stackoverflow.com/a/30717598}
  */
-export function Enum(a) {
+export function Enum(enumObj) {
   // noinspection CommaExpressionJS
   const i = Object
-    .keys(a)
-    .reduce((o, k) => (o[a[k]] = k, o), {});
+    .keys(enumObj)
+    .reduce((o, k) => (o[enumObj[k]] = k, o), {});
 
   // noinspection CommaExpressionJS
   return Object.freeze(
-    Object.keys(a).reduce(
-      (o, k) => (o[k] = a[k], o), v => i[v]
+    Object.keys(enumObj).reduce(
+      (o, k) => (o[k] = enumObj[k], o), v => i[v]
     )
   );
 }
 
 /**
  * @param {!Object} obj
+ * @returns {GeneratorFunction}
  */
 export function* entries(obj) {
   for (const key of Object.keys(obj)) {

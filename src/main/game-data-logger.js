@@ -32,7 +32,7 @@ export function createGameDataLogger() {
 
   ipcMain.on(AppEvent.REHYDRATE_STORE_REQUEST, async event => {
     event.sender.send(AppEvent.REHYDRATE_STORE,
-      await r.table('MaterialState')
+      await r.table('MaterialStateRecord')
              .orderBy(r.desc('timestamp'))
              .nth(0)
              .run());

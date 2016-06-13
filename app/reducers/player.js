@@ -1,4 +1,3 @@
-/* eslint no-confusing-arrow: 0 */
 /**
  * @overview
  *
@@ -7,10 +6,13 @@
 import { List, Map, fromJS } from 'immutable';
 import { ApiEvents } from '../constants';
 import createReducer from './create-reducer';
-import { PlayerProfile, Materials as MaterialState } from '../records';
+import { PlayerProfile, MaterialState as MaterialState } from '../records';
 
 const mergeWithFn = (prev, next) => next == null ? prev : next;
 
+/**
+ * @type {PlayerReducerState}
+ */
 const initialState = fromJS({
   profile: new PlayerProfile(),
   quests: List(),
@@ -26,6 +28,11 @@ const initialState = fromJS({
 });
 
 export default createReducer(initialState, {
+  /**
+   * @param state
+   * @param payload
+   * @returns {*}
+   */
   [ApiEvents.GET_PLAYER_BASE_DATA](state, { payload }) {
     return state.set('slotItems', payload.getIn(['slotItems', 'items']));
   },

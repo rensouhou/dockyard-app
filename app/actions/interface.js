@@ -2,9 +2,7 @@
 /**
  * @overview
  *
- * @since 0.2.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/actions/interface
+ * @since 0.1.0
  */
 import { createAction } from 'redux-actions';
 

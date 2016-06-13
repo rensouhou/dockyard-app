@@ -1,5 +1,7 @@
 /**
  * @overview
+ *  The root container that will act as a single source of truth in
+ *  regards to data.
  *
  * @since 0.1.0
  */
@@ -8,18 +10,7 @@ import { connect } from 'react-redux';
 import { actionHandlers } from '../actions/api-actions';
 import { actions as applicationActions } from '../actions/application';
 import { getPlayer } from '../selectors/player';
-import { Map } from 'immutable';
 import Game from '../components/Game';
-
-/**
- * @typedef {Object} UIStateProps
- * @property {Immutable.Map} ui
- */
-
-/**
- * @typedef {Immutable.Map} UIState
- * @property {Immutable.Map} UIStatePlayer
- */
 
 /**
  * @param state

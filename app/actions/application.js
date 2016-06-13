@@ -12,6 +12,9 @@ import { ipcRenderer, remote as electronRemote } from 'electron';
 import MainProcEvent from '../../src/shared/constants';
 import { ApplicationEvents } from '../constants';
 
+/**
+ * Screenshot action handler
+ */
 export const takeScreenshot = createAction(ApplicationEvents.TAKE_SCREENSHOT,
   /**
    * @description
