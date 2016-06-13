@@ -21,8 +21,6 @@ const getSlotItem = (slotItem = {}) => ({
 });
 
 /**
- * @param {Object} body
- * @param {Object} postBody
  * @returns {any}
  * @constructor
  */

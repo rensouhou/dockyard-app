@@ -3,5 +3,8 @@
   "destination": "./out/esdoc",
   "plugins": [
     {"name": "esdoc-es7-plugin"}
-  ]
+  ],
+  "manual": {
+    "installation": ["./manual/installation.md"]
+  }
 }

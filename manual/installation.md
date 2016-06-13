@@ -1,5 +1,3 @@
-# Installation
-
 Currently, the only way to run the application is to clone the repo,
 and compile it yourself. Releases in the somewhat near future.
 
