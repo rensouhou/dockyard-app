@@ -3,8 +3,7 @@
  *
  * @since 0.1.0
  */
-import { baseShip, baseShipGraphic } from './base-ship';
-import { baseShipType } from './base-ship-types';
+import { baseShip, baseShipGraphic, baseShipType } from './base-ship';
 import { baseSlotItem } from './base-slotitem';
 import { baseMission } from './base-mission';
 import { opponentFleet } from './opponent-fleet';
