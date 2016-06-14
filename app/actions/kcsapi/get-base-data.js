@@ -12,6 +12,10 @@ import { playerShip } from '../../transformers/api/player-ship';
 import { playerProfile } from '../../transformers/api/player-profile';
 import { playerFleet } from '../../transformers/api/player-fleet';
 
+/**
+ * Handler for the `GET_BASE_DATA` API event
+ * @type {ApiActionRecord}
+ */
 export default function GET_BASE_DATA({ body }) {
   return fromJS({
     id: asNumber(body.api_basic.api_member_id),

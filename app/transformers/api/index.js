@@ -1,12 +1,9 @@
 /**
  * @overview
  *
- * @since 0.3.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
- * @module app/transformers/api
+ * @since 0.1.0
  */
-import { baseShip } from './base-ship';
-import { baseShipGraphic } from './base-ship-graphic';
+import { baseShip, baseShipGraphic } from './base-ship';
 import { baseShipType } from './base-ship-types';
 import { baseSlotItem } from './base-slotitem';
 import { baseMission } from './base-mission';

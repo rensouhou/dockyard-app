@@ -6,7 +6,7 @@
  * @since 0.1.0
  */
 import { Map, List, Set, Record } from 'immutable';
-import { ConstructionType } from './constants';
+import { ConstructionType, ShipHealthState } from './constants';
 
 // region # Fleet
 /**
@@ -65,11 +65,7 @@ export const PlayerProfile = Record({
 // endregion
 
 // region # Ship record
-/**
- * Ship record
- * @type {ShipRecord}
- */
-export const Ship = Record({
+export const shipRecordDefault = Record({
   id: undefined,
   sortId: undefined,
   shipId: undefined,
@@ -114,6 +110,37 @@ export const Ship = Record({
     items: List()
   })
 });
+
+/**
+ * Ship record
+ * @type {ShipRecord}
+ * @extends {BaseRecord}
+ */
+export class Ship extends Record(shipRecordDefault) {
+  /**
+   * Check if ship is an enemy
+   * @returns {boolean}
+   */
+  isEnemy() {
+    return false;
+  }
+
+  /**
+   * Check if ship's health is critical
+   * @returns {boolean}
+   */
+  isCritical() {
+    return this.getHealthColor() === ShipHealthState.RED;
+  }
+
+  /**
+   * The current health state of the ship
+   * @returns {string}
+   */
+  getHealthColor() {
+    return ShipHealthState.GREEN;
+  }
+}
 // endregion
 
 // region # SlotItem record
@@ -173,6 +200,7 @@ export const Quest = Record({
 });
 // endregion record
 
+// region # CraftedEntity
 // region # CraftedEntity default values
 const craftedEntityDefault = {
   type: ConstructionType.NONE,
@@ -197,8 +225,10 @@ const craftedEntityDefault = {
 // endregion
 
 // region # CraftedEntity record definition
+// endregion
 /**
  * @type {CreatedEntityRecord}
+ * @extends {BaseRecord}
  */
 export class CraftedEntityRecord extends Record(craftedEntityDefault) {
   /**
@@ -208,6 +238,10 @@ export class CraftedEntityRecord extends Record(craftedEntityDefault) {
     return !!this.inProgress;
   }
 
+  /**
+   * Check if the crafted entity is valid.
+   * @returns {boolean}
+   */
   isValid() {
     switch (this.type) {
       case ConstructionType.ITEM:

@@ -73,9 +73,11 @@ export const getWithDefault = (M, k, def) => getFromM(M, k).orSome(def);
 
 /**
  * @external {Enum} http://stackoverflow.com/a/30717598
+ * @typedef {Function} Enum
  * @param {Object} enumObj
- * @returns {Enum}
+ * @returns {Enum|Function}
  * @constructor
+ * @since 0.1.0
  */
 export function Enum(enumObj) {
   // noinspection CommaExpressionJS

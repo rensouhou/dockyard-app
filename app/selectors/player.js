@@ -22,15 +22,17 @@ import {
 
 /**
  * Get state of the player's fleet
- * @param state
- * @returns {List<Fleet>}
+ * @type {function}
+ * @param {ApplicationReducerState} state
+ * @returns {IList<Fleet>}
  */
 const playerFleetList = (state) => state.getIn(['player', 'fleets'], List());
 
 /**
  * Get the player ship list
- * @param state
- * @returns {Map<number, Ship>}
+ * @type {function}
+ * @param {ApplicationReducerState} state
+ * @returns {IMap<number, Ship>}
  */
 const playerShipList = (state) =>
   state.getIn(['player', 'ships'], List())
@@ -39,8 +41,9 @@ const playerShipList = (state) =>
 
 /**
  * Get the master game ship list
- * @param state
- * @returns {Map<number, Ship>}
+ * @type {function}
+ * @param {ApplicationReducerState} state
+ * @returns {IMap<number, Ship>}
  */
 const baseShipList = (state) =>
   state.getIn(['game', 'ships'], List())
@@ -48,24 +51,9 @@ const baseShipList = (state) =>
        .flatMap((ship) => Map.of(ship.get('shipId'), ship));
 
 /**
- * Usable ship list containing complete {@link ShipRecord} entities.
- * @type {List<Ship>}
- */
-const getShipList = createSelector(
-  [playerShipList, baseShipList],
-  /**
-   * @param {Map<number, Ship>} playerShips
-   * @param {Map<number, Ship>} baseShips
-   * @returns {List<Ship>}
-   */
-  (playerShips, baseShips) =>
-    playerShips.map((ship) =>
-      new ShipRecord(baseShips.get(ship.get('shipId')).mergeDeep(ship)))
-);
-
-/**
+ * @type {function}
  * @param {ApplicationReducerState} state
- * @return {Map<number, SlotItem>}
+ * @return {IMap<number, SlotItem>}
  */
 const playerSlotItemList = (state) =>
   state.getIn(['player', 'slotItems'], List())
@@ -73,8 +61,9 @@ const playerSlotItemList = (state) =>
        .flatMap((item) => Map.of(item.get('id'), item));
 
 /**
+ * @type {function}
  * @param {ApplicationReducerState} state
- * @return {Map<number, SlotItem>}
+ * @return {IMap<number, SlotItem>}
  */
 const baseSlotItemList = (state) =>
   state.getIn(['game', 'slotItems'], List())
@@ -82,33 +71,42 @@ const baseSlotItemList = (state) =>
        .flatMap((item) => Map.of(item.get('slotItemId'), item));
 
 /**
- * Get state of the player profile
+ * Player profile getter (null-safe)
+ * @type {function}
  * @param {ApplicationReducerState} state
  * @returns {PlayerProfile}
  */
-const playerProfile = (state) => state.getIn(['player', 'profile'], Map());
+const playerProfile = (state) => state.getIn(['player', 'profile'], new PlayerProfile());
 
 /**
- * Get state of player materials
+ * Player material state getter (null-safe)
+ * @type {function}
  * @param {ApplicationReducerState} state
  * @returns {MaterialStateRecord}
  */
-const playerMaterials = (state) => state.getIn(['player', 'materials'], Map());
+const playerMaterials = (state) => state.getIn(['player', 'materials'], new MaterialState());
 
 /**
  * Public-facing selectors
  **************************************/
 
 /**
+ * Usable ship list containing complete {@link ShipRecord} entities.
+ * @since 0.2.0
+ */
+const getShipList = createSelector(
+  [playerShipList, baseShipList],
+  (playerShips, baseShips) =>
+    playerShips.map((ship) =>
+      new ShipRecord(baseShips.get(ship.get('shipId')).mergeDeep(ship)))
+);
+
+/**
  * Player slot item selector
+ * @since 0.2.0
  */
 export const getPlayerSlotItems = createSelector(
   [playerSlotItemList, baseSlotItemList],
-  /**
-   * @param {Map<number, SlotItem|Map>} playerSlotItems
-   * @param {Map<number, SlotItem|Map>} baseSlotItems
-   * @return {Map<number, SlotItem>}
-   */
   (playerSlotItems, baseSlotItems) =>
     playerSlotItems.map((item) =>
       new SlotItemRecord(baseSlotItems.get(item.get('slotItemId')).mergeDeep(item)))
@@ -116,14 +114,10 @@ export const getPlayerSlotItems = createSelector(
 
 /**
  * Player ship selector
+ * @since 0.1.0
  */
 export const getPlayerShips = createSelector(
   [getShipList, getPlayerSlotItems],
-  /**
-   * @param {Map<number, Ship|Map>} shipList
-   * @param {Map<number, SlotItem|Map>} slotItems
-   * @return {Map<number, Ship>}
-   */
   (shipList, slotItems) => shipList.map((ship) =>
     ship.mergeDeepIn(['slot', 'items'],
       ship.getIn(['slot', 'items'])
@@ -135,15 +129,10 @@ export const getPlayerShips = createSelector(
 /**
  * Player fleet selector
  * Populates the fleet's ship list with {@link Ship} records
- * @type {List<Fleet|Map>}
+ * @since 0.2.0
  */
 export const getPlayerFleets = createSelector(
   [playerFleetList, getPlayerShips],
-  /**
-   * @param {List<Fleet|Map>} fleetList
-   * @param {Map<number, Ship|Map>} playerShipMap
-   * @return {List<Fleet|Map>}
-   */
   (fleetList, playerShipMap) => fleetList
     .map((fleet) => fleet.mergeIn(['ships'], fleet.get('ships').map((id) => playerShipMap.get(id))))
     .map((fleet) => new FleetRecord(fleet))
@@ -151,45 +140,28 @@ export const getPlayerFleets = createSelector(
 
 /**
  * Player profile selector
- * @type {List<Fleet|Map>}
+ * @since 0.1.0
  */
 export const getPlayerProfile = createSelector(
   [playerProfile],
-  /**
-   * @param {Map<string, *>} profile
-   * @return {PlayerProfile}
-   */
   (profile) => new PlayerProfile(profile)
 );
 
 /**
  * Player material state selector
- * @type {List<Fleet|Map>}
+ * @since 0.1.0
  */
 export const getPlayerMaterials = createSelector(
   [playerMaterials],
-  /**
-   * @param {MaterialState} materials
-   * @return {MaterialState}
-   */
   (materials) => new MaterialState(materials)
 );
 
 /**
  * Player main state selector (for UI)
- * @type {Map}
+ * @since 0.1.0
  */
 export const getPlayer = createSelector(
   [getPlayerFleets, getPlayerProfile, getPlayerMaterials, getPlayerShips, getPlayerSlotItems],
-  /**
-   * @typedef {Map<string, *>} UIStatePlayer
-   * @param {List<Fleet>} fleets
-   * @param {PlayerProfile} profile
-   * @param {MaterialState} materials
-   * @param {List<Ship>} ships
-   * @param {List<SlotItem>} slotItems
-   * @return {Map<string, Map<string, *>>}
-   */
   (fleets, profile, materials, ships, slotItems) => Map({
     fleets, profile, materials, ships, slotItems
   })

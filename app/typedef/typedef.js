@@ -76,6 +76,21 @@
  * @typedef {BaseRecord} ApiActionRecord
  */
 
+/**
+ * @typedef {BaseRecord} PlayerProfileRecord
+ */
+
+// UI state definitions
+// --------------------
+/**
+ * @typedef {Object|Map<string, *>} ApplicationUIState
+ * @param {List<Fleet>} fleets
+ * @param {PlayerProfile} profile
+ * @param {MaterialState} materials
+ * @param {List<Ship>} ships
+ * @param {List<SlotItem>} slotItems
+ */
+
 // Reducer state definitions
 // -------------------------
 /**
@@ -84,4 +99,22 @@
 
 /**
  * @typedef {Object|Map<string, *>} PlayerReducerState
+ */
+
+// Misc. library definitions
+// -------------------------
+/**
+ * @typedef {Immutable.Map} IMap
+ */
+
+/**
+ * @typedef {Immutable.List} IList
+ */
+
+/**
+ * @typedef {Immutable.Seq} ISeq
+ */
+
+/**
+ * @typedef {Immutable.Iterable} IIterable
  */

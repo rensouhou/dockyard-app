@@ -11,9 +11,11 @@ import Ship from './ship';
 // region # <ShipList /> ship list component
 /**
  * <ShipList /> component for <Fleet />
- * @param props
+ * @type {React.StatelessComponent}
+ * @param {Object} props
  * @returns {JSX.Element}
  * @constructor
+ * @since 0.1.0
  */
 const ShipList = (props) => (
   <div>
@@ -28,9 +30,11 @@ ShipList.propTypes = {
 
 // region # <FleetComponent /> fleet component
 /**
+ * @type {React.StatelessComponent}
  * @param props
  * @returns {JSX.Element}
  * @constructor
+ * @since 0.1.0
  */
 const FleetComponent = (props) => {
   const ships = props.record.get('ships');

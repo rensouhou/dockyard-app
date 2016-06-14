@@ -6,6 +6,11 @@
 import { Enum } from '../../helpers';
 import { asNumber } from '../primitive';
 
+/**
+ * Enum for the map area's type
+ * @type {Enum}
+ * @since 0.2.0
+ */
 const MapAreaType = Enum({
   NORMAL: 0,
   EVENT: 1
@@ -14,7 +19,10 @@ const MapAreaType = Enum({
 /**
  * Map area
  *
+ * @type {Function}
+ * @param {Object} o
  * @return {Object}
+ * @since 0.2.0
  */
 export const mapArea = (o) => ({
   id: asNumber(o.api_id),
@@ -24,12 +32,16 @@ export const mapArea = (o) => ({
 
 /**
  * Map info
- * Unused attributes:
- * - api_max_maxhp
- * - api_required_defeat_count
- * - api_sally_flag
  *
+ * Unused or unknown attributes:
+ * - `api_max_maxhp`
+ * - `api_required_defeat_count`
+ * - `api_sally_flag`
+ *
+ * @type {Function}
+ * @param {!Object} o
  * @return {Object}
+ * @since 0.1.0
  */
 export const mapInfo = (o) => ({
   id: asNumber(o.api_id),
@@ -42,6 +54,12 @@ export const mapInfo = (o) => ({
   reward: o.api_item
 });
 
+/**
+ * @type {Function}
+ * @param {!Object} o
+ * @returns {Object}
+ * @since 0.2.0
+ */
 export const mapBgm = (o) => ({
   id: asNumber(o.api_id),
   worldId: asNumber(o.api_maparea_id),
@@ -53,7 +71,8 @@ export const mapBgm = (o) => ({
 /**
  * Note: Most likely NOT final, as certain node types are not 100% accurate.
  * Node types `AIR_NODE` (9) and `AIR_RAID_NODE` (10) need some attention.
- * @type {Object}
+ * @type {Enum}
+ * @since 0.2.0
  */
 const MapCellType = Enum({
   START_NODE: 0,
@@ -69,6 +88,12 @@ const MapCellType = Enum({
   AIR_RAID_NODE: 10
 });
 
+/**
+ * @type {Function}
+ * @param {!Object} o
+ * @returns {Object}
+ * @since 0.2.0
+ */
 export const mapCell = (o) => ({
   cellId: asNumber(o.api_map_no),
   worldId: asNumber(o.api_maparea_id),

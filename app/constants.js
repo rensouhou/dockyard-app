@@ -146,3 +146,10 @@ export const ConstructionState = {
   INCOMPLETE: 'INCOMPLETE',
   COMPLETE: 'COMPLETE'
 };
+
+export const ShipHealthState = {
+  RED: 'RED',
+  ORANGE: 'ORANGE',
+  YELLOW: 'YELLOW',
+  GREEN: 'GREEN'
+};

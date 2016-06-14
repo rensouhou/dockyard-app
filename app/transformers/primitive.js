@@ -12,6 +12,7 @@
  * @type {Function}
  * @param {?Array} arr
  * @returns {Array}
+ * @since 0.1.0
  */
 export const getArrayOrDefault = (arr) => arr || [];
 
@@ -21,6 +22,7 @@ export const getArrayOrDefault = (arr) => arr || [];
  * @type {Function}
  * @param {?Object} obj
  * @returns {Object}
+ * @since 0.1.0
  */
 export const getObjectOrDefault = (obj) => obj || {};
 
@@ -29,6 +31,7 @@ export const getObjectOrDefault = (obj) => obj || {};
  * @type {Function}
  * @param {?number} num
  * @returns {number|null}
+ * @since 0.1.0
  */
 export const asNumber = (num) => !isNaN(parseInt(num, 10)) ? parseInt(num, 10) : null;
 
@@ -37,6 +40,7 @@ export const asNumber = (num) => !isNaN(parseInt(num, 10)) ? parseInt(num, 10) :
  * @type {Function}
  * @param {?number} n
  * @returns {boolean}
+ * @since 0.1.0
  */
 export const asBool = (n) => asNumber(n) === 1;
 
@@ -46,6 +50,7 @@ export const asBool = (n) => asNumber(n) === 1;
  * @type {Function}
  * @param {?number} n
  * @returns {boolean}
+ * @since 0.1.0
  */
 export const notEmpty = (n) => asNumber(n) !== -1;
 
@@ -54,5 +59,6 @@ export const notEmpty = (n) => asNumber(n) !== -1;
  * @type {Function}
  * @param {?string} s
  * @returns {string}
+ * @since 0.1.0
  */
 export const formatLineBreaks = (s) => (s || '').replace(/<br\s?\/?>/gi, '\n');

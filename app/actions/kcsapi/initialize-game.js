@@ -5,8 +5,7 @@
  *
  * @since 0.1.0
  */
-import { Map, List } from 'immutable';
-import { baseShipType } from '../../transformers/api/base-ship-types';
+import { fromJS } from 'immutable';
 import { baseSlotItem } from '../../transformers/api/base-slotitem';
 import { baseFurniture } from '../../transformers/api/base-furniture';
 import { baseMission } from '../../transformers/api/base-mission';
@@ -17,23 +16,24 @@ import {
   mapCell as baseMapCell,
   mapInfo as baseMapInfo
 } from '../../transformers/api/base-map';
-import { baseShip, baseShipGraphic } from '../../transformers/api/base-ship';
+import { baseShip, baseShipType, baseShipGraphic } from '../../transformers/api/base-ship';
 
 /**
- * @type {Dockyard.GameEvent.transformer}
+ * Handler for the `INITIALIZE_GAME` API event
+ * @type {ApiActionRecord}
  */
 export default function INITIALIZE_GAME({ body }) {
-  return Map({
-    ships: List(body.api_mst_ship).map(baseShip),
-    shipGraphics: List(body.api_mst_shipgraph).map(baseShipGraphic),
-    shipTypes: List(body.api_mst_stype).map(baseShipType),
-    slotItems: List(body.api_mst_slotitem).map(baseSlotItem),
-    missions: List(body.api_mst_mission).map(baseMission),
-    furniture: List(body.api_mst_furniture).map(baseFurniture),
-    mapAreas: List(body.api_mst_maparea).map(baseMapArea),
-    mapBgms: List(body.api_mst_mapbgm).map(baseMapBgm),
-    mapInfos: List(body.api_mst_mapinfo).map(baseMapInfo),
-    mapNodes: List(body.api_mst_mapcell).map(baseMapCell),
-    bgm: List(body.api_mst_bgm).map(baseBgm)
+  return fromJS({
+    ships: body.api_mst_ship.map(baseShip),
+    shipGraphics: body.api_mst_shipgraph.map(baseShipGraphic),
+    shipTypes: body.api_mst_stype.map(baseShipType),
+    slotItems: body.api_mst_slotitem.map(baseSlotItem),
+    missions: body.api_mst_mission.map(baseMission),
+    furniture: body.api_mst_furniture.map(baseFurniture),
+    mapAreas: body.api_mst_maparea.map(baseMapArea),
+    mapBgms: body.api_mst_mapbgm.map(baseMapBgm),
+    mapInfos: body.api_mst_mapinfo.map(baseMapInfo),
+    mapNodes: body.api_mst_mapcell.map(baseMapCell),
+    bgm: body.api_mst_bgm.map(baseBgm)
   });
 }
