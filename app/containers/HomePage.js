@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import Home from '../components/Home';
 
-export default class HomePage extends Component {
-  render() {
-    return (
-      <Home />
-    );
-  }
-}
+const mapStateToProps = (state) => ({
+  version: state.getIn(['application', 'packageJson', 'version'])
+});
+
+export default connect(mapStateToProps)(Home);

@@ -1,19 +1,21 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import styles from './Home.scss';
+import css from './Home.scss';
 
-export default class Home extends Component {
-  render() {
-    return (
-      <div className={styles.container}>
-        <h2>Dockyard</h2>
-        <div className={styles.modeSelect}>
-          <Link to="/game">Launch</Link>
-          <Link to="/configure">Configuration</Link>
-          <Link to="/test">Core Test</Link>
-        </div>
-        <footer>github.com/rensouhou/dockyard-app</footer>
-      </div>
-    );
-  }
-}
+const HomeComponent = (props) => (
+  <div className={css.container}>
+    <h2>Dockyard <span className={css.version}>{props.version}</span></h2>
+    <div className={css.modeSelect}>
+      <Link to="/game">Launch</Link>
+      <Link to="/configure">Configuration</Link>
+      <Link to="/test">Core Test</Link>
+    </div>
+    <footer>github.com/rensouhou/dockyard-app</footer>
+  </div>
+);
+
+HomeComponent.propTypes = {
+  version: PropTypes.string.isRequired
+};
+
+export default HomeComponent;
