@@ -5,8 +5,9 @@
  *
  * @since 0.1.0
  */
-import { Map, List, Set, Record } from 'immutable';
+import { Map, List, Set, Record, fromJS } from 'immutable';
 import { ConstructionType, ShipHealthState } from './constants';
+import pkg from '../package.json';
 
 // region # Fleet
 /**
@@ -65,7 +66,7 @@ export const PlayerProfile = Record({
 // endregion
 
 // region # Ship record
-export const shipRecordDefault = Record({
+export const shipRecordDefault = {
   id: undefined,
   sortId: undefined,
   shipId: undefined,
@@ -109,7 +110,7 @@ export const shipRecordDefault = Record({
     capacity: List(),
     items: List()
   })
-});
+};
 
 /**
  * Ship record
@@ -270,7 +271,8 @@ const ApplicationState = Record({
   appState: '',
   webview: undefined,
   lastScreenshot: Map(),
-  isAudioMuted: false
+  isAudioMuted: false,
+  packageJson: fromJS(pkg)
 });
 
 /** @type {ApiHandlerRecord} */
