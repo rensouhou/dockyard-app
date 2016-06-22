@@ -220,7 +220,7 @@ export const Dock = Record({
 /**
  * @type {QuestRecord}
  */
-export const Quest = Record({
+export const QuestRecord = Record({
   id: undefined,
   type: undefined,
   category: undefined,

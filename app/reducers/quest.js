@@ -9,18 +9,21 @@ import createReducer from './create-reducer';
 
 /** @type {IMap<string, *>} */
 const initialState = fromJS({
-  quests: [],
-  activeQuests: []
+  totalQuestCount: undefined,
+  currentPage: undefined,
+  totalPageCount: undefined,
+  currentActiveTab: undefined,
+  quests: []
 });
 
 export default createReducer(initialState, {
-  [ApiEvents.GET_QUEST_LIST](state, action) {
+  [ApiEvents.GET_QUEST_LIST](state, { payload }) {
+    return state.merge(payload);
+  },
+  [ApiEvents.START_QUEST](state, { payload }) {
     return state;
   },
-  [ApiEvents.START_QUEST](state, action) {
-    return state;
-  },
-  [ApiEvents.STOP_QUEST](state, action) {
+  [ApiEvents.STOP_QUEST](state, { payload }) {
     return state;
   }
 });

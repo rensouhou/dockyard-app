@@ -4,19 +4,10 @@
  *
  * @since 0.1.0
  */
-import { Map, fromJS } from 'immutable';
+import { Map, List, fromJS } from 'immutable';
 import { questListTabs } from '../../enums';
 import { asNumber } from '../../transformers/primitive';
-import { quest as transformQuest } from '../../transformers/api/quest';
-
-/**
- * @private
- * @type {function}
- * @param {Array<Object>} list
- */
-const questList = (list) => fromJS(list).toMap()
-                                        .map((q) => fromJS(transformQuest(q)))
-                                        .flatMap((q) => Map.of(q.id, q));
+import { questAsRecord } from '../../transformers/api/quest';
 
 /**
  * Handler function for the `GET_QUEST_LIST` event.
@@ -24,14 +15,17 @@ const questList = (list) => fromJS(list).toMap()
  * @param {ApiActionRecord} p
  * @returns {any}
  * @constructor
+ * @version 0.3.0
  */
 export default function GET_QUEST_LIST(p) {
   const { body, postBody } = p;
   return fromJS({
-    questCount: asNumber(body.api_count),
+    totalQuestCount: asNumber(body.api_count),
     currentPage: asNumber(body.api_disp_page),
-    currentlyActiveTab: questListTabs(postBody.api_tab_id),
+    currentActiveTab: questListTabs(postBody.api_tab_id),
     totalPageCount: asNumber(body.api_page_count),
-    quests: questList(body.api_list)
+    quests: List(body.api_list).map((q) => questAsRecord(q))
+                               .toMap()
+                               .flatMap((q) => Map.of(q.id, q))
   });
 }
