@@ -79,6 +79,10 @@
 
 /**
  * @typedef {BaseRecord} ApiActionRecord
+ * @property {?Object} body
+ * @property {?Object} postBody
+ * @property {string} path
+ * @property {?Error} error
  */
 
 /**

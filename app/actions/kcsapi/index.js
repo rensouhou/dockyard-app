@@ -11,6 +11,7 @@ import GET_PLAYER_BASE_DATA from './get-player-base-data';
 import GET_CONSTRUCTION_DOCKS from './get-construction-docks';
 import LOAD_FLEET_PRESET from './load-fleet-preset';
 import GET_FLEET from './get-fleet';
+import GET_FLEET_DATA from './get-fleet-data';
 import GET_MATERIAL from './get-material';
 import GET_SLOT_ITEMS from './get-slot-items';
 import START_MISSION from './start-mission';
@@ -56,6 +57,7 @@ export {
   DESTROY_SHIP,
   LOAD_FLEET_PRESET,
   GET_FLEET,
+  GET_FLEET_DATA,
 
   GET_QUEST_LIST,
   START_QUEST,

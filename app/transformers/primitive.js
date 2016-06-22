@@ -46,7 +46,8 @@ export const asBool = (n) => asNumber(n) === 1;
 
 /**
  * Check if a given value is "Kancolle API empty".
- * Usable as a simple predicate.
+ * Usable as a simple predicate. Most used with Kancolle API
+ * data validation.
  * @type {Function}
  * @param {?number} n
  * @returns {boolean}
