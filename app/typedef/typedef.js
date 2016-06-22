@@ -26,6 +26,11 @@
  */
 
 /**
+ * A record that holds the player's current state of usable materials.
+ * @typedef {BaseRecord} MaterialStateRecord
+ */
+
+/**
  * @typedef {BaseRecord} FleetRecord
  * @property {number} flagship
  * @property {number} id
@@ -84,9 +89,9 @@
 // --------------------
 /**
  * @typedef {Object|Map<string, *>} ApplicationUIState
- * @param {List<Fleet>} fleets
- * @param {PlayerProfile} profile
- * @param {MaterialState} materials
+ * @param {List<FleetRecord>} fleets
+ * @param {PlayerProfileRecord} profile
+ * @param {MaterialStateRecord} materials
  * @param {List<Ship>} ships
  * @param {List<SlotItem>} slotItems
  */

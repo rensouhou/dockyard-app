@@ -8,7 +8,7 @@ import createReducer from './create-reducer';
 import { ApiEvents, ConstructionState } from '../constants';
 
 /**
- * @type {any}
+ * @type {IMap<string, *>}
  * @private
  */
 const initialState = fromJS({

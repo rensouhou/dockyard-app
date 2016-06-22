@@ -8,7 +8,7 @@ import { fromJS } from 'immutable';
 
 /**
  * @param {Object} d
- * @returns {PlayerProfile|Map}
+ * @returns {PlayerProfileRecord|Map}
  */
 export const playerProfile = (d) => fromJS({
   id: asNumber(d.api_member_id),

@@ -12,24 +12,44 @@ import Fleet from '../ui/game/fleet';
 import css from './game-ui.scss';
 
 /**
+ * @type {function}
+ * @param {Object} props
+ * @return {IMap<string, *>}
+ */
+const getPlayer = (props) => props.ui.player || Map();
+
+/**
+ * @type {function}
+ * @param {Object} props
+ * @returns {IList<FleetRecord>}
+ */
+const getFleets = (props) => getPlayer(props).getIn(['fleets'], List());
+
+/**
+ * @type {function}
+ * @param {Object} props
+ * @return {FleetRecord}
+ */
+const getMainFleet = (props) => getFleets(props).first();
+
+/**
  * @param {Object} props
  * @returns {XML|JSX.Element}
  * @constructor
  */
-const GameUIComponent = (props) => {
-  const fleets = props.ui.player.getIn(['fleets'], List());
+const GameUIComponent = (props) => (
+  <div className={css.gameUi}>
+    <StaticPanel title="Materials" />
+    <StaticPanel title="Player" />
+    <StaticPanel title="Fleet">
+      <Fleet record={getMainFleet(props)} />
+    </StaticPanel>
+  </div>
+);
 
-  return (
-    <div className={css.gameUi}>
-      <StaticPanel title="Materials" />
-      <StaticPanel title="Player" />
-      <StaticPanel title="Fleet">
-        <Fleet record={fleets.first()} />
-      </StaticPanel>
-    </div>
-  );
-};
-
+/**
+ * @type {{children: Requireable<any>, ui: *}}
+ */
 GameUIComponent.propTypes = {
   children: PropTypes.any,
   ui: ImmutablePropTypes.map

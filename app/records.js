@@ -9,26 +9,33 @@ import { Map, List, Set, Record, fromJS } from 'immutable';
 import { ConstructionType, ShipHealthState } from './constants';
 import pkg from '../package.json';
 
-// region # Fleet
+// region # Game-related Records
+// region ## Fleet record
 /**
  * @type {FleetRecord}
  */
-export const Fleet = Record({
+const fleetRecordDefaults = {
   flagship: undefined,
   id: undefined,
   memberId: undefined,
   mission: List(),
   name: '',
   ships: List()
-});
+};
+
+export class FleetRecord extends Record(fleetRecordDefaults) {
+  /**
+   * Check whether the fleet contains any ships.
+   * @returns {boolean}
+   */
+  hasShips() {
+    return this.ships.size > 0;
+  }
+}
 // endregion
 
-// region # Material record
-/**
- * A record that hold's the player's current state of usable materials.
- * @typedef {*|Record.Class} MaterialStateRecord
- */
-export const MaterialState = Record({
+// region ## Material record
+const materialStateDefaults = {
   fuel: undefined,
   ammo: undefined,
   steel: undefined,
@@ -37,11 +44,23 @@ export const MaterialState = Record({
   instantRepair: undefined,
   developmentMaterials: undefined,
   improvementMaterials: undefined
-});
+};
+
+/**
+ * @extends {IMap}
+ * @extends {Record.Class}
+ */
+export class MaterialStateRecord extends Record(materialStateDefaults) {
+  static basicFields = List.of('fuel', 'ammo', 'steel', 'bauxite');
+  getBasic() {
+    return this.keySeq().filter((type) => MaterialStateRecord.basicFields.includes(type));
+  }
+}
+
 // endregion
 
-// region # PlayerProfile record
-export const PlayerProfile = Record({
+// region ## PlayerProfile record
+const playerProfileDefaults = {
   nickname: '',
   level: undefined,
   rank: undefined,
@@ -62,10 +81,22 @@ export const PlayerProfile = Record({
   docks: Map({}),
   startTime: undefined,
   tutorial: Map({})
-});
+};
+
+export class PlayerProfileRecord extends Record(playerProfileDefaults) {
+  isPlayer() {
+    return new Error('NYI');
+  }
+  isEnemy() {
+    return new Error('NYI');
+  }
+  isPracticeEnemy() {
+    return new Error('NYI');
+  }
+}
 // endregion
 
-// region # Ship record
+// region ## Ship record
 export const shipRecordDefault = {
   id: undefined,
   sortId: undefined,
@@ -144,7 +175,7 @@ export class Ship extends Record(shipRecordDefault) {
 }
 // endregion
 
-// region # SlotItem record
+// region ## SlotItem record
 /**
  * Slot item record
  * @type {SlotItemRecord}
@@ -172,7 +203,7 @@ export const SlotItem = Record({
 });
 // endregion
 
-// region # Dock record
+// region ## Dock record
 /**
  * @type {DockRecord}
  */
@@ -185,7 +216,7 @@ export const Dock = Record({
 });
 // endregion
 
-// region # Quest record
+// region ## Quest record
 /**
  * @type {QuestRecord}
  */
@@ -201,8 +232,8 @@ export const Quest = Record({
 });
 // endregion record
 
-// region # CraftedEntity
-// region # CraftedEntity default values
+// region ## CraftedEntity
+// region ### CraftedEntity default values
 const craftedEntityDefault = {
   type: ConstructionType.NONE,
   entity: {
@@ -225,8 +256,7 @@ const craftedEntityDefault = {
 };
 // endregion
 
-// region # CraftedEntity record definition
-// endregion
+// region ### CraftedEntity record definition
 /**
  * @type {CreatedEntityRecord}
  * @extends {BaseRecord}
@@ -255,14 +285,19 @@ export class CraftedEntityRecord extends Record(craftedEntityDefault) {
   }
 }
 // endregion
+// endregion
+// endregion
 
+// Convenience
+// -----------
 export const Player = {
-  Fleet,
-  MaterialState,
-  PlayerProfile,
+  FleetRecord,
+  MaterialStateRecord,
+  PlayerProfileRecord,
   CraftedEntityRecord
 };
 
+// region # Internal Records
 // Internal
 // --------
 /** @type {ApplicationStateRecord} */
@@ -300,3 +335,4 @@ const KCSApiData = Record({
  * @type {{ApplicationState: ApplicationStateRecord, ApiHandler: ApiHandlerRecord, ApiAction: ApiActionRecord, KCSApiData: (*|Record.Class)}}
  */
 export const Internal = { ApplicationState, ApiHandler, ApiAction, KCSApiData };
+// endregion

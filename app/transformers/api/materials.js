@@ -5,14 +5,15 @@
  * @since 0.1.0
  */
 import { getArrayOrDefault } from '../primitive';
-import { MaterialState } from '../../records';
+import { MaterialStateRecord } from '../../records';
 import R from 'ramda';
 
 const _ = R.__;
 
 /** @private */
 const materials = [
-  'fuel', 'ammo', 'steel', 'bauxite', 'instantConstruction', 'instantRepair', 'developmentMaterials',
+  'fuel', 'ammo', 'steel', 'bauxite',
+  'instantConstruction', 'instantRepair', 'developmentMaterials',
   'improvementMaterials'
 ];
 
@@ -35,9 +36,9 @@ const tightFilter = R.filter(tightFilterPred);
 const zipMats = R.zipObj(materials);
 
 /**
- * Parse a list of numbers into a player's {@link MaterialState}
+ * Parse a list of numbers into a player's {@link MaterialStateRecord}
  * @type {Function}
- * @returns {MaterialState}
+ * @returns {Object}
  * @example <caption>Parsing arrays</caption>
  * let mats = [100, 100, 200, 50];
  * let matObj = parseMaterialArray(mats);
@@ -48,7 +49,7 @@ export const parseMaterialArray =
 
 /**
  * @type {Function}
- * @returns {MaterialState}
+ * @returns {Object}
  * @example
  * let createMaterial = (id, val, ?memberId) => { api_id: id, api_value: val, api_member_id: memberId };
  * let mats = [
@@ -67,9 +68,10 @@ export const parseMaterialObjects =
  * Composes a {@link Dockyard.Materials} object with {@link parseMaterialArray}
  * and filters out all falsy values. For use mainly with construction recipes.
  * Uses {@link materials} index for values.
+ * @todo Fix documentation
  *
  * @type {Function}
- * @returns {MaterialState}
+ * @returns {Object}
  * @example
  * let matObj = parseMaterialsRecipe([100, 100, 200, 50, null, null, 20]);
  * console.log(matObj); // => { fuel: 100, ammo: 100, steel: 200, bauxite: 50, developmentMaterials: 20 }
@@ -81,12 +83,12 @@ export const parseMaterialsRecipe =
  * Convenience function for @see {@link parseMaterialsRecipe}
  *
  * @type {Function}
- * @returns {MaterialState}
+ * @returns {Object}
  */
 export const parseRecipe = R.curry(parseMaterialsRecipe)(_, _, _, _, null, null, _);
 
 /**
  * @param obj
- * @returns {records.js~Materials}
+ * @returns {MaterialStateRecord}
  */
-export const asRecord = (obj) => new MaterialState(obj);
+export const asRecord = (obj) => new MaterialStateRecord(obj);

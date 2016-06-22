@@ -9,9 +9,9 @@
 import { Map, List } from 'immutable';
 import { createSelector } from 'reselect';
 import {
-  PlayerProfile,
-  MaterialState as MaterialState,
-  Fleet as FleetRecord,
+  PlayerProfileRecord,
+  MaterialStateRecord,
+  FleetRecord as FleetRecord,
   Ship as ShipRecord,
   SlotItem as SlotItemRecord
 } from '../records';
@@ -24,7 +24,7 @@ import {
  * Get state of the player's fleet
  * @type {function}
  * @param {ApplicationReducerState} state
- * @returns {IList<Fleet>}
+ * @returns {IList<FleetRecord>}
  */
 const playerFleetList = (state) => state.getIn(['player', 'fleets'], List());
 
@@ -74,9 +74,9 @@ const baseSlotItemList = (state) =>
  * Player profile getter (null-safe)
  * @type {function}
  * @param {ApplicationReducerState} state
- * @returns {PlayerProfile}
+ * @returns {PlayerProfileRecord}
  */
-const playerProfile = (state) => state.getIn(['player', 'profile'], new PlayerProfile());
+const playerProfile = (state) => state.getIn(['player', 'profile'], new PlayerProfileRecord());
 
 /**
  * Player material state getter (null-safe)
@@ -84,7 +84,7 @@ const playerProfile = (state) => state.getIn(['player', 'profile'], new PlayerPr
  * @param {ApplicationReducerState} state
  * @returns {MaterialStateRecord}
  */
-const playerMaterials = (state) => state.getIn(['player', 'materials'], new MaterialState());
+const playerMaterials = (state) => state.getIn(['player', 'materials'], new MaterialStateRecord());
 
 /**
  * Public-facing selectors
@@ -144,7 +144,7 @@ export const getPlayerFleets = createSelector(
  */
 export const getPlayerProfile = createSelector(
   [playerProfile],
-  (profile) => new PlayerProfile(profile)
+  (profile) => new PlayerProfileRecord(profile)
 );
 
 /**
@@ -153,7 +153,7 @@ export const getPlayerProfile = createSelector(
  */
 export const getPlayerMaterials = createSelector(
   [playerMaterials],
-  (materials) => new MaterialState(materials)
+  (materials) => new MaterialStateRecord(materials)
 );
 
 /**

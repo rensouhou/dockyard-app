@@ -5,7 +5,7 @@
  */
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Fleet } from '../../../records';
+import { FleetRecord } from '../../../records';
 import Ship from './ship';
 
 // region # <ShipList /> ship list component
@@ -50,7 +50,7 @@ FleetComponent.propTypes = {
 };
 
 FleetComponent.defaultProps = {
-  record: new Fleet()
+  record: new FleetRecord()
 };
 // endregion
 

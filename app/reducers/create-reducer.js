@@ -1,12 +1,9 @@
 /* eslint no-else-return: 0 */
 /**
- * @since 0.1.0
- */
-
-/**
  * @param {*} initialState
  * @param {Object} handlers
  * @returns {reducer}
+ * @since 0.1.0
  */
 export default function createReducer(initialState, handlers) {
   return function reducer(state = initialState, action) {

@@ -6,7 +6,7 @@
 import { List, Map, fromJS } from 'immutable';
 import { ApiEvents } from '../constants';
 import createReducer from './create-reducer';
-import { PlayerProfile, MaterialState as MaterialState } from '../records';
+import { PlayerProfileRecord, MaterialStateRecord } from '../records';
 
 const mergeWithFn = (prev, next) => next == null ? prev : next;
 
@@ -14,7 +14,7 @@ const mergeWithFn = (prev, next) => next == null ? prev : next;
  * @type {PlayerReducerState}
  */
 const initialState = fromJS({
-  profile: new PlayerProfile(),
+  profile: new PlayerProfileRecord(),
   quests: List(),
   fleets: List(),
   ships: List(),
@@ -24,7 +24,7 @@ const initialState = fromJS({
     repair: List(),
     construction: List()
   },
-  materials: new MaterialState()
+  materials: new MaterialStateRecord()
 });
 
 export default createReducer(initialState, {

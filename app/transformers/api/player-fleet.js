@@ -9,7 +9,7 @@ import { mission } from './mission';
 
 /**
  * @param {Object} d
- * @returns {Fleet|Map}
+ * @returns {FleetRecord|Map}
  */
 export const playerFleet = (d) => fromJS({
   flagship: d.api_flagship,
