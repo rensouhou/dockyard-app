@@ -227,7 +227,7 @@ export const Quest = Record({
   state: undefined,
   title: undefined,
   detail: undefined,
-  reward: new MaterialState(),
+  reward: new MaterialStateRecord(),
   progress: undefined
 });
 // endregion record
@@ -245,7 +245,7 @@ const craftedEntityDefault = {
   dockId: undefined,
   completionTime: undefined,
   consumed: {
-    materials: new MaterialState()
+    materials: new MaterialStateRecord()
   },
   flags: {
     wasSuccessful: undefined,
