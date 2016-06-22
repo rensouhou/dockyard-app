@@ -54,6 +54,14 @@
 
 /**
  * @typedef {BaseRecord} QuestRecord
+ * @property {number} id
+ * @property {number} type
+ * @property {number} category
+ * @property {number} state
+ * @property {string} title
+ * @property {string} detail
+ * @property {MaterialStateRecord} reward
+ * @property {*} progress
  */
 
 /**
