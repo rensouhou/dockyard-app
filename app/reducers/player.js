@@ -28,11 +28,6 @@ const initialState = fromJS({
 });
 
 export default createReducer(initialState, {
-  /**
-   * @param state
-   * @param payload
-   * @returns {*}
-   */
   [ApiEvents.GET_PLAYER_BASE_DATA](state, { payload }) {
     return state.set('slotItems', payload.getIn(['slotItems', 'items']));
   },
@@ -41,6 +36,9 @@ export default createReducer(initialState, {
   },
   [ApiEvents.GET_FLEET](state, { payload }) {
     return state.setIn(['fleets', payload.get('fleetId') - 1], payload.get('fleet'));
+  },
+  [ApiEvents.GET_FLEET_DATA](state, { payload }) {
+    return state.setIn(['fleets'], payload.get('fleets'));
   },
   [ApiEvents.LOAD_FLEET_PRESET](state, { payload }) {
     return state.setIn(['fleets', payload.get('fleetId') - 1], payload.get('fleet'));

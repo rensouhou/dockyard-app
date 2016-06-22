@@ -1,7 +1,8 @@
 /**
  * @overview
  */
-import { fromJS } from 'immutable';
+import { List, fromJS } from 'immutable';
+import { asFleetRecord } from '../../transformers/api/player-fleet';
 
 /**
  * @param {ApiActionRecord} p
@@ -9,9 +10,8 @@ import { fromJS } from 'immutable';
  * @constructor
  */
 export default function GET_FLEET_DATA(p) {
-  const { body, postBody } = p;
+  const { body } = p;
   return fromJS({
-    body,
-    postBody
+    fleets: List(body).map(asFleetRecord)
   });
 }
