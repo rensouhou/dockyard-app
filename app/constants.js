@@ -153,3 +153,9 @@ export const ShipHealthState = {
   YELLOW: 'YELLOW',
   GREEN: 'GREEN'
 };
+
+export const QuestState = {
+  AVAILABLE: 1,
+  IN_PROGRESS: 2,
+  DONE: 3
+};

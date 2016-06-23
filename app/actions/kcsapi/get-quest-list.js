@@ -15,15 +15,18 @@ import { questAsRecord } from '../../transformers/api/quest';
  * @param {ApiActionRecord} p
  * @returns {any}
  * @constructor
+ * @since 0.1.0
  * @version 0.3.0
  */
 export default function GET_QUEST_LIST(p) {
   const { body, postBody } = p;
   return fromJS({
-    totalQuestCount: asNumber(body.api_count),
-    currentPage: asNumber(body.api_disp_page),
-    currentActiveTab: questListTabs(postBody.api_tab_id),
-    totalPageCount: asNumber(body.api_page_count),
+    questList: {
+      totalQuestCount: asNumber(body.api_count),
+      currentPage: asNumber(body.api_disp_page),
+      currentActiveTab: questListTabs(postBody.api_tab_id),
+      totalPageCount: asNumber(body.api_page_count)
+    },
     quests: List(body.api_list).map((q) => questAsRecord(q))
                                .toMap()
                                .flatMap((q) => Map.of(q.id, q))

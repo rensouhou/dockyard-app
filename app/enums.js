@@ -21,11 +21,12 @@ export const QuestProgressState = Enum({
  * @readonly
  * @enum {number}
  * @type {Enum|Function}
+ * @property {number} IN_PROGRESS
  */
 export const QuestState = Enum({
-  Available: 1,
-  InProgress: 2,
-  Done: 3
+  AVAILABLE: 1,
+  IN_PROGRESS: 2,
+  DONE: 3
 });
 
 /**

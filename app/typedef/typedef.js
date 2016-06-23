@@ -133,6 +133,15 @@
  * @property {FleetRecord} fleet
  */
 
+/**
+ * @typedef {BaseReducerState} QuestReducerState
+ * @property {number} totalQuestCount
+ * @property {number} currentPage
+ * @property {number} totalPageCount
+ * @property {number} currentActiveTab
+ * @property {IList<QuestRecord>} questList
+ */
+
 // Misc. library definitions
 // -------------------------
 /**
