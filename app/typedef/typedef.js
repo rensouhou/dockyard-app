@@ -97,25 +97,40 @@
  * @typedef {BaseRecord} PlayerProfileRecord
  */
 
+/**
+ * @typedef {BaseRecord} ProfileRecord
+ */
+
 // UI state definitions
 // --------------------
 /**
  * @typedef {Object|Map<string, *>} ApplicationUIState
  * @param {List<FleetRecord>} fleets
- * @param {PlayerProfileRecord} profile
+ * @param {ProfileRecord} profile
  * @param {MaterialStateRecord} materials
- * @param {List<Ship>} ships
+ * @param {List<ShipRecord>} ships
  * @param {List<SlotItem>} slotItems
  */
 
 // Reducer state definitions
 // -------------------------
 /**
- * @typedef {Object|Map<string, *>} ApplicationReducerState
+ * @typedef {Object|Map<string, *>} BaseReducerState
  */
 
 /**
- * @typedef {Object|Map<string, *>} PlayerReducerState
+ * @typedef {BaseReducerState} ApplicationReducerState
+ */
+
+/**
+ * @typedef {BaseReducerState} PlayerReducerState
+ * @deprecated
+ */
+
+/**
+ * @typedef {BaseReducerState} OpponentReducerState
+ * @property {ProfileRecord} profile
+ * @property {FleetRecord} fleet
  */
 
 // Misc. library definitions
