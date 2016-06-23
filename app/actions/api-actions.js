@@ -34,7 +34,7 @@ export const findEvent = (findPath) => {
 
 /**
  * Create a `Seq` of action handlers that is in a usable form for the Redux application.
- * @type {Iterable<any, any>}
+ * @type {Seq.Keyed<any, any>}
  */
 export const actionHandlers = Seq.Keyed(handlers)
                                  .flatMap((handlerRecord, event) =>

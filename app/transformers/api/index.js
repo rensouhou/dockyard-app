@@ -6,7 +6,7 @@
 import { baseShip, baseShipGraphic, baseShipType } from './base-ship';
 import { baseSlotItem } from './base-slotitem';
 import { baseMission } from './base-mission';
-import { opponentFleet } from './opponent-fleet';
+import { opponentProfile } from './opponent-fleet';
 import { playerSlotItem } from './player-slotitem';
 import * as Materials from './materials';
 
@@ -16,7 +16,7 @@ export {
   baseShipGraphic,
   baseShipType,
   baseMission,
-  opponentFleet,
+  opponentProfile,
   playerSlotItem,
   Materials
 };

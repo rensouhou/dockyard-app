@@ -4,12 +4,21 @@
  *
  * @since 0.1.0
  */
-import { List, Map } from 'immutable';
+import { List, Map, fromJS } from 'immutable';
 import { playerSlotItem } from '../../transformers/api/player-slotitem';
 import { constructionDock } from '../../transformers/api/construction-dock';
 
-export default function GET_PLAYER_BASE_DATA({ body }) {
-  return Map({
+/**
+ * Handler function for the `GET_PLAYER_BASE_DATA` event.
+ *
+ * @param {ApiActionRecord} apiAction
+ * @returns {IMap<string, *>}
+ * @constructor
+ * @version 0.2.0
+ */
+export default function GET_PLAYER_BASE_DATA(apiAction) {
+  const { body } = apiAction;
+  return fromJS({
     slotItems: Map({
       items: List(body.api_slot_item).map(playerSlotItem),
       unused: Map(body.api_unsetslot),

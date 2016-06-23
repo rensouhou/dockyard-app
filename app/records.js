@@ -31,6 +31,22 @@ export class FleetRecord extends Record(fleetRecordDefaults) {
   hasShips() {
     return this.ships.size > 0;
   }
+
+  /**
+   * Check if the fleet belongs to a player or not
+   * @returns {boolean}
+   */
+  isPlayerFleet() {
+    return true;
+  }
+
+  /**
+   * Check if the fleet is hostile
+   * @returns {boolean}
+   */
+  isEnemyFleet() {
+    return false;
+  }
 }
 // endregion
 
@@ -52,6 +68,7 @@ const materialStateDefaults = {
  */
 export class MaterialStateRecord extends Record(materialStateDefaults) {
   static basicFields = List.of('fuel', 'ammo', 'steel', 'bauxite');
+
   getBasic() {
     return this.keySeq().filter((type) => MaterialStateRecord.basicFields.includes(type));
   }
@@ -83,13 +100,15 @@ const playerProfileDefaults = {
   tutorial: Map({})
 };
 
-export class PlayerProfileRecord extends Record(playerProfileDefaults) {
+export class ProfileRecord extends Record(playerProfileDefaults) {
   isPlayer() {
     return new Error('NYI');
   }
+
   isEnemy() {
     return new Error('NYI');
   }
+
   isPracticeEnemy() {
     return new Error('NYI');
   }
@@ -147,8 +166,9 @@ export const shipRecordDefault = {
  * Ship record
  * @type {ShipRecord}
  * @extends {BaseRecord}
+ * @since 0.2.0
  */
-export class Ship extends Record(shipRecordDefault) {
+export class ShipRecord extends Record(shipRecordDefault) {
   /**
    * Check if ship is an enemy
    * @returns {boolean}
@@ -158,7 +178,8 @@ export class Ship extends Record(shipRecordDefault) {
   }
 
   /**
-   * Check if ship's health is critical
+   * Check if ship's health is critical.
+   * Useful for checking if player should retreat.
    * @returns {boolean}
    */
   isCritical() {
@@ -293,7 +314,7 @@ export class CraftedEntityRecord extends Record(craftedEntityDefault) {
 export const Player = {
   FleetRecord,
   MaterialStateRecord,
-  PlayerProfileRecord,
+  ProfileRecord,
   CraftedEntityRecord
 };
 

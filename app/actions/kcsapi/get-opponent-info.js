@@ -4,11 +4,20 @@
  *
  * @since 0.1.0
  */
-import { Map } from 'immutable';
-import { opponentFleet } from '../../transformers/api/opponent-fleet';
+import { fromJS } from 'immutable';
+import { asProfileRecord, asFleetRecord } from '../../transformers/api/opponent-fleet';
 
-export default function GET_OPPONENT_INFO({ body }) {
-  return Map({
-    fleet: opponentFleet(body)
+/**
+ * Handler function for the `GET_OPPONENT_INFO` event
+ *
+ * @param {ApiActionRecord} apiAction
+ * @returns {IMap<string, *>}
+ * @constructor
+ */
+export default function GET_OPPONENT_INFO(apiAction) {
+  const { body } = apiAction;
+  return fromJS({
+    profile: asProfileRecord(body),
+    fleet: asFleetRecord(body)
   });
 }

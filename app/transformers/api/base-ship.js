@@ -10,7 +10,7 @@ import { parseMaterialArray, asRecord } from './materials';
 /**
  * @type {function}
  * @param {Object} s
- * @returns {Ship}
+ * @returns {ShipRecord}
  * @todo(@stuf): create methods to check if a ship is player/enemy
  */
 export const baseShip = (s) => fromJS({

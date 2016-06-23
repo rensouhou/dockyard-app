@@ -13,13 +13,16 @@ import { FleetRecord, ProfileRecord } from '../records';
  * @type {OpponentReducerState}
  */
 const initialState = fromJS({
-  profile: new ProfileRecord(),
-  fleet: new FleetRecord()
+  opponents: [],
+  opponent: {
+    profile: new ProfileRecord(),
+    fleet: new FleetRecord()
+  }
 });
 
 export default createReducer(initialState, {
   [ApiEvents.GET_PVP_OPPONENT_LIST](state, { payload }) {
-    return state;
+    return state.mergeIn(['opponent'], payload);
   },
   [ApiEvents.GET_OPPONENT_INFO](state, { payload }) {
     return state;

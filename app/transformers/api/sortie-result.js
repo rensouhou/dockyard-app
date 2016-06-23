@@ -2,32 +2,53 @@
  * @overview
  *
  * @since 0.1.0
+ * @todo Rewrite me
  */
 import { asBool } from '../primitive';
 
-/** Reward ship */
-const getShip = o => ({
+/**
+ * Reward ship
+ * @private
+ * @type {function}
+ * @param {Object} o
+ * @returns {Object}
+ */
+const getShip = (o) => ({
   id: o.api_ship_id,
   name: o.api_ship_name,
   type: o.api_ship_type,
   flavorText: o.api_ship_getmes
 });
 
-/** Reward item */
-const getItem = o => ({
+/**
+ * Reward item
+ * @private
+ * @type {function}
+ * @param {Object} o
+ * @returns {Object}
+ */
+const getItem = (o) => ({
   id: o.api_useitem_id,
   name: o.api_useitem_name
 });
 
-/** Reward slot item */
+/**
+ * Reward slot item
+ * @private
+ * @type {function}
+ * @param {Object} o
+ * @returns {Object}
+ */
 const getSlotItem = (o) => ({
   id: o.api_slotitem_id
 });
 
 /**
- * @param o
+ * @type {function}
+ * @param {Object} o
+ * @returns {Object}
  */
-export const sortieResult = o => {
+export const sortieResult = (o) => {
   const ei = o.api_enemy_info;
   const gs = o.api_get_ship;
   const gi = o.api_get_useitem;

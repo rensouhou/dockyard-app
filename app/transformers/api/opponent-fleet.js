@@ -5,9 +5,16 @@
  * @author Stefan Rimaila <stefan@rimaila.fi>
  * @module app/transformers/api/opponent-fleet
  */
-import { asBool, getObjectOrDefault, notEmpty } from '../primitive';
+import { getObjectOrDefault as objOrDef, notEmpty } from '../primitive';
+import { FleetRecord, ShipRecord, ProfileRecord } from '../../records';
 
-const opponentShip = o => ({
+/**
+ * @private
+ * @type {function}
+ * @param {Object} o
+ * @returns {Object}
+ */
+const opponentShip = (o) => ({
   id: o.api_id,
   shipId: o.api_ship_id,
   level: o.api_level,
@@ -15,10 +22,37 @@ const opponentShip = o => ({
 });
 
 /**
- * @param o
- * @todo(@stuf): add type of `OpponentFleet extends Fleet`
+ * @private
+ * @type {function}
+ * @param {Object} o
+ * @returns {ShipRecord}
  */
-export const opponentFleet = (o) => ({
+const asShipRecord = (o) => new ShipRecord(opponentShip(o));
+
+/**
+ * @private
+ * @type {function}
+ * @param {Object} o
+ * @returns {Object}
+ */
+const opponentFleet = (o) => ({
+  name: o.api_deckname,
+  ships: objOrDef(o.api_deck).api_ships.filter(notEmpty).map(asShipRecord)
+});
+
+/**
+ * @type {function}
+ * @param {Object} o
+ * @returns {FleetRecord}
+ */
+export const asFleetRecord = (o) => new FleetRecord(opponentFleet(o));
+
+/**
+ * @type {function}
+ * @param {Object} o
+ * @returns {ProfileRecord} o
+ */
+export const opponentProfile = (o) => ({
   id: o.api_member_id,
   level: o.api_level,
   comment: o.api_cmt,
@@ -27,15 +61,13 @@ export const opponentFleet = (o) => ({
   counts: {
     ships: o.api_ship,
     slotItems: o.api_slotitem
-  },
-  fleet: {
-    name: o.api_deckname,
-    ships: getObjectOrDefault(o.api_deck).api_ships.filter(notEmpty).map(opponentShip)
-  },
-  $_unknown: {
-    friend: asBool(o.api_friend),
-    commentId: o.api_cmt_id,
-    nameId: o.api_deckname_id,
-    nicknameId: o.api_nickname_id
   }
 });
+
+/**
+ * @type {function}
+ * @param {Object} o
+ * @returns {ProfileRecord}
+ */
+export const asProfileRecord = (o) => new ProfileRecord(opponentProfile(o));
+

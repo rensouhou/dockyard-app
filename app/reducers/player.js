@@ -6,15 +6,17 @@
 import { List, Map, fromJS } from 'immutable';
 import { ApiEvents } from '../constants';
 import createReducer from './create-reducer';
-import { PlayerProfileRecord, MaterialStateRecord } from '../records';
+import { ProfileRecord, MaterialStateRecord } from '../records';
 
 const mergeWithFn = (prev, next) => next == null ? prev : next;
 
 /**
+ * @private
+ * @readonly
  * @type {PlayerReducerState}
  */
 const initialState = fromJS({
-  profile: new PlayerProfileRecord(),
+  profile: new ProfileRecord(),
   quests: List(),
   fleets: List(),
   ships: List(),

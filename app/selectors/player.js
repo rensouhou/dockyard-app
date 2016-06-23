@@ -9,10 +9,10 @@
 import { Map, List } from 'immutable';
 import { createSelector } from 'reselect';
 import {
-  PlayerProfileRecord,
+  ProfileRecord,
   MaterialStateRecord,
   FleetRecord as FleetRecord,
-  Ship as ShipRecord,
+  ShipRecord as ShipRecord,
   SlotItem as SlotItemRecord
 } from '../records';
 
@@ -32,7 +32,7 @@ const playerFleetList = (state) => state.getIn(['player', 'fleets'], List());
  * Get the player ship list
  * @type {function}
  * @param {ApplicationReducerState} state
- * @returns {IMap<number, Ship>}
+ * @returns {IMap<number, ShipRecord>}
  */
 const playerShipList = (state) =>
   state.getIn(['player', 'ships'], List())
@@ -43,7 +43,7 @@ const playerShipList = (state) =>
  * Get the master game ship list
  * @type {function}
  * @param {ApplicationReducerState} state
- * @returns {IMap<number, Ship>}
+ * @returns {IMap<number, ShipRecord>}
  */
 const baseShipList = (state) =>
   state.getIn(['game', 'ships'], List())
@@ -63,7 +63,7 @@ const playerSlotItemList = (state) =>
 /**
  * @type {function}
  * @param {ApplicationReducerState} state
- * @return {IMap<number, SlotItem>}
+ * @return {Immutable.Map<number, SlotItem>}
  */
 const baseSlotItemList = (state) =>
   state.getIn(['game', 'slotItems'], List())
@@ -74,9 +74,9 @@ const baseSlotItemList = (state) =>
  * Player profile getter (null-safe)
  * @type {function}
  * @param {ApplicationReducerState} state
- * @returns {PlayerProfileRecord}
+ * @returns {ProfileRecord}
  */
-const playerProfile = (state) => state.getIn(['player', 'profile'], new PlayerProfileRecord());
+const playerProfile = (state) => state.getIn(['player', 'profile'], new ProfileRecord());
 
 /**
  * Player material state getter (null-safe)
@@ -128,7 +128,7 @@ export const getPlayerShips = createSelector(
 
 /**
  * Player fleet selector
- * Populates the fleet's ship list with {@link Ship} records
+ * Populates the fleet's ship list with {@link ShipRecord} records
  * @since 0.2.0
  */
 export const getPlayerFleets = createSelector(
@@ -144,7 +144,7 @@ export const getPlayerFleets = createSelector(
  */
 export const getPlayerProfile = createSelector(
   [playerProfile],
-  (profile) => new PlayerProfileRecord(profile)
+  (profile) => new ProfileRecord(profile)
 );
 
 /**
