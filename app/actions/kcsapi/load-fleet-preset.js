@@ -4,12 +4,22 @@
  *
  * @since 0.1.0
  */
-import { Map } from 'immutable';
+import { fromJS } from 'immutable';
 import { playerFleet } from '../../transformers/api/player-fleet';
 import { asNumber } from '../../transformers/primitive';
 
-export default function LOAD_FLEET_PRESET({ body, postBody }) {
-  return Map({
+/**
+ * Handler function for the `LOAD_FLEET_PRESET` event
+ *
+ * @param {ApiActionRecord} apiAction
+ * @returns {ApiActionResult}
+ * @constructor
+ * @since 0.1.0
+ * @version 0.2.0
+ */
+export default function LOAD_FLEET_PRESET(apiAction) {
+  const { body, postBody } = apiAction;
+  return fromJS({
     fleet: playerFleet(body),
     fleetId: asNumber(postBody.api_deck_id),
     presetId: asNumber(postBody.api_preset_id)

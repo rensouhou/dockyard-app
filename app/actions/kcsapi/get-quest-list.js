@@ -13,7 +13,7 @@ import { questAsRecord } from '../../transformers/api/quest';
  * Handler function for the `GET_QUEST_LIST` event.
  *
  * @param {ApiActionRecord} apiAction
- * @returns {any}
+ * @returns {ApiActionResult}
  * @constructor
  * @since 0.1.0
  * @version 0.3.0

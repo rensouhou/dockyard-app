@@ -12,8 +12,10 @@ import { CraftedEntityRecord } from '../../records';
 
 /**
  * @private
+ * @type {function}
  * @param {Object} slotItem
  * @returns {Object}
+ * @since 0.1.0
  */
 const getSlotItem = (slotItem = {}) => ({
   playerId: slotItem.api_id,
@@ -21,10 +23,16 @@ const getSlotItem = (slotItem = {}) => ({
 });
 
 /**
- * @returns {any}
+ * Handler function for the `CRAFT_ITEM` event
+ *
+ * @param {ApiActionRecord} apiAction
+ * @returns {ApiActionResult}
  * @constructor
+ * @since 0.1.0
+ * @version 0.2.0
  */
-export default function CRAFT_ITEM({ body, postBody }) {
+export default function CRAFT_ITEM(apiAction) {
+  const { body, postBody } = apiAction;
   return fromJS({
     craftedEntity: new CraftedEntityRecord({
       type: ConstructionType.ITEM,

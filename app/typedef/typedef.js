@@ -18,6 +18,12 @@
  * @property {Map<string, *>} UIStatePlayer
  */
 
+// API types
+// ---------
+/**
+ * @typedef {IMap<string, *>} ApiActionResult
+ */
+
 // Player records
 // --------------
 /**
@@ -185,4 +191,13 @@
 
 /**
  * @typedef {Immutable.Iterable} IIterable
+ */
+
+// Other
+// -----
+
+/**
+ * @typedef {Object} MissionReward
+ * @property {number} id
+ * @property {number} amount
  */

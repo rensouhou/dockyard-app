@@ -7,7 +7,17 @@
 import { fromJS } from 'immutable';
 import { sortieResult } from '../../transformers/api/sortie-result';
 
-export default function FINISHED_SORTIE({ body }) {
+/**
+ * Handler function for the `FINISHED_SORTIE` event
+ *
+ * @param {ApiActionRecord} apiAction
+ * @returns {ApiActionResult}
+ * @constructor
+ * @since 0.1.0
+ * @version 0.1.0
+ */
+export default function FINISHED_SORTIE(apiAction) {
+  const { body } = apiAction;
   return fromJS({
     result: sortieResult(body)
   });

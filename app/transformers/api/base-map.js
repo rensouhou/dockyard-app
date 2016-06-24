@@ -42,6 +42,7 @@ export const mapArea = (o) => ({
  * @param {!Object} o
  * @return {Object}
  * @since 0.1.0
+ * @version 0.2.0
  */
 export const mapInfo = (o) => ({
   id: asNumber(o.api_id),

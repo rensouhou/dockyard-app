@@ -16,12 +16,7 @@ const missionResult = Enum({
 });
 
 /**
- * @typedef {Object} MissionReward
- * @property {number} id
- * @property {number} amount
- */
-
-/**
+ * @private
  * @returns {MissionReward}
  */
 const parseReward = ({ api_useitem_id, api_useitem_count }) => Map({
@@ -30,12 +25,16 @@ const parseReward = ({ api_useitem_id, api_useitem_count }) => Map({
 });
 
 /**
- * @param {ApiAction} p
- * @returns {Object}
+ * Handler function for the `COMPLETE_MISSION` event
+ *
+ * @param {ApiActionRecord} apiAction
+ * @returns {ApiActionResult}
  * @constructor
+ * @since 0.1.0
+ * @version 0.2.0
  */
-export default function COMPLETE_MISSION(p) {
-  const { body, postBody } = p;
+export default function COMPLETE_MISSION(apiAction) {
+  const { body, postBody } = apiAction;
   return fromJS({
     fleetId: asNumber(postBody.api_deck_id),
     result: missionResult(body.api_clear_result),

@@ -6,6 +6,18 @@
  */
 import { fromJS } from 'immutable';
 
-export default function FINISHED_PRACTICE({ body, postBody }) {
-  return fromJS({ body, postBody });
+/**
+ * Handler function for the `FINISHED_PRACTICE` event
+ *
+ * @param {ApiActionRecord} apiAction
+ * @returns {ApiActionResult}
+ * @constructor
+ * @since 0.1.0
+ */
+export default function FINISHED_PRACTICE(apiAction) {
+  const { body, postBody } = apiAction;
+  return fromJS({
+    body,
+    postBody
+  });
 }

@@ -14,9 +14,15 @@ import { playerFleet } from '../../transformers/api/player-fleet';
 
 /**
  * Handler for the `GET_BASE_DATA` API event
- * @type {ApiActionRecord}
+ *
+ * @param {ApiActionRecord} p
+ * @returns {ApiActionResult}
+ * @constructor
+ * @since 0.1.0
+ * @version 0.3.0
  */
-export default function GET_BASE_DATA({ body }) {
+export default function GET_BASE_DATA(p) {
+  const { body } = p;
   return fromJS({
     id: asNumber(body.api_basic.api_member_id),
     profile: playerProfile(body.api_basic),

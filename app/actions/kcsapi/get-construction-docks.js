@@ -23,7 +23,7 @@ const State = Enum({
 });
 
 /**
- * @param dock
+ * @param {Object} dock
  * @return {Dock}
  */
 const parseDock = (dock) => ({
@@ -34,7 +34,15 @@ const parseDock = (dock) => ({
   state: State(dock.api_state)
 });
 
-export default function GET_CONSTRUCTION_DOCKS({ body }) {
+/**
+ * @param {ApiActionRecord} apiAction
+ * @returns {ApiActionResult}
+ * @constructor
+ * @since 0.1.0
+ * @version 0.2.0
+ */
+export default function GET_CONSTRUCTION_DOCKS(apiAction) {
+  const { body } = apiAction;
   return fromJS({
     docks: body.map(parseDock)
   });

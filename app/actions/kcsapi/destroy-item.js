@@ -4,11 +4,21 @@
  *
  * @since 0.1.0
  */
-import { Map } from 'immutable';
+import { fromJS } from 'immutable';
 import { parseMaterialArray, asRecord } from '../../transformers/api/materials';
 
-export default function DESTROY_ITEM({ body }) {
-  return Map({
+/**
+ * Handler for the `DESTROY_ITEM` event
+ *
+ * @param {ApiActionRecord} apiAction
+ * @returns {ApiActionResult}
+ * @constructor
+ * @since 0.1.0
+ * @version 0.2.0
+ */
+export default function DESTROY_ITEM(apiAction) {
+  const { body } = apiAction;
+  return fromJS({
     materials: asRecord(parseMaterialArray(body.api_material))
   });
 }

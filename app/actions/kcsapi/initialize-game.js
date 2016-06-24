@@ -20,9 +20,15 @@ import { baseShip, baseShipType, baseShipGraphic } from '../../transformers/api/
 
 /**
  * Handler for the `INITIALIZE_GAME` API event
- * @type {ApiActionRecord}
+ *
+ * @param {ApiActionRecord} apiAction
+ * @returns {ApiActionResult}
+ * @constructor
+ * @since 0.1.0
+ * @version 0.2.0
  */
-export default function INITIALIZE_GAME({ body }) {
+export default function INITIALIZE_GAME(apiAction) {
+  const { body } = apiAction;
   return fromJS({
     ships: body.api_mst_ship.map(baseShip),
     shipGraphics: body.api_mst_shipgraph.map(baseShipGraphic),
