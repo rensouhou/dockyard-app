@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { actionHandlers } from '../actions/api-actions';
 import { actions as applicationActions } from '../actions/application';
 import { getPlayer } from '../selectors/player';
+import { getQuestState } from '../selectors/quest';
 import Game from '../components/Game';
 
 /**
@@ -18,7 +19,8 @@ import Game from '../components/Game';
  */
 const mapStateToProps = (state) => ({
   ui: {
-    player: getPlayer(state)
+    player: getPlayer(state),
+    quest: getQuestState(state)
   }
 });
 

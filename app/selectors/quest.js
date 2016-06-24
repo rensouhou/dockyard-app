@@ -3,17 +3,15 @@
  * @since 0.3.0
  */
 import { createSelector } from 'reselect';
-import { Map, List, Seq } from 'immutable';
-import { QuestRecord } from '../records';
+import { Iterable, Map, List } from 'immutable';
 import { QuestState } from '../constants';
 
 /**
  * @param {ApplicationStateRecord|Map} state
  */
 const quests = (state) => state.getIn(['quest', 'questList'], List())
-                               .map((q) => new QuestRecord(q))
                                .toMap()
-                               .flatMap((q) => Map.of(q.id, q));
+                               .flatMap((q) => Iterable.isIterable(q) ? Map.of(q.get('id'), q) : Map());
 
 /**
  * Get all quests currently present in the store.
@@ -30,7 +28,7 @@ export const getQuests = createSelector(
  */
 export const getActiveQuests = createSelector(
   [quests],
-  (questList) => Seq.Keyed(questList).filter((q) => q.state === QuestState.DONE)
+  (questList) => questList.filter((q) => q.state === QuestState.DONE)
 );
 
 /**
