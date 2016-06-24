@@ -33,7 +33,7 @@ ShipSlotItems.propTypes = {
 
 // region # <Ship /> component
 /**
- * @param {{record: Record|Map<string, *>}} props
+ * @param {Object} props
  * @returns {JSX.Element}
  * @constructor
  */

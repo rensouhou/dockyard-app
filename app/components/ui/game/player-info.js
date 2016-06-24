@@ -7,7 +7,11 @@ import React, { Component, PropTypes } from 'react';
 import { StaticPanel } from '../';
 import css from './player-info.scss';
 
-export default class PlayerInfo extends Component {
+/**
+ * @class PlayerInfoComponent
+ * @extends Component
+ */
+export default class PlayerInfoComponent extends Component {
   static propTypes = {
     profile: PropTypes.object,
     ships: PropTypes.number,

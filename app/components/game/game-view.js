@@ -12,6 +12,8 @@ import './game-view.scss';
 /**
  * Public-facing game view component that contains the
  * game frame.
+ * @class GameView
+ * @extends Component
  */
 export default class GameView extends Component {
   static propTypes = {

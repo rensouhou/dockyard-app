@@ -7,7 +7,11 @@
 import React, { Component, PropTypes } from 'react';
 import { FunctionalityTestPanel } from './ui';
 
-export default class Test extends Component {
+/**
+ * @class TestComponent
+ * @extends Component
+ */
+export default class TestComponent extends Component {
   static propTypes = {
     actions: PropTypes.object
   };

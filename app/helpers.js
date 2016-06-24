@@ -3,8 +3,7 @@
  * @overview
  *
  * @since 0.1.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
- * @flow
+ * @version 0.2.0
  */
 import R from 'ramda';
 import m from 'monet';
@@ -13,7 +12,6 @@ const { Maybe } = m;
 const { path, pathOr, isEmpty } = R;
 
 /**
- * @template T
  * @param {?Array<T>} obj
  * @param {!string[]} objPath
  * @returns {Array<T>}
@@ -21,7 +19,6 @@ const { path, pathOr, isEmpty } = R;
 export const listOrDefault = (obj, ...objPath) => pathOr([], objPath, obj);
 
 /**
- * @template T, U
  * @param {?Object<T, U>} obj
  * @param {!string[]} objPath
  * @returns {Object<T, U>}
@@ -29,7 +26,6 @@ export const listOrDefault = (obj, ...objPath) => pathOr([], objPath, obj);
 export const objOrDefault = (obj, ...objPath) => pathOr({}, objPath, obj);
 
 /**
- * @template T
  * @param obj
  * @param propPath
  * @returns {Maybe<T>}

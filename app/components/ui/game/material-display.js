@@ -40,6 +40,10 @@ MaterialDisplayComponent.propTypes = {
 
 export default MaterialDisplayComponent;
 
+/**
+ * @class MaterialDisplayComponent
+ * @extends Component
+ */
 export class MaterialDisplay extends Component {
   static propTypes = {
     data: PropTypes.any,

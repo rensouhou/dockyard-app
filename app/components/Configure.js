@@ -1,10 +1,13 @@
 /* eslint no-console: 0 */
 /**
- * @flow
  */
 import React, { Component, PropTypes } from 'react';
 
-export default class Configure extends Component {
+/**
+ * @class ConfigureComponent
+ * @extends Component
+ */
+export default class ConfigureComponent extends Component {
   static propTypes = {
     actions: PropTypes.object
   };
@@ -18,10 +21,10 @@ export default class Configure extends Component {
     };
   }
 
-  readConfiguration = (file:string) =>
+  readConfiguration = (file) =>
     this.props.actions.readConfiguration(file);
 
-  saveConfiguration = (file:string, content:any) =>
+  saveConfiguration = (file, content) =>
     this.props.actions.saveConfiguration({ file, content });
 
   render() {

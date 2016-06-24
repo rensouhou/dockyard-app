@@ -23,6 +23,10 @@ const fleetRecordDefaults = {
   ships: List()
 };
 
+/**
+ * @class FleetRecord
+ * @extends Record.Class
+ */
 export class FleetRecord extends Record(fleetRecordDefaults) {
   /**
    * Check whether the fleet contains any ships.
@@ -63,8 +67,8 @@ const materialStateDefaults = {
 };
 
 /**
- * @extends {IMap}
- * @extends {Record.Class}
+ * @extends Immutable.Map
+ * @extends Record.Class
  */
 export class MaterialStateRecord extends Record(materialStateDefaults) {
   static basicFields = List.of('fuel', 'ammo', 'steel', 'bauxite');
@@ -101,6 +105,10 @@ const playerProfileDefaults = {
   tutorial: Map({})
 };
 
+/**
+ * @class ProfileRecord
+ * @extends Record.Class
+ */
 export class ProfileRecord extends Record(playerProfileDefaults) {
   isPlayer() {
     return new Error('NYI');
@@ -164,9 +172,8 @@ export const shipRecordDefault = {
 };
 
 /**
- * Ship record
- * @type {ShipRecord}
- * @extends {BaseRecord}
+ * @class ShipRecord
+ * @extends BaseRecord
  * @since 0.2.0
  */
 export class ShipRecord extends Record(shipRecordDefault) {
@@ -280,8 +287,8 @@ const craftedEntityDefault = {
 
 // region ### CraftedEntity record definition
 /**
- * @type {CreatedEntityRecord}
- * @extends {BaseRecord}
+ * @class CraftedEntityRecord
+ * @extends BaseRecord
  */
 export class CraftedEntityRecord extends Record(craftedEntityDefault) {
   /**

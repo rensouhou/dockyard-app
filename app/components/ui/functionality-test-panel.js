@@ -2,13 +2,17 @@
  * @overview
  *
  * @since 0.1.0
- * @author Stefan Rimaila <stefan@rimaila.fi>
  */
 import React, { Component, PropTypes } from 'react';
 import StaticPanel from './static-panel';
 import Button from './button';
 import css from './functionality-test-panel.scss';
 
+/**
+ * @deprecated
+ * @class FunctionalityTestPanel
+ * @extends Component
+ */
 export default class FunctionalityTestPanel extends Component {
   static propTypes = {
     actions: PropTypes.object,

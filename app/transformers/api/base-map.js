@@ -74,6 +74,7 @@ export const mapBgm = (o) => ({
  * Node types `AIR_NODE` (9) and `AIR_RAID_NODE` (10) need some attention.
  * @type {Enum}
  * @since 0.2.0
+ * @version 0.2.0
  */
 const MapCellType = Enum({
   START_NODE: 0,
