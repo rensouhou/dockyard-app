@@ -19,7 +19,7 @@
     "package-all": "npm run package -- --all",
     "postinstall": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json",
     "dev": "concurrently --raw --prefix \"{time}-{pid}\" --kill-others \"npm run hot-server\" \"npm run start-hot\"",
-    "doc": "esdoc -c ./esdoc.json"
+    "docs:build": "esdoc -c ./esdoc.json"
   },
   "bin": {
     "electron": "./node_modules/.bin/electron"
