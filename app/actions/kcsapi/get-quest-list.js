@@ -12,14 +12,14 @@ import { questAsRecord } from '../../transformers/api/quest';
 /**
  * Handler function for the `GET_QUEST_LIST` event.
  *
- * @param {ApiActionRecord} p
+ * @param {ApiActionRecord} apiAction
  * @returns {any}
  * @constructor
  * @since 0.1.0
  * @version 0.3.0
  */
-export default function GET_QUEST_LIST(p) {
-  const { body, postBody } = p;
+export default function GET_QUEST_LIST(apiAction) {
+  const { body, postBody } = apiAction;
   return fromJS({
     questList: {
       totalQuestCount: asNumber(body.api_count),

@@ -15,8 +15,9 @@ const isInitialized = (props) => R.complement(R.isEmpty(R.pathOr([], ['applicati
 
 /**
  * @param props
- * @returns {JSX.Element}
+ * @returns {XML|JSX.Element}
  * @constructor
+ * @version 0.2.0
  */
 const GameComponent = (props) => {
   if (!isInitialized(props)) {
@@ -24,6 +25,8 @@ const GameComponent = (props) => {
       <div>Not ready yet.</div>
     );
   }
+
+  console.log('GameComponent.props =>', props);
 
   return (
     <div className={css.container}>

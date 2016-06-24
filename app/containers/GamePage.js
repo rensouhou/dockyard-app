@@ -14,8 +14,10 @@ import { getQuestState } from '../selectors/quest';
 import Game from '../components/Game';
 
 /**
- * @param state
- * @returns {UIState}
+ * @param {IMap<string, *>} state
+ * @returns {ApplicationUIState}
+ * @since 0.1.0
+ * @version 0.3.0
  */
 const mapStateToProps = (state) => ({
   ui: {
@@ -26,6 +28,9 @@ const mapStateToProps = (state) => ({
 
 /**
  * @param {Dispatch} dispatch
+ * @returns {ApplicationUIState}
+ * @since 0.1.0
+ * @version 0.2.0
  */
 const mapDispatchToProps = (dispatch) => ({
   actions: {
