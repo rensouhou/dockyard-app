@@ -22,11 +22,12 @@
 
   h2 {
     font-size: 2rem;
-    font-weight: normal;
+    font-weight: bold;
     margin: 0 0 1rem;
 
     .version {
       color: rgba(255, 255, 255, 0.54);
+      font-weight: normal;
     }
   }
 

@@ -78,6 +78,7 @@ export class MaterialStateRecord extends Record(materialStateDefaults) {
 
 // region ## PlayerProfile record
 const playerProfileDefaults = {
+  id: undefined,
   nickname: '',
   level: undefined,
   rank: undefined,
