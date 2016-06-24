@@ -9,7 +9,7 @@ import { QuestState } from '../constants';
 /**
  * @param {ApplicationStateRecord|Map} state
  */
-const quests = (state) => state.getIn(['quest', 'questList'], List())
+const quests = (state) => state.getIn(['quest', 'quests'], List())
                                .toMap()
                                .flatMap((q) => Iterable.isIterable(q) ? Map.of(q.get('id'), q) : Map());
 
@@ -28,7 +28,7 @@ export const getQuests = createSelector(
  */
 export const getActiveQuests = createSelector(
   [quests],
-  (questList) => questList.filter((q) => q.state === QuestState.DONE)
+  (questList) => questList.filter((q) => q.state === QuestState.IN_PROGRESS)
 );
 
 /**

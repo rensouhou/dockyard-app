@@ -25,6 +25,7 @@ const getSlotItem = (slotItem = {}) => ({
 /**
  * Handler function for the `CRAFT_ITEM` event
  *
+ * @name CRAFT_ITEM
  * @param {ApiActionRecord} apiAction
  * @returns {ApiActionResult}
  * @constructor

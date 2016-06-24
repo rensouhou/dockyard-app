@@ -15,6 +15,7 @@ import { playerFleet } from '../../transformers/api/player-fleet';
 /**
  * Handler for the `GET_BASE_DATA` API event
  *
+ * @name GET_BASE_DATA
  * @param {ApiActionRecord} p
  * @returns {ApiActionResult}
  * @constructor

@@ -21,7 +21,7 @@ const initialState = fromJS({
 export default createReducer(initialState, {
   [ApiEvents.GET_QUEST_LIST](state, { payload }) {
     return state.mergeIn(['questList'], payload.get('questList'))
-                .mergeDeepIn(['quests'], payload.get('quests'));
+                .setIn(['quests'], payload.get('quests'));
   },
   [ApiEvents.START_QUEST](state, { payload }) {
     return state;

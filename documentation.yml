@@ -1,0 +1,13 @@
+toc:
+  - name: Actions
+    description: |
+      Action description
+  - name: Reducers
+    description: |
+      Reducer description
+  - name: KcsApiHandlerFns
+    description: |
+      API transformer functions
+  - INITIALIZE_GAME
+  - GET_BASE_DATA
+  - CRAFT_ITEM

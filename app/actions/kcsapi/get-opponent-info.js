@@ -5,11 +5,12 @@
  * @since 0.1.0
  */
 import { fromJS } from 'immutable';
-import { asProfileRecord, asFleetRecord } from '../../transformers/api/opponent-fleet';
+import { opponentProfile, opponentFleet } from '../../transformers/api/opponent-fleet';
 
 /**
  * Handler function for the `GET_OPPONENT_INFO` event
  *
+ * @name GET_OPPONENT_INFO
  * @param {ApiActionRecord} apiAction
  * @returns {ApiActionResult}
  * @constructor
@@ -19,7 +20,7 @@ import { asProfileRecord, asFleetRecord } from '../../transformers/api/opponent-
 export default function GET_OPPONENT_INFO(apiAction) {
   const { body } = apiAction;
   return fromJS({
-    profile: asProfileRecord(body),
-    fleet: asFleetRecord(body)
+    profile: opponentProfile(body),
+    fleet: opponentFleet(body)
   });
 }

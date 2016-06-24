@@ -21,6 +21,7 @@ import { baseShip, baseShipType, baseShipGraphic } from '../../transformers/api/
 /**
  * Handler for the `INITIALIZE_GAME` API event
  *
+ * @name INITIALIZE_GAME
  * @param {ApiActionRecord} apiAction
  * @returns {ApiActionResult}
  * @constructor

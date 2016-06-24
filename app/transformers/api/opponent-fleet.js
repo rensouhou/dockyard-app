@@ -30,12 +30,11 @@ const opponentShip = (o) => ({
 const asShipRecord = (o) => new ShipRecord(opponentShip(o));
 
 /**
- * @private
  * @type {function}
  * @param {Object} o
  * @returns {Object}
  */
-const opponentFleet = (o) => ({
+export const opponentFleet = (o) => ({
   name: o.api_deckname,
   ships: objOrDef(o.api_deck).api_ships.filter(notEmpty).map(asShipRecord)
 });

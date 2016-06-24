@@ -3,6 +3,7 @@
  *  API handlers
  *
  * @since 0.1.0
+ * @module app/actions/kcsapi
  */
 // region # Imports: Base Game Data
 import INITIALIZE_GAME from './initialize-game';
@@ -42,6 +43,9 @@ import FINISHED_SORTIE from './finished-sortie';
 // region # Imports: Sortie
 // endregion
 
+/**
+ * @name KcsApiHandlerFns
+ */
 export {
   INITIALIZE_GAME,
   GET_PLAYER_BASE_DATA,

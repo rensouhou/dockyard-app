@@ -5,7 +5,6 @@
 import { List, fromJS } from 'immutable';
 import { ApiEvents } from '../constants';
 import createReducer from './create-reducer';
-import { FleetRecord, ProfileRecord } from '../records';
 
 /**
  * @private
@@ -13,16 +12,8 @@ import { FleetRecord, ProfileRecord } from '../records';
  * @type {OpponentReducerState}
  */
 const initialState = fromJS({
-  opponent: {
-    profile: new ProfileRecord(),
-    fleet: new FleetRecord()
-  },
-  history: {
-    0: {
-      profile: new ProfileRecord(),
-      fleets: []
-    }
-  }
+  profile: {},
+  fleet: {}
 });
 
 export default createReducer(initialState, {
@@ -30,12 +21,6 @@ export default createReducer(initialState, {
     return state;
   },
   [ApiEvents.GET_OPPONENT_INFO](state, { payload }) {
-    const playerId = payload.getIn(['profile', 'id']);
-    const profilePath = ['history', playerId, 'profile'];
-    const fleetPath = ['history', playerId, 'fleets'];
-    const playerFleets = state.getIn(fleetPath, List());
-
-    return state.mergeIn(profilePath, payload.get('profile'))
-                .mergeIn(fleetPath, playerFleets.concat(payload.get('fleet')));
+    return state.merge(payload);
   }
 });

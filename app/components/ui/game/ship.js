@@ -1,7 +1,7 @@
 /**
  * @overview
  *  Provides a <Ship /> component that consumes a standard
- *  {@link records.js~Ship} record object. Usable anywhere where
+ *  {@link ShipRecord} record object. Usable anywhere where
  *  a basic ship information panel is required.
  *
  * @since 0.1.0

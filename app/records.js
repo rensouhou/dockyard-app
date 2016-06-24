@@ -339,7 +339,9 @@ const ApplicationState = Record({
   packageJson: fromJS(pkg)
 });
 
-/** @type {ApiHandlerRecord} */
+/**
+ * @type {ApiHandlerRecord}
+ */
 const ApiHandler = Record({
   path: undefined,
   event: undefined,
