@@ -5,7 +5,7 @@
  *
  * @since 0.1.0
  */
-import { fromJS } from 'immutable';
+import { Map, Seq, fromJS } from 'immutable';
 import { baseSlotItem } from '../../transformers/api/base-slotitem';
 import { baseFurniture } from '../../transformers/api/base-furniture';
 import { baseMission } from '../../transformers/api/base-mission';
@@ -17,6 +17,10 @@ import {
   mapInfo as baseMapInfo
 } from '../../transformers/api/base-map';
 import { baseShip, baseShipType, baseShipGraphic } from '../../transformers/api/base-ship';
+
+const groupBy = (id, list) => Seq.Indexed(list)
+                                 .toKeyedSeq()
+                                 .flatMap(((it) => Map.of(it[id], it)));
 
 /**
  * Handler for the `INITIALIZE_GAME` API event

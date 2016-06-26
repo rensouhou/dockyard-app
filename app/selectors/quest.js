@@ -1,6 +1,7 @@
 /**
  * @overview
  * @since 0.3.0
+ * @module app/selectors/quest
  */
 import { createSelector } from 'reselect';
 import { Iterable, Map, List } from 'immutable';
@@ -9,7 +10,7 @@ import { QuestState } from '../constants';
 /**
  * @param {ApplicationStateRecord|Map} state
  */
-const quests = (state) => state.getIn(['quest', 'quests'], List())
+const quests = (state) => state.getIn(['quest', 'records'], List())
                                .toMap()
                                .flatMap((q) => Iterable.isIterable(q) ? Map.of(q.get('id'), q) : Map());
 

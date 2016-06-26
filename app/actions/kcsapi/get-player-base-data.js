@@ -3,6 +3,7 @@
  *  Handler for `GET_PLAYER_BASE_DATA` event
  *
  * @since 0.1.0
+ * @module app/actions/kcsapi/get-player-base-data
  */
 import { List, Map, fromJS } from 'immutable';
 import { playerSlotItem } from '../../transformers/api/player-slotitem';
@@ -11,6 +12,7 @@ import { constructionDock } from '../../transformers/api/construction-dock';
 /**
  * Handler function for the `GET_PLAYER_BASE_DATA` event.
  *
+ * @name GET_PLAYER_BASE_DATA
  * @param {ApiActionRecord} apiAction
  * @returns {ApiActionResult}
  * @constructor

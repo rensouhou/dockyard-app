@@ -2,31 +2,40 @@
  * @overview
  *
  * @since 0.1.0
+ * @module app/reducers/quest
  */
 import { fromJS } from 'immutable';
-import { ApiEvents } from '../constants';
+import { ApiEvents, QuestState } from '../constants';
 import createReducer from './create-reducer';
 
-/** @type {IMap<string, *>} */
+/**
+ * Initial state for the {@link QuestReducer}
+ * @type {IMap<string, *>}
+ */
 const initialState = fromJS({
-  questList: {
+  questListState: {
     totalQuestCount: undefined,
     currentPage: undefined,
     totalPageCount: undefined,
     currentActiveTab: undefined
   },
-  quests: []
+  records: []
 });
 
+/**
+ * @name QuestReducer
+ */
 export default createReducer(initialState, {
   [ApiEvents.GET_QUEST_LIST](state, { payload }) {
-    return state.mergeIn(['questList'], payload.get('questList'))
-                .setIn(['quests'], payload.get('quests'));
+    return state.updateIn(['records'], (rs) => rs.merge(payload.get('records')))
+                .mergeIn(['questListState'], payload.get('questListState'));
   },
   [ApiEvents.START_QUEST](state, { payload }) {
-    return state;
+    const questId = payload.getIn(['quest', 'id']);
+    return state.updateIn(['records', questId], (q) => q.set('state', QuestState.IN_PROGRESS));
   },
   [ApiEvents.STOP_QUEST](state, { payload }) {
-    return state;
+    const questId = payload.getIn(['quest', 'id']);
+    return state.updateIn(['records', questId], (q) => q.set('state', QuestState.AVAILABLE));
   }
 });
