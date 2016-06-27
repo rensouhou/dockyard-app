@@ -29,7 +29,7 @@ export const getQuests = createSelector(
  */
 export const getActiveQuests = createSelector(
   [quests],
-  (questList) => questList.filter((q) => q.state === QuestState.IN_PROGRESS)
+  (questList) => questList.filter((q) => q.state !== QuestState.AVAILABLE)
 );
 
 /**

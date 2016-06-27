@@ -42,7 +42,7 @@ export default class GameView extends Component {
   }
 
   /**
-   * @returns {XML|JSX.Element}
+   * @returns {XML|JSX.Element|ReactComponent}
    */
   render() {
     return <div ref="gameViewHolder" id="game-view-holder"></div>;

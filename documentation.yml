@@ -6,8 +6,18 @@ toc:
     description: |
       Reducer description
   - name: KcsApiHandlerFns
-    description: |
-      API transformer functions
+    description: API transformer functions
+  - name: Base fns
+    description: Base functionality
   - INITIALIZE_GAME
   - GET_BASE_DATA
+  - name: Crafting
+    description: Crafting event handlers
   - CRAFT_ITEM
+  - CRAFT_SHIP
+  - name: Quests
+    description: Quest event handlers
+  - GET_QUEST_LIST
+  - START_QUEST
+  - STOP_QUEST
+  - GET_PLAYER_BASE_DATA

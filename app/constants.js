@@ -154,8 +154,12 @@ export const ShipHealthState = {
   GREEN: 'GREEN'
 };
 
+/**
+ * @type {QuestStateEnum}
+ */
 export const QuestState = {
+  TURNED_IN: -1,    // Not in API; used internally
   AVAILABLE: 1,
   IN_PROGRESS: 2,
-  DONE: 3
+  COMPLETED: 3
 };

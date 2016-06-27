@@ -3,6 +3,7 @@
  *  Handler for `GET_CONSTRUCTION_DOCKS` event
  *
  * @since 0.1.0
+ * @module app/actions/kcsapi/get-construction-docks
  */
 import R from 'ramda';
 import { fromJS } from 'immutable';
@@ -23,6 +24,7 @@ const State = Enum({
 });
 
 /**
+ * @type {function}
  * @param {Object} dock
  * @return {Dock}
  */
@@ -35,6 +37,7 @@ const parseDock = (dock) => ({
 });
 
 /**
+ * @name GET_CONSTRUCTION_DOCKS
  * @param {ApiActionRecord} apiAction
  * @returns {ApiActionResult}
  * @constructor

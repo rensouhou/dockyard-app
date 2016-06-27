@@ -6,7 +6,7 @@
  */
 import { Map, List, fromJS } from 'immutable';
 import { questListTabs } from '../../enums';
-import { asNumber } from '../../transformers/primitive';
+import { asNumber, notEmpty } from '../../transformers/primitive';
 import { questAsRecord } from '../../transformers/api/quest';
 
 /**
@@ -21,6 +21,7 @@ import { questAsRecord } from '../../transformers/api/quest';
  */
 export default function GET_QUEST_LIST(apiAction) {
   const { body, postBody } = apiAction;
+  console.log('apiAction => ', apiAction);
   return fromJS({
     questListState: {
       totalQuestCount: asNumber(body.api_count),
@@ -28,8 +29,9 @@ export default function GET_QUEST_LIST(apiAction) {
       currentActiveTab: questListTabs(postBody.api_tab_id),
       totalPageCount: asNumber(body.api_page_count)
     },
-    records: List(body.api_list).map((q) => questAsRecord(q))
-                               .toMap()
-                               .flatMap((q) => Map.of(q.id, q))
+    records: List(body.api_list).filter((q) => notEmpty(q))
+                                .map((q) => questAsRecord(q))
+                                .toMap()
+                                .flatMap((q) => Map.of(q.id, q))
   });
 }

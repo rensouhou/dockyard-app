@@ -201,3 +201,15 @@
  * @property {number} id
  * @property {number} amount
  */
+
+// Enums
+// -----
+/**
+ * @typedef {Object} QuestStateEnum
+ * @enum {number}
+ * @property {number} TURNED_IN - Not in API; used internally
+ * @property {number} AVAILABLE
+ * @property {number} IN_PROGRESS
+ * @property {number} COMPLETED
+ */
+

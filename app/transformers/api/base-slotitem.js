@@ -9,8 +9,9 @@ import { formatLineBreaks } from '../primitive';
 import { parseMaterialArray } from '../api/materials';
 
 /**
- * @param o
- * @returns {SlotItem}
+ * @type {function}
+ * @param {Object} o
+ * @returns {Object}
  */
 export const baseSlotItem = (o) => fromJS({
   slotItemId: o.api_id,

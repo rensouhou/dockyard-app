@@ -19,7 +19,7 @@ const initialState = fromJS({
     totalPageCount: undefined,
     currentActiveTab: undefined
   },
-  records: []
+  records: {}
 });
 
 /**
@@ -27,8 +27,7 @@ const initialState = fromJS({
  */
 export default createReducer(initialState, {
   [ApiEvents.GET_QUEST_LIST](state, { payload }) {
-    return state.updateIn(['records'], (rs) => rs.merge(payload.get('records')))
-                .mergeIn(['questListState'], payload.get('questListState'));
+    return state.mergeDeep(payload);
   },
   [ApiEvents.START_QUEST](state, { payload }) {
     const questId = payload.getIn(['quest', 'id']);
@@ -37,5 +36,9 @@ export default createReducer(initialState, {
   [ApiEvents.STOP_QUEST](state, { payload }) {
     const questId = payload.getIn(['quest', 'id']);
     return state.updateIn(['records', questId], (q) => q.set('state', QuestState.AVAILABLE));
+  },
+  [ApiEvents.COMPLETE_QUEST](state, { payload }) {
+    const questId = payload.getIn(['quest', 'id']);
+    return state.updateIn(['records', questId], (q) => q.set('state', QuestState.TURNED_IN));
   }
 });

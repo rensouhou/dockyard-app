@@ -8,7 +8,7 @@ const HomeComponent = (props) => (
     <div className={css.modeSelect}>
       <Link to="/game">Launch</Link>
       <Link to="/configure">Configuration</Link>
-      <Link to="/test">Core Test</Link>
+      <Link to="/test">Core</Link>
     </div>
     <footer>github.com/rensouhou/dockyard-app</footer>
   </div>

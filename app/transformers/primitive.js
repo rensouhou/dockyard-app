@@ -4,6 +4,7 @@
  *  primitives.
  *
  * @since 0.1.0
+ * @module app/transformers/primitive
  */
 
 /**
@@ -12,6 +13,7 @@
  * @type {Function}
  * @param {?Array} arr
  * @returns {Array}
+ * @memberof app/transformers/primitive
  * @since 0.1.0
  */
 export const getArrayOrDefault = (arr) => arr || [];
@@ -58,8 +60,8 @@ export const notEmpty = (n) => asNumber(n) !== -1;
 /**
  * Format a string, replacing `<br />` tags with line breaks.
  * @type {Function}
- * @param {?string} s
+ * @param {?string} str
  * @returns {string}
  * @since 0.1.0
  */
-export const formatLineBreaks = (s) => (s || '').replace(/<br\s?\/?>/gi, '\n');
+export const formatLineBreaks = (str) => (str || '').replace(/<br\s?\/?>/gi, '\n');

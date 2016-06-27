@@ -26,7 +26,7 @@ export const QuestProgressState = Enum({
 export const QuestState = Enum({
   AVAILABLE: 1,
   IN_PROGRESS: 2,
-  DONE: 3
+  COMPLETED: 3
 });
 
 /**

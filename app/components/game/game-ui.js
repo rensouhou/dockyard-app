@@ -4,11 +4,12 @@
  *
  * @since 0.1.0
  */
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
 import { StaticPanel } from '../ui';
 import Fleet from '../ui/game/fleet';
+import { QuestList } from '../ui/game/quest/quest-list';
 import css from './game-ui.scss';
 
 /**
@@ -33,26 +34,44 @@ const getFleets = (props) => getPlayer(props).getIn(['fleets'], List());
 const getMainFleet = (props) => getFleets(props).first();
 
 /**
+ * @type {function}
  * @param {Object} props
- * @returns {XML|JSX.Element}
- * @constructor
+ * @return {IList<QuestRecord>}
  */
-const GameUIComponent = (props) => (
-  <div className={css.gameUi}>
-    <StaticPanel title="Materials" />
-    <StaticPanel title="Player" />
-    <StaticPanel title="Fleet">
-      <Fleet record={getMainFleet(props)} />
-    </StaticPanel>
-  </div>
-);
+const getActiveQuests = (props) => props.ui.quest.get('activeQuests');
 
 /**
- * @type {{children: Requireable<any>, ui: *}}
+ * Main parent of the UI
+ *
+ * _Using ES6 classes here instead of stateless functions due to how HMR works in dev_
+ *
+ * @class GameUIComponent
+ * @extends Component
  */
-GameUIComponent.propTypes = {
-  children: PropTypes.any,
-  ui: ImmutablePropTypes.map
-};
+class GameUIComponent extends Component {
+  static propTypes = {
+    children: PropTypes.any,
+    ui: ImmutablePropTypes.map
+  };
+
+  render() {
+    return (
+      <div>
+        <div className={css.gameUi}>
+          <article>
+            <StaticPanel title="Materials" />
+            <StaticPanel title="Player" />
+            <StaticPanel title="Fleet">
+              <Fleet record={getMainFleet(this.props)} />
+            </StaticPanel>
+          </article>
+          <aside>
+            <QuestList records={getActiveQuests(this.props)} />
+          </aside>
+        </div>
+      </div>
+    );
+  }
+}
 
 export default GameUIComponent;

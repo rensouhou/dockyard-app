@@ -4,6 +4,8 @@
  *
  * @since 0.1.0
  */
+import 'react-hot-loader/patch';
+import { AppContainer } from 'react-hot-loader';
 import { Map } from 'immutable';
 import { ipcRenderer } from 'electron';
 import AppEvent from '../src/shared/constants';
@@ -35,9 +37,17 @@ const history = syncHistoryWithStore(hashHistory, store, {
   }
 });
 
-render(
+const rootEl = document.getElementById('root');
+
+const renderFn = () => render(
   <Provider store={store}>
     <Router history={history} routes={routes} />
   </Provider>,
-  document.getElementById('root')
+  rootEl
 );
+
+export function __reload() {
+  renderFn();
+}
+
+renderFn();

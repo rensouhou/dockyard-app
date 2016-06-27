@@ -1,5 +1,17 @@
 .gameUi {
   // border: dashed 1px #f00;
+  display: flex;
+
+  > article {
+    width: (100% / 3) * 2;
+  }
+
+  > aside {
+    width: (100% / 3);
+  }
+}
+
+.gameUiCol {
 }
 
 .fleetCols {
