@@ -78,7 +78,7 @@
     "redux-perf-middleware": "^1.0.1",
     "resolve-url-loader": "^1.4.4",
     "rimraf": "^2.5.2",
-    "sass-loader": "^3.2.1",
+    "sass-loader": "^4.0.0",
     "scss-loader": "0.0.1",
     "selenium-webdriver": "^2.53.1",
     "sinon": "^1.17.3",
