@@ -16,7 +16,8 @@ import * as apiHandlerFns from '../actions/kcsapi';
 
 /**
  * Ensure that the action handlers are mapped into {@link ApiHandler} records.
- * @type {Iterable<any, any>}
+ * @type {Immutable.Iterable<any, any>}
+ * @since 0.2.0
  */
 export const handlers = Seq.Keyed(ApiEventPaths)
                            .flatMap((path, event) =>
@@ -24,8 +25,10 @@ export const handlers = Seq.Keyed(ApiEventPaths)
 
 /**
  * A non-`Seq` version of the @see findEventSeq function.
- * @param findPath
- * @returns {K|*}
+ * @param {string} findPath
+ * @returns {string}
+ * @since 0.2.0
+ * @version 0.3.0
  */
 export const findEvent = (findPath) => {
   const pathRegex = new RegExp(`^${findPath}`);
@@ -34,7 +37,8 @@ export const findEvent = (findPath) => {
 
 /**
  * Create a `Seq` of action handlers that is in a usable form for the Redux application.
- * @type {Seq.Keyed<any, any>}
+ * @type {Immutable.Iterable<any, any>}
+ * @since 0.2.0
  */
 export const actionHandlers = Seq.Keyed(handlers)
                                  .flatMap((handlerRecord, event) =>

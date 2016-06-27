@@ -58,3 +58,6 @@ export default createReducer(initialState, {
     return state.mergeDeepWith(mergeWithFn, payload.getIn(['player', 'materials']));
   }
 });
+
+// Exports for tests
+export { initialState as _initialState };
