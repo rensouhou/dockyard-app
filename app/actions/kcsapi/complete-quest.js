@@ -15,7 +15,7 @@ import { parseMaterialArray, asRecord } from '../../transformers/api/materials';
  * @returns {ApiActionResult}
  * @constructor
  * @since 0.1.0
- * @version 0.2.0
+ * @version 0.3.0
  */
 export default function COMPLETE_QUEST(apiAction) {
   const { body, postBody } = apiAction;

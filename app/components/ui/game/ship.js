@@ -1,6 +1,6 @@
 /**
  * @overview
- *  Provides a <Ship /> component that consumes a standard
+ *  Provides a `<Ship />` component that consumes a standard
  *  {@link ShipRecord} record object. Usable anywhere where
  *  a basic ship information panel is required.
  *
@@ -8,7 +8,6 @@
  */
 import React, { PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Map } from 'immutable';
 import StaticPanel from '../static-panel';
 import Progress from '../progress';
 import css from './ship.scss';
@@ -34,13 +33,13 @@ ShipSlotItems.propTypes = {
 // region # <Ship /> component
 /**
  * @param {Object} props
- * @returns {JSX.Element}
+ * @returns {XML|JSX.Element}
  * @constructor
  */
 const ShipComponent = (props) => {
   const record = props.record;
-  const slotItems = record.getIn(['slot', 'items']);
-  const slotCapacities = record.getIn(['slot']);
+  // const slotItems = record.getIn(['slot', 'items']);
+  // const slotCapacities = record.getIn(['slot']);
   const name = record.name.toJS();
   return (
     <StaticPanel title={name.reading} className={css.ship}>

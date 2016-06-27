@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * @overview
  *  Middleware for logging in-game data
