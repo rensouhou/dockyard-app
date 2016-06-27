@@ -11,6 +11,7 @@ import { asNumber } from '../../transformers/primitive';
 /**
  * Handler function for the `LOAD_FLEET_PRESET` event
  *
+ * @name LOAD_FLEET_PRESET
  * @param {ApiActionRecord} apiAction
  * @returns {ApiActionResult}
  * @constructor

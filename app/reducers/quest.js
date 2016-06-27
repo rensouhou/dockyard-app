@@ -10,7 +10,9 @@ import createReducer from './create-reducer';
 
 /**
  * Initial state for the {@link QuestReducer}
+ * @name QuestReducerInitialState
  * @type {IMap<string, *>}
+ * @since 0.3.0
  */
 const initialState = fromJS({
   questListState: {
@@ -24,6 +26,7 @@ const initialState = fromJS({
 
 /**
  * @name QuestReducer
+ * @since 0.3.0
  */
 export default createReducer(initialState, {
   [ApiEvents.GET_QUEST_LIST](state, { payload }) {

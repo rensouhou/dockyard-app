@@ -9,6 +9,8 @@ import { playerSlotItem } from '../../transformers/api/player-slotitem';
 
 /**
  * Handler function for the `GET_SLOT_ITEMS` event.
+ *
+ * @name GET_SLOT_ITEMS
  * @param {ApiActionRecord} apiAction
  * @returns {ApiActionResult}
  * @constructor

@@ -10,6 +10,7 @@ import { asNumber } from '../../transformers/primitive';
 /**
  * Handler function for the `GET_SORTIE_CONDITIONS` event.
  *
+ * @name GET_SORTIE_CONDITIONS
  * @param {ApiActionRecord} p
  * @returns {ApiActionResult}
  * @constructor

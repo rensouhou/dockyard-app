@@ -7,6 +7,7 @@ import { asFleetRecord } from '../../transformers/api/player-fleet';
 /**
  * Handler function for the `GET_FLEET_DATA` event
  *
+ * @name GET_FLEET_DATA
  * @param {ApiActionRecord} apiAction
  * @returns {ApiActionResult}
  * @constructor

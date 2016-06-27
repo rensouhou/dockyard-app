@@ -8,7 +8,16 @@
 import { fromJS } from 'immutable';
 import { parseMaterialArray, asRecord } from '../../transformers/api/materials';
 
-export default function RESUPPLY_SHIP({ body }) {
+/**
+ * @name RESUPPLY_SHIP
+ * @param {ApiActionRecord} apiAction
+ * @returns {ApiActionResult}
+ * @constructor
+ * @since 0.1.0
+ * @version 0.3.0
+ */
+export default function RESUPPLY_SHIP(apiAction) {
+  const { body } = apiAction;
   return fromJS({
     materials: asRecord(parseMaterialArray(body.api_material))
   });

@@ -9,6 +9,7 @@ import { fromJS } from 'immutable';
 /**
  * Handler function for the `FINISHED_PRACTICE` event
  *
+ * @name FINISHED_PRACTICE
  * @param {ApiActionRecord} apiAction
  * @returns {ApiActionResult}
  * @constructor

@@ -4,8 +4,16 @@
  *
  * @since 0.1.0
  */
-import { Map } from 'immutable';
+import { fromJS } from 'immutable';
 
-export default function START_SORTIE({ body, postBody }) {
-  return Map({ body, postBody });
+/**
+ * @name START_SORTIE
+ * @param {ApiActionRecord} apiAction
+ * @returns {ApiActionResult}
+ * @constructor
+ * @since 0.1.0
+ */
+export default function START_SORTIE(apiAction) {
+  const { body, postBody } = apiAction;
+  return fromJS({ body, postBody });
 }

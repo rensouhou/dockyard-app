@@ -205,8 +205,15 @@
 // Enums
 // -----
 /**
+ * @typedef {Object} ApiEventEnum
+ */
+
+/**
+ * @typedef {Object} ApiEventPathEnum
+ */
+
+/**
  * @typedef {Object} QuestStateEnum
- * @enum {number}
  * @property {number} TURNED_IN - Not in API; used internally
  * @property {number} AVAILABLE
  * @property {number} IN_PROGRESS

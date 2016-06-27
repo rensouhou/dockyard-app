@@ -11,6 +11,7 @@ import { getArrayOrDefault } from '../../transformers/primitive';
 /**
  * Handler function for the `GET_MATERIAL` event
  *
+ * @name GET_MATERIAL
  * @param {ApiActionRecord} apiAction
  * @returns {ApiActionResult}
  * @constructor

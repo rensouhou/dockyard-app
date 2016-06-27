@@ -11,6 +11,7 @@ import { playerShip } from '../../transformers/api/player-ship';
 /**
  * Handler function for the `GET_FLEET` event
  *
+ * @name GET_FLEET
  * @param {ApiActionRecord} apiAction
  * @returns {ApiActionResult}
  * @constructor

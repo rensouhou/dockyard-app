@@ -1,16 +1,11 @@
 toc:
-  - name: Actions
-    description: |
-      Action description
-  - name: Reducers
-    description: |
-      Reducer description
-  - name: KcsApiHandlerFns
+  - name: API Handlers
     description: API transformer functions
   - name: Base fns
     description: Base functionality
   - INITIALIZE_GAME
   - GET_BASE_DATA
+  - GET_SLOT_ITEMS
   - name: Crafting
     description: Crafting event handlers
   - CRAFT_ITEM
@@ -21,3 +16,14 @@ toc:
   - START_QUEST
   - STOP_QUEST
   - GET_PLAYER_BASE_DATA
+  - name: Practice
+  - GET_OPPONENT_INFO
+  - START_PVP_BATTLE
+  - FINISHED_PRACTICE
+  - name: Unsorted
+  - GET_FLEET
+  - GET_FLEET_DATA
+  - LOAD_FLEET_PRESET
+  - GET_CONSTRUCTION_DOCKS
+  - GET_MATERIAL
+  - GET_SORTIE_CONDITIONS
