@@ -24,12 +24,14 @@ export const getQuests = createSelector(
 );
 
 /**
- * Get a {@link Seq} or the currently active quests.
+ * Get a {@link IMap<TId, TObj>} or the currently active quests.
  * @since 0.3.0
  */
 export const getActiveQuests = createSelector(
   [quests],
-  (questList) => questList.filter((q) => q.state !== QuestState.AVAILABLE)
+  (questList) => questList.filter((q) => (
+    q.state !== QuestState.AVAILABLE && q.state !== QuestState.TURNED_IN
+  ))
 );
 
 /**

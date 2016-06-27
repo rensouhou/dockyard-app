@@ -4,5 +4,3 @@
  */
 import { createSelector } from 'reselect';
 import { getPlayerShips } from './player';
-
-
