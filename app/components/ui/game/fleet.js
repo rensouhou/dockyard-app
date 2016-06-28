@@ -1,46 +1,36 @@
 /**
  * @overview
+ *  Provides a `<Fleet />` component to display a fleet of `0-6` ships.
+ *  Additionally, shows extra information about the fleet.
  *
  * @since 0.1.0
+ * @version 0.3.0
  */
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { FleetRecord } from '../../../records';
 import Ship from './ship';
+import ItemList from '../itemlist';
+import css from './fleet.scss';
 
-// region # <ShipList /> ship list component
 /**
- * <ShipList /> component for <Fleet />
- * @type {React.StatelessComponent}
+ * @type {function}
  * @param {Object} props
- * @returns {JSX.Element}
+ * @property {FleetRecord} props.record
  * @constructor
  * @since 0.1.0
- */
-const ShipList = (props) => (
-  <div>
-    {props.ships.map((ship) => <Ship record={ship} />)}
-  </div>
-);
-
-ShipList.propTypes = {
-  ships: ImmutablePropTypes.listOf(ImmutablePropTypes.record)
-};
-// endregion
-
-// region # <FleetComponent /> fleet component
-/**
- * @type {React.StatelessComponent}
- * @param props
- * @returns {JSX.Element}
- * @constructor
- * @since 0.1.0
+ * @version 0.3.0
  */
 const FleetComponent = (props) => {
-  const ships = props.record.get('ships');
+  const { record } = props;
+  const hasRecords = !!record;
+  const itemList = hasRecords
+    ? <ItemList record={record.get('ships')} itemComponent={Ship} />
+    : <div>Empty fleet</div>;
+
   return (
-    <div>
-      <ShipList ships={ships} />
+    <div className={css.ships}>
+      <h3 className={css.fleetName}>{record.name} {record.id}</h3>
+      {itemList}
     </div>
   );
 };
@@ -48,10 +38,5 @@ const FleetComponent = (props) => {
 FleetComponent.propTypes = {
   record: ImmutablePropTypes.record
 };
-
-FleetComponent.defaultProps = {
-  record: new FleetRecord()
-};
-// endregion
 
 export default FleetComponent;

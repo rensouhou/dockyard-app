@@ -17,8 +17,7 @@ import { ApplicationEvents } from '../constants';
  */
 export const takeScreenshot = createAction(ApplicationEvents.TAKE_SCREENSHOT,
   /**
-   * @description
-   *  Screenshot action handler
+   * Screenshot action handler
    *
    * @param webview
    * @return {Object}
@@ -48,18 +47,17 @@ export const takeScreenshot = createAction(ApplicationEvents.TAKE_SCREENSHOT,
 
 export const registerGameView = createAction(ApplicationEvents.REGISTER_GAME_VIEW,
   /**
-   * @description
-   *  Game view registration action creator
+   * Game view registration action creator
    *
    * @param webview
+   * @returns {any}
    */
   (webview) => webview
 );
 
 export const notify = createAction(ApplicationEvents.NOTIFY,
   /**
-   * @description
-   *  Desktop notification action creator
+   * Desktop notification action creator
    *
    * @param {!string} title
    * @param {Object} options
@@ -70,8 +68,7 @@ export const notify = createAction(ApplicationEvents.NOTIFY,
 
 export const scheduleEvent = createAction(ApplicationEvents.CREATE_TIMER,
   /**
-   * @description
-   *  Scheduled events action creator
+   * Scheduled events action creator
    *
    * @param args
    * @returns {{targetTime: *}}
@@ -84,6 +81,9 @@ export const scheduleEvent = createAction(ApplicationEvents.CREATE_TIMER,
   }
 );
 
+/**
+ * @type {ActionCreator}
+ */
 export const toggleAudio = createAction(ApplicationEvents.TOGGLE_AUDIO,
   /**
    * @param webview

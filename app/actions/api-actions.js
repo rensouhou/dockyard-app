@@ -4,9 +4,10 @@
  *  Takes a key-value -pair representing the event to handle as key and its respective
  *  handler function as the value.
  *
- *  Event-to-URL mapping is done in `ApiEventPaths`.
+ *  Event-to-URL mapping is done in {@link ApiEventPaths}.
  *
  * @since 0.2.0
+ * @version 0.3.0
  */
 import { Seq, Map } from 'immutable';
 import { createAction } from 'redux-actions';

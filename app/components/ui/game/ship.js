@@ -5,32 +5,16 @@
  *  a basic ship information panel is required.
  *
  * @since 0.1.0
+ * @version 0.3.0
  */
 import React, { PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import StaticPanel from '../static-panel';
+import ShipSlotItem from './ship-slot-item';
 import Progress from '../progress';
+import ItemList from '../itemlist';
 import css from './ship.scss';
 
-// region # Ship slot item display
-const ShipSlotItems = (props) => (
-  <div>
-    <ul>
-      {props.items.map((it, idx) => (
-        <li key={`${it.id}-${idx}`}>{idx} -> {it.name} (category: {it.type.category})</li>
-      ))}
-    </ul>
-  </div>
-);
-
-ShipSlotItems.propTypes = {
-  items: PropTypes.any,
-  count: PropTypes.number,
-  slotItems: ImmutablePropTypes.listOf(ImmutablePropTypes.record)
-};
-// endregion
-
-// region # <Ship /> component
 /**
  * @param {Object} props
  * @returns {XML|JSX.Element}
@@ -38,17 +22,25 @@ ShipSlotItems.propTypes = {
  */
 const ShipComponent = (props) => {
   const record = props.record;
-  // const slotItems = record.getIn(['slot', 'items']);
-  // const slotCapacities = record.getIn(['slot']);
   const name = record.name.toJS();
+
   return (
-    <StaticPanel title={name.reading} className={css.ship}>
+    <StaticPanel
+      key={record.hashCode()}
+      title={name.reading}
+      className={css.ship}
+      style={{ ...props.style || {} }}
+    >
       <div className={css.shipBody}>
         <div>
           <div style={{ width: '50%' }}>{(name || {}).kanji}</div>
           <div style={{ width: '25%' }}><i className="fa fa-heart" /> {record.morale}</div>
           <div style={{ width: '25%', textAlign: 'right', fontWeight: 'bold' }}>{record.level}</div>
         </div>
+        <ItemList
+          itemComponent={ShipSlotItem}
+          records={record.getIn(['slot', 'items'])}
+        />
         <div>
           <Progress min={0} max={100} value={record.experience.get(2)} />
         </div>
@@ -58,8 +50,8 @@ const ShipComponent = (props) => {
 };
 
 ShipComponent.propTypes = {
-  record: ImmutablePropTypes.record
+  record: ImmutablePropTypes.record,
+  style: PropTypes.object
 };
-// endregion
 
 export default ShipComponent;

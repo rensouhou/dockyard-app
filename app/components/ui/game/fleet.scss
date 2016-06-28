@@ -4,7 +4,15 @@
 
 .ships {
   // border: solid 1px #f00;
-  // margin: 0 -0.75rem;
-  display: flex;
-  flex-wrap: wrap;
+  margin: 0 -0.75rem;
+  padding: 0 1.5rem;
+
+  > * {
+    border: solid 1px #f00;
+  }
+
+  .fleetName {
+    border: solid 2px #f00;
+    margin: 0 0 0.1rem;
+  }
 }

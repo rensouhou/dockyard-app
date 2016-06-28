@@ -3,6 +3,7 @@
  *
  * @since 0.1.0
  * @version 0.3.0
+ * @module app/reducers
  */
 import { combineReducers } from 'redux-immutable';
 import routing from './routing';

@@ -339,6 +339,10 @@ const ApplicationState = Record({
   packageJson: fromJS(pkg)
 });
 
+const TimerRecord = Record({
+  targetTime: undefined
+});
+
 /**
  * @type {ApiHandlerRecord}
  */
@@ -365,5 +369,5 @@ const KCSApiData = Record({
  * Internal application state records.
  * @type {{ApplicationState: ApplicationStateRecord, ApiHandler: ApiHandlerRecord, ApiAction: ApiActionRecord, KCSApiData: (*|Record.Class)}}
  */
-export const Internal = { ApplicationState, ApiHandler, ApiAction, KCSApiData };
+export const Internal = { TimerRecord, ApplicationState, ApiHandler, ApiAction, KCSApiData };
 // endregion
