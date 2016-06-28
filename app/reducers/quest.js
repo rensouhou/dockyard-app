@@ -45,3 +45,5 @@ export default createReducer(initialState, {
     return state.updateIn(['records', questId], (q) => q.set('state', QuestState.TURNED_IN));
   }
 });
+
+export { initialState as _initialState };

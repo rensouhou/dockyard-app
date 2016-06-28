@@ -6,9 +6,6 @@
  */
 import { Map } from 'immutable';
 
-/**
- * @type {ApiEventEnum}
- */
 export const ApiEvents = {
   INITIALIZE_GAME: 'INITIALIZE_GAME',
   GET_PLAYER_BASE_DATA: 'GET_PLAYER_BASE_DATA',
@@ -57,9 +54,6 @@ export const ApiEvents = {
   USE_PAID_ITEM: 'USE_PAID_ITEM'
 };
 
-/**
- * @type {ApiEventPathEnum}
- */
 export const ApiEventPaths = Map({
   // region # Core game-related
   [ApiEvents.INITIALIZE_GAME]: '/api_start2',

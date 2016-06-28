@@ -1,26 +1,22 @@
 /* eslint-disable */
 import { expect } from 'chai';
-import { createAction } from 'redux-actions';
+import { Iterable } from 'immutable';
 import player, { _initialState } from '../../app/reducers/player';
-import { actionHandlers, findEvent } from '../../app/actions/api-actions';
 import { ApiEvents } from '../../app/constants';
 import { MaterialStateRecord } from '../../app/records';
 
 let undef;
-const initialState = _initialState;
 
-describe('reducers', () => {
+describe('reducer', () => {
   describe('player', () => {
-    /**
-     * @test
-     */
     it('should handle initial state', () => {
       expect(player(undef, {})).to.equal(_initialState);
     });
 
-    /**
-     * @test
-     */
+    it('should use an immutable state object', () => {
+      expect(player(undef, {})).to.be.an.instanceOf(Iterable);
+    });
+
     it('should handle the `GET_MATERIAL` event', () => {
       const materialState = () => new MaterialStateRecord({
         fuel: 100,

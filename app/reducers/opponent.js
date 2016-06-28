@@ -24,3 +24,5 @@ export default createReducer(initialState, {
     return state.merge(payload);
   }
 });
+
+export { initialState as _initialState };

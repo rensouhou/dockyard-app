@@ -34,3 +34,5 @@ const handlers = {
  * @type {reducer}
  */
 export default createReducer(initialState, handlers);
+
+export { initialState as _initialState };
