@@ -16,8 +16,14 @@ export default {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'file?name=fonts/[name].[hash].[ext]&mimetype=application/octet-stream'
       },
-      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file?name=fonts/[name].[hash].[ext]' },
-      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'file?name=images/[name].[hash].[ext]&mimetype=image/svg+xml' },
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'file?name=fonts/[name].[hash].[ext]'
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'file?name=images/[name].[hash].[ext]&mimetype=image/svg+xml'
+      },
       {
         test: /\.jsx?$/,
         loaders: ['babel-loader'],
