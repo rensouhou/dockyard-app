@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import * as coreActions from '../actions/application';
 import Test from '../components/Test';
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({ ...coreActions }, dispatch)
 });
 
