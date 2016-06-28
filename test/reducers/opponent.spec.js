@@ -9,14 +9,12 @@ import opponent, { _initialState } from '../../app/reducers/opponent';
 
 let undef;
 
-describe('reducer', () => {
-  describe('opponent', () => {
-    it('should handle initial state', () => {
-      expect(opponent(undef, {})).to.equal(_initialState);
-    });
+describe('reducers/opponent', () => {
+  it('should handle initial state', () => {
+    expect(opponent(undef, {})).to.equal(_initialState);
+  });
 
-    it('should use an immutable state object', () => {
-      expect(opponent(undef, {})).to.be.an.instanceOf(Iterable);
-    });
+  it('should use an immutable state object', () => {
+    expect(opponent(undef, {})).to.be.an.instanceOf(Iterable);
   });
 });

@@ -9,14 +9,12 @@ import quest, { _initialState } from '../../app/reducers/quest';
 
 let undef;
 
-describe('reducer', () => {
-  describe('quest', () => {
-    it('should handle initial state', () => {
-      expect(quest(undef, {})).to.equal(_initialState);
-    });
-
-    it('should use an immutable state object', () => {
-      expect(quest(undef, {})).to.be.an.instanceOf(Iterable);
-    })
+describe('reducers/quest', () => {
+  it('should handle initial state', () => {
+    expect(quest(undef, {})).to.equal(_initialState);
   });
+
+  it('should use an immutable state object', () => {
+    expect(quest(undef, {})).to.be.an.instanceOf(Iterable);
+  })
 });

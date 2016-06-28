@@ -9,14 +9,12 @@ import game, { _initialState } from '../../app/reducers/game';
 
 let undef;
 
-describe('reducer', () => {
-  describe('game', () => {
-    it('should handle initial state', () => {
-      expect(game(undef, {})).to.equal(_initialState);
-    });
-
-    it('should use an immutable state object', () => {
-      expect(game(undef, {})).to.be.an.instanceOf(Iterable);
-    })
+describe('reducers/game', () => {
+  it('should handle initial state', () => {
+    expect(game(undef, {})).to.equal(_initialState);
   });
+
+  it('should use an immutable state object', () => {
+    expect(game(undef, {})).to.be.an.instanceOf(Iterable);
+  })
 });
