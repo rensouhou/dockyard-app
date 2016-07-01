@@ -11,9 +11,7 @@ import pkg from '../package.json';
 
 // region # Game-related Records
 // region ## Fleet record
-/**
- * @type {FleetRecord}
- */
+/** @type {FleetRecord} */
 const fleetRecordDefaults = {
   flagship: undefined,
   id: undefined,
@@ -26,6 +24,10 @@ const fleetRecordDefaults = {
 /**
  * @class FleetRecord
  * @extends Record.Class
+ * @property {number} id
+ * @property {string} name
+ * @property {IList<ShipRecord>} ships
+ * @property {IList<*>} mission
  */
 export class FleetRecord extends Record(fleetRecordDefaults) {
   /**
@@ -205,11 +207,7 @@ export class ShipRecord extends Record(shipRecordDefault) {
 // endregion
 
 // region ## SlotItem record
-/**
- * Slot item record
- * @type {SlotItemRecord}
- */
-export const SlotItem = Record({
+const slotItemDefaults = {
   id: undefined,
   slotItemId: undefined,
   sortId: undefined,
@@ -229,7 +227,17 @@ export const SlotItem = Record({
   rarity: undefined,
   locked: undefined,
   stats: undefined,
-});
+};
+
+/**
+ * Slot item record
+ * @type {SlotItemRecord}
+ */
+export class SlotItemRecord extends Record(slotItemDefaults) {
+  isAirPlane() {
+    return false;
+  }
+}
 // endregion
 
 // region ## Dock record

@@ -1,0 +1,28 @@
+/**
+ */
+@import '../../assets/base-styles';
+
+.label {
+  border: solid 0.1rem $md-amber-a400;
+  background-color: $md-amber-a400;
+  color: $global-background;
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.2rem;
+
+  &.fullwidth {
+    display: block;
+  }
+
+  &.left {
+    text-align: left;
+  }
+
+  &.center {
+    text-align: center;
+  }
+
+  &.right {
+    text-align: right;
+  }
+}

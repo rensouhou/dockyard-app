@@ -11,9 +11,9 @@ import { createSelector } from 'reselect';
 import {
   ProfileRecord,
   MaterialStateRecord,
-  FleetRecord as FleetRecord,
-  ShipRecord as ShipRecord,
-  SlotItem as SlotItemRecord
+  FleetRecord,
+  ShipRecord,
+  SlotItemRecord
 } from '../records';
 
 /**
@@ -53,7 +53,7 @@ const baseShipList = (state) =>
 /**
  * @type {function}
  * @param {ApplicationReducerState} state
- * @return {IMap<number, SlotItem>}
+ * @return {IMap<number, SlotItemRecord>}
  */
 const playerSlotItemList = (state) =>
   state.getIn(['player', 'slotItems'], List())
@@ -63,7 +63,7 @@ const playerSlotItemList = (state) =>
 /**
  * @type {function}
  * @param {ApplicationReducerState} state
- * @return {Immutable.Map<number, SlotItem>}
+ * @return {Immutable.Map<number, SlotItemRecord>}
  */
 const baseSlotItemList = (state) =>
   state.getIn(['game', 'slotItems'], List())

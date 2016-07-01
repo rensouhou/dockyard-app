@@ -22,14 +22,13 @@ import css from './fleet.scss';
  */
 const FleetComponent = (props) => {
   const { record } = props;
-  const hasRecords = !!record;
-  const itemList = hasRecords
-    ? <ItemList record={record.get('ships')} itemComponent={Ship} />
+  const hasRecord = !!record;
+  const itemList = hasRecord
+    ? <ItemList items={record.get('ships')} itemComponent={Ship} />
     : <div>Empty fleet</div>;
 
   return (
     <div className={css.ships}>
-      <h3 className={css.fleetName}>{record.name} {record.id}</h3>
       {itemList}
     </div>
   );

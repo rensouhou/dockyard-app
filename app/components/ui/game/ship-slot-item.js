@@ -2,7 +2,7 @@
  * @overview
  * @since 0.3.0
  */
-import React from 'react';
+import React, { PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
 /**
@@ -13,14 +13,14 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
  * @since 0.3.0
  */
 const ShipSlotItem = (props) => {
-  const { id, name, type } = props.record;
+  const { id, name, type } = props.item;
   return (
-    <li>{id} {name} (category: {type.get('category')})</li>
+    <li>{type.toString()}</li>
   );
 };
 
 ShipSlotItem.propTypes = {
-  record: ImmutablePropTypes.record
+  item: PropTypes.oneOfType([PropTypes.object, ImmutablePropTypes.record])
 };
 
 export default ShipSlotItem;

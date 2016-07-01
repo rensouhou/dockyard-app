@@ -7,9 +7,9 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
-import { StaticPanel } from '../ui';
+import { StaticPanel, ItemList, Label } from '../ui';
 import Fleet from '../ui/game/fleet';
-import { QuestList } from '../ui/game/quest/quest-list';
+import { Quest, QuestList } from '../ui/game/quest/quest-list';
 import css from './game-ui.scss';
 
 /**
@@ -66,6 +66,7 @@ class GameUIComponent extends Component {
             </StaticPanel>
           </article>
           <aside>
+            <Label text="test" fullwidth />
             <QuestList records={getActiveQuests(this.props)} />
           </aside>
         </div>

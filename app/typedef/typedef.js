@@ -137,7 +137,7 @@
  * @property {ProfileRecord} profile
  * @property {MaterialStateRecord} materials
  * @property {IList<ShipRecord>} ships
- * @property {IList<SlotItem>} slotItems
+ * @property {IList<SlotItemRecord>} slotItems
  */
 
 /**

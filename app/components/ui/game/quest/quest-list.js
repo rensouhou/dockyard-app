@@ -6,29 +6,35 @@
 import React from 'react';
 import R from 'ramda';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { StaticPanel } from '../../';
+import { StaticPanel, Label } from '../../';
 import { QuestState } from '../../../../constants';
 
 const { cond, equals, always, T } = R;
 
 /**
  * @type {function}
- * @param {QuestRecord} record
+ * @param {Object} props
+ * @property {QuestRecord} props.item
  * @returns {XML}
  * @constructor
  * @since 0.3.0
  */
-const Quest = ({ record }) => {
-  const { id, title, state } = record;
+const Quest = (props) => {
+  const { title, state } = props.record;
   const statusFn = cond([
-    [equals(QuestState.IN_PROGRESS), always('In progress')],
-    [equals(QuestState.COMPLETED), always('Completed')],
+    [equals(QuestState.IN_PROGRESS), always('0/1')],
+    [equals(QuestState.COMPLETED), always('1/1')],
     [T, always('')]
   ]);
   return (
-    <StaticPanel title={`Quest #${id}`}>
-      {title} / {statusFn(state)}
-    </StaticPanel>
+    <tr>
+      <td style={{ width: '25%', verticalAlign: 'top' }}>
+        <Label text={statusFn(state)} fullwidth alignment="center" />
+      </td>
+      <td>
+        {title}
+      </td>
+    </tr>
   );
 };
 
@@ -44,11 +50,15 @@ Quest.propTypes = {
  * @since 0.3.0
  */
 const QuestList = (props) => (
-  <StaticPanel title="Quests">
-    {props.records.map((quest) => (
-      <Quest record={quest} key={`quest-${quest.id}`} />
-    ))}
-  </StaticPanel>
+  <div>
+    <table style={{ fontSize: '12px' }}>
+      <tbody>
+        {props.records.map((quest) => (
+          <Quest record={quest} key={quest.hashCode()} />
+        ))}
+      </tbody>
+    </table>
+  </div>
 );
 
 QuestList.propTypes = {

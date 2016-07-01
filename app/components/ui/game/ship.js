@@ -21,7 +21,7 @@ import css from './ship.scss';
  * @constructor
  */
 const ShipComponent = (props) => {
-  const record = props.record;
+  const record = props.item;
   const name = record.name.toJS();
 
   return (
@@ -39,7 +39,9 @@ const ShipComponent = (props) => {
         </div>
         <ItemList
           itemComponent={ShipSlotItem}
-          records={record.getIn(['slot', 'items'])}
+          items={record.getIn(['slot', 'items'])}
+          direction={'horizontal'}
+          style={{ fontSize: '0.8rem' }}
         />
         <div>
           <Progress min={0} max={100} value={record.experience.get(2)} />
@@ -50,7 +52,7 @@ const ShipComponent = (props) => {
 };
 
 ShipComponent.propTypes = {
-  record: ImmutablePropTypes.record,
+  item: PropTypes.oneOfType([ImmutablePropTypes.record, PropTypes.object]),
   style: PropTypes.object
 };
 

@@ -7,39 +7,71 @@
  */
 import React, { PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import { Record, Iterable, List } from 'immutable';
+import cx from 'classnames';
+import css from './itemlist.scss';
 
-const components = ({ component: ItemComponent, records, style }) =>
-  records.map((record, idx) => (
-    <li>
-      <ItemComponent {...{ record, style }} />
+const components = ({ component: ItemComponent, items, style }) => {
+  console.log('ItemList~components:%s =>', ItemComponent.name, items);
+  return items.map((item) => (
+    <li className={css.item}>
+      <ItemComponent {...{ item, style }} key={item.hashCode()} />
     </li>
   ));
-
-const itemListStyles = {
-  margin: '0'
 };
 
-const ItemList = (props) => {
-  const hasItems = !!props.records && props.records.size > 0;
+components.propTypes = {
+  component: PropTypes.func,
+  items: PropTypes.oneOfType([PropTypes.array, ImmutablePropTypes.list]),
+  style: PropTypes.object
+};
 
-  const list = (
-    <ul style={itemListStyles}>
-      {components({ component: props.itemComponent, style: props.itemStyle, records: props.records })}
+const EmptyItem = (props) => (
+  <div>
+    No items.
+  </div>
+);
+
+/**
+ * @param props
+ * @returns {*}
+ * @constructor
+ * @since 0.3.0
+ */
+const ItemList = (props) => {
+  const items = !Iterable.isIterable(props.items) ? List(props.items) : props.items;
+  const isRecord = items.first() instanceof Record;
+  const sizeProp = isRecord ? 'size' : 'length';
+  const hasItems = !!items && items[sizeProp] > 0;
+
+  if (!hasItems) {
+    const EmptyComponent = !!props.emptyComponent ? props.emptyComponent : EmptyItem;
+    return <EmptyComponent />;
+  }
+
+  const classNames = [
+    css.itemList,
+    css[props.direction]
+  ];
+
+  return (
+    <ul className={cx(classNames)} style={props.style}>
+      {components({
+        component: props.itemComponent,
+        style: props.itemStyle,
+        items: props.items
+      })}
     </ul>
   );
-
-  const empty = (
-    <div>No items</div>
-  );
-
-  return hasItems ? list : empty;
 };
 
 ItemList.propTypes = {
-  records: ImmutablePropTypes.listOf(ImmutablePropTypes.record),
+  items: ImmutablePropTypes.listOf(ImmutablePropTypes.record),
   itemComponent: PropTypes.func.isRequired,
+  emptyComponent: PropTypes.element,
   style: PropTypes.object,
-  itemStyle: PropTypes.object
+  itemStyle: PropTypes.object,
+  direction: PropTypes.oneOf(['horizontal', 'vertical'])
 };
 
 export default ItemList;

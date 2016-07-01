@@ -1,3 +1,19 @@
-.itemList {
-  border: solid 2px #00f !important;
+ul.itemList {
+  // border: solid 2px #00f !important;
+  padding: 0;
+  list-style: none;
+
+  > li.item {
+    // border: solid 2px #0ff;
+  }
+}
+
+.horizontal {
+  > li {
+    display: inline-block;
+
+    & + & {
+      // border: solid 2px #f00;
+    }
+  }
 }
