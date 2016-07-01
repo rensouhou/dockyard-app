@@ -6,9 +6,9 @@
  */
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { List } from 'immutable';
+import { List, Map } from 'immutable';
 import { StaticPanel, ItemList, Label } from '../ui';
-import Fleet from '../ui/game/fleet';
+import { ResourceDisplay, Fleet } from '../ui/game';
 import { Quest, QuestList } from '../ui/game/quest/quest-list';
 import css from './game-ui.scss';
 
@@ -25,6 +25,13 @@ const getPlayer = (props) => props.ui.player || Map();
  * @returns {IList<FleetRecord>}
  */
 const getFleets = (props) => getPlayer(props).getIn(['fleets'], List());
+
+/**
+ * @type {function}
+ * @param {Object} props
+ * @returns {MaterialStateRecord}
+ */
+const getMaterials = (props) => getPlayer(props).getIn(['materials'], Map());
 
 /**
  * @type {function}
@@ -59,14 +66,13 @@ class GameUIComponent extends Component {
       <div>
         <div className={css.gameUi}>
           <article>
-            <StaticPanel title="Materials" />
+            <ResourceDisplay record={getMaterials(this.props)} />
             <StaticPanel title="Player" />
             <StaticPanel title="Fleet">
               <Fleet record={getMainFleet(this.props)} />
             </StaticPanel>
           </article>
           <aside>
-            <Label text="test" fullwidth />
             <QuestList records={getActiveQuests(this.props)} />
           </aside>
         </div>

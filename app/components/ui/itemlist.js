@@ -39,10 +39,9 @@ const EmptyItem = (props) => (
  * @since 0.3.0
  */
 const ItemList = (props) => {
-  const items = !Iterable.isIterable(props.items) ? List(props.items) : props.items;
+  const items = props.items;
   const isRecord = items.first() instanceof Record;
-  const sizeProp = isRecord ? 'size' : 'length';
-  const hasItems = !!items && items[sizeProp] > 0;
+  const hasItems = !!items && items.size > 0;
 
   if (!hasItems) {
     const EmptyComponent = !!props.emptyComponent ? props.emptyComponent : EmptyItem;
@@ -66,12 +65,13 @@ const ItemList = (props) => {
 };
 
 ItemList.propTypes = {
-  items: ImmutablePropTypes.listOf(ImmutablePropTypes.record),
+  items: ImmutablePropTypes.listOf(ImmutablePropTypes.record, ImmutablePropTypes.iterable),
   itemComponent: PropTypes.func.isRequired,
   emptyComponent: PropTypes.element,
   style: PropTypes.object,
   itemStyle: PropTypes.object,
-  direction: PropTypes.oneOf(['horizontal', 'vertical'])
+  direction: PropTypes.oneOf(['horizontal', 'vertical']),
+  className: PropTypes.string
 };
 
 export default ItemList;

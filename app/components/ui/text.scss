@@ -1,0 +1,9 @@
+/* text.scss
+ */
+
+.text {
+  border: solid 0.1rem #f00;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
