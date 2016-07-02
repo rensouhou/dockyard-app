@@ -8,8 +8,18 @@ import { List, Map } from 'immutable';
 import { getBaseShipList } from './base';
 import { ShipRecord } from '../records';
 
+/**
+ * @type {function}
+ * @param {ApplicationReducerState} state
+ * @returns {Immutable.Iterable<*>}
+ */
 const opponentFleet = (state) => state.getIn(['opponent', 'fleet'], Map());
 
+/**
+ * @type {function}
+ * @param {ApplicationReducerState} state
+ * @returns {Immutable.List<ShipRecord>}
+ */
 const opponentShips = (state) => state.getIn(['opponent', 'fleet', 'ships'], List());
 
 export const getOpponentShipList = createSelector(
