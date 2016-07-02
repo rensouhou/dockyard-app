@@ -11,14 +11,12 @@ import { Record, Iterable, List } from 'immutable';
 import cx from 'classnames';
 import css from './itemlist.scss';
 
-const components = ({ component: ItemComponent, items, style }) => {
-  // console.log('ItemList~components:%s =>', ItemComponent.name, items);
-  return items.map((item) => (
+const components = ({ component: ItemComponent, items, style }) =>
+  items.map((item) => (
     <li className={css.item}>
       <ItemComponent {...{ item, style }} key={item.hashCode()} />
     </li>
   ));
-};
 
 components.propTypes = {
   component: PropTypes.func,
