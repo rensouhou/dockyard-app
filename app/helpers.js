@@ -6,9 +6,7 @@
  * @version 0.2.0
  */
 import R from 'ramda';
-import m from 'monet';
 
-const { Maybe } = m;
 const { path, pathOr, isEmpty } = R;
 
 /**
@@ -25,47 +23,47 @@ export const listOrDefault = (obj, ...objPath) => pathOr([], objPath, obj);
  */
 export const objOrDefault = (obj, ...objPath) => pathOr({}, objPath, obj);
 
-/**
- * @param obj
- * @param propPath
- * @returns {Maybe<T>}
- */
-export const getMaybe = (obj, ...propPath) => {
-  const d = path(propPath, obj);
-  return isEmpty(d)
-    ? Maybe.None()
-    : Maybe.Some(d);
-};
-
-/**
- * Creates a null-safe monadic property getter.
- * Implements a "monadic pluck", e.g. creates a simple key getter
- * wrapped in a `Maybe` for use as an applicative (@see {@link Maybe#ap})
- *
- * @param key
- * @returns {Maybe<T>}
- */
-export const getKeyAp = key => Maybe.Some(it => it[key]);
-
-/**
- * Get the specified key `k` from the given `Maybe`.
- * The value of `M` must be something that can be picked by index and/or key.
- *
- * @param {Maybe<T>} M
- * @param {string} k
- * @returns {Maybe<T>}
- */
-export const getFromM = (M, k) => M.ap(getKeyAp(k));
-
-/**
- * Get the specified key `k` from the given `Maybe`, or return `def` in case
- * the result of getting `M[k]` is `None`.
- *
- * @param {Maybe<T>} M
- * @param {string} k
- * @param {Iterable<T>} def
- */
-export const getWithDefault = (M, k, def) => getFromM(M, k).orSome(def);
+// /**
+//  * @param obj
+//  * @param propPath
+//  * @returns {Maybe<T>}
+//  */
+// export const getMaybe = (obj, ...propPath) => {
+//   const d = path(propPath, obj);
+//   return isEmpty(d)
+//     ? Maybe.None()
+//     : Maybe.Some(d);
+// };
+//
+// /**
+//  * Creates a null-safe monadic property getter.
+//  * Implements a "monadic pluck", e.g. creates a simple key getter
+//  * wrapped in a `Maybe` for use as an applicative (@see {@link Maybe#ap})
+//  *
+//  * @param key
+//  * @returns {Maybe<T>}
+//  */
+// export const getKeyAp = key => Maybe.Some(it => it[key]);
+//
+// /**
+//  * Get the specified key `k` from the given `Maybe`.
+//  * The value of `M` must be something that can be picked by index and/or key.
+//  *
+//  * @param {Maybe<T>} M
+//  * @param {string} k
+//  * @returns {Maybe<T>}
+//  */
+// export const getFromM = (M, k) => M.ap(getKeyAp(k));
+//
+// /**
+//  * Get the specified key `k` from the given `Maybe`, or return `def` in case
+//  * the result of getting `M[k]` is `None`.
+//  *
+//  * @param {Maybe<T>} M
+//  * @param {string} k
+//  * @param {Iterable<T>} def
+//  */
+// export const getWithDefault = (M, k, def) => getFromM(M, k).orSome(def);
 
 /**
  * @external {Enum} http://stackoverflow.com/a/30717598
