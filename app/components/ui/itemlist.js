@@ -12,7 +12,7 @@ import cx from 'classnames';
 import css from './itemlist.scss';
 
 const components = ({ component: ItemComponent, items, style }) => {
-  console.log('ItemList~components:%s =>', ItemComponent.name, items);
+  // console.log('ItemList~components:%s =>', ItemComponent.name, items);
   return items.map((item) => (
     <li className={css.item}>
       <ItemComponent {...{ item, style }} key={item.hashCode()} />

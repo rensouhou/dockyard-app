@@ -38,6 +38,7 @@
 
 /**
  * @typedef {BaseRecord} FleetRecord
+ * @extends IMap
  * @property {number} flagship - ???
  * @property {number} id
  * @property {number} memberId

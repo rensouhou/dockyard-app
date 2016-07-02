@@ -19,10 +19,10 @@ export const baseSlotItem = (o) => fromJS({
   name: o.api_name,
   flavorText: formatLineBreaks(o.api_info),
   type: {
-    broadCategory: o.api_type[0],
-    itemInfoType: o.api_type[1],
-    category: o.api_type[2],
-    iconId: o.api_type[3]
+    broadCategory: o.api_type[0] + 1,
+    itemInfoType: o.api_type[1] + 1,
+    category: o.api_type[2] + 1,
+    iconId: o.api_type[3] + 1
   },
   stats: {
     endurance: o.api_taik,

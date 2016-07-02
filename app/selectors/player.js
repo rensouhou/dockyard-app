@@ -9,7 +9,14 @@
 import { Map, List } from 'immutable';
 import { createSelector } from 'reselect';
 import { getBaseShipList, getBaseSlotItemList } from './base';
-import { ProfileRecord, MaterialStateRecord, FleetRecord, ShipRecord, SlotItemRecord } from '../records';
+import { getFleetFighterPower } from '../core/game/sortie-airbattle';
+import {
+  ProfileRecord,
+  MaterialStateRecord,
+  FleetRecord,
+  ShipRecord,
+  SlotItemRecord
+} from '../records';
 
 /**
  * Null-safe data getters
@@ -107,9 +114,10 @@ export const getPlayerShips = createSelector(
  */
 export const getPlayerFleets = createSelector(
   [playerFleetList, getPlayerShips],
-  (fleetList, playerShipMap) => fleetList
-    .map((fleet) => fleet.mergeIn(['ships'], fleet.get('ships').map((id) => playerShipMap.get(id))))
-    .map((fleet) => new FleetRecord(fleet))
+  (fleetList, playerShipMap) =>
+    fleetList.map((fleet) => fleet.mergeIn(['ships'], fleet.get('ships').map((id) => playerShipMap.get(id))))
+             .map((fleet) => fleet.setIn(['meta', 'fighterPower'], getFleetFighterPower(fleet)))
+             .map((fleet) => new FleetRecord(fleet))
 );
 
 /**
