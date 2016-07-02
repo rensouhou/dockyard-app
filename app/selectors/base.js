@@ -3,7 +3,7 @@
  * @since 0.4.0
  */
 import { createSelector } from 'reselect';
-import { List } from 'immutable';
+import { List, Map } from 'immutable';
 
 /**
  * @type {function}
