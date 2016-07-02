@@ -8,13 +8,8 @@
  */
 import { Map, List } from 'immutable';
 import { createSelector } from 'reselect';
-import {
-  ProfileRecord,
-  MaterialStateRecord,
-  FleetRecord,
-  ShipRecord,
-  SlotItemRecord
-} from '../records';
+import { getBaseShipList, getBaseSlotItemList } from './base';
+import { ProfileRecord, MaterialStateRecord, FleetRecord, ShipRecord, SlotItemRecord } from '../records';
 
 /**
  * Null-safe data getters
@@ -40,17 +35,6 @@ const playerShipList = (state) =>
        .flatMap((ship) => Map.of(ship.get('id'), ship));
 
 /**
- * Get the master game ship list
- * @type {function}
- * @param {ApplicationReducerState} state
- * @returns {IMap<number, ShipRecord>}
- */
-const baseShipList = (state) =>
-  state.getIn(['game', 'ships'], List())
-       .toMap()
-       .flatMap((ship) => Map.of(ship.get('shipId'), ship));
-
-/**
  * @type {function}
  * @param {ApplicationReducerState} state
  * @return {IMap<number, SlotItemRecord>}
@@ -59,16 +43,6 @@ const playerSlotItemList = (state) =>
   state.getIn(['player', 'slotItems'], List())
        .toMap()
        .flatMap((item) => Map.of(item.get('id'), item));
-
-/**
- * @type {function}
- * @param {ApplicationReducerState} state
- * @return {Immutable.Map<number, SlotItemRecord>}
- */
-const baseSlotItemList = (state) =>
-  state.getIn(['game', 'slotItems'], List())
-       .toMap()
-       .flatMap((item) => Map.of(item.get('slotItemId'), item));
 
 /**
  * Player profile getter (null-safe)
@@ -95,7 +69,7 @@ const playerMaterials = (state) => state.getIn(['player', 'materials'], new Mate
  * @since 0.2.0
  */
 const getShipList = createSelector(
-  [playerShipList, baseShipList],
+  [playerShipList, getBaseShipList],
   (playerShips, baseShips) =>
     playerShips.map((ship) =>
       new ShipRecord(baseShips.get(ship.get('shipId')).mergeDeep(ship)))
@@ -106,7 +80,7 @@ const getShipList = createSelector(
  * @since 0.2.0
  */
 export const getPlayerSlotItems = createSelector(
-  [playerSlotItemList, baseSlotItemList],
+  [playerSlotItemList, getBaseSlotItemList],
   (playerSlotItems, baseSlotItems) =>
     playerSlotItems.map((item) =>
       new SlotItemRecord(baseSlotItems.get(item.get('slotItemId')).mergeDeep(item)))
