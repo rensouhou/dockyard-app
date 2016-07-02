@@ -11,53 +11,32 @@ import pkg from '../package.json';
 
 // region # Game-related Records
 // region ## Fleet record
-/** @type {FleetRecord} */
-const fleetRecordDefaults = {
-  flagship: undefined,
-  id: undefined,
-  memberId: undefined,
-  mission: List(),
-  name: '',
-  ships: List()
-};
-
 /**
- * @class FleetRecord
- * @extends Record.Class
+ * @type {FleetRecord}
  * @property {number} id
  * @property {string} name
  * @property {IList<ShipRecord>} ships
  * @property {IList<*>} mission
  */
-export class FleetRecord extends Record(fleetRecordDefaults) {
-  /**
-   * Check whether the fleet contains any ships.
-   * @returns {boolean}
-   */
-  hasShips() {
-    return this.ships.size > 0;
-  }
-
-  /**
-   * Check if the fleet belongs to a player or not
-   * @returns {boolean}
-   */
-  isPlayerFleet() {
-    return true;
-  }
-
-  /**
-   * Check if the fleet is hostile
-   * @returns {boolean}
-   */
-  isEnemyFleet() {
-    return false;
-  }
-}
+export const FleetRecord = Record({
+  flagship: undefined,
+  id: undefined,
+  memberId: undefined,
+  mission: List(),
+  name: '',
+  ships: List(),
+  meta: Map({
+    fighterPower: undefined
+  })
+});
 // endregion
 
 // region ## Material record
-const materialStateDefaults = {
+/**
+ * @extends Immutable.Map
+ * @extends Record.Class
+ */
+export const MaterialStateRecord = Record({
   fuel: undefined,
   ammo: undefined,
   steel: undefined,
@@ -66,24 +45,13 @@ const materialStateDefaults = {
   instantRepair: undefined,
   developmentMaterials: undefined,
   improvementMaterials: undefined
-};
-
-/**
- * @extends Immutable.Map
- * @extends Record.Class
- */
-export class MaterialStateRecord extends Record(materialStateDefaults) {
-  static basicFields = List.of('fuel', 'ammo', 'steel', 'bauxite');
-
-  getBasic() {
-    return this.keySeq().filter((type) => MaterialStateRecord.basicFields.includes(type));
-  }
-}
+});
 
 // endregion
 
 // region ## PlayerProfile record
-const playerProfileDefaults = {
+/** @type {ProfileRecord} */
+export const ProfileRecord = Record({
   id: undefined,
   nickname: '',
   level: undefined,
@@ -105,29 +73,15 @@ const playerProfileDefaults = {
   docks: Map({}),
   startTime: undefined,
   tutorial: Map({})
-};
-
-/**
- * @class ProfileRecord
- * @extends Record.Class
- */
-export class ProfileRecord extends Record(playerProfileDefaults) {
-  isPlayer() {
-    return new Error('NYI');
-  }
-
-  isEnemy() {
-    return new Error('NYI');
-  }
-
-  isPracticeEnemy() {
-    return new Error('NYI');
-  }
-}
+});
 // endregion
 
 // region ## Ship record
-export const shipRecordDefault = {
+/**
+ * @type {ShipRecord}
+ * @since 0.2.0
+ */
+export const ShipRecord = Record({
   id: undefined,
   sortId: undefined,
   shipId: undefined,
@@ -171,43 +125,15 @@ export const shipRecordDefault = {
     capacity: List(),
     items: List()
   })
-};
-
-/**
- * @class ShipRecord
- * @extends BaseRecord
- * @since 0.2.0
- */
-export class ShipRecord extends Record(shipRecordDefault) {
-  /**
-   * Check if ship is an enemy
-   * @returns {boolean}
-   */
-  isEnemy() {
-    return false;
-  }
-
-  /**
-   * Check if ship's health is critical.
-   * Useful for checking if player should retreat.
-   * @returns {boolean}
-   */
-  isCritical() {
-    return this.getHealthColor() === ShipHealthState.RED;
-  }
-
-  /**
-   * The current health state of the ship
-   * @returns {string}
-   */
-  getHealthColor() {
-    return ShipHealthState.GREEN;
-  }
-}
+});
 // endregion
 
 // region ## SlotItem record
-const slotItemDefaults = {
+/**
+ * Slot item record
+ * @type {SlotItemRecord}
+ */
+export const SlotItemRecord = Record({
   id: undefined,
   slotItemId: undefined,
   sortId: undefined,
@@ -227,17 +153,7 @@ const slotItemDefaults = {
   rarity: undefined,
   locked: undefined,
   stats: undefined,
-};
-
-/**
- * Slot item record
- * @type {SlotItemRecord}
- */
-export class SlotItemRecord extends Record(slotItemDefaults) {
-  isAirPlane() {
-    return false;
-  }
-}
+});
 // endregion
 
 // region ## Dock record
