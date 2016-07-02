@@ -5,3 +5,13 @@
 [![Issue Count](https://codeclimate.com/github/rensouhou/dockyard-app/badges/issue_count.svg)](https://codeclimate.com/github/rensouhou/dockyard-app)
 
 # Dockyard App
+
+Attempt at a somewhat saner handling of Kancolle API data.
+
+## Changelog
+
+See the file [CHANGELOG.md](CHANGELOG.md).
+
+## Acknowledgements
+
+## Maintainers
