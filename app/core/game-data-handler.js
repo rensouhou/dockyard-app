@@ -39,6 +39,7 @@ export function createGameViewHandler(parseFunObj, cfg) {
 export function handleGameView(parseFunObj, cfg) {
   return (e) => {
     const view = e.target;
+    /** @type {Electron.BrowserWindow.webContents} */
     const wc = view.getWebContents();
     /** @type {Electron.Session} */
     const ws = wc.session;

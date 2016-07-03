@@ -32,7 +32,7 @@ export const handlers = Seq.Keyed(ApiEventPaths)
  * @version 0.3.0
  */
 export const findEvent = (findPath) => {
-  const pathRegex = new RegExp(`^${findPath}`);
+  const pathRegex = new RegExp(`^${findPath}$`);
   return ApiEventPaths.findKey((path) => pathRegex.test(path));
 };
 
