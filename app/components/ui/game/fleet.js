@@ -8,8 +8,9 @@
  */
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import { ItemList } from '../';
+import { Flex } from '../../dom';
 import Ship from './ship';
-import ItemList from '../itemlist';
 import css from './fleet.scss';
 
 /**
@@ -34,10 +35,10 @@ const FleetComponent = (props) => {
 
   return (
     <div className={css.ships}>
-      <div>
+      <Flex justifyContent="space-between">
         <div>{record.get('name')}</div>
         <div>{record.getIn(['meta', 'fighterPower'])}</div>
-      </div>
+      </Flex>
       {itemList}
     </div>
   );
