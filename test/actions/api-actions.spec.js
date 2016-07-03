@@ -10,7 +10,7 @@ import { ApiEventPaths, ApiEvents } from '../../app/constants';
 describe('actions/api-actions', () => {
   describe('event lookup', () => {
     it('should find the correct event 1/2', () => {
-      expect(findEvent(ApiEventPaths.get(ApiEvents.INITIALIZE_GAME))).to.equal(ApiEvents.INITIALIZE_GAME);
+      expect(findEvent('/api_start2')).to.equal(ApiEvents.INITIALIZE_GAME);
     });
     it('should find the correct event 2/2', () => {
       expect(findEvent(ApiEventPaths.get(ApiEvents.FINISHED_PRACTICE))).to.equal(ApiEvents.FINISHED_PRACTICE);
