@@ -1,3 +1,4 @@
+/* eslint spaced-comment: 0 */
 /**
  * @overview
  *  Store configuration for `development` environment.
@@ -13,7 +14,6 @@ import { hashHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
 import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
-import perflogger from 'redux-perf-middleware';
 import Immutable from 'immutable';
 import installImmutableDevTools from 'immutable-devtools';
 
@@ -27,7 +27,7 @@ const logger = createLogger({
 const router = routerMiddleware(hashHistory);
 
 const enhancer = compose(
-  applyMiddleware(thunk, perflogger, promiseMiddleware, router, logger),
+  applyMiddleware(thunk, /*perflogger,*/ promiseMiddleware, router, logger),
   DevTools.instrument(),
   persistState(
     window.location.href.match(

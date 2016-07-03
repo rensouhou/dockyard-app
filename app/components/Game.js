@@ -35,8 +35,6 @@ class GameComponent extends Component {
       );
     }
 
-    console.log('GameComponent.props =>', this.props);
-
     return (
       <div className={css.container}>
         <GameView actions={this.props.actions.application} transformerActions={this.props.actions.transformers} />
