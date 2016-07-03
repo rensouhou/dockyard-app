@@ -4,6 +4,7 @@
  *
  * @since 0.3.0
  * @author Stefan Rimaila <stefan@rimaila.fi>
+ * @todo Port this over to use `<Flex />`
  */
 import React, { PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
