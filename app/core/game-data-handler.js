@@ -4,6 +4,7 @@
  *  Game data handler for {@see KCSApi} traffic
  *
  * @since 0.1.0
+ * @version 0.4.0
  */
 import qs from 'querystring';
 import { Map } from 'immutable';
@@ -18,10 +19,10 @@ let firstGameLoad = true;
 let gameUrl;
 let debuggerAttached = false;
 
-const NETWORK = {
-  RequestWillBeSent: 'Network.requestWillBeSent',
-  ResponseReceived: 'Network.responseReceived',
-  LoadingFinished: 'Network.loadingFinished'
+const Network = {
+  REQUEST_WILL_BE_SENT: 'Network.requestWillBeSent',
+  RESPONSE_RECEIVED: 'Network.responseReceived',
+  LOADING_FINISHED: 'Network.loadingFinished'
 };
 
 export function createGameViewHandler(parseFunObj, cfg) {
@@ -107,7 +108,7 @@ function Handler(wc, parseFunObj, cfg) {
 
     try {
       switch (method) {
-        case NETWORK.RequestWillBeSent:
+        case Network.REQUEST_WILL_BE_SENT:
           url = params.request.url;
           if (pathPrefix.test(url)) {
             req = req.update(requestId,
@@ -118,14 +119,14 @@ function Handler(wc, parseFunObj, cfg) {
               }));
           }
           break;
-        case NETWORK.ResponseReceived:
+        case Network.RESPONSE_RECEIVED:
           url = params.response.url;
           if (pathPrefix.test(url)) {
             req = req.update(requestId,
               it => ({ ...it, response: params.response }));
           }
           break;
-        case NETWORK.LoadingFinished:
+        case Network.LOADING_FINISHED:
           if (req.has(requestId)) {
             const { path, request } = req.get(requestId);
             req = req.delete(requestId);
