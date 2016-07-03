@@ -3,6 +3,7 @@
  *  Base model for the base slot-item data
  *
  * @since 0.1.0
+ * @version 0.4.0
  */
 import { fromJS } from 'immutable';
 import { formatLineBreaks } from '../primitive';
@@ -18,6 +19,9 @@ export const baseSlotItem = (o) => fromJS({
   sortId: o.api_sortno,
   name: o.api_name,
   flavorText: formatLineBreaks(o.api_info),
+  /**
+   * @todo Note +1 behavior
+   */
   type: {
     broadCategory: o.api_type[0] + 1,
     itemInfoType: o.api_type[1] + 1,

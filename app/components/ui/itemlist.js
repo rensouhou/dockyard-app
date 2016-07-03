@@ -7,7 +7,7 @@
  */
 import React, { PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Record, Iterable, List } from 'immutable';
+import { Record } from 'immutable';
 import cx from 'classnames';
 import css from './itemlist.scss';
 
@@ -38,7 +38,6 @@ const EmptyItem = (props) => (
  */
 const ItemList = (props) => {
   const items = props.items;
-  const isRecord = items.first() instanceof Record;
   const hasItems = !!items && items.size > 0;
 
   if (!hasItems) {

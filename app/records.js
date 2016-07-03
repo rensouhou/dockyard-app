@@ -6,7 +6,7 @@
  * @since 0.1.0
  */
 import { Map, List, Set, Record, fromJS } from 'immutable';
-import { ConstructionType, ShipHealthState } from './constants';
+import { ConstructionType } from './constants';
 import pkg from '../package.json';
 
 // region # Game-related Records
@@ -181,7 +181,10 @@ export const QuestRecord = Record({
   title: undefined,
   detail: undefined,
   reward: new MaterialStateRecord(),
-  progress: undefined
+  progress: undefined,
+  meta: {
+    completed: undefined
+  }
 });
 // endregion record
 
@@ -205,6 +208,9 @@ const craftedEntityDefault = {
     usedDevelopmentMaterials: undefined,
     instant: undefined,
     lsc: undefined
+  },
+  meta: {
+    inProgress: undefined
   }
 };
 // endregion
@@ -219,7 +225,7 @@ export class CraftedEntityRecord extends Record(craftedEntityDefault) {
    * @returns {boolean}
    */
   isInProgress() {
-    return !!this.inProgress;
+    return !!this.meta.inProgress;
   }
 
   /**
