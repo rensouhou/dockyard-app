@@ -12,7 +12,7 @@ import {
   findRenderedDOMComponentWithClass,
   Simulate
 } from 'react-addons-test-utils';
-import { Flex } from '../../app/components/dom';
+import { Flex } from '../../../app/components/dom';
 
 function setup() {
   const actions = {};
@@ -23,6 +23,6 @@ function setup() {
 
 describe('DOM Flex component', () => {
   it('should be true', () => {
-    expect(true).to.be(true);
+    expect(true).to.equal(true);
   });
 });
