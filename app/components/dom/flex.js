@@ -1,5 +1,10 @@
 /**
  * @overview
+ *  Provides a generic DOM `Flex` component that can be used instead of
+ *  providing a `div` element with `style` or `className` attributes.
+ *
+ *  Normal flexbox attributes are usable as attributes for this component.
+ *
  * @since 0.4.0
  */
 import React, { PropTypes } from 'react';

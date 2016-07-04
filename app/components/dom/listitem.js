@@ -5,19 +5,32 @@
  *
  * @since 0.4.0
  */
-import React, { PropTypes } from 'react';
+import React, { DOM, PropTypes } from 'react';
+
+export const ListType = {
+  UNORDERED: 'UNORDERED',
+  ORDERED: 'ORDERED',
+  DEFINITION: 'DEFINITION'
+};
+
+const ListItemFactories = {
+  [ListType.UNORDERED]: DOM.li,
+  [ListType.ORDERED]: DOM.li,
+  [ListType.DEFINITION]: () => console.warn('NYI')
+};
 
 const ListItemComponent = (props) => {
-  const { children } = props;
+  const { children, ...rest } = props;
   return (
-    <li>
+    <li {...rest}>
       {children}
     </li>
   );
 };
 
 ListItemComponent.propTypes = {
-  children: PropTypes.any
+  children: PropTypes.any,
+  type: PropTypes.oneOf(['ul', 'ol', 'dl'])
 };
 
 export default ListItemComponent;

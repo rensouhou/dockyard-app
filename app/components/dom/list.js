@@ -1,5 +1,8 @@
 /**
  * @overview
+ *  Provides a `List` wrapper component for creating basic HTML lists that can
+ *  be styled through attributes instead of only by the `style` attribute.
+ *
  * @since 0.4.0
  */
 import React, { DOM, PropTypes } from 'react';
@@ -53,7 +56,8 @@ const ListComponent = (props) => {
 
 ListComponent.propTypes = {
   type: PropTypes.oneOf([ListType.UNORDERED, ListType.ORDERED, ListType.DEFINITION]),
-  children: PropTypes.any
+  children: PropTypes.oneOf([DOM.li, DOM.dd, DOM.dt]),
+  style: PropTypes.object
 };
 
 export default ListComponent;
