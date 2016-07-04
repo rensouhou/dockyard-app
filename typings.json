@@ -1,7 +1,9 @@
 {
   "name": "electron-test",
   "version": false,
-  "dependencies": {},
+  "dependencies": {
+    "ramda": "registry:npm/ramda#0.21.0+20160531162943"
+  },
   "ambientDependencies": {
     "bluebird": "registry:dt/bluebird#2.0.0+20160319051630",
     "chai": "registry:dt/chai#3.4.0+20160317120654",
