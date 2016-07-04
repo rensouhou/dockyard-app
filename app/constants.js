@@ -163,3 +163,26 @@ export const QuestState = {
   IN_PROGRESS: 2,
   COMPLETED: 3
 };
+
+/**
+ * @type {Object}
+ * @todo i18n
+ */
+export const ShipSpeed = {
+  SLOW: 0,
+  FAST: 5,
+  VERY_FAST: 10
+};
+
+/**
+ * @type {Object}
+ * @todo i18n
+ */
+export const ShipRange = {
+  UNKNOWN: -1,
+  NONE: 0,
+  SHORT: 1,
+  MEDIUM: 2,
+  LONG: 3,
+  VERY_LONG: 4
+};
