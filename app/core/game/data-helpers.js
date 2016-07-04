@@ -29,6 +29,27 @@ export const getShipSpeed = (ship) => cond([
 
 /**
  * @type {function}
+ * @param {FleetRecord} fleet
+ * @returns {number}
+ */
+export const getFleetSpeed = (fleet) => fleet;
+
+/**
+ * @type {function}
+ * @param {ShipRecord} ship
+ * @returns {number}
+ */
+export const getShipLOS = (ship) => ship;
+
+/**
+ * @type {function}
+ * @param {FleetRecord} fleet
+ * @returns {number}
+ */
+export const getFleetLOS = (fleet) => fleet;
+
+/**
+ * @type {function}
  * @param {ShipRecord} ship
  * @returns {number}
  */
