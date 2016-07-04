@@ -21,7 +21,6 @@ import { questAsRecord } from '../../transformers/api/quest';
  */
 export default function GET_QUEST_LIST(apiAction) {
   const { body, postBody } = apiAction;
-  console.log('apiAction => ', apiAction);
   return fromJS({
     questListState: {
       totalQuestCount: asNumber(body.api_count),
