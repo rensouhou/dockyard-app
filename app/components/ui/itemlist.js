@@ -21,7 +21,7 @@ const components = ({ component: ItemComponent, items, style }) =>
 
 components.propTypes = {
   component: PropTypes.func,
-  items: PropTypes.oneOfType([PropTypes.array, ImmutablePropTypes.list]),
+  items: ImmutablePropTypes.listOf(ImmutablePropTypes.record),
   style: PropTypes.object
 };
 
