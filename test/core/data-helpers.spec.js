@@ -36,22 +36,27 @@ describe('core/data-helpers', () => {
       expect(isAbyssalShip(abyssalOne)).to.equals(true);
     });
   });
+
   describe('getShipSpeed', () => {
     // @todo pending
     it('should get the correct speed for an FBB');
     it('should get the correct speed to a normal DD');
   });
+
   describe('getFleetSpeed', () => {
     it('should get the correct speed for a slow fleet');
     it('should get the correct speed for a medium fleet');
     it('should get the correct speed for a fast fleet');
   });
+
   describe('getShipLOS', () => {
     it('should calculate the ship\'s LOS');
   });
+
   describe('getFleetLOS', () => {
     it('should calculate the fleet\'s LOS');
   });
+
   describe('getShipRange', () => {
     it('should get the correct range enum');
   });
