@@ -3,15 +3,21 @@
 
 ## Done
 
+* Game mechanics
+  * Fighter power calculation 
 * DOM components
   * `<Flex />`
-* Fighter power calculation 
+  * `<List />`
+  * `<ListItem />`
 
 ## Planned
 
-* View data in separate window
-* Aircraft proficiency calculator
-* Better quest tracking
+* Game mechanics
+  * Aircraft proficiency calculator
+  * LOS calculation
+* UI
+  * View data in separate window
+  * Better quest tracking
 
 # 0.3.0 — Mostly under the hood
 
