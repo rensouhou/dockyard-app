@@ -5,16 +5,16 @@
  */
 import { expect } from 'chai';
 import { Iterable } from 'immutable';
-import game, { _initialState } from '../../app/reducers/game';
+import game, { _initialState } from '../../../app/reducers/game';
 
 let undef;
 
-describe('reducers/game', () => {
-  it('should handle initial state', () => {
+describe('game', () => {
+  it('handles initial state', () => {
     expect(game(undef, {})).to.equal(_initialState);
   });
 
-  it('should use an immutable state object', () => {
+  it('uses an immutable state object', () => {
     expect(game(undef, {})).to.be.an.instanceOf(Iterable);
   })
 });

@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { spy } from 'sinon';
 
-describe('actions/core', () => {
+describe('core', () => {
   it('registers a game view');
   it('takes a screenshot');
   it('creates a notification');

@@ -22,7 +22,7 @@ function setup() {
 }
 
 describe('DOM Flex component', () => {
-  it('should be true', () => {
-    expect(true).to.equal(true);
-  });
+  it('creates a flexbox row');
+  it('creates a flexbox column');
+  it('creates a wrappable flexbox');
 });
