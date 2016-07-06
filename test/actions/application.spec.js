@@ -8,4 +8,5 @@ describe('actions/core', () => {
   it('schedules an event');
   it('toggles the audio');
   it('creates a game entity');
+  it('updates quest progress');
 });

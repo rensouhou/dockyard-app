@@ -4,7 +4,7 @@
  * @module app/selectors/quest
  */
 import { createSelector } from 'reselect';
-import { Iterable, Map, List } from 'immutable';
+import { Map, List } from 'immutable';
 import { QuestState } from '../constants';
 
 /**
@@ -12,7 +12,7 @@ import { QuestState } from '../constants';
  */
 const quests = (state) => state.getIn(['quest', 'records'], List())
                                .toMap()
-                               .flatMap((q) => Iterable.isIterable(q) ? Map.of(q.get('id'), q) : Map());
+                               .flatMap((q) => Map.of(q.get('id')));
 
 /**
  * Get all quests currently present in the store.

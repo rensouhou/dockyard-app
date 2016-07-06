@@ -105,6 +105,13 @@ export const createdEntity = createAction(ApplicationEvents.CREATED_ENTITY,
   (entity) => entity
 );
 
+export const updateQuestProgress = createAction(ApplicationEvents.UPDATE_QUEST_PROGRESS,
+  /**
+   * @param questProgress
+   */
+  (questProgress) => questProgress
+);
+
 export const actions = {
   scheduleEvent,
   notify,

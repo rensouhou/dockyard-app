@@ -5,9 +5,7 @@
  * @since 0.1.0
  * @version 0.2.0
  */
-import R from 'ramda';
-
-const { path, pathOr, isEmpty } = R;
+import { path, pathOr, isEmpty, wrap } from 'ramda';
 
 /**
  * @param {?Array<T>} obj
