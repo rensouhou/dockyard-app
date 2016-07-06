@@ -21,7 +21,7 @@ function setup() {
   return { component };
 }
 
-describe('DOM Flex component', () => {
+describe('<Flex /> component', () => {
   it('creates a flexbox row');
   it('creates a flexbox column');
   it('creates a wrappable flexbox');
