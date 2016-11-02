@@ -129,7 +129,6 @@
     "pkginfo": "^0.4.0",
     "postcss": "^5.0.19",
     "ramda": "^0.21.0",
-    "ramda-lens": "github:ramda/ramda-lens",
     "react": "^15.2.0",
     "react-dom": "^15.2.0",
     "react-fa": "^4.1.2",
